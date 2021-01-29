@@ -1,9 +1,5 @@
-module.exports = {
-  someSidebar: {
-    Introduction: ['welcome'],
-    "User's Guide": ['users/cs'],
-    'Admin Guide': ['admin/installation'],
-    API: ['api-intro'],
-    'Default Docs': ['doc1', 'doc2', 'mdx'],
-  },
-};
+const yaml = require('js-yaml');
+const fs = require('fs');
+
+const fileContent = fs.readFileSync('./sidebars.yaml');
+module.exports = yaml.safeLoad(fileContent);

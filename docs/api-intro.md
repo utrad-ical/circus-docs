@@ -5,7 +5,11 @@ sidebar_label: CIRCUS API Introduction
 slug: /api-intro
 ---
 
-All of the functions of CIRCUS can be accessed via RESTful API.
+All of the functions of CIRCUS CS/DB can be accessed via RESTful API.
+
+## API Endpoint
+
+All of the API endpoints are prefixed with `/api`.
 
 ## Authentication
 
@@ -20,3 +24,13 @@ And use this token in the `Authorization` header as follows:
 ```
 Authorization: Bearer aaabbbcccdddeeefff
 ```
+
+Any programming language or command that is capable of making HTTP requests can be used to access the API.
+
+## API Access Samples
+
+### Using cURL
+
+### Using Node.js
+
+### Using Python

@@ -1,0 +1,20 @@
+someSidebar:
+  Introduction:
+    - welcome
+  User Guide:
+    - users/cs
+  Administrator Guide:
+    - admin/installation
+  Developer Guide:
+    - type: category
+      label: CIRCUS API
+      items:
+        - api-intro
+    - type: category
+      label: CIRCUS RS
+      items:
+        - rs/index
+  Default Docs:
+    - doc1
+    - doc2
+    - mdx
