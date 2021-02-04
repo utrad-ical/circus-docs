@@ -1,5 +1,5 @@
 ---
-title: Introducction of CIRCUS RS
+title: Introduction of CIRCUS RS
 sidebar_label: Introduction
 ---
 
