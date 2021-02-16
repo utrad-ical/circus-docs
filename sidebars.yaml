@@ -15,6 +15,11 @@ someSidebar:
       items:
         - rs/index
         - rs/concepts
+    - type: category
+      label: CIRCUS CS Plug-ins
+      items:
+        - cs/overview
+        - cs/result-display
   Default Docs:
     - doc1
     - doc2
