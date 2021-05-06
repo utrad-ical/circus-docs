@@ -20,6 +20,7 @@ someSidebar:
       items:
         - cs/overview
         - cs/result-display
+        - cs/custom-display
   Default Docs:
     - doc1
     - doc2
