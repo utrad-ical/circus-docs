@@ -18,7 +18,8 @@ someSidebar:
     - type: category
       label: CIRCUS CS Plug-ins
       items:
-        - cs/overview
+        - cs/execution
+        - cs/build
         - cs/result-display
         - cs/custom-display
   Default Docs:
