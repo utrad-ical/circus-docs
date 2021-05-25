@@ -22,7 +22,7 @@ module.exports = {
           label: 'Docs',
           position: 'left',
         },
-        { to: 'blog', label: 'Blog', position: 'left' },
+        /* { to: 'blog', label: 'Blog', position: 'left' } , */
         { to: 'docs/admin/installation', label: 'Download', position: 'left' },
         {
           to: 'api-explorer',
