@@ -18,6 +18,7 @@ someSidebar:
     - type: category
       label: CIRCUS CS Plug-ins
       items:
+        - cs/introduction
         - cs/execution
         - cs/build
         - cs/result-display
