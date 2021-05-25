@@ -21,6 +21,7 @@ someSidebar:
         - cs/execution
         - cs/build
         - cs/result-display
+        - cs/builtin-displays
         - cs/custom-display
   Default Docs:
     - doc1

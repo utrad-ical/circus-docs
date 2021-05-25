@@ -4,17 +4,15 @@ title: Plug-in Execution Flow
 
 A CIRCUS CS Plug-in is a Docker image. This means you can use any programming language or runtime to develop your plug-in.
 
-When a CS job is started, the CIRCUS CS system will create a container and runs the process specified in your Dockerfile.
-
-The main application in your container will read and process the input image, and write the processed results into a file.
+When a CS job is started, the CIRCUS CS system will create a container and runs the main process specified in your Dockerfile. The main application in your container will read and process the input image, and write the processed results into a file.
 
 ## Input of Your Plug-in
 
-Your plug-in will be invoked with an external directory mounted to `/circus/in`. This directory contains the following files.
+Your plug-in will be invoked with an external directory mounted to `/circus`. This directory contains the following directories and files.
 
 ```
-📂/circus (mounted to container's root)
-    📂/in
+📂/circus/ (mounted to container's root)
+    📂in/
         0.mhd
         0.raw
         0.json
@@ -22,14 +20,14 @@ Your plug-in will be invoked with an external directory mounted to `/circus/in`.
         1.raw
         1.json
           :
-    📂/out (initially empty)
+    📂out/ (initially empty)
 ```
 
 The numbers are volume IDs starting from 0.
 
 ### RAW volume data (`${volId}.raw`) and MHD file (`${volId}.mhd`)
 
-The RAW data of the volume extracted by the DICOM series, and the corresponding MHD file containing basic geometry information. You can preview the images using an MHD viewer.
+The RAW data of the volume extracted by the DICOM series, and the corresponding MHD file containing basic geometry information. You can preview the images using third-party MHD viewers.
 
 :::note
 Currently, only grayscale images are supported.
@@ -53,11 +51,11 @@ The data related to patient information is not included.
 
 ## Output of Your Plug-in
 
-Your plug-in must output those information.
+Here are the list of information your plug-in can output.
 
 - **Main results JSON** (`/circus/out/results.json`): The main results file containing the JSON-serialized results of your plug-in. Text-based data should go here. The details will be explained later.
-- **Additional binaries** (`/circus/out/*`): All the files your plug-in wrote into `/circus/out` will be stored in the results directory. For example, you can generate images, PDFs or any arbitrary binary data. Displays can access these files and show or let users download them.
-- **Standard output**: All the data your plug-in printed via stdout will be saved to a log file in the results directory. Note that anything written to stderr will be ignored.
+- **Optional files** (`/circus/out/*`): All the files your plug-in wrote into `/circus/out` will be stored in the results directory. For example, you can generate images, PDFs or any arbitrary binary file. Displays can access these files and show or let users download them. Each file should have an appropreate extension (e.g., `*.png`, `*.pdf`) because it will be served via HTTP.
+- **Standard output**: All the data your plug-in printed to stdout will be saved to a log file in the results directory. Note that anything written to stderr will be ignored.
 - **Status code**: Your plug-in must exit with a non-zero status code if it has not finished processing successfully. Then CIRCUS CS detects it and mark the job as "failed".
 
 ## `results.json`
@@ -79,3 +77,4 @@ See the display reference page.
 ## Other Restrictions
 
 - For security reasons, your plug-in will not have network access. All the data required to process the input image must be contained in the Docker image.
+- The container will be deleted after the plug-in ends.
