@@ -1,5 +1,5 @@
 ---
-title: Series import
+title: Series Import
 ---
 
 ## Series Import 画面の表示方法
