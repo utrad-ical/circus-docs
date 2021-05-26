@@ -2,16 +2,20 @@
 title: Installation
 ---
 
+## 準備
+
+CIRCUSをインストールするマシンに Docker (Linux版は 19.03以降)をインストールする必要があります。[Docker公式ドキュメント](https://docs.docker.com/get-docker/)を参考にインストールを行ってください。
+
 ## CIRCUSシステムのインストール(Docker imageを使用)
 
 Docker HubにてCIRCUSシステムのDocker imageを提供しています。こちらを使ってインストールするのが最も簡単です。
 
 ### CIRCUS のDocker image取得
 
-Docker Hub より以下のDocker imageを pull します。
+Docker Hub より以下のDocker imageを 取得しますします。
 
-     # docker pull circuscad/circus:1.0.0-beta6
-     # docker pull circuscad/dicom_utility:2.0.0-beta3
+     # sudo docker pull circuscad/circus:1.0.0-beta6
+     # sudo docker pull circuscad/dicom_utility:2.0.0-beta3
 
 
 ### 初期設定手順
