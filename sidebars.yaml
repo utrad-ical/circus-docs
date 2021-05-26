@@ -5,6 +5,8 @@ someSidebar:
     - users/cs
   Administrator Guide:
     - admin/installation
+    - admin/registration-cs-plugins    
+    - admin/dicom-storage-server    
   Developer Guide:
     - type: category
       label: CIRCUS API
