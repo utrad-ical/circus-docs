@@ -6,7 +6,7 @@ title: Case search
 
 画面上部のメニューより[Case] - [Case Search]を選択するとCase Search画面が表示されます。
 
-![Case search from menu](case-search-from-menu.png "Case search from menu")
+![Case search from menu](case-search-01.png "Case search from menu")
 
 :::tip
 
