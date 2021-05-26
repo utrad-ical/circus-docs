@@ -2,7 +2,7 @@ someSidebar:
   Introduction:
     - welcome
   User Guide:
-    - users/cs
+    - users/login
   Administrator Guide:
     - admin/installation
     - admin/registration-cs-plugins    
