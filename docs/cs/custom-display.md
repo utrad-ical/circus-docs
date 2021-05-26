@@ -27,8 +27,8 @@ See the boilerplate in our GitHub repository.
 
 :::important
 
-- Do not try to `import` modules other than `react`, `@utrad-ical/circus-rs` and `@utrad-ical/circus-cs-results`. It is not supported.
-- Use function components. `useCsResults` and `useJobResultsLoader` do not work with React class components.
+- Do not try to `import` modules other than `react`, `@utrad-ical/circus-rs` and `@utrad-ical/circus-ui-kit`. It is not supported.
+- Use function components. `useCsResults` do not work with React class components.
 
 :::
 

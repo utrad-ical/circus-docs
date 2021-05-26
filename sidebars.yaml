@@ -22,7 +22,15 @@ someSidebar:
         - cs/execution
         - cs/build
         - cs/result-display
-        - cs/builtin-displays
+        - type: category
+          label: Built-in Displays
+          items:
+            - cs/displays/index
+            - cs/displays/choice
+            - cs/displays/dump
+            - cs/displays/lesion-candidates
+            - cs/displays/locator
+            - cs/displays/volume-overlay
         - cs/custom-display
   Default Docs:
     - doc1

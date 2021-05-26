@@ -11,5 +11,5 @@ When a CS job is started, the CIRCUS CS system will create a container and runs 
 - **[Plug-in Execution Flow](./execution.md)**: Explains how plug-ins are executed in detail.
 - **[Building a Plug-in](./build.md)**: Explains how to build a plug-in image using docker CLI.
 - **[Presenting CAD Results](./result-display.md)**: Explains how plug-in results are displayed on a browser.
-- **[Built-in Displays](./builtin-displays.md)**: Explains how to use and costomize built-in displays of CIRCUS CS.
+- **[Built-in Displays](./displays/index.md)**: Explains how to use and costomize built-in displays of CIRCUS CS.
 - **[Custom Result Display](./custom-display.md)**: Explains how to fully customize the result screen using your custom React component.

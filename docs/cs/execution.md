@@ -6,6 +6,8 @@ title: Plug-in Execution Flow
 
 When a user registeres a plug-in job (hereafter "job" for short), it will be inserted in a queue. Since plug-in execution is usually costly, CIRCUS CS does not execute plug-ins in parallel.
 
+When a job is started, the CIRCUS CS system will create a Docker container and runs the main process (specified in your Dockerfile). The main application in your container will read and process the input image, and write the processed results into a file. The container will be deleted after the execution regardless of whether it succeeded or failed.
+
 :::note
 It is possible to execute plug-ins on multiple separate machines, but this is not documented yet. Please contact the authors if you need support for this.
 :::
@@ -20,7 +22,7 @@ Each job has one of the following status:
 
 ## Input of Your Plug-in
 
-Your plug-in will be invoked with an external directory mounted to `/circus`. This directory contains the following directories and files.
+Your plug-in (container) will be invoked with an external directory mounted to `/circus`. This directory contains the following directories and files.
 
 ```
 📂/circus/ (mounted to container's root)
@@ -39,7 +41,7 @@ The numbers are volume IDs starting from 0.
 
 ### RAW volume data (`${volId}.raw`) and MHD file (`${volId}.mhd`)
 
-The `*.raw` files contain the RAW data of the volume extracted by the DICOM series (i.e., only pixel values, no headers or metadata). The corresponding MHD file contains basic geometry information. You can preview the images using third-party MHD viewers.
+The `*.raw` files contain the RAW data of the volume extracted by the DICOM series (i.e., only pixel values, no headers or metadata). The corresponding MHD files contain basic geometry information such as the size and the pixel format. You can preview the images using third-party MHD viewers.
 
 :::note
 Currently, only grayscale images are supported.
@@ -47,6 +49,7 @@ Currently, only grayscale images are supported.
 
 ### JSON tag dump data (`${volId}.json`)
 
+This file contains anonymized, JSON-serialized version of DICOM tags. To reduce the file size, the file is divided into the `common` section and the `unique` section. The `common` section contains tag data that are shared across all the images (or slices) of the series (e.g., study time). The `unique` section contains other tag data that are not common across images (e.g., slice location).
 This file contains anonymized, JSON-serialized version of DICOM tags. To reduce file size, the file is divided into the `common` section and the `unique` section. The `common` section contains tag data that are shared across all the images (or slices) of the series (e.g., study time or modality). The `unique` section contains other tag data that are not common across images (e.g., slice location).
 
 The data related to patient information is not included.
@@ -81,7 +84,7 @@ If you are planning to use CIRCUS CS built-in displays (such as `LesionCandidate
 }
 ```
 
-See the display reference page.
+THe [built-in display reference page](./displays/index.md) explains how to prepare your `results.json` for each display.
 
 ## Other Restrictions
 
