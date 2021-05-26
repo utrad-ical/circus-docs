@@ -2,7 +2,7 @@
 title: Case search
 ---
 
-## Case Search 画面の表示
+## Case Search 画面の表示方法
 
 画面上部のメニューより[Case] - [Case Search]を選択するとCase Search画面が表示されます。
 

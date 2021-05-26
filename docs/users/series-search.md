@@ -1,8 +1,8 @@
 ---
-title: Series search
+title: Series Search
 ---
 
-## Series Search 画面の表示
+## Series Search 画面の表示方法
 
 画面上部のメニューより[Series] - [Series Search]を選択するとSeries Search画面が表示されます。
 
