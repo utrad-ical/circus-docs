@@ -1,0 +1,99 @@
+---
+id: api-intro
+title: CIRCUS API usage
+sidebar_label: CIRCUS API Introduction
+slug: /api-intro
+---
+
+All of the functions of CIRCUS CS/DB can be accessed via RESTful API.
+
+## API Endpoint
+
+All of the API endpoints are prefixed with `/api`.
+
+## Authentication
+
+First, you need a permanent access token to access the API.
+
+- The first option is log-in to the CIRCUS Web UI and go to the "Access Tokens" section under the Tool menu.
+- The second option is to use CIRCUS CLI. Attach to the CIRCUS container and issue the following command.
+
+  ```bash
+  $ node circus add-permanent-token <user-email>
+  ```
+
+:::caution Keep the Token Secret!
+Your permanent access tokens will remain valid even after you have logged out of the CIRCUS web UI, and it can do anything on behalf of your account.
+:::
+
+Once you've generated the token, you can use it in the `Authorization` header as follows:
+
+```
+Authorization: Bearer 5ccec1795806a75fd3ea6800e99ade60ddda76bb
+```
+
+Any programming language or command that is capable of making HTTP requests can be used to access the API.
+
+## Examples
+
+Before trying the following samples, you need a permanent access token.
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs
+  defaultValue="js"
+  values={[
+    { label: 'JavaScript', value: 'js', },
+    { label: 'Python', value: 'py', },
+    { label: 'cURL', value: 'curl', },
+  ]}
+>
+<TabItem value="js">
+
+```js title="index.js"
+// This example uses 'node-fetch', but you can use any HTTP library.
+// Other popular options include axios and superagent.
+const fetch = require('node-fetch');
+
+// Replace these according to your environment.
+const token = '5ccec1795806a75fd3ea6800e99ade60ddda76bb';
+const server = 'localhost:8080';
+
+const main = async () => {
+  const res = await fetch(`http://${server}/api/series`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const data = await res.json();
+  console.log(data);
+};
+
+main();
+```
+
+</TabItem>
+<TabItem value="py">
+
+```py title="index.py"
+def hello_world():
+  print 'Hello, world!'
+```
+
+</TabItem>
+<TabItem value="curl">
+
+```bash title="curl.bash"
+#!/usr/bin/bash
+
+# Replace these according to your environment.
+TOKEN=5ccec1795806a75fd3ea6800e99ade60ddda76bb
+SERVER=localhost:8080
+
+curl -H "Authorization: Bearer ${TOKEN}" \
+  http://${SERVER}/api/series
+```
+
+</TabItem>
+</Tabs>
