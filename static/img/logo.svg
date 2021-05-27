@@ -2,7 +2,7 @@
   <defs>
     <style>
       .a {
-        fill: none;
+        fill: #fff;
         stroke: #cb2c20;
         stroke-miterlimit: 10;
       }
