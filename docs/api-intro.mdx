@@ -1,8 +1,7 @@
 ---
 id: api-intro
-title: CIRCUS API usage
-sidebar_label: CIRCUS API Introduction
-slug: /api-intro
+title: CIRCUS API Introduction
+sidebar_label: API Introduction
 ---
 
 All of the functions of CIRCUS CS/DB can be accessed via RESTful API.
@@ -13,10 +12,10 @@ All of the API endpoints are prefixed with `/api`.
 
 ## Authentication
 
-First, you need a permanent access token to access the API.
+First, you need a permanent access token to access the API. It can be obtained in two ways.
 
-- The first option is log-in to the CIRCUS Web UI and go to the "Access Tokens" section under the Tool menu.
-- The second option is to use CIRCUS CLI. Attach to the CIRCUS container and issue the following command.
+- The first option: Log in to CIRCUS Web UI and go to the "Access Tokens" section under the Tool menu.
+- The second option: Use CIRCUS CLI. Attach to the CIRCUS Docker container and issue the following command.
 
   ```bash
   $ node circus add-permanent-token <user-email>
@@ -26,7 +25,9 @@ First, you need a permanent access token to access the API.
 Your permanent access tokens will remain valid even after you have logged out of the CIRCUS web UI, and it can do anything on behalf of your account.
 :::
 
-Once you've generated the token, you can use it in the `Authorization` header as follows:
+Save the generated token somewhere securely. You cannot see it from the system again.
+
+You can use the token in the `Authorization` header in an API request, like so:
 
 ```
 Authorization: Bearer 5ccec1795806a75fd3ea6800e99ade60ddda76bb
@@ -34,7 +35,9 @@ Authorization: Bearer 5ccec1795806a75fd3ea6800e99ade60ddda76bb
 
 Any programming language or command that is capable of making HTTP requests can be used to access the API.
 
-## Examples
+## Basic Examples
+
+The following examples access `/api/series` endpoint to search DICOM series uploaded to the system.
 
 Before trying the following samples, you need a permanent access token.
 
@@ -46,7 +49,7 @@ import TabItem from '@theme/TabItem';
   values={[
     { label: 'JavaScript', value: 'js', },
     { label: 'Python', value: 'py', },
-    { label: 'cURL', value: 'curl', },
+    { label: 'cURL (bash)', value: 'curl', },
   ]}
 >
 <TabItem value="js">
@@ -81,7 +84,7 @@ main();
 import requests
 
 def main(token, server):
-    url = 'http://{}/api/series'.format(server) 
+    url = 'http://{}/api/series'.format(server)
     headers = { 'Authorization': 'Bearer {}'.format(token)}
     return requests.get(url, headers=headers).json()
 
@@ -110,3 +113,20 @@ curl -H "Authorization: Bearer ${TOKEN}" \
 
 </TabItem>
 </Tabs>
+
+You can also use convenient apps such as VSCode's [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) extension.
+
+## Form Your Request
+
+Requests are JSON-based (MIME: `application/json`) with a few exceptions. When you POST or PUT something to API, you must add the `Content-Type: application/json` header, but may HTTP clients handle this automatically. All JSON requests and responses are UTF-8 encoded.
+
+The server may return a `2xx` status code for successful requests.
+
+- **200 OK**: For most GET requests
+- **201 Created**: For most PUT/POST requests
+- **204 No Content**: For most DELETE/PATCH requests and some other requests that return no response body
+
+The server may return a `4xx` status code for unprocessable requests.
+
+- **400 Bad Request**: For most client-side errors such as malformed JSON or wrong request body.
+- **401 Unauthorized**: For requests that has no access token in the header, and requests from users with insufficient privileges.

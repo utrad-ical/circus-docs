@@ -23,6 +23,7 @@ someSidebar:
       label: CIRCUS API
       items:
         - api-intro
+        - api-reference
     - type: category
       label: CIRCUS RS
       items:

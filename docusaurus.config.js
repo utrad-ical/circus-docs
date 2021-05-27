@@ -25,6 +25,11 @@ module.exports = {
         /* { to: 'blog', label: 'Blog', position: 'left' } , */
         { to: 'docs/admin/installation', label: 'Download', position: 'left' },
         /* { to: 'api-explorer', label: 'API Explorer', position: 'left' }, */
+        {
+          href: 'https://github.com/utrad-ical/circus',
+          label: 'GItHub',
+          position: 'right',
+        },
       ],
     },
     footer: {
