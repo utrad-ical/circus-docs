@@ -77,8 +77,21 @@ main();
 <TabItem value="py">
 
 ```py title="index.py"
-def hello_world():
-  print 'Hello, world!'
+# This example uses 'Requests', but you can use any HTTP library.
+import requests
+
+def main(token, server):
+    url = 'http://{}/api/series'.format(server) 
+    headers = { 'Authorization': 'Bearer {}'.format(token)}
+    return requests.get(url, headers=headers).json()
+
+if __name__ == '__main__':
+
+    token = '5ccec1795806a75fd3ea6800e99ade60ddda76bb'
+    server = 'localhost:8080'
+
+    data = main(token, server)
+    print(data)
 ```
 
 </TabItem>
