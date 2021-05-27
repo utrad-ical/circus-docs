@@ -19,8 +19,12 @@ CIRCUS is an open-source, purely web-based platform system to address problems i
 
 ### References
 
-- Yukihiro Nomura, Soichiro Miki, Naoto Hayashi, Shouhei Hanaoka, Issei Sato, Takeharu Yoshikawa, Yoshitaka Masutani and Osamu Abe. **Novel platform for development, training, and validation of computer-assisted detection/diagnosis software**. International Journal of Computer Assisted Radiology and Surgery volume 15, pages661–672 (2020). DOI: [10.1007/s11548-020-02132-z](http://dx.doi.org/10.1007/s11548-020-02132-z)
+Yukihiro Nomura, Soichiro Miki, Naoto Hayashi, Shouhei Hanaoka, Issei Sato, Takeharu Yoshikawa, Yoshitaka Masutani and Osamu Abe  
+**Novel platform for development, training, and validation of computer-assisted detection/diagnosis software**  
+International Journal of Computer Assisted Radiology and Surgery 2020;15(4):661-672    
+[Journal's site (open access)](https://rdcu.be/b2OLL)
 
+ 
 ## About The Documents
 
 This docs site is divided into three sections.
