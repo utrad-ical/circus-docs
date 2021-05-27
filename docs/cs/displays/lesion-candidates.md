@@ -2,21 +2,114 @@
 title: LesionCandidates
 ---
 
+The LesionCandidates display presents volumes with marks of interest.
+
+## Example
+
+![LesionCandidates example](./lesion-candidates.png)
+
 ## Synopsis
 
-## Requirements
+```json
+[
+  {
+    "feedbackKey": "lesionCandidates",
+    "caption": "Lesion Candidates",
+    "type": "LesionCandidates",
+    "options": {
+      "maxCandidates": 3,
+      "feedbackListener": {
+        "type": "Choice",
+        "options": {
+          "personal": [
+            { "caption": "Yes", "value": 1 },
+            { "caption": "No", "value": 0 }
+          ]
+        }
+      }
+    }
+  }
+]
+```
 
-Plug-in results must contain an array data containing the locations of points in the following format:
+## Data Preparation
+
+The plug-in results (`results.json`) must contain an array data containing the locations of points in the following format:
+
+```ts
+Array<{
+  id?: number;
+  rank: number;
+  confidence: number;
+  volumeSize: number;
+  volumeId?: number;
+  location: [number, number, number];
+}>
+```
+
+For exmaple:
 
 ```json
-[]
+{
+  "results": {
+    "lesionCandidates": [
+      {
+        "rank": 1,
+        "confidence": 0.475554,
+        "volumeId": 0,
+        "location": [235, 234, 77],
+        "volumeSize": 11.74
+      },
+      {
+        "rank": 2,
+        "confidence": 0.474043,
+        "volumeId": 0,
+        "location": [333, 216, 73],
+        "volumeSize": 11.02
+      },
+      {
+        "rank": 3,
+        "confidence": 0.469355,
+        "volumeId": 0,
+        "location": [241, 221, 84],
+        "volumeSize": 3.91
+      }
+    ]
+  }
+}
 ```
+
+Your array should usually be located at `results.lesionCandidates`, but this can be configured via the `dataPath` option. This is useful when you want to display two different series of candidates in one screen.
 
 ## Options
 
-- `maxCandidates`: The maximum number of candidates that can be displayed.
-- `sortBy`: Sorts the displays according to the key.
-- `confidenceThreshold`: Candidates with confidence below this value will not be displayed.
-- `feedbackListener`: Can be used to collect feedback data for each displayed methods.
+```ts
+interface MarkStyle {
+  color?: string;
+  dimmedColor?: string;
+  radius?: number;
+  width?: number;
+}
+
+interface LesionCandidatesOptions {
+  dataPath?: string;
+  feedbackListener?: DisplayDefinition | null;
+  maxCandidates?: number;
+  markStyle?: MarkStyle;
+  confidenceThreshold?: number;
+  sortBy?: [keyof LesionCandidate, 'asc' | 'desc'];
+  excludeFromActionLog?: boolean;
+}
+```
+
+- `dataPath: string`: (default: "results.lesionCandidates") Changes where to read the location data from.
+- `feedbackListener: { type: string; options: any }`: Can be used to collect feedback data for each displayed candidates. See below.
+- `maxCandidates: number`: The maximum number of candidates that can be displayed.
+- `markStyle`: (defalut: magenta circle) The radius, color and line width of the mark.
+- `confidenceThreshold: number`: If set, candidates with confidences below this value will be excluded.
+- `sortBy`: (default: ['rank', 'asc']) Sorts the displays according to the key.
+- `excludeFromActionLog: boolean`: (default: false) If set to true, nothing will be recorded to the action log regarding this display.
 
 ## Nested Dispaly to Collect Feedback
+
+You can use `feedbackListener` option to collection feedback for each lesion candidate displayed on screen.

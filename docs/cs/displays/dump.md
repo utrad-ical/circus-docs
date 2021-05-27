@@ -10,11 +10,13 @@ The `Dump` display shows all data from the plug-in. This is mainly for debugging
 [
   {
     "type": "Dump",
-    "options": {}
+    "options": {
+      "maxHeight": 300
+    }
   }
 ]
 ```
 
 ## Options
 
-Currently there are no options to configure this display.
+- `maxHeight: number`: (default = 300) The maximum height of the text box. If the height of the content exceeds this, a scroll bar will appear.
