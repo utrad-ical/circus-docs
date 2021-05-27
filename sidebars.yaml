@@ -2,6 +2,7 @@ someSidebar:
   Introduction:
     - welcome
   User Guide:
+    - users/about  
     - users/login
     - users/series-search
     - users/series-import
