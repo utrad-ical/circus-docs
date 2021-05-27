@@ -24,39 +24,39 @@ module.exports = {
         },
         /* { to: 'blog', label: 'Blog', position: 'left' } , */
         { to: 'docs/admin/installation', label: 'Download', position: 'left' },
-        {
-          to: 'api-explorer',
-          label: 'API Explorer',
-          position: 'left',
-        },
+        /* { to: 'api-explorer', label: 'API Explorer', position: 'left' }, */
       ],
     },
     footer: {
       style: 'dark',
       links: [
         {
-          title: 'Docs',
+          title: 'CIRCUS Project',
           items: [
             {
-              label: 'Style Guide',
-              to: 'docs/',
+              label: 'GitHub',
+              href: 'https://github.com/utrad-ical/circus',
             },
             {
-              label: 'Second Doc',
-              to: 'docs/doc2',
+              label: 'Improve Docs',
+              href: 'https://github.com/utrad-ical/circus-docs',
             },
           ],
         },
         {
-          title: 'More',
+          title: 'UT Radiology ICAL Team',
           items: [
             {
-              label: 'Blog',
-              to: 'blog',
+              label: 'ICAL',
+              to: 'http://www.ut-radiology.umin.jp/ical/',
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/utrad-ical/circus-project',
+              label: 'UT Radiology',
+              to: 'http://www.ut-radiology.umin.jp/',
+            },
+            {
+              label: '東大病院',
+              to: 'https://www.h.u-tokyo.ac.jp/',
             },
           ],
         },

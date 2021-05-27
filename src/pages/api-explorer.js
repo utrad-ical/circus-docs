@@ -13,7 +13,7 @@ function Hello() {
           fontSize: '20px',
         }}
       >
-        <p>CIRCUS API Explorer will come here.</p>
+        <p>CIRCUS API Explorer.</p>
       </div>
     </Layout>
   );

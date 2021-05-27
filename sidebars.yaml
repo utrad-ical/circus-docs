@@ -12,11 +12,11 @@ someSidebar:
     - type: category
       label: CIRCUS CS
       items:
-        - users/plugin-job-search            
+        - users/plugin-job-search
   Administrator Guide:
     - admin/installation
-    - admin/registration-cs-plugins    
-    - admin/dicom-storage-server    
+    - admin/registration-cs-plugins
+    - admin/dicom-storage-server
   Developer Guide:
     - type: category
       label: CIRCUS API
@@ -44,7 +44,7 @@ someSidebar:
             - cs/displays/locator
             - cs/displays/volume-overlay
         - cs/custom-display
-  Default Docs:
-    - doc1
-    - doc2
-    - mdx
+  # Default Docs:
+  #   - doc1
+  #   - doc2
+  #   - mdx
