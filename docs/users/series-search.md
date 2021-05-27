@@ -6,7 +6,7 @@ title: Series Search
 
 画面上部のメニューより[Series] - [Series Search]を選択するとSeries Search画面が表示されます。
 
-![Series search from menu](series-search-01.png)
+![Menu - Series Search](menu-series-search.png)
 
 :::tip
 
@@ -28,31 +28,31 @@ Series Search画面の上部の"Search Condition"にて検索条件を設定し�
 
 Basicでは基本的な検索条件により検索ができます。
 
-![Search condition (Basic mode)](series-search-02.png)
+![Search condition (Basic)](series-search-basic-condition.png)
 
 
 ### Advanced
 
 Advancedでは検索条件をより詳細に設定することができます。Basicにはなかった検索項目(import date)による検索も行うことができます。
 
-![Search condition (Advanced)](series-search-03.png)
+![Search condition (Advanced)](series-search-advanced-condition.png)
 
 ### 検索条件の保存(preset)
 
 よく使用する検索条件をpresetとして保存することができます。検索条件設定画面下部の[Save]ボタンをクリックすると、preset nameを設定するダイアログが表示されますので、名前を設定して[OK]ボタンをクリックします。
 
-![Set preset name](series-search-04.png)
+![Set preset name](series-search-preset-dialog.png)
 
 保存したpresetはメニューの[Seres]より呼び出すことができます。
 
-![Call preset from menu](series-search-05.png)
+![Menu - Series preset](menu-series-search-preset.png)
 
 
 ## 検索結果のリスト表示
 
 検索結果は画面下部に表示されます。
 
-![Set preset name](series-search-06.png)
+![Set preset name](series-search-list.png)
 
 - リスト各行の"Uid"列にある虫眼鏡アイコンをクリックすると、そのseriesのStudy Instance UIDならびにSeries Instance UIDが表示されます。それぞれのUIDをクリップボードにコピーすることもできます。 
 

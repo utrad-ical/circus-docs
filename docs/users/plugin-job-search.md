@@ -6,7 +6,7 @@ title: Plug-in Job Search
 
 画面上部のメニューより[CAD] - [Plug-in Job Search]を選択するとPlug-in Job Search画面が表示されます。
 
-![Plug-in Job Search from menu](plugin-job-search-01.png "Plug-in Job Search from menu")
+![Menu: Plug-in Job Search](menu-plugin-job-search.png)
 
 :::tip
 
