@@ -8,7 +8,6 @@ CT・MRIをはじめとする医用画像診断装置の進歩に伴い、診断
 
 CADソフトウェアの開発／臨床応用を促進するためには、アルゴリズムの開発、ソフトウェアの実装、臨床使用、知見のフィードバック、アルゴリズムおよびソフトウェアの改善、さらなる臨床使用の循環が必要です。CIRCUS (Clinical Infrastructure for Radiologic Computation of United Solutions) は、これらの循環を実現することを目的に開発された、統合的なCAD開発プラットフォームです。
 
-
 ## CIRCUSの構成
 
 CIRCUSは2種類のトップレベル・アプリケーションで構成されています
@@ -22,7 +21,6 @@ CADソフトウェアの開発では、対象となる疾患の元画像およ�
 - 複数疾患ならびに複数DICOMシリーズに対応
 - 症例情報の入力項目は対象とする疾患毎に設定可能
 - ソフトウェア開発用の元画像および病変形状はボリュームデータとして取得可能（症例情報はJSONファイルにて取得）
-
 
 ### CIRCUS CS (clinical server)
 
@@ -45,12 +43,30 @@ CIRCUS CS上で動作するオリジナルのプラグインを作成した場�
 
 ### 依存する他のソフトウェア
 
+CIRCUSは他のオープンソフトウェアを使用して構築されています。CIRCUSと別のライセンスが適用されます。主なものを以下に掲載します。
+
+#### Node.js
+
+Node.js は OpenJS Foundation により MIT license で配布されている JavaScript実行環境です。
+
+#### nginx
+
+nginx は Nginx, Inc. により 2-clause BSD-like license で配布されている HTTPサーバソフトウェアです。
+
+#### MongoDB
+
+MongoDB は MongoDB, Inc. により Server Side Public License (SSPL) で配布されているドキュメント指向データベースです。
+
+#### Docker
+
+Docker は  Docker, Inc. により Apache License 2.0 で配布されているコンテナ型の仮想化プラットフォームです。
+
 
 ### 文献
 
-CIRCUSの概要は以下の論文に掲載されています。CIRCUSを用いた研究成果を発表する場合には、CIRCUSを利用した旨明記し、かつ以下の文献を引用して頂ければ幸いです。
+CIRCUSの概要は以下の論文に掲載されています。CIRCUSを用いた研究成果を発表する場合には、CIRCUSを利用した旨明記し、かつ以下の文献の引用をお願いいたします。
 
 Nomura Y, Miki S, Hayashi N, Hanaoka S, Sato I, Yoshikawa T, Masutani Y, Abe O  
 *** Novel platform for development, training, and validation of computer-assisted detection/diagnosis software ***  
 International Journal of Computer Assisted Radiology and Surgery, vol.15, no.4, 661-672, 2020  
-[***Journal's site (open access)***](https://rdcu.be/b2OLL)
+[**Journal's site** (open access)](https://rdcu.be/b2OLL)
