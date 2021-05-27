@@ -1,6 +1,6 @@
 module.exports = {
   title: 'CIRCUS',
-  tagline: 'Platform for computer-aided diagnosis research',
+  tagline: 'Platform for Computer-aided Diagnosis Research',
   url: 'https://circus-docs.netlify.app',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -55,7 +55,7 @@ module.exports = {
               to: 'http://www.ut-radiology.umin.jp/',
             },
             {
-              label: '東大病院',
+              label: 'The University of Tokyo Hospital',
               to: 'https://www.h.u-tokyo.ac.jp/',
             },
           ],
@@ -70,13 +70,11 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl:
-            'https://github.com/utrad-ical/circus-docs/edit/master/website/',
+          editUrl: 'https://github.com/utrad-ical/circus-docs/edit/master',
         },
         blog: {
           showReadingTime: true,
-          editUrl:
-            'https://github.com/utrad-ical/circus-docs/edit/master/website/blog/',
+          editUrl: 'https://github.com/utrad-ical/circus-docs/edit/master',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),

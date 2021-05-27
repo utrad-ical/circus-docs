@@ -12,34 +12,43 @@ const features = [
     // imageUrl: 'img/undraw_docusaurus_mountain.svg',
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        CIRCUS DB (database) is a clinical image database application for
+        collecting datasets used to develop CAD software. It stores DICOM
+        series, optionally after anonymization, and users can define labels on
+        the stored images.
       </>
     ),
+    link: '/docs/users/case-search',
   },
   {
     title: 'CIRCUS CS',
     // imageUrl: 'img/undraw_docusaurus_tree.svg',
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        CIRCUS CS (clinical server) is a CAD execution platform based on Docker
+        plug-ins. Users can request to execute a plug-in as a job on selected
+        DICOM series, and each job is sequentially processed by Job Manager. The
+        results are either displayed as a web page or fetched via RESTful API.
       </>
     ),
+    link: '/docs/users/login',
   },
   {
     title: 'CIRCUS RS',
     // imageUrl: 'img/undraw_docusaurus_react.svg',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        CIRCUS DB/CS is powered by CIRCUS RS, a lightweight medical image server
+        and a viewer component, written in TypeScript. You can develop a custom
+        viewer application on top of CIRCUS RS.
       </>
     ),
+    link: '/docs/rs/index',
   },
 ];
 
-function Feature({ imageUrl, title, description }) {
+const Feature = props => {
+  const { imageUrl, title, description, link } = props;
   const imgUrl = useBaseUrl(imageUrl);
   return (
     <div className={clsx('col col--4', styles.feature)}>
@@ -50,18 +59,27 @@ function Feature({ imageUrl, title, description }) {
       )}
       <h3>{title}</h3>
       <p>{description}</p>
+      {link && (
+        <p className="text--right">
+          <a href={link}>&gt; Learn More</a>
+        </p>
+      )}
     </div>
   );
-}
+};
 
-function Home() {
+const Home = () => {
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
   return (
     <Layout title={siteConfig.title} description="The home of CIRCUS Project">
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
-          <h1 className="hero__title">{siteConfig.title}</h1>
+          <img
+            className="hero__title"
+            src="img/circus-main-logo.svg"
+            alt={siteConfig.title}
+          />
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={styles.buttons}>
             <Link
@@ -91,6 +109,6 @@ function Home() {
       </main>
     </Layout>
   );
-}
+};
 
 export default Home;
