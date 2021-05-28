@@ -3,18 +3,19 @@ someSidebar:
     - welcome
   User Guide:
     - users/about
-    - users/data-structure  
+    - users/data-structure
     - users/login
     - users/series-search
     - users/series-import
     - type: category
       label: CIRCUS DB
       items:
+        - users/new-case
         - users/case-search
     - type: category
       label: CIRCUS CS
       items:
-        - users/new-job      
+        - users/new-job
         - users/plugin-job-search
   Administrator Guide:
     - admin/installation

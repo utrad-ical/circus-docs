@@ -60,7 +60,7 @@ Advancedでは検索条件をより詳細に設定することができます。
 
   ![Set detail](series-detail.png)
 
-- リスト各行の[New]はプルダウンメニューとなっています。
+- リスト各行の[+ New]はプルダウンメニューとなっています。
   - "New Case"を選択すると、そのシリーズを含むCase(CIRCUS DB)新規登録画面が表示されます。
   - "New Job"を選択すると、そのシリーズを含むPlug-in job(CIRCUS CS)新規登録画面が表示されます。
 
