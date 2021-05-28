@@ -14,6 +14,7 @@ someSidebar:
     - type: category
       label: CIRCUS CS
       items:
+        - users/new-job      
         - users/plugin-job-search
   Administrator Guide:
     - admin/installation
