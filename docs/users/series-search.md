@@ -33,7 +33,7 @@ Basicでは基本的な検索条件により検索ができます。
 
 ### Advanced
 
-Advancedでは検索条件をより詳細に設定することができます。Basicにはなかった検索項目(import date)による検索も行うことができます。
+Advancedでは検索条件をより詳細に設定することができます。Basicにはない検索項目(import date)を用いた検索も行うことができます。
 
 ![Search condition (Advanced)](series-search-advanced-condition.png)
 
@@ -41,7 +41,7 @@ Advancedでは検索条件をより詳細に設定することができます。
 
 よく使用する検索条件をpresetとして保存することができます。検索条件設定画面下部の[Save]ボタンをクリックすると、preset nameを設定するダイアログが表示されますので、名前を設定して[OK]ボタンをクリックします。
 
-![Set preset name](series-search-preset-dialog.png)
+![Set preset name](search-preset-dialog.png)
 
 保存したpresetはメニューの[Seres]より呼び出すことができます。
 
@@ -63,3 +63,5 @@ Advancedでは検索条件をより詳細に設定することができます。
 - リスト各行の[New]はプルダウンメニューとなっています。
   - "New Case"を選択すると、そのシリーズを含むCase(CIRCUS DB)新規登録画面が表示されます。
   - "New Job"を選択すると、そのシリーズを含むPlug-in job(CIRCUS CS)新規登録画面が表示されます。
+
+
