@@ -14,7 +14,47 @@ title: Plug-in Job Search
 
 :::
 
-### Plug-in Jobの検索
+## 検索条件の設定
+
+Plug-in Job Search画面の上部の"Search Condition"にて検索条件を設定します。検索条件の設定方法として、BasicおよびAdvancedの2種類があります。 それぞれはタブによって切り替えることが出来ます。
+
+:::note
+
+検索条件設定画面が表示されていない場合は"Search Condition"上部の &#9660; をクリックします。
+
+:::
+
+### Basic
+
+Basicでは基本的な検索条件により検索ができます。
+
+![Search condition (Basic)](plugin-job-search-basic-condition.png)
 
 
-### 検索結果の表示
+### Advanced
+
+Advancedでは検索条件をより詳細に設定することができます。Basicにはない検索項目(job register date, job finish date)を用いた検索も行うことができます。
+
+![Search condition (Advanced)](plugin-job-search-advanced-condition.png)
+
+
+### 検索条件の保存(preset)
+
+よく使用する検索条件をpresetとして保存することができます。検索条件設定画面下部の[Save]ボタンをクリックすると、preset nameを設定するダイアログが表示されますので、名前を設定して[OK]ボタンをクリックします。
+
+![Set preset name](search-preset-dialog.png)
+
+保存したpresetはメニューの[Seres]より呼び出すことができます。
+
+![Menu - Series preset](menu-cad-search-preset.png)
+
+
+## 検索結果のリスト表示
+
+検索結果は画面下部に表示されます。
+
+![Set preset name](plugin-job-search-list.png)
+
+- リスト各行の"Job ID"列にある虫眼鏡アイコンをクリックすると、Job IDが表示されます。Job IDをクリップボードにコピーすることもできます。 
+
+- リスト各行の[View]ボタンをクリックすると、Plug-inの処理結果画面が表示されます。
