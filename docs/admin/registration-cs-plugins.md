@@ -2,7 +2,7 @@
 title: Registration of CS Plug-ins
 ---
 
-## CIRCUS CS プラグインの登録手順
+## CIRCUS CSプラグインの登録手順
 
 エクスポートされたDocker image (xxx_ver.1.0.0.tar) をCIRCUS CSのプラグインとして登録するためには以下で行います。
 
