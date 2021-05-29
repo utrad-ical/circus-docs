@@ -22,7 +22,7 @@ title: Groups
 
 ### Group Name
 
-グループ名を設定します。
+グループ名を入力します。
 
 ### Privileges
 

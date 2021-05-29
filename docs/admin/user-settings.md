@@ -30,7 +30,6 @@ title: Users
 
 ![User description](user-description.png)
 
-
 ### パスワード
 
 パスワードを設定します。変更の場合は空白で表示されています。
@@ -38,7 +37,6 @@ title: Users
 ### Groups
 
 ユーザが所属するグループを設定します。ユーザは複数のグループに所属することができ、そのレベルで CIRCUS 内の様々な操作への権限が付与されます（個々のユーザのレベルでは権限情報を持っていません）。
-
 
 ### Preferences
 

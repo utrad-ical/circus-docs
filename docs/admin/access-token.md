@@ -10,7 +10,7 @@ CIRCUSのAPIを使用する場合や、DICOM Storage ServerのDocker imageを使
 
 画面上部のメニューより[Tool] - [Access Tokens]を選択すると永続接続トークンの作成画面が表示されます。
 
-1. トークンを作成するためには、画面下部の"Add new token"のテキストボックスに説明文を入力し、[Create]ボタンをクリックします。
+1. トークンを作成するためには、画面下部の"Add new token"のテキストボックスにを短い説明文を入力し、[Create]ボタンをクリックします。
 
   ![Add new token](add-new-token.png)
 
