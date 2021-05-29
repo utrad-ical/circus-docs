@@ -12,6 +12,7 @@ someSidebar:
       items:
         - users/new-case
         - users/case-search
+        - users/case-info        
     - type: category
       label: CIRCUS CS
       items:

@@ -30,7 +30,6 @@ Basicでは基本的な検索条件により検索ができます。
 
 ![Search condition (Basic)](plugin-job-search-basic-condition.png)
 
-
 ### Advanced
 
 Advancedでは検索条件をより詳細に設定することができます。Basicにはない検索項目(job register date, job finish date)を用いた検索も行うことができます。
