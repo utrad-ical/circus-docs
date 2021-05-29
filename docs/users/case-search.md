@@ -30,15 +30,13 @@ Basicでは基本的な検索条件により検索ができます。
 
 ![Search condition (Basic)](case-search-basic-condition.png)
 
-
 ### Advanced
 
 Advancedでは検索条件をより詳細に設定することができます。Basicにはない検索項目(age, sex)を用いた検索も行うことができます。
 
 ![Search condition (Advanced)](case-search-advanced-condition.png)
 
-
-### 検索条件の保存(preset)
+### 検索条件(preset)の保存
 
 よく使用する検索条件をpresetとして保存することができます。検索条件設定画面下部の[Save]ボタンをクリックすると、preset nameを設定するダイアログが表示されますので、名前を設定して[OK]ボタンをクリックします。
 
@@ -48,6 +46,11 @@ Advancedでは検索条件をより詳細に設定することができます。
 
 ![Menu - Series preset](menu-case-search-preset.png)
 
+:::note
+
+presetの削除方法は [ユーザ固有の設定](user-preference.md) を参照ください。
+
+:::
 
 ## 検索結果のリスト表示
 

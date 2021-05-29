@@ -18,7 +18,7 @@ someSidebar:
         - users/new-job
         - users/plugin-job-search
         - users/cad-result-display
-    - users/preference           
+    - users/user-preference           
   Administrator Guide:
     - admin/installation
     - admin/registration-cs-plugins

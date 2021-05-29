@@ -37,8 +37,7 @@ Advancedでは検索条件をより詳細に設定することができます。
 
 ![Search condition (Advanced)](plugin-job-search-advanced-condition.png)
 
-
-### 検索条件の保存(preset)
+### 検索条件(preset)の保存
 
 よく使用する検索条件をpresetとして保存することができます。検索条件設定画面下部の[Save]ボタンをクリックすると、preset nameを設定するダイアログが表示されますので、名前を設定して[OK]ボタンをクリックします。
 
@@ -48,6 +47,11 @@ Advancedでは検索条件をより詳細に設定することができます。
 
 ![Menu - Series preset](menu-cad-search-preset.png)
 
+:::note
+
+presetの削除方法は [ユーザ固有の設定](user-preference.md) ご参照ください。
+
+:::
 
 ## 検索結果のリスト表示
 
