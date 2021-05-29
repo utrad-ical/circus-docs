@@ -12,14 +12,14 @@ someSidebar:
       items:
         - users/new-case
         - users/case-search
-        - users/case-info        
+        - users/case-info
     - type: category
       label: CIRCUS CS
       items:
         - users/new-job
         - users/plugin-job-search
         - users/cad-result-display
-    - users/user-preference           
+    - users/user-preference
   Administrator Guide:
     - admin/installation
     - admin/registration-cs-plugins
@@ -28,7 +28,7 @@ someSidebar:
     - admin/project-settings
     - admin/job-manager
     - admin/cad-plugin-settings
-    - admin/server-configuration    
+    - admin/server-configuration
     - admin/access-token
     - admin/dicom-storage-server
   Developer Guide:
@@ -37,11 +37,11 @@ someSidebar:
       items:
         - api-intro
         - api-reference
-    - type: category
-      label: CIRCUS RS
-      items:
-        - rs/index
-        - rs/concepts
+    # - type: category
+    #   label: CIRCUS RS
+    #   items:
+    #     - rs/index
+    #     - rs/concepts
     - type: category
       label: CIRCUS CS Plug-ins
       items:
