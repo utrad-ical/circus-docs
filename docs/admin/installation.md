@@ -28,11 +28,11 @@ CIRCUS システムの起動に必要なデータを作成するために以下�
 
         # sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] -it circuscad/circus:1.0.0-beta6 /bin/bash
 
-:::tip
+  :::tip
 
-データベース(MongoDB)を外部から操作しない場合は "-p 27017:27017" は不要です。
+  データベース(MongoDB)を外部から操作しない場合は "-p 27017:27017" は不要です。
 
-:::
+  :::
 
 1. CIRCUSの Docker image内で以下のコマンドを実行し、データベースなどを構築します。
 
