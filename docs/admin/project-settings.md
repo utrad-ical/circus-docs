@@ -29,13 +29,13 @@ title: Projects
 
 ### Window Presets
 
-Case Info画面でDICOM画像を表示する際のwindow level、window widthのpresetを設定できます。
+Case Detail画面でDICOM画像を表示する際のwindow level、window widthのpresetを設定できます。
 
 ![Window Presets](project-window-presets.png)
 
 ### Window Priority
 
-Case Info画面でDICOM画像（ボリュームデータ）を表示する際のwindow level、window widthの初期値を決める方法の優先度の順を選択できます。
+Case Detail画面でDICOM画像（ボリュームデータ）を表示する際のwindow level、window widthの初期値を決める方法の優先度の順を選択できます。
 
 - preset："Window Presets"で設定した値を使用します。複数設定されている場合は1番目の値を使用し、設定されていない場合は無視されます。
 - dicom：ボリュームデータ中央のDICOMファイルにwindow center(0x0028, 0x0050)、window width(0x0028, 0x0051)タグが存在すればその値を使用し、存在しない場合は無視します。
