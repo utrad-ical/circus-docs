@@ -29,7 +29,8 @@ See the boilerplate in our GitHub repository.
 
 The following modules are shared among the webpack containers; you can `import` these directly without worrying bundle size bloating or duplicate instances.
 
-- `react`, `react-dom`
+- `react`
+- `react-dom`
 - `styled-components`
 - `@utrad-ical/circus-rs`
 - `@utrad-ical/circus-ui-kit`
@@ -55,16 +56,18 @@ interface CsResultsContextType {
 
 export interface Job {
   jobId: string;
+  userEmail: string;
   pluginId: string;
   series: SeriesDefinition[];
   feedbacks: FeedbackEntry<any>[];
   createdAt: string;
-  results: any;
+  finishedAt: string;
+  results: any; // The data in results.json
 }
 ```
 
 - The data the plug-in wrote to `results.json` is located at `job.results`. This is always available when this display is invoked.
-- Other arbitrary files output by the plug-in (e.g., PDF) are asynchronously fetched via authorized HTTP requests. You can use either the `loadAttachment` function or the `useAttachment` custom hook (which is a wrapper around `loadAttachment`).
+- Other arbitrary files output by the plug-in (e.g., PDF) can be asynchronously fetched via authorized HTTP requests. You can use either the `loadAttachment` function or the `useAttachment` custom hook (which is a wrapper around `loadAttachment`).
 
 :::important
 Use only function components. The `useCsResults()` hook does not work in React class components.
@@ -77,6 +80,7 @@ Use only function components. The `useCsResults()` hook does not work in React c
 ```tsx
 import { usePluginAttachment } from '@utrad-ical/circus-ui-kit';
 
+// Function component
 const Results = () => {
   const csvDataStr = usePluginAttachment('my-data.csv', 'text');
 
@@ -94,6 +98,27 @@ Note that the data you requested will be fetched from the network and arrives as
 - `undefined`: When the data has not been loaded yet.
 - `Error`: When an error has happened while the loading process (e.g., a wrong file name was passed).
 - `string | object | ArrayBuffer`: When the data has been successfully loaded.
+
+If you want to load more than one file, simply use `usePluginAttachment` multiple times.
+
+```tsx
+const DisplayLoadingTwoFiles = () => {
+  const data1 = usePluginAttachment('data1.txt', 'text');
+  const data2 = usePluginAttachment('data2.txt', 'text');
+
+  if (!data1 || !data2) return <div>Loading...</div>;
+  if (data1 instanceof Error || data2 instanceof Error) return <div>Error</div>;
+
+  return (
+    <ul>
+      <li>{data1}</li>
+      <li>{data2}</li>
+    </ul>
+  );
+};
+
+export default DisplayLoadingTwoFiles;
+```
 
 ## Flexibly Load Data Using `loadAttachment`
 
@@ -154,15 +179,17 @@ interface InvalidFeedbackReport {
 type FeedbackReport<T> = ValidFeedbackReport<T> | InvalidFeedbackReport;
 ```
 
-The system is similar to the plain [controlled component pattern](https://reactjs.org/docs/forms.html) in that you have to report data changes using a passed callback, but `initialValue` will not be updated between re-renders. That is, you have to manage the current feedback data inside your display's state.
+The mechanism is similar to the plain [controlled component pattern](https://reactjs.org/docs/forms.html) in that you have to report data changes using a passed callback, but `initialValue` will not be updated between re-renders. That is, you have to manage the current feedback data inside your display's state.
 
-You can return any data as feedback, as long as it is JSON-serializable. Do not return non-serializable data such as `Date`, `Map` or `symbol`.
+Make sure to **call `onFeedbackChange` on initial render**. It tells the CIRCUS system that your display wants to collect user feedback. And report the validation status whenever your current feedback data inside your display changes, which can be done using `useEffect(..., [currentFeedback])`. On the other hand, if your display doesn't need to collect feedback, simply avoid calling `onFeedbackChange`.
+
+You can return any data as feedback as long as they are JSON-serializable. Do not return non-serializable data such as `Date`, `Map` or `symbol`.
 
 This is a sample display which collects numerical feedback (greater than 3) from the user.
 
 ```jsx
 const NumberInputDisplay = props => {
-  const { initialFeedbackValue, onFeedbackChange } = props;
+  const { initialFeedbackValue, onFeedbackChange, personalOpinions } = props;
   // editable will be false when a feedback entry has been already registered.
   const { editable, consensual } = useCsResults();
 
@@ -173,8 +200,8 @@ const NumberInputDisplay = props => {
     // Perform personal feedback integration when the user enters consensual mode.
     // Here, we calculate the mean of the values entered in personal mode.
     if (consensual && editable) {
-      const sum = opinions.map(o => o.data).reduce((a, b) => a + b, 0);
-      return sum / opinions.length;
+      const sum = personalOpinions.map(o => o.data).reduce((a, b) => a + b, 0);
+      return sum / personalOpinions.length;
     }
     // Otherwise, just return the default value used when a user
     // first enters this display.
@@ -208,5 +235,7 @@ const NumberInputDisplay = props => {
 ```
 
 :::important
-If your display is purely for presenting data and doesn't want to support feedback collection, simply avoid calling `onFeedbackChange`. The CIRCUS system will recognize this display supports feedback collection the first time you call this callback with either `{ valid: true }` or `{ valid: false }`
+
+When you integrate personal feedback entries, use `props.personalOpinions` rathern than `job.feedbacks` from `useCsResults()`. These seem similar, but the latter contains all the data from other displays, and you cannot determine which part of the data is relevant to your display.
+
 :::
