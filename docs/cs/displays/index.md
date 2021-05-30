@@ -10,6 +10,8 @@ This section explains the built-in displays currently available on CIRCUS CS.
 | [Dump](./dump.md)                       |    📺    | Dumps raw results data for debugging                                |
 | [LesionCandidates](./lesion-candidates) |  📺&🎤   | Shows series with lesion candidate marks and collects user feedback |
 | [Locator](./locator)                    |    🎤    | Lets user click locations of a volume                               |
+| [Numeric](./numeric)                    |    🎤    | Lets user input a numeric value                                     |
+| [Text](./text)                          |    🎤    | Lets user input a string                                            |
 | [VolumeOverlay](./volume-overlay)       |    📺    | Shows series with colored volume overlay                            |
 
 📺: Presentation, 🎤: Feedback collection

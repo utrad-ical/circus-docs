@@ -172,7 +172,7 @@ const NumberInputDisplay = props => {
     if (typeof initialFeedbackValue === 'number') return initialFeedbackValue;
     // Perform personal feedback integration when the user enters consensual mode.
     // Here, we calculate the mean of the values entered in personal mode.
-    if (consensual && initialFeedbackValue === undefined) {
+    if (consensual && editable) {
       const sum = opinions.map(o => o.data).reduce((a, b) => a + b, 0);
       return sum / opinions.length;
     }

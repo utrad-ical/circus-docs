@@ -57,6 +57,8 @@ someSidebar:
             - cs/displays/dump
             - cs/displays/lesion-candidates
             - cs/displays/locator
+            - cs/displays/numeric
+            - cs/displays/text
             - cs/displays/volume-overlay
         - cs/custom-display
   # Default Docs:
