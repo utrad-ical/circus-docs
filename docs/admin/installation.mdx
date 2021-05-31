@@ -10,17 +10,15 @@ import TabItem from '@theme/TabItem';
 Docker HubにてCIRCUSシステムのDocker imageを提供しています。こちらを使ってインストールするのが最も簡単です。ホストマシンのOSによって手順が異なります。
 
 :::important
-
 2021.6現在、Mac OSでは未検証です。
-
 :::
 
 :::tip
-
 DockerHub上にあるCIRCUSの最新版は以下のサイトでご確認ください。  
 https://hub.docker.com/u/circuscad
-
 :::
+
+## CIRCUSのDocker image取得・初期設定
 
 <Tabs
   defaultValue="linux"
@@ -33,18 +31,18 @@ https://hub.docker.com/u/circuscad
 
 以下の手順はCIRCUSのデータフォルダを/var/circus/dataと設定（ホスト、Docker image内共通）することを前提としています。
 
-## Dockerのインストール
+#### Dockerのインストール
 
 CIRCUSをインストールするマシンに docker-ce 19.03以降をインストールします。詳細は[Docker公式ドキュメント](https://docs.docker.com/get-docker/)を参考してください。
 
-## CIRCUSのDocker imageの取得
+#### CIRCUSのDocker imageの取得
 
 Docker Hub より以下のDocker imageを取得します。
 
     # sudo docker pull circuscad/circus:1.0.0-beta8
     # sudo docker pull circuscad/dicom_utility:2.0.0-beta3
 
-## 初期設定手順
+#### 初期設定手順
 
 CIRCUSシステムの起動に必要なデータを作成するために以下の操作が必要となります。
 
@@ -52,50 +50,34 @@ CIRCUSシステムの起動に必要なデータを作成するために以下�
 
 1. コンテナ内部でコマンドを実行するため、CIRCUS のDocker imageを使って /bin/bash を実行します。
 
-        # sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] -it circuscad/circus:1.0.0-beta6 /bin/bash
+        # sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -it circuscad/circus:1.0.0-beta8 /bin/bash
 
-  :::tip
-
-  データベース(MongoDB)を外部から操作しない場合は "-p 27017:27017" は不要です。
-
+  :::note
+  初期設定の間はポートの公開（`-p`オプション）やIPアドレスのマッピング(`--add-host`オプション)の設定は不要です。
   :::
 
 1. CIRCUSの Docker image内で以下のコマンドを実行し、データベースなどを構築します。
 
         # /root/data_initialize.sh
 
-## 2回目以降の起動手順
-
-- デーモンとして起動させる場合(サーバ群が自動起動します)
-
-      # sudo docker run -d --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] circuscad/circus:1.0.0-beta8
-
-- コンテナ内部でコマンドを実行する場合(/bin/bash を起動)
-
-      # sudo docker run --rm -v /var/circus/data:/var/circus/data -v/var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] -it circuscad/circus:1.0.0-beta8 /bin/bash
-
-  - サーバ群を起動させるためにはコンテナ内で以下のスクリプトを実行する必要があります(バックグラウンドでの実行を推奨)。
-
-        # /root/services.sh &
-
 </TabItem>
 <TabItem value="win">
 
 以下の手順はホスト側のCIRCUSのデータフォルダをC:\circus\data（以下では/C/circus/dataと記述）設定します。
 
-## Docker Desktop for Windowsのインストール
+#### Docker Desktop for Windowsのインストール
 
 CIRCUSをインストールするマシンに Docker Desktop for Windowsをインストールします。詳細は[Docker公式ドキュメント](https://docs.docker.com/get-docker/)を参考してください。
 
 
-## CIRCUSのDocker imageの取得
+#### CIRCUSのDocker imageの取得
 
 Docker Hub より以下のDocker imageを取得します。
 
     # docker pull circuscad/circus:1.0.0-beta8
     # docker pull circuscad/dicom_utility:2.0.0-beta3
 
-## 初期設定手順
+#### 初期設定
 
 CIRCUSシステムの起動に必要なデータ、ならびにOS間のフォルダ構造の違いを解消するために以下の操作が必要となります。
 
@@ -106,10 +88,9 @@ CIRCUSシステムの起動に必要なデータ、ならびにOS間のフォル
 
             > docker run -v /var/run/docker.sock:/var/run/docker.sock -it circuscad/circus:1.0.0-beta8 /bin/bash
 
-      :::tip
-
-      起動したコンテナ内に変更した設定を保持させるために、--rmオプションを外します。
-
+      :::note
+      - 起動したコンテナ内に変更した設定を保持させるために、--rmオプションを外します。
+      - 初期設定の間はポートの公開（`-p`オプション）やIPアドレスのマッピング(`--add-host`オプション)の設定は不要です。
       :::
 
    1. 起動したDockerコンテナ内部で以下のコマンドを実行します。
@@ -136,39 +117,47 @@ CIRCUSシステムの起動に必要なデータ、ならびにOS間のフォル
 
 1. 上記操作で新たに作成したDocker image内で以下のコマンドを実行し、データベースなどを構築します。
 
-        > docker run --rm -v /c/circus/data:/c/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] -it circuscad/circus-for-win:1.0.0-beta8 /bin/bash
+        > docker run --rm -v /c/circus/data:/c/circus/data -v /var/run/docker.sock:/var/run/docker.sock -it circuscad/circus-for-win:1.0.0-beta8 /bin/bash
 
         # /root/data_initialize.sh
 
-## 2回目以降の起動手順
+</TabItem>
+</Tabs>
 
-- デーモンとして起動させる場合(サーバ群が自動起動します)
-
-      > docker run -d --rm -v /c/circus/data:/c/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] circuscad/circus-for-win:1.0.0-beta8
+## CRICUSの起動(初期設定後)
 
 - コンテナ内部でコマンドを実行する場合(/bin/bash を起動)
 
-      > docker run --rm -v /c/circus/data:/c/circus/data -v/var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] -it circuscad/circus-for-win:1.0.0-beta8 /bin/bash
+      # sudo docker run --rm -v /var/circus/data:/var/circus/data -v/var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] -it circuscad/circus:1.0.0-beta8 /bin/bash
+
+  :::note
+  - 上記はLinuxの場合です。Windowsでデータフォルダを /c/circus/data としている場合は、`-v /var/circus/data:/var/circus/data` を `-v /c/circus/data:/c/circus/data` に置き換えてください（以下同様）。 
+  - データベース(MongoDB)を外部から操作しない場合は "-p 27017:27017" は不要です。
+  :::
+
+  :::tip
+  [IP address for host] はホスト側のIPアドレスを入力します。ホスト側のIPアドレスは各OSのコマンドなどで調べてください。以下は一例です。
+  - `ip a` (Ubuntu) 
+  - `ipconfig` (Windows)
+  :::
 
   - サーバ群を起動させるためにはコンテナ内で以下のスクリプトを実行する必要があります(バックグラウンドでの実行を推奨)。
 
         # /root/services.sh &
 
-</TabItem>
-</Tabs>
+- デーモンとして起動させる場合(サーバ群が自動起動します)
+
+      # sudo docker run -d --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] circuscad/circus:1.0.0-beta8
 
 ## 新バージョンのDocker imageを使用する場合
 
-新バージョンのCIRCUSシステムのDocker imageを初めて使用する場合、CIRCUS の Docker image で /bin/bash を実行した上で、以下のコマンドを実行して内部データベースの情報の更新を行います。
+新バージョンのDocker imageを使用する場合、CIRCUS の Docker image で /bin/bash を実行した上で、以下のコマンドを実行して内部データベースの情報の更新を行います。
 
     # /root/servicies.sh & 
-    # cd /var/circus/circus-api
+    # cd /var/circus/packages/circus-api
     # node circus migrate
 
 :::warning
-
 - この操作でシステム内部データベースのrevisionが更新された場合、旧バージョンのDocker imageを使用することができません。このため、事前にデータベース(MongoDB)のバックアップを取るなど、十分に注意してください。
-
 - Windowsで使用する場合にはインストール時と同様にコンテナ内部のフォルダ構成の設定を変更する必要があります。
-
 :::
