@@ -2,7 +2,7 @@
 title: Case Detail
 ---
 
-Case Search の検索結果のリスト各行にある[View]ボタンをクリックすると、Case Detail 画面が表示されます。Case Detail 画面ではラベルおよび属性情報の入力を行います。
+Case Search の検索結果のリスト各行にある[View]ボタンをクリックすると、Case Detail画面が表示されます。Case Detail 画面ではラベルおよび属性情報の入力を行います。
 
 ## Case Detail 画面の構成
 
@@ -30,13 +30,25 @@ DICOM シリーズより生成したボリュームデータが表示されま�
 
 ケースの属性情報の入力インターフェイスがあります。
 
+## DICOM Viewer Componentの操作
 
-## DICOM Viewer Component
+### 左ドラッグ時の操作
 
-### 左ドラッグ時の操作について
+DICOM Viewer Component左上のツールバーで、マウスの左ドラッグ時の操作を選択できます。下図のアイコンは左側より以下の通りです。
 
+![Tool for left drag](case-detail-tool-for-left-drag.png)
 
+- Paging(Pキー)
+  - 画像のスクロール(paging)を行います。
 
+- Zoom(Zキー)
+  - 画像のズームを行います。アイコン右側のプルダウンメニューにより、現在の表示画像を一定の倍率でズームすることもできます(×8, ×4, ×2, ×1/2, ×1/4, ×1/8)。
+
+- Hand(Hキー)
+  - 画像の表示位置を移動させることができます。
+
+- Window(Wキー)
+  - 画像の表示条件（Window Level, Window Width）を変えることができます。アイコン右側のプルダウンメニューで登録済のプリセット値への変更や、マニュアルでの設定が行えます。
 
 ### 画像のスクロール
 
@@ -64,10 +76,13 @@ DICOM Viewer Componentの画像は以下の方法でスクロールすること�
 
 ![Select view](case-detail-select-view.png)
 
+### リファレンス線、補間
 
+DICOM Viewer Component上部の歯車アイコンより"Show reference line"を選択するとリファレンス線を表示されます。
 
+Triliear filteringを選択すると表示画像に対して線形補間が行われます（選択しない場合はnearest neighbor法による補間）。表示は滑らかになりますが、表示速度は遅くなります。
 
-
+![Viewer settings](case-detail-viewer-settings.png)
 
 ## ラベルの新規入力
 
@@ -115,7 +130,60 @@ CIRCUS DBでは2Dおよび3Dの関心領域(ROI)をラベルとすることも�
 
 サイズ計測用ラベルです。初期状態ではラベル追加時の画像の中心に設置されます。
 
-## ボクセルラベルに
+## ボクセルラベルに対する操作
+
+DICOM Viewer Component上部のツールバーで、ボクセルラベルに対する操作を選択します。下図のアイコンは左側より以下の通りです。
+
+![Painting tools](case-detail-painting-tools.png)
+
+- ブラシ(B)
+  - クリックした位置を四角いペンで塗ります。
+- 消しゴム(E)
+  - クリックした位置のラベルを消去します。
+- ブラシ・消しゴムの太さを設定
+  - プルダウンメニューでブラシ・消しゴムの太さを設定します。
+- バケツツール(Shift+B)
+  - クリックした位置から連結している同じラベル値の領域を塗りつぶします。
+- バケツ消去ツール(Shift+E)
+  - クリックした位置から連結している同じラベル値の領域を消去します。
+- ワンドツール(M) 
+  - 背景画像の画素値に対し、クリックした位置の画素値から一定範囲の画素値を持つ画素を塗ります。
+      ![Setting of wand tool](wand-tool-setting.png)
+- ワンド消去ツール(Shift+M)
+  - ワンドツールの逆の操作を行います。
+
+### Connected component analysis
+
+"Series/Labels" の[…]より、アクティブな voxel ラベルに対して Connected component labeling(CCL)、Hole filling を行うことができます。
+
+![Connected component analysis menu](case-detail-connected-component-analysis-menu.png)
+
+#### Connected component labeling(CCL)
+
+アクティブな voxel ラベルを 3 次元で連結する voxel ごとに別のラベルに分割します。
+
+| 設定オプション           | 範囲    | 詳細                                                                                                      |
+| ------------------------ | ------- | --------------------------------------------------------------------------------------------------------- |
+| 表示する最大連結要素数 N | 1 ～ 10 | 体積が大きい順に N 個の voxel ラベルを新たに作成し、それ以外の領域は一つの voxel ラベルにまとめて表示する |
+| 近傍数                   | 6、26   | 連結判定に使用                                                                                            |
+
+![CCL result](case-detail-CCL-result.png)
+
+#### Hole filling
+
+アクティブな voxel ラベルの穴埋めをします。
+
+| 設定オプション | 範囲                    | 詳細               |
+| -------------- | ----------------------- | ------------------ |
+| 次元数         | 2、3                    |                    |
+| Orientation    | Axial、Sagital、Colonal | 2 次元の時のみ選択 |
+| 近傍数         | 6、26                   | 連結判定に使用     |
+
+![Hole filling result](case-detail-hole-filling-result.png)
+
+:::caution
+CCL および Hole filling は計算途中で voxel ラベルの分割数が 255 を超える複雑な形状には対応していません。
+:::
 
 ## ROI の移動・サイズ変更
 
@@ -170,35 +238,3 @@ ROI、point、rulerの情報はdata.jsonに含まれます。位置はボリュ�
 
 :::
 
-## Connected component analysis
-
-"Series/Labels" の[…]より、アクティブな voxel ラベルに対して Connected component labeling(CCL)、Hole filling を行うことができます。
-
-![Connected component analysis menu](case-detail-connected-component-analysis-menu.png)
-
-### Connected component labeling(CCL)
-
-アクティブな voxel ラベルを 3 次元で連結する voxel ごとに別のラベルに分割します。
-
-| 設定オプション           | 範囲    | 詳細                                                                                                      |
-| ------------------------ | ------- | --------------------------------------------------------------------------------------------------------- |
-| 表示する最大連結要素数 N | 1 ～ 10 | 体積が大きい順に N 個の voxel ラベルを新たに作成し、それ以外の領域は一つの voxel ラベルにまとめて表示する |
-| 近傍数                   | 6、26   | 連結判定に使用                                                                                            |
-
-![CCL result](case-detail-CCL-result.png)
-
-## Hole filling
-
-アクティブな voxel ラベルの穴埋めをします。
-
-| 設定オプション | 範囲                    | 詳細               |
-| -------------- | ----------------------- | ------------------ |
-| 次元数         | 2、3                    |                    |
-| Orientation    | Axial、Sagital、Colonal | 2 次元の時のみ選択 |
-| 近傍数         | 6、26                   | 連結判定に使用     |
-
-![Hole filling result](case-detail-hole-filling-result.png)
-
-:::caution
-CCL・Hole filling は計算途中で voxel ラベルの分割数が 255 を超える複雑な形状には対応していません。
-:::
