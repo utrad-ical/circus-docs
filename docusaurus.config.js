@@ -27,7 +27,7 @@ module.exports = {
         /* { to: 'api-explorer', label: 'API Explorer', position: 'left' }, */
         {
           href: 'https://github.com/utrad-ical/circus',
-          label: 'GItHub',
+          label: 'GitHub',
           position: 'right',
         },
       ],
