@@ -42,7 +42,22 @@ Create a JSON file called `plugin.json`. This is a manifest file that contains t
     "color": "#ffffff",
     "backgroundColor": "#000000"
   },
-  "displayStrategy": []
+  "displayStrategy": [
+    {
+      "caption": "Results",
+      "type": "VolumeOverlay"
+    },
+    {
+      "feedbackKey": "evaluation",
+      "caption": "Score",
+      "type": "Numeric",
+      "options": {
+        "minimum": 1,
+        "maximum": 5,
+        "multipleOf": 1
+      }
+    }
+  ]
 }
 ```
 
@@ -54,7 +69,7 @@ Note that you **cannot write comments** in the real JSON file.
 - `icon`: The icon of this plug-in.
 - `icon.glyph`: The icon of this plug-in. See `packages/circus-icons` for available glyphs.
 - `icon.color` and `icon.backgroundColor`: Must be in the 6-digit hex format.
-- `displayStrategy`: An array of objects that describes how to display the plug-in results by default. For details of how this works, read [Presenting CAD Results](./result-display.md).
+- `displayStrategy`: An array of objects that describes how to display the plug-in results by default. For details of how this works, read [Presenting CAD Results](./result-display.md). If you want examples, refer to [Built-in Displays](./displays) reference pages.
 
 :::note
 `icon` and `displayStrategy` values can be overwritten after the installation via the administration screen of CIRCUS. Think of them as the default values.
@@ -122,7 +137,7 @@ Alternatively, your image can be hosted in Docker Hub or any other container reg
 
 ## 7. Install the plug-in
 
-どうやってコンテナに attach するの？
+Refer to the admin page: [Registration of CS Plug-ins](/admin/registration-cs-plugins)
 
 :::caution
 Plug-ins are identified using the SHA-256 image hash. Thus you cannot change the content of the plug-in after installing it. When you have modified the content, rebuild the image and re-install it with a different version.
