@@ -17,7 +17,7 @@ title: Registration of CS Plug-ins
 1. CIRCUS の Docker image で /bin/bash を実行した上で、以下のコマンドを実行してCIRCUS CS プラグインの情報を登録します。
 
         # /root/servicies.sh & 
-        # cd /var/circus/circus-api
+        # cd /var/circus/packages/circus-api
         # node circus register-cad-plugin [取得したDocker imageのfull ID]
 
 
