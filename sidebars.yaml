@@ -36,6 +36,7 @@ someSidebar:
   - type: category
     label: Developer Guide
     items:
+      - dev/index
       - type: category
         label: CIRCUS API
         items:
@@ -49,7 +50,7 @@ someSidebar:
       - type: category
         label: CIRCUS CS Plug-ins
         items:
-          - dev/cs/introduction
+          - dev/cs/index
           - dev/cs/execution
           - dev/cs/build
           - dev/cs/result-display
