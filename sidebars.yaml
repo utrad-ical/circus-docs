@@ -1,67 +1,71 @@
 someSidebar:
-  Introduction:
-    - welcome
-  User Guide:
-    - users/about
-    - users/data-structure
-    - users/login
-    - users/series-search
-    - users/series-import
-    - type: category
-      label: CIRCUS DB
-      items:
-        - users/new-case
-        - users/case-search
-        - users/case-detail
-    - type: category
-      label: CIRCUS CS
-      items:
-        - users/new-job
-        - users/plugin-job-search
-        - users/cad-result-display
-    - users/user-preference
-  Administrator Guide:
-    - admin/installation
-    - admin/registration-cs-plugins
-    - admin/user-settings
-    - admin/group-settings
-    - admin/project-settings
-    - admin/job-manager
-    - admin/cad-plugin-settings
-    - admin/server-configuration
-    - admin/access-token
-    - admin/dicom-storage-server
-  Developer Guide:
-    - type: category
-      label: CIRCUS API
-      items:
-        - api-intro
-        - api-reference
-    # - type: category
-    #   label: CIRCUS RS
-    #   items:
-    #     - rs/index
-    #     - rs/concepts
-    - type: category
-      label: CIRCUS CS Plug-ins
-      items:
-        - cs/introduction
-        - cs/execution
-        - cs/build
-        - cs/result-display
-        - type: category
-          label: Built-in Displays
-          items:
-            - cs/displays/index
-            - cs/displays/choice
-            - cs/displays/dump
-            - cs/displays/lesion-candidates
-            - cs/displays/locator
-            - cs/displays/numeric
-            - cs/displays/text
-            - cs/displays/volume-overlay
-        - cs/custom-display
-  # Default Docs:
-  #   - doc1
-  #   - doc2
-  #   - mdx
+  - welcome
+  - type: category
+    label: User Guide
+    items:
+      - users/data-structure
+      - users/login
+      - users/series-search
+      - users/series-import
+      - type: category
+        label: CIRCUS DB
+        items:
+          - users/new-case
+          - users/case-search
+          - users/case-detail
+      - type: category
+        label: CIRCUS CS
+        items:
+          - users/new-job
+          - users/plugin-job-search
+          - users/cad-result-display
+      - users/user-preference
+  - type: category
+    label: Administrator Guide
+    items:
+      - admin/installation
+      - admin/registration-cs-plugins
+      - admin/user-settings
+      - admin/group-settings
+      - admin/project-settings
+      - admin/job-manager
+      - admin/cad-plugin-settings
+      - admin/server-configuration
+      - admin/access-token
+      - admin/dicom-storage-server
+  - type: category
+    label: Developer Guide
+    items:
+      - type: category
+        label: CIRCUS API
+        items:
+          - api-intro
+          - api-reference
+      # - type: category
+      #   label: CIRCUS RS
+      #   items:
+      #     - rs/index
+      #     - rs/concepts
+      - type: category
+        label: CIRCUS CS Plug-ins
+        items:
+          - cs/introduction
+          - cs/execution
+          - cs/build
+          - cs/result-display
+          - type: category
+            label: Built-in Displays
+            items:
+              - cs/displays/index
+              - cs/displays/choice
+              - cs/displays/dump
+              - cs/displays/lesion-candidates
+              - cs/displays/locator
+              - cs/displays/numeric
+              - cs/displays/text
+              - cs/displays/volume-overlay
+          - cs/custom-display
+    # Default Docs:
+    #   - doc1
+    #   - doc2
+    #   - mdx
