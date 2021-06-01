@@ -9,13 +9,15 @@
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "serve": "docusaurus serve",
-    "clear": "docusaurus clear"
+    "clear": "docusaurus clear",
+    "prettier": "prettier --write docs/**/*.{md,mdx}"
   },
   "dependencies": {
     "@docusaurus/core": "^2.0.0-beta.0",
     "@docusaurus/preset-classic": "^2.0.0-beta.0",
     "@mdx-js/react": "^1.6.21",
     "clsx": "^1.1.1",
+    "prettier": "^2.3.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
   },

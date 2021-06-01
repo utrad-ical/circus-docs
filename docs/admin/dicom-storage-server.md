@@ -2,21 +2,25 @@
 title: DICOM Storage Server
 ---
 
-CIRCUSシステムへの画像の転送方法として、DICOM Store SCPによるStorage Serverを使用することもできます。
+CIRCUS システムへの画像の転送方法として、DICOM Store SCP による Storage Server を使用することもできます。
 
 ## 準備
 
-1. Docker Hub よりDICOM Storage Server の Docker image を取得します。
+1.  Docker Hub より DICOM Storage Server の Docker image を取得します。
 
-        # docker pull circuscad/dicom_storage_server:1.0.0-beta
+    ```
+    $ sudo docker pull circuscad/dicom_storage_server:1.0.0-beta
+    ```
 
-1. [Parmanent access tokenの作成](access-token.md)の手順で管理権限を持つユーザのparmanent access tokenを取得します。
+1.  [Parmanent access token の作成](access-token.md)の手順で管理権限を持つユーザの parmanent access token を取得します。
 
-1. CIRCUS コンテナの内部の IP アドレスを取得します。
+1.  CIRCUS コンテナの内部の IP アドレスを取得します。
 
-        # docker inspect <container ID> | grep "IPAddress"
+    ```
+    $ sudo docker inspect <container ID> | grep "IPAddress"
+    ```
 
-      - 起動中のDockerコンテナのIDを調べるためには "docker ps -a" を実行します。  
+    - 起動中の Docker コンテナの ID を調べるためには "docker ps -a" を実行します。
 
 ## DICOM storage server の起動方法
 

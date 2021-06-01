@@ -2,7 +2,7 @@
 title: Case Detail
 ---
 
-Case Search の検索結果のリスト各行にある[View]ボタンをクリックすると、Case Detail画面が表示されます。Case Detail 画面ではラベルおよび属性情報の入力を行います。
+Case Search の検索結果のリスト各行にある [View] ボタンをクリックすると、Case Detail 画面が表示されます。Case Detail 画面ではラベルおよび属性情報の入力を行います。
 
 ## Case Detail 画面の構成
 
@@ -30,31 +30,34 @@ DICOM シリーズより生成したボリュームデータが表示されま�
 
 ケースの属性情報の入力インターフェイスがあります。
 
-## DICOM Viewer Componentの操作
+## DICOM Viewer Component の操作
 
 ### 左ドラッグ時の操作
 
-DICOM Viewer Component左上のツールバーで、マウスの左ドラッグ時の操作を選択できます。下図のアイコンは左側より以下の通りです。
+DICOM Viewer Component 左上のツールバーで、マウスの左ドラッグ時の操作を選択できます。下図のアイコンは左側より以下の通りです。
 
 ![Tool for left drag](case-detail-tool-for-left-drag.png)
 
-- Paging(Pキー)
+- Paging（P キー）
+
   - 画像のスクロール(paging)を行います。
 
-- Zoom(Zキー)
-  - 画像のズームを行います。アイコン右側のプルダウンメニューにより、現在の表示画像を一定の倍率でズームすることもできます(×8, ×4, ×2, ×1/2, ×1/4, ×1/8)。
+- Zoom（Z キー）
 
-- Hand(Hキー)
+  - 画像のズームを行います。アイコン右側のプルダウンメニューにより、現在の表示画像を一定の倍率でズームすることもできます (×8, ×4, ×2, ×1/2, ×1/4, ×1/8)。
+
+- Hand（H キー）
+
   - 画像の表示位置を移動させることができます。
 
-- Window(Wキー)
-  - 画像の表示条件（Window Level, Window Width）を変えることができます。アイコン右側のプルダウンメニューで登録済のプリセット値への変更や、マニュアルでの設定が行えます。
+- Window（W キー）
+  - 画像の表示条件 (Window Level, Window Width) を変えることができます。アイコン右側のプルダウンメニューで登録済のプリセット値への変更や、マニュアルでの設定が行えます。
 
 ### 画像のスクロール
 
-DICOM Viewer Componentの画像は以下の方法でスクロールすることができます。
+DICOM Viewer Component の画像は以下の方法でスクロールすることができます。
 
-- マウス左ドラッグ操作を Pager に設定(Pager アイコンをクリック、もしくは"P"キーを押す)した上で、スクロールしたい断面で左ドラッグをします。
+- マウス左ドラッグ操作を Pager に設定（Pager アイコンをクリック、もしくは"P"キーを押す）した上で、スクロールしたい断面で左ドラッグをします。
 
 - スクロールしたい断面でマウスカーソルを合わせて、マウスホイールでスクロールします。
 
@@ -64,7 +67,7 @@ DICOM Viewer Componentの画像は以下の方法でスクロールすること�
 
   :::
 
-- 設定ツールバーの[Scroll bars] で [Small] もしくは [Large]を選択し（左下図）、スクロールしたい断面の右端にマウスカーソルを合わせるとスクロールバーが表示されます（右下図）。
+- 設定ツールバーの [Scroll bars] で [Small] もしくは [Large] を選択し（左下図）、スクロールしたい断面の右端にマウスカーソルを合わせるとスクロールバーが表示されます（右下図）。
 
   | ![Scrollbar setting](case-detail-scrollbar-setting.png) | ![Scrollbar setting](case-detail-scrollbar-display.png) |
   | :-----------------------------------------------------: | :-----------------------------------------------------: |
@@ -78,15 +81,15 @@ DICOM Viewer Componentの画像は以下の方法でスクロールすること�
 
 ### リファレンス線、補間
 
-DICOM Viewer Component上部の歯車アイコンより"Show reference line"を選択するとリファレンス線を表示されます。
+DICOM Viewer Component 上部の歯車アイコンより "Show reference line" を選択するとリファレンス線を表示されます。
 
-Triliear filteringを選択すると表示画像に対して線形補間が行われます（選択しない場合はnearest neighbor法による補間）。表示は滑らかになりますが、表示速度は遅くなります。
+Triliear filtering を選択すると表示画像に対して線形補間が行われます（選択しない場合は nearest neighbor 法による補間）。表示は滑らかになりますが、表示速度は遅くなります。
 
 ![Viewer settings](case-detail-viewer-settings.png)
 
 ## ラベルの新規入力
 
-"Series/Labels" の[Add ●]の右側のプルダウンメニューよりラベルの種類を選択します。
+"Series/Labels" の [Add ●] の右側のプルダウンメニューよりラベルの種類を選択します。
 
 ![Add label](add-label.png)
 
@@ -98,7 +101,7 @@ CIRCUS DB で実装しているラベルは以下の通りです。
 
 ### ROI (2D/3D)
 
-CIRCUS DBでは2Dおよび3Dの関心領域(ROI)をラベルとすることもできます。初期状態ではラベル追加時の画像の中心に設置されます。
+CIRCUS DB では 2D および 3D の関心領域 (ROI) をラベルとすることもできます。初期状態ではラベル追加時の画像の中心に設置されます。
 
 #### cuboid (3D)
 
@@ -132,33 +135,33 @@ CIRCUS DBでは2Dおよび3Dの関心領域(ROI)をラベルとすることも�
 
 ## ボクセルラベルに対する操作
 
-DICOM Viewer Component上部のツールバーで、ボクセルラベルに対する操作を選択します。下図のアイコンは左側より以下の通りです。
+DICOM Viewer Component 上部のツールバーで、ボクセルラベルに対する操作を選択します。下図のアイコンは左側より以下の通りです。
 
 ![Painting tools](case-detail-painting-tools.png)
 
-- ブラシ(B)
+- ブラシ (B)
   - クリックした位置を四角いペンで塗ります。
-- 消しゴム(E)
+- 消しゴム (E)
   - クリックした位置のラベルを消去します。
 - ブラシ・消しゴムの太さを設定
   - プルダウンメニューでブラシ・消しゴムの太さを設定します。
-- バケツツール(Shift+B)
+- バケツツール (Shift+B)
   - クリックした位置から連結している同じラベル値の領域を塗りつぶします。
-- バケツ消去ツール(Shift+E)
+- バケツ消去ツール (Shift+E)
   - クリックした位置から連結している同じラベル値の領域を消去します。
-- ワンドツール(M) 
+- ワンドツール (M)
   - 背景画像の画素値に対し、クリックした位置の画素値から一定範囲の画素値を持つ画素を塗ります。
-      ![Setting of wand tool](wand-tool-setting.png)
-- ワンド消去ツール(Shift+M)
+    ![Setting of wand tool](wand-tool-setting.png)
+- ワンド消去ツール (Shift+M)
   - ワンドツールの逆の操作を行います。
 
 ### Connected component analysis
 
-"Series/Labels" の[…]より、アクティブな voxel ラベルに対して Connected component labeling(CCL)、Hole filling を行うことができます。
+"Series/Labels" の […] より、アクティブな voxel ラベルに対して Connected component labeling(CCL)、Hole filling を行うことができます。
 
 ![Connected component analysis menu](case-detail-connected-component-analysis-menu.png)
 
-#### Connected component labeling(CCL)
+#### Connected component labeling (CCL)
 
 アクティブな voxel ラベルを 3 次元で連結する voxel ごとに別のラベルに分割します。
 
@@ -200,19 +203,19 @@ CCL および Hole filling は計算途中で voxel ラベルの分割数が 255
 
 ## Undo / Redo / Revert
 
-- 画面右上[Save]ボタンの左側にある&#x25C0;、&#x25B6;ボタンで操作の undo、redo が行えます(undo は Ctrl キー+Z キーでも行えます）。
-- 画面右上[Save]ボタンの右側にあるメニューボタンより[Revert]を選択すると、Revision の最初の状態まで戻すことができます。ただし、Revert した場合はこれまでの操作の記録が消去されます。
+- 画面右上 [Save] ボタンの左側にある &#x25C0;、&#x25B6; ボタンで操作の undo、redo が行えます(undo は Ctrl キー+Z キーでも行えます）。
+- 画面右上 [Save] ボタンの右側にあるメニューボタンより [Revert] を選択すると、Revision の最初の状態まで戻すことができます。ただし、Revert した場合はこれまでの操作の記録が消去されます。
 
 ![Undo, redo, and menu button](case-detail-menu-button.png)
 
 ## エクスポート
 
-ケースのデータ（元画像、voxel ラベルのボリュームデータ、属性情報）をダウンロードするためには、画面右上のメニューボタンから[Export as MHD]を選択します。以下のダイアログが表示されますので、条件を選択した上で、[Start download]ボタンをクリックします。
+ケースのデータ（元画像、voxel ラベルのボリュームデータ、属性情報）をダウンロードするためには、画面右上のメニューボタンから [Export as MHD] を選択します。以下のダイアログが表示されますので、条件を選択した上で、[Start download] ボタンをクリックします。
 
 - Voxel labels
-  - 現在はラベル毎に別々のボリュームで出力する(Isolated)か、全てのラベルを1つのボリュームで出力するかを選択します。
-- MHD file line endings  
-  - mhdファイルの改行コードをLF(Linux)、CR + LF(Windows)を選択します。
+  - 現在はラベル毎に別々のボリュームで出力する (Isolated) か、全てのラベルを 1 つのボリュームで出力するかを選択します。
+- MHD file line endings
+  - mhd ファイルの改行コードを LF (Linux)、CR + LF (Windows) を選択します。
 - Comression format
   - エクスポートデータの圧縮形式を選択します(tar.gz or ZIP)。
 
@@ -230,11 +233,10 @@ voxel ラベルデータです。
 
 #### data.json
 
-症例の属性情報(JSON 形式)です。
+症例の属性情報 (JSON 形式) です。
 
 :::tip
 
-ROI、point、rulerの情報はdata.jsonに含まれます。位置はボリュームの左上ボクセルを原点としたmm単位で書かれています。
+ROI、point、ruler の情報は data.json に含まれます。位置はボリュームの左上ボクセルを原点とした mm 単位で書かれています。
 
 :::
-
