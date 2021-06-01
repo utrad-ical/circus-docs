@@ -7,21 +7,21 @@ sidebar_label: Installation
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Docker HubにてCIRCUSシステムのDocker imageを提供しています。こちらを使ってインストールするのが最も簡単です。ホストマシンのOSによって手順が異なります。
+Docker Hub にて CIRCUS システムの Docker イメージを提供しています。こちらを使ってインストールするのが最も簡単です。ホストマシンの OS によって手順が異なります。
 
 :::important
-2021.6現在、Mac OSでは未検証です。
+2021.6 現在、Mac OS では未検証です。
 :::
 
 :::tip
-- Linuxではdockerの使用は基本的にはsudo権限が必要ですが、以下の説明では`sudo`の記載を省略しています。
-- DockerHub上にあるCIRCUSの最新版は以下のサイトでご確認ください。  
-  - https://hub.docker.com/u/circuscad
+
+Docker Hub 上にある CIRCUS の最新版は以下のサイトでご確認ください。
+
+- https://hub.docker.com/u/circuscad
+
 :::
 
-
-
-## CIRCUSのDocker image取得・初期設定
+## CIRCUS の Docker イメージ取得・初期設定
 
 <Tabs
   defaultValue="linux"
@@ -32,135 +32,186 @@ Docker HubにてCIRCUSシステムのDocker imageを提供しています。こ�
 >
 <TabItem value="linux">
 
-以下の手順はCIRCUSのデータフォルダを/var/circus/dataと設定（ホスト、Docker image内共通）することを前提としています。
+以下の手順は CIRCUS のデータフォルダを `/var/circus/data` と設定（ホスト、Docker コンテナ内共通）することを前提としています。
 
-#### Dockerのインストール
+#### Docker のインストール
 
-CIRCUSをインストールするマシンに docker-ce 19.03以降をインストールします。詳細は[Docker公式ドキュメント](https://docs.docker.com/get-docker/)を参考してください。
+CIRCUS をインストールするマシンに docker-ce 19.03 以降をインストールします。詳細は [Docker 公式ドキュメント](https://docs.docker.com/get-docker/)を参考してください。
 
-#### CIRCUSのDocker imageの取得
+#### CIRCUS の Docker イメージの取得
 
-Docker Hub より以下のDocker imageを取得します。
+Docker Hub より以下の Docker イメージを取得します。
 
-    # docker pull circuscad/circus:1.0.0-beta8
-    # docker pull circuscad/dicom_utility:2.0.0-beta3
+```shell-session
+$ sudo docker pull circuscad/circus:1.0.0-beta8
+$ sudo docker pull circuscad/dicom_utility:2.0.0-beta3
+```
 
 #### 初期設定手順
 
-CIRCUSシステムの起動に必要なデータを作成するために以下の操作が必要となります。
+CIRCUS システムの起動に必要なデータを作成するために以下の操作が必要となります。
 
-1. ホスト側に /var/circus/data フォルダを作成します。
+1. ホスト側に `/var/circus/data` フォルダを作成します。
 
-1. コンテナ内部でコマンドを実行するため、CIRCUS のDocker imageを使って /bin/bash を実行します。
+1. コンテナ内部でコマンドを実行するため、CIRCUS の Docker コンテナを作成し、内部で `/bin/bash` を実行します。
 
-        # docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -it circuscad/circus:1.0.0-beta8 /bin/bash
+   ```shell-session
+   $ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -it circuscad/circus:1.0.0-beta8 /bin/bash
+   ```
 
-  :::note
-  初期設定の間はポートの公開（`-p`オプション）やIPアドレスのマッピング(`--add-host`オプション)の設定は不要です。
-  :::
+   :::note
 
-1. CIRCUSの Docker image内で以下のコマンドを実行し、データベースなどを構築します。
+   初期設定の間はポートの公開（`-p` オプション）や IP アドレスのマッピング（`--add-host` オプション）の設定は不要です。
 
-        # /root/data_initialize.sh
+   :::
+
+1. CIRCUS の Docker コンテナに 内で以下のコマンドを実行し、データベースの初期設定を行います。
+
+   ```shell-session title="コンテナ内"
+   # /root/data_initialize.sh
+   ```
 
 </TabItem>
 <TabItem value="win">
 
-以下の手順はホスト側のCIRCUSのデータフォルダをC:\circus\data（以下ではWSL2での記法に倣って、/C/circus/dataと記述）設定します。
+以下の手順はホスト側の CIRCUS のデータフォルダを `C:\circus\data`（以下では WSL2 での記法に倣って、`/C/circus/data` と記述）設定します。
 
-#### Docker Desktop for Windowsのインストール
+#### Docker Desktop for Windows のインストール
 
-CIRCUSをインストールするマシンに Docker Desktop for Windowsをインストールします。詳細は[Docker公式ドキュメント](https://docs.docker.com/get-docker/)を参考してください。
+CIRCUS をインストールするマシンに Docker Desktop for Windows をインストールします。詳細は [Docker 公式ドキュメント](https://docs.docker.com/get-docker/)を参考してください。
 
+#### CIRCUS の Docker image の取得
 
-#### CIRCUSのDocker imageの取得
+Docker Hub より以下の Docker image を取得します。
 
-Docker Hub より以下のDocker imageを取得します。
-
-    # docker pull circuscad/circus:1.0.0-beta8
-    # docker pull circuscad/dicom_utility:2.0.0-beta3
+```
+> docker pull circuscad/circus:1.0.0-beta8
+> docker pull circuscad/dicom_utility:2.0.0-beta3
+```
 
 #### 初期設定
 
-CIRCUSシステムの起動に必要なデータ、ならびにOS間のフォルダ構造の違いを解消するために以下の操作が必要となります。
+CIRCUS システムの起動に必要なデータ、ならびに OS 間のフォルダ構造の違いを解消するために以下の操作が必要となります。
 
-1. ホスト側に C:\circus\data フォルダを作成します。
+1.  ホスト側に `C:\circus\data` フォルダを作成します。
 
-1. Docker imageの一部設定を変更し、新たなDocker imageとして保存します。
-   1. (Windows) コンテナ内部でコマンドを実行するため、CIRCUS のDocker imageを使って /bin/bash を実行します。
+1.  Docker イメージの一部設定を変更し、新たなイメージとして保存します。
 
-            > docker run -v /var/run/docker.sock:/var/run/docker.sock -it circuscad/circus:1.0.0-beta8 /bin/bash
+    1.  (Windows) コンテナ内部でコマンドを実行するため、CIRCUS の Docker コンテナを作成し `/bin/bash` を実行します。
 
-      :::note
-      - 起動したコンテナ内に変更した設定を保持させるために、--rmオプションを外します。
-      - 初期設定の間はポートの公開（`-p`オプション）やIPアドレスのマッピング(`--add-host`オプション)の設定は不要です。
-      :::
+        ```
+        docker run -v /var/run/docker.sock:/var/run/docker.sock -it circuscad/circus:1.0.0-beta8 /bin/bash
+        ```
 
-   1. 起動したDockerコンテナ内部で以下のコマンドを実行します。
+        :::note
 
-            # sed -i 's@/var/circus/data@/c/circus/data@g' /var/circus/circus.config.js
-            # mkdir -p /c/circus/data
-            # rm -rf /var/circus/data
-            # ln -s /c/circus/data /var/circus/data
-            # exit
+        - 起動したコンテナ内に変更した設定を保持させるために、`--rm` オプションを外します。
+        - 初期設定の間はポートの公開（`-p`オプション）や IP アドレスのマッピング(`--add-host`オプション)の設定は不要です。
 
-   1. (Windows) 以下のコマンドで先ほど起動したDockerコンテナのIDを確認します。以下の例では、eb0c8b5ae39cが取得したいIDです。          
+        :::
 
-            > docker ps -a
-            CONTAINER ID   IMAGE                          COMMAND       CREATED          STATUS                     PORTS     NAMES
-            eb0c8b5ae39c   circuscad/circus:1.0.0-beta8   "/bin/bash"   33 seconds ago   Exited (0) 9 seconds ago             eager_golick
+        ```bash
+        # sed -i 's@/var/circus/data@/c/circus/data@g' /var/circus/circus.config.js
+        # mkdir -p /c/circus/data
+        # rm -rf /var/circus/data
+        # ln -s /c/circus/data /var/circus/data
+        # exit
+        ```
 
-   1. (Windows) DockerコンテナのIDを新たなDocker image(circuscad/circus-for-win:1.0.0-beta8)として保存します。  
+    1.  (Windows) 以下のコマンドで先ほど起動した Docker コンテナの ID を確認します。以下の例では、eb0c8b5ae39c が取得したい ID です。
 
-            > docker container commit eb0c8b5ae39c circuscad/circus-for-win:1.0.0-beta8
+        ```
+        > docker ps -a
+        CONTAINER ID   IMAGE                          COMMAND       CREATED          STATUS                     PORTS     NAMES
+        eb0c8b5ae39c   circuscad/circus:1.0.0-beta8   "/bin/bash"   33 seconds ago   Exited (0) 9 seconds ago             eager_golick
+        ```
 
-   1. (Windows) 保存前のDockerコンテナを削除します。  
+    1.  (Windows) Docker コンテナの ID を新たな Docker image(circuscad/circus-for-win:1.0.0-beta8)として保存します。
 
-            > docker rm --force eb0c8b5ae39c
+        ```
+        > docker container commit eb0c8b5ae39c circuscad/circus-for-win:1.0.0-beta8
+        ```
 
-1. 上記操作で新たに作成したDocker image内で以下のコマンドを実行し、データベースなどを構築します。
+    1.  (Windows) 保存前の Docker コンテナを削除します。
 
+        ```
+        > docker rm --force eb0c8b5ae39c
+        ```
+
+1.  上記操作で新たに作成した Docker image 内で以下のコマンドを実行し、データベースなどを構築します。
+
+        ```
         > docker run --rm -v /c/circus/data:/c/circus/data -v /var/run/docker.sock:/var/run/docker.sock -it circuscad/circus-for-win:1.0.0-beta8 /bin/bash
 
         # /root/data_initialize.sh
+        ```
 
 </TabItem>
 </Tabs>
 
-## CRICUSの起動(初期設定後)
+## コンテナ内でのコマンドの実行 {#shell}
 
-- コンテナ内部でコマンドを実行する場合(/bin/bash を起動)
+管理者はしばしばコンテナ内の `/bin/bash` にアクセスしてコマンドを発行する必要があります。
 
-      # docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] -it circuscad/circus:1.0.0-beta8 /bin/bash
+- データベース初期設定・マイグレーション
+- プラグイン登録
+- その他 CLI として提供されている各種コマンドの利用
 
-  :::note
-  - 上記はLinuxの場合です。Windowsでデータフォルダを /c/circus/data としている場合は、`-v /var/circus/data:/var/circus/data` を `-v /c/circus/data:/c/circus/data` に置き換えてください（以下同様）。 
-  - データベース(MongoDB)を外部から操作しない場合は "-p 27017:27017" は不要です。
-  :::
+Docker コンテナ内の `/bin/bash` にアクセスする場合は、以下のようにします。
 
-  :::tip
-  [IP address for host] はホスト側のIPアドレスを入力します。ホスト側のIPアドレスは各OSのコマンドなどで調べてください。以下は一例です。
-  - `ip a` (Ubuntu) 
+```shell-session
+$ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] -it circuscad/circus:1.0.0-beta8 /bin/bash
+```
+
+- 上記は Linux の場合です。Windows でデータフォルダを /c/circus/data としている場合は、`-v /var/circus/data:/var/circus/data` を `-v /c/circus/data:/c/circus/data` に置き換えてください（以下同様）。
+- データベース (MongoDB) を外部から操作しない場合は `-p 27017:27017` は不要です。
+- `-v /var/run/docker.sock:/var/run/docker.sock` のオプションはプラグインに Docker outside of Docker (DooD) 形式でアクセスするために必要です。
+- [IP address for host] はホスト側の IP アドレスを入力します。ホスト側の IP アドレスは各 OS のコマンドなどで調べてください。以下は一例です。
+  - `ip a` (Ubuntu)
   - `ipconfig` (Windows)
-  :::
 
-  - サーバ群を起動させるためにはコンテナ内で以下のスクリプトを実行する必要があります(バックグラウンドでの実行を推奨)。
+上記のスクリプトは bash エイリアスなどで登録しておくと便利です。
 
-        # /root/services.sh &
+## CRICUS の起動(初期設定後)
 
-- デーモンとして起動させる場合(サーバ群が自動起動します)
+### コンテナ内部でコマンドを実行する場合（`/bin/bash` 経由）
 
-      # docker run -d --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] circuscad/circus:1.0.0-beta8
+上記の方法でコンテナ内の Bash にアタッチし、以下を実行します。
 
-## 新バージョンのDocker imageを使用する場合
+```shell-session title="コンテナ内"
+# /root/services.sh &
+```
 
-新バージョンのDocker imageを使用する場合、CIRCUS の Docker image で /bin/bash を実行した上で、以下のコマンドを実行して内部データベースの情報の更新を行います。
+### デーモンとして起動させる場合（サーバ群が自動起動します）
 
-    # /root/servicies.sh & 
-    # cd /var/circus/packages/circus-api
-    # node circus migrate
+```shell-session
+$ sudo docker run -d --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] circuscad/circus:1.0.0-beta8
+```
+
+## 新バージョンの Docker イメージを使用する場合
+
+新バージョンの Docker イメージを使用する場合、データベースのマイグレーション処理を行う必要がある場合があります。上記の手順に従い CIRCUS の Docker コンテナで `/bin/bash` を起動し、以下のコマンドを実行して内部データベースの情報の更新を行います。
+
+```shell-session title="コンテナ内"
+# cd /var/circus/packages/circus-api
+# node circus migrate
+```
 
 :::warning
-- この操作でシステム内部データベースのrevisionが更新された場合、旧バージョンのDocker imageを使用することができません。このため、事前にデータベース(MongoDB)のバックアップを取るなど、十分に注意してください。
-- Windowsで使用する場合にはインストール時と同様にコンテナ内部のフォルダ構成の設定を変更する必要があります。
+
+- この操作でデータベースのリビジョンが更新された場合、旧バージョンの Docker イメージを使用することができなくなります。事前にデータベース (MongoDB) のバックアップを取るなど、十分に注意してください。
+- Windows で使用する場合にはインストール時と同様にコンテナ内部のフォルダ構成の設定を変更する必要があります。
+
 :::
+
+## データのバックアップ
+
+永続的に保存されるすべてのデータはホスト側の `/var/circus/data` ディレクトリに保存されます（Linux デフォルトの場合）。このディレクトリはコンテナ作成時に `-v` オプションでコンテナにマウントされており、以下のようなデータが含まれます。
+
+- MongoDB のデータベース（ユーザ情報、ケース情報などの非バイナリデータのほとんどを保存）
+- アップロードされるシリーズデータ
+- CIRCUS DB のラベルなどのバイナリデータ
+- CIRCUS CS のプラグイン処理結果
+- 各種実行ログデータ
+
+バックアップは単純にこれらのファイルをコピーすることで行えます。
