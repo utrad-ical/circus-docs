@@ -24,7 +24,7 @@ someSidebar:
     label: Administrator Guide
     items:
       - admin/installation
-      - admin/registration-cs-plugins
+      - admin/registration-cs-plugin
       - admin/user-settings
       - admin/group-settings
       - admin/project-settings
