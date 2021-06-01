@@ -39,8 +39,8 @@ someSidebar:
       - type: category
         label: CIRCUS API
         items:
-          - api-intro
-          - api-reference
+          - dev/api-intro
+          - dev/api-reference
       # - type: category
       #   label: CIRCUS RS
       #   items:
@@ -49,22 +49,22 @@ someSidebar:
       - type: category
         label: CIRCUS CS Plug-ins
         items:
-          - cs/introduction
-          - cs/execution
-          - cs/build
-          - cs/result-display
+          - dev/cs/introduction
+          - dev/cs/execution
+          - dev/cs/build
+          - dev/cs/result-display
           - type: category
             label: Built-in Displays
             items:
-              - cs/displays/index
-              - cs/displays/choice
-              - cs/displays/dump
-              - cs/displays/lesion-candidates
-              - cs/displays/locator
-              - cs/displays/numeric
-              - cs/displays/text
-              - cs/displays/volume-overlay
-          - cs/custom-display
+              - dev/cs/displays/index
+              - dev/cs/displays/choice
+              - dev/cs/displays/dump
+              - dev/cs/displays/lesion-candidates
+              - dev/cs/displays/locator
+              - dev/cs/displays/numeric
+              - dev/cs/displays/text
+              - dev/cs/displays/volume-overlay
+          - dev/cs/custom-display
     # Default Docs:
     #   - doc1
     #   - doc2
