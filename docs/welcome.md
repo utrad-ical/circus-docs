@@ -81,6 +81,6 @@ International Journal of Computer Assisted Radiology and Surgery, vol.15, no.4, 
 
 This docs site is divided into three sections.
 
-- **[User Guide](users/about)**: Explains how to use CIRCUS CS/DB as an end user.
+- **[User Guide](users/login)**: Explains how to use CIRCUS CS/DB as an end user.
 - **[Admininistrator Guide](admin/installation)**: Explains how to install CIRCUS in your institute, etc.
 - **[Developer Guide](api-intro)**: Explains how to programmatically access data on CIRCUS. Also explains how to build a new application using CIRCUS RS, our DICOM viewer component (requires JavaScript knowledge).
