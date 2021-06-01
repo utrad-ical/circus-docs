@@ -96,7 +96,7 @@ CIRCUSシステムの起動に必要なデータ、ならびにOS間のフォル
    1. 起動したDockerコンテナ内部で以下のコマンドを実行します。
 
             # sed -i 's@/var/circus/data@/c/circus/data@g' /var/circus/circus.config.js
-            # mkdir -p /d/circus/data
+            # mkdir -p /c/circus/data
             # rm -rf /var/circus/data
             # ln -s /c/circus/data /var/circus/data
             # exit
