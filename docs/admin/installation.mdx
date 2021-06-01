@@ -65,7 +65,7 @@ CIRCUS システムの起動に必要なデータを作成するために以下�
 
    :::
 
-1. CIRCUS の Docker コンテナに 内で以下のコマンドを実行し、データベースの初期設定を行います。
+1. CIRCUS の Docker コンテナ 内で以下のコマンドを実行し、データベースの初期設定を行います。
 
    ```shell-session title="コンテナ内"
    # /root/data_initialize.sh
@@ -110,7 +110,9 @@ CIRCUS システムの起動に必要なデータ、ならびに OS 間のフォ
 
         :::
 
-        ```bash
+    1.   CIRCUS の Docker コンテナ 内で以下のコマンドを実行します。
+
+        ```shell-session title="コンテナ内"
         # sed -i 's@/var/circus/data@/c/circus/data@g' /var/circus/circus.config.js
         # mkdir -p /c/circus/data
         # rm -rf /var/circus/data
@@ -126,7 +128,7 @@ CIRCUS システムの起動に必要なデータ、ならびに OS 間のフォ
         eb0c8b5ae39c   circuscad/circus:1.0.0-beta8   "/bin/bash"   33 seconds ago   Exited (0) 9 seconds ago             eager_golick
         ```
 
-    1.  (Windows) Docker コンテナの ID を新たな Docker image(circuscad/circus-for-win:1.0.0-beta8)として保存します。
+    1.  (Windows) Docker コンテナの ID を新たな Docker イメージ(circuscad/circus-for-win:1.0.0-beta8)として保存します。
 
         ```
         > docker container commit eb0c8b5ae39c circuscad/circus-for-win:1.0.0-beta8
@@ -138,7 +140,7 @@ CIRCUS システムの起動に必要なデータ、ならびに OS 間のフォ
         > docker rm --force eb0c8b5ae39c
         ```
 
-1.  上記操作で新たに作成した Docker image 内で以下のコマンドを実行し、データベースなどを構築します。
+1.  上記操作で新たに作成した Docker イメージ 内で以下のコマンドを実行し、データベースなどを構築します。
 
         ```
         > docker run --rm -v /c/circus/data:/c/circus/data -v /var/run/docker.sock:/var/run/docker.sock -it circuscad/circus-for-win:1.0.0-beta8 /bin/bash
