@@ -4,10 +4,7 @@ title: Installation
 sidebar_label: Installation
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
-Docker Hub にて CIRCUS システムの Docker イメージを提供しています。こちらを使ってインストールするのが最も簡単です。ホストマシンの OS によって手順が異なります。
+Docker Hub にて CIRCUS システムの Docker イメージを提供しています。こちらを使ってインストールするのが最も簡単です。
 
 :::important
 2021.6 現在、Mac OS では未検証です。
@@ -23,45 +20,54 @@ Docker Hub 上にある CIRCUS の最新版は以下のサイトでご確認く�
 
 ## CIRCUS の Docker イメージ取得・初期設定
 
-<Tabs
-  defaultValue="linux"
-  values={[
-    { label: 'Linux', value: 'linux', },
-    { label: 'Windows', value: 'win', },
-  ]}
->
-<TabItem value="linux">
-
 以下の手順は CIRCUS のデータフォルダを `/var/circus/data` と設定（ホスト、Docker コンテナ内共通）することを前提としています。
 
-#### Docker のインストール
+:::tip
 
-CIRCUS をインストールするマシンに docker-ce 19.03 以降をインストールします。詳細は [Docker 公式ドキュメント](https://docs.docker.com/get-docker/)を参考してください。
+- データフォルダを任意のフォルダに変更できます。この場合、ホストマシン と Docker コンテナの動作に影響が生じないフォルダを設定してください。
+  - CIRCUS の Docker イメージでは `/var/circus` に CIRCUS のコード、設定ファイル等をインストールしています。
+- ホストマシンの OS が Windows でデータフォルダを `C:\circus\data` と設定する場合、以下の `/var/circus/data` は `/c/circus/data` に置き換えてください。
 
-#### CIRCUS の Docker イメージの取得
+:::
+
+### Docker のインストール
+
+CIRCUS をインストールするマシンに Docker をインストールします。詳細は [Docker 公式ドキュメント](https://docs.docker.com/get-docker/)を参考してください。
+
+- Linux: docker-ce 19.03 以降
+- Windows: Docker Desktop for Windows
+
+### CIRCUS の Docker イメージの取得
 
 Docker Hub より以下の Docker イメージを取得します。
 
 ```shell-session
-$ sudo docker pull circuscad/circus:1.0.0-beta8
+$ sudo docker pull circuscad/circus:1.0.0-beta9
 $ sudo docker pull circuscad/dicom_utility:2.0.0-beta3
 ```
 
-#### 初期設定手順
+:::note
+
+Windows のコマンドプロンプトで実行する場合は各行先頭の `sudo` は不要です（以下同様）。
+
+:::
+
+### 初期設定
 
 CIRCUS システムの起動に必要なデータを作成するために以下の操作が必要となります。
 
-1. ホスト側に `/var/circus/data` フォルダを作成します。
+1. ホストマシンに `/var/circus/data` フォルダを作成します。
 
 1. コンテナ内部でコマンドを実行するため、CIRCUS の Docker コンテナを作成し、内部で `/bin/bash` を実行します。
 
    ```shell-session
-   $ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -it circuscad/circus:1.0.0-beta8 /bin/bash
+   $ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -it circuscad/circus:1.0.0-beta9
    ```
 
    :::note
 
-   初期設定の間はポートの公開（`-p` オプション）や IP アドレスのマッピング（`--add-host` オプション）の設定は不要です。
+   - 上記コマンドの最後に `/bin/bash` は不要です（コンテナ内部の初期設定スクリプトより `/bin/bash` を実行しています）。
+   - 初期設定ではポートの公開（`-p` オプション）や IP アドレスのマッピング（`--add-host` オプション）の設定は不要です。
 
    :::
 
@@ -71,85 +77,7 @@ CIRCUS システムの起動に必要なデータを作成するために以下�
    # /root/data_initialize.sh
    ```
 
-</TabItem>
-<TabItem value="win">
-
-以下の手順はホスト側の CIRCUS のデータフォルダを `C:\circus\data`（以下では WSL2 での記法に倣って、`/C/circus/data` と記述）設定します。
-
-#### Docker Desktop for Windows のインストール
-
-CIRCUS をインストールするマシンに Docker Desktop for Windows をインストールします。詳細は [Docker 公式ドキュメント](https://docs.docker.com/get-docker/)を参考してください。
-
-#### CIRCUS の Docker image の取得
-
-Docker Hub より以下の Docker image を取得します。
-
-```
-> docker pull circuscad/circus:1.0.0-beta8
-> docker pull circuscad/dicom_utility:2.0.0-beta3
-```
-
-#### 初期設定
-
-CIRCUS システムの起動に必要なデータ、ならびに OS 間のフォルダ構造の違いを解消するために以下の操作が必要となります。
-
-1.  ホスト側に `C:\circus\data` フォルダを作成します。
-
-1.  Docker イメージの一部設定を変更し、新たなイメージとして保存します。
-
-    1.  (Windows) コンテナ内部でコマンドを実行するため、CIRCUS の Docker コンテナを作成し `/bin/bash` を実行します。
-
-        ```
-        docker run -v /var/run/docker.sock:/var/run/docker.sock -it circuscad/circus:1.0.0-beta8 /bin/bash
-        ```
-
-        :::note
-
-        - 起動したコンテナ内に変更した設定を保持させるために、`--rm` オプションを外します。
-        - 初期設定の間はポートの公開（`-p`オプション）や IP アドレスのマッピング(`--add-host`オプション)の設定は不要です。
-
-        :::
-
-    1.  CIRCUS の Docker コンテナ 内で以下のコマンドを実行します。
-
-        ```shell-session title="コンテナ内"
-        # sed -i 's@/var/circus/data@/c/circus/data@g' /var/circus/circus.config.js
-        # mkdir -p /c/circus/data
-        # rm -rf /var/circus/data
-        # ln -s /c/circus/data /var/circus/data
-        # exit
-        ```
-
-    1.  (Windows) 以下のコマンドで先ほど起動した Docker コンテナの ID を確認します。以下の例では、eb0c8b5ae39c が取得したい ID です。
-
-        ```
-        > docker ps -a
-        CONTAINER ID   IMAGE                          COMMAND       CREATED          STATUS                     PORTS     NAMES
-        eb0c8b5ae39c   circuscad/circus:1.0.0-beta8   "/bin/bash"   33 seconds ago   Exited (0) 9 seconds ago             eager_golick
-        ```
-
-    1.  (Windows) Docker コンテナの ID を新たな Docker イメージ(circuscad/circus-for-win:1.0.0-beta8)として保存します。
-
-        ```
-        > docker container commit eb0c8b5ae39c circuscad/circus-for-win:1.0.0-beta8
-        ```
-
-    1.  (Windows) 保存前の Docker コンテナを削除します。
-
-        ```
-        > docker rm --force eb0c8b5ae39c
-        ```
-
-1.  上記操作で新たに作成した Docker イメージ 内で以下のコマンドを実行し、データベースなどを構築します。
-
-        ```
-        > docker run --rm -v /c/circus/data:/c/circus/data -v /var/run/docker.sock:/var/run/docker.sock -it circuscad/circus-for-win:1.0.0-beta8 /bin/bash
-
-        # /root/data_initialize.sh
-        ```
-
-</TabItem>
-</Tabs>
+1．`exit` コマンドで Docker コンテナを一旦終了させます。
 
 ## コンテナ内でのコマンドの実行 {#shell}
 
@@ -159,10 +87,10 @@ CIRCUS システムの起動に必要なデータ、ならびに OS 間のフォ
 - プラグイン登録
 - その他 CLI として提供されている各種コマンドの利用
 
-Docker コンテナ内の `/bin/bash` にアクセスする場合は、以下のようにします。
+Docker コンテナ内の Bash (`/bin/bash`) にアクセスする場合は、以下のようにします。
 
 ```shell-session
-$ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] -it circuscad/circus:1.0.0-beta8 /bin/bash
+$ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] -it circuscad/circus:1.0.0-beta9
 ```
 
 - 上記は Linux の場合です。Windows でデータフォルダを /c/circus/data としている場合は、`-v /var/circus/data:/var/circus/data` を `-v /c/circus/data:/c/circus/data` に置き換えてください（以下同様）。
@@ -172,7 +100,7 @@ $ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.s
   - `ip a` (Ubuntu)
   - `ipconfig` (Windows)
 
-上記のスクリプトは bash エイリアスなどで登録しておくと便利です。
+上記のスクリプトは Bash エイリアスなどで登録しておくと便利です。
 
 ## CRICUS の起動(初期設定後)
 
@@ -184,15 +112,19 @@ $ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.s
 # /root/services.sh &
 ```
 
-### デーモンとして起動させる場合（サーバ群が自動起動します）
+### デーモンとして起動させる場合
+
+以下のコマンドで Docker コンテナをバックグラウンド起動させ、サーバ群を自動起動させることができます（上記 `/bin/bash` 経由による方法の `-it` の代わりに `-d -e DAEMON_MODE=1` とします）。
 
 ```shell-session
-$ sudo docker run -d --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] circuscad/circus:1.0.0-beta8
+$ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] -d -e DAEMON_MODE=1 circuscad/circus:1.0.0-beta9
 ```
+
+起動させたコンテナを終了させるためには、`docker ps` コマンドで起動しているコンテナの ID を調べた上で、`docker kill --force [コンテナの ID]`を実行してください。
 
 ## 新バージョンの Docker イメージを使用する場合
 
-新バージョンの Docker イメージを使用する場合、データベースのマイグレーション処理を行う必要がある場合があります。上記の手順に従い CIRCUS の Docker コンテナで `/bin/bash` を起動し、以下のコマンドを実行して内部データベースの情報の更新を行います。
+新バージョンの Docker イメージを使用する場合、データベースのマイグレーション処理を行う必要がある場合があります。上記の手順に従い CIRCUS の Docker コンテナ内部で CIRCUS を起動した上で、以下のコマンドを実行して内部データベースの情報の更新を行います。
 
 ```shell-session title="コンテナ内"
 # cd /var/circus/packages/circus-api
@@ -201,8 +133,7 @@ $ sudo docker run -d --rm -v /var/circus/data:/var/circus/data -v /var/run/docke
 
 :::warning
 
-- この操作でデータベースのリビジョンが更新された場合、旧バージョンの Docker イメージを使用することができなくなります。事前にデータベース (MongoDB) のバックアップを取るなど、十分に注意してください。
-- Windows で使用する場合にはインストール時と同様にコンテナ内部のフォルダ構成の設定を変更する必要があります。
+この操作でデータベースのリビジョンが更新された場合、旧バージョンの Docker イメージを使用することができなくなります。事前に内部データベース (MongoDB) のバックアップを取るなど、十分に注意してください。
 
 :::
 
@@ -217,3 +148,13 @@ $ sudo docker run -d --rm -v /var/circus/data:/var/circus/data -v /var/run/docke
 - 各種実行ログデータ
 
 バックアップは単純にこれらのファイルをコピーすることで行えます。
+
+### 内部データベース (MongoDB) のダンプを行う場合
+
+CIRCUS の Docker コンテナ内部で CIRCUS を起動した後、以下のコマンドを実行することで内部データベースのダンプ（バイナリバックアップ）を行えます。
+
+```shell-session
+# /root/mongodb_dump.sh
+```
+
+上記の場合、ダンプされたデータは `/var/circus/data/mongodb_dump/circus_mongo_archive_[タイムスタンプ].gz` となります。

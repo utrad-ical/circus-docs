@@ -6,15 +6,35 @@ sidebar_label: Registration of CS Plug-in
 
 ## CIRCUS CS プラグインの登録手順
 
-エクスポートされた Docker image (xxx_ver.1.0.0.tar) を CIRCUS CS のプラグインとして登録するためには以下で行います。
+エクスポートされた Docker イメージ (xxx_ver.1.0.0.tar) を CIRCUS CS のプラグインとして登録するためには以下で行います。
 
-1. docker load コマンドで Docker image を読み込みます。
+### 準備
+
+docker load コマンドで Docker image を読み込みます。
 
 ```
 $ docker load -i xxx_ver.1.0.0.tar
 ```
 
-1. 読み込んだプラグインの Docker image ID を取得します。
+### Docker コンテナ内でスクリプトを実行する場合（推奨）
+
+CIRCUS の Docker コンテナ内部で CIRCUS を起動した後、以下のコマンドを実行してください。
+
+```
+# /root/cad_plugin_registration.sh [REPOSITORY]:[TAG]
+```
+
+登録の途中で下図のように確認画面が求められたら、"Y" と入力し、[Enter]キーを押します。
+
+![Confirmation of plug-in registration](register-cad-plugin-confirm.png)
+
+:::tip
+コマンド実行に必要な [REPOSITORY] および [TAG] は `docker images` コマンドで調べてください。
+:::
+
+### CIRCUS の Docker コンテナ内で API を直接実行する場合
+
+1. 読み込んだプラグインの Docker image の full ID を取得します。
 
 ```
 $ docker images --no-trunc
@@ -24,7 +44,7 @@ $ docker images --no-trunc
 
        ![docker image list](docker-images-no-trunc_result.png)
 
-1. CIRCUS の Docker コンテナに 内で以下のコマンドを実行し、CIRCUS CS プラグインの情報を登録します。
+1. CIRCUS の Docker コンテナ内で以下のコマンドを実行し、CIRCUS CS プラグインの情報を登録します。
 
 ```shell-session title="コンテナ内"
 # /root/servicies.sh &
@@ -32,9 +52,9 @@ $ docker images --no-trunc
 # node circus register-cad-plugin [取得したDocker イメージの full ID]
 ```
 
-    - 登録の途中で下図のように確認画面が求められたら、"Y" と入力し、[Enter]キーを押します。
+- 登録の途中で下図のように確認画面が求められたら、"Y" と入力し、[Enter]キーを押します。
 
-       ![Confirmation of plug-in registration](register-cad-plugin-confirm.png)
+  ![Confirmation of plug-in registration](register-cad-plugin-confirm.png)
 
 ## CIRCUS CS の プラグインで GPU を使用する場合(Linux のみ、オプション)
 

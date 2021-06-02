@@ -155,6 +155,12 @@ DICOM Viewer Component 上部のツールバーで、ボクセルラベルに対
 - ワンド消去ツール (Shift+M)
   - ワンドツールの逆の操作を行います。
 
+:::note
+
+ボリュームデータの読込が完了するまでの間は、ワンドツールおよびワンド消去ツールは無効のままです。
+
+:::
+
 ### Connected component analysis
 
 "Series/Labels" の […] より、アクティブな voxel ラベルに対して Connected component labeling(CCL)、Hole filling を行うことができます。
