@@ -13,9 +13,8 @@ const features = [
     description: (
       <>
         CIRCUS DB (database) is a clinical image database application for
-        collecting datasets used to develop CAD software. It stores DICOM
-        series, optionally after anonymization, and users can define labels on
-        the stored images.
+        collecting datasets used to develop CAD software. Users can on stored
+        DICOM images in various formats including voxel-based painting.
       </>
     ),
     link: '/docs/users/case-search',
@@ -43,7 +42,6 @@ const features = [
         viewer application on top of CIRCUS RS.
       </>
     ),
-    link: '/docs/rs/index',
   },
 ];
 
