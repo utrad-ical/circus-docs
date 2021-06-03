@@ -35,20 +35,18 @@ DICOM Viewer Component 左上のツールバーで、マウスの左ドラッグ
 
 import { Icon } from '../icon';
 
-- Paging <Icon icon="rs-icon-pager" />（<kbd>P</kbd> キー）
+<dl>
+<dt><Icon icon="rs-icon-pager" /> Paging (<kbd>P</kbd>)</dt>
+<dd>画像のスクロール（ページング）を行います。</dd>
+<dt><Icon icon="rs-icon-zoom" /> Zoom (<kbd>Z</kbd>)</dt>
+<dd>画像のズームを行います。アイコン右側のプルダウンメニューにより、現在の表示画像を一定の倍率でズームすることもできます (×8, ×4, ×2, ×1/2, ×1/4, ×1/8)。</dd>
+<dt><Icon icon="rs-icon-hand" />Hand (<kbd>H</kbd>)</dt>
+<dd>画像の表示位置を移動させることができます。</dd>
+<dt><Icon icon="rs-icon-window" /> Window (<kbd>W</kbd>)</dt>
+<dd>画像の表示条件 (Window Level, Window Width) を変えることができます。アイコン右側のプルダウンメニューで登録済のプリセット値への変更や、マニュアルでの設定が行えます。</dd>
+</dl>
 
-  - 画像のスクロール（ページング）を行います。
-
-- Zoom <Icon icon="rs-icon-zoom" />（<kbd>Z</kbd> キー）
-
-  - 画像のズームを行います。アイコン右側のプルダウンメニューにより、現在の表示画像を一定の倍率でズームすることもできます (×8, ×4, ×2, ×1/2, ×1/4, ×1/8)。
-
-- Hand <Icon icon="rs-icon-hand" />（<kbd>H</kbd> キー）
-
-  - 画像の表示位置を移動させることができます。
-
-- Window <Icon icon="rs-icon-window" />（<kbd>W</kbd> キー）
-  - 画像の表示条件 (Window Level, Window Width) を変えることができます。アイコン右側のプルダウンメニューで登録済のプリセット値への変更や、マニュアルでの設定が行えます。
+カッコ内はキーボードショートカットです（以下同様）。
 
 ### 画像のスクロール
 
@@ -86,26 +84,22 @@ Triliear filtering を選択すると表示画像に対して線形補間が行�
 
 CIRCUS DB で実装しているラベルは以下の通りです。
 
-voxel
-: ボクセル単位で塗りつぶすラベルです。
-
-cuboid (3D)
-: 直方体 ROI です。初期状態では立方体です。
-
-ellipsoid (3D)
-: 楕円体 ROI です。初期状態では正球です。
-
-rectangle (2D)
-: 長方形 ROI です。初期状態では正方形です。
-
-ellipse (2D)
-: 楕円 ROI です。初期状態では正円です。
-
-point
-: 点状のラベルです。初期状態ではラベル追加時の画像の中心に設置されます。
-
-ruler
-: サイズ計測用ラベルです。初期状態ではラベル追加時の画像の中心に設置されます。
+<dl>
+<dt><Icon icon="circus-icon-annotation-voxel"/> voxel</dt>
+<dd>ボクセル単位で塗りつぶすラベルです。</dd>
+<dt><Icon icon="circus-icon-annotation-cuboid"/> cuboid (3D)</dt>
+<dd>直方体 ROI です。作成直後は立方体です。</dd>
+<dt><Icon icon="circus-icon-annotation-ellipsoid"/> ellipsoid (3D)</dt>
+<dd>楕円体 ROI です。作成直後は正球です。</dd>
+<dt><Icon icon="circus-icon-annotation-rectangle"/> rectangle (2D)</dt>
+<dd>長方形 ROI です。作成直後は正方形です。</dd>
+<dt><Icon icon="circus-icon-annotation-ellipse"/> ellipse (2D)</dt>
+<dd>楕円 ROI です。作成直後は正円です。</dd>
+<dt><Icon icon="circus-icon-annotation-point"/> point</dt>
+<dd>点状のラベルです。作成直後はラベル追加時の画像の中心に設置されます。</dd>
+<dt><Icon icon="circus-icon-annotation-ruler"/> ruler</dt>
+<dd>サイズ計測用ラベルです。作成直後はラベル追加時の画像の中心に設置されます。</dd>
+</dl>
 
 2D ROI は設定したスライスの上下 3 スライスでは半透明で表示されます。
 
@@ -115,25 +109,26 @@ DICOM Viewer Component 上部のツールバーで、ボクセルラベルに対
 
 ![Painting tools](case-detail-painting-tools.png)
 
-- ブラシ <Icon icon="rs-icon-brush" /> (<kbd>B</kbd>)
-  - クリックした位置を四角いペンで塗ります。
-- 消しゴム<Icon icon="rs-icon-eraser" /> (<kbd>E</kbd>)
-  - クリックした位置のラベルを消去します。
-- ブラシ・消しゴムの太さを設定
-  - プルダウンメニューでブラシ・消しゴムの太さを設定します。
-- バケツツール <Icon icon="rs-icon-bucket" />(<kbd>Shift</kbd>+<kbd>B</kbd>)
-  - クリックした位置から連結している同じラベル値の領域を塗りつぶします。
-- バケツ消去ツール<Icon icon="rs-icon-bucket-erase" /> (<kbd>Shift</kbd>+<kbd>E</kbd>)
-  - クリックした位置から連結している同じラベル値の領域を消去します。
-- ワンドツール <Icon icon="rs-icon-wand" />(<kbd>M</kbd>)
-  - 背景画像の画素値に対し、クリックした位置の画素値から一定範囲の画素値を持つ画素を塗ります。
-    ![Setting of wand tool](wand-tool-setting.png)
-- ワンド消去ツール <Icon icon="rs-icon-wand-eraser" />(<kbd>Shift</kbd>+<kbd>M</kbd>)
-  - ワンドツールの逆の操作を行います。
+<dl>
+<dt><Icon icon="rs-icon-brush" /> ブラシ (<kbd>B</kbd>)</dt>
+<dd>クリックした位置を四角いペンで塗ります。</dd>
+<dt><Icon icon="rs-icon-eraser" /> 消しゴム (<kbd>E</kbd>)</dt>
+<dd>クリックした位置のラベルを消去します。</dd>
+<dt>ブラシ・消しゴムの太さ設定</dt>
+<dd>プルダウンメニューでブラシ・消しゴムの太さを設定します。</dd>
+<dt><Icon icon="rs-icon-bucket" /> バケツツール (<kbd>Shift</kbd>+<kbd>B</kbd>)</dt>
+<dd>クリックした位置から連結している同じラベル値の領域を塗りつぶします。</dd>
+<dt><Icon icon="rs-icon-bucket-erase" /> バケツ消去ツール (<kbd>Shift</kbd>+<kbd>E</kbd>)</dt>
+<dd>クリックした位置から連結している同じラベル値の領域を消去します。</dd>
+<dt><Icon icon="rs-icon-wand" /> ワンドツール (<kbd>M</kbd>)</dt>
+<dd>背景画像の画素値に対し、クリックした位置の画素値から一定範囲の画素値を持つ画素を塗ります。スレッショルドと最大距離をオプションで設定できます。</dd>
+<dt><Icon icon="rs-icon-wand-eraser" /> ワンド消去ツール (<kbd>Shift</kbd>+<kbd>M</kbd>)</dt>
+<dd>背景画像の画素値に対し、クリックした位置の画素値から一定範囲の画素値を持つ画素を消去します。</dd>
+</dl>
 
 :::note
 
-ボリュームデータの読込が完了するまでの間は、ワンドツールおよびワンド消去ツールは無効のままです。
+全ボリュームデータの読込が完了するまでの間（ローディングインジゲータが表示されている間）は、ワンドツールおよびワンド消去ツールは有効になりません。
 
 :::
 
