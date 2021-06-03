@@ -34,8 +34,8 @@
 
 dl {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 5px 3px;
+  grid-template-columns: fit-content(40%) 1fr;
+  gap: 7px 3px;
   margin: 25px 0;
 }
 
