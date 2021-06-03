@@ -1,0 +1,41 @@
+// TODO: Remove the tildes before '@'
+// after upgrading to Webpack >= 5 & less-loader >= 8
+
+@font-face {
+  font-family: 'circus-db-font';
+  src: url('~@utrad-ical/circus-icons/dist/circus-db-font.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'circus-rs-font';
+  src: url('~@utrad-ical/circus-icons/dist/circus-rs-font.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^='circus-icon-'],
+[class*=' circus-icon-'] {
+  font-family: 'circus-db-font';
+}
+
+[class^='rs-icon-'],
+[class*=' rs-icon-'] {
+  font-family: 'circus-rs-font';
+}
+
+[class^='circus-icon-'],
+[class*=' circus-icon-'],
+[class^='rs-icon-'],
+[class*=' rs-icon-'] {
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: 150%;
+}
+
+@import 'circus-db-font-glyphs';
+@import 'circus-rs-font-glyphs';

@@ -33,26 +33,28 @@ DICOM Viewer Component 左上のツールバーで、マウスの左ドラッグ
 
 ![Tool for left drag](case-detail-tool-for-left-drag.png)
 
-- Paging（<kbd>P</kbd> キー）
+import { Icon } from '../icon';
+
+- Paging <Icon icon="rs-icon-pager" />（<kbd>P</kbd> キー）
 
   - 画像のスクロール（ページング）を行います。
 
-- Zoom（<kbd>Z</kbd> キー）
+- Zoom <Icon icon="rs-icon-zoom" />（<kbd>Z</kbd> キー）
 
   - 画像のズームを行います。アイコン右側のプルダウンメニューにより、現在の表示画像を一定の倍率でズームすることもできます (×8, ×4, ×2, ×1/2, ×1/4, ×1/8)。
 
-- Hand（<kbd>H</kbd> キー）
+- Hand <Icon icon="rs-icon-hand" />（<kbd>H</kbd> キー）
 
   - 画像の表示位置を移動させることができます。
 
-- Window（<kbd>W</kbd> キー）
+- Window <Icon icon="rs-icon-window" />（<kbd>W</kbd> キー）
   - 画像の表示条件 (Window Level, Window Width) を変えることができます。アイコン右側のプルダウンメニューで登録済のプリセット値への変更や、マニュアルでの設定が行えます。
 
 ### 画像のスクロール
 
 DICOM Viewer Component の画像は以下の方法でスクロールすることができます。
 
-- マウス左ドラッグ操作を Pager に設定（Pager アイコンをクリック、もしくは <kbd>P</kbd> キーを押す）した上で、スクロールしたい断面で左ドラッグをします。
+- マウス左ドラッグ操作を Pager <Icon icon="rs-icon-pager" /> に設定（Pager アイコンをクリック、もしくは <kbd>P</kbd> キーを押す）した上で、スクロールしたい断面で左ドラッグをします。
 
 - スクロールしたい断面でマウスカーソルを合わせて、マウスホイールでスクロールします。
 
@@ -113,20 +115,20 @@ DICOM Viewer Component 上部のツールバーで、ボクセルラベルに対
 
 ![Painting tools](case-detail-painting-tools.png)
 
-- ブラシ (<kbd>B</kbd>)
+- ブラシ <Icon icon="rs-icon-brush" /> (<kbd>B</kbd>)
   - クリックした位置を四角いペンで塗ります。
-- 消しゴム (<kbd>E</kbd>)
+- 消しゴム<Icon icon="rs-icon-eraser" /> (<kbd>E</kbd>)
   - クリックした位置のラベルを消去します。
 - ブラシ・消しゴムの太さを設定
   - プルダウンメニューでブラシ・消しゴムの太さを設定します。
-- バケツツール (<kbd>Shift</kbd>+<kbd>B</kbd>)
+- バケツツール <Icon icon="rs-icon-bucket" />(<kbd>Shift</kbd>+<kbd>B</kbd>)
   - クリックした位置から連結している同じラベル値の領域を塗りつぶします。
-- バケツ消去ツール (<kbd>Shift</kbd>+<kbd>E</kbd>)
+- バケツ消去ツール<Icon icon="rs-icon-bucket-erase" /> (<kbd>Shift</kbd>+<kbd>E</kbd>)
   - クリックした位置から連結している同じラベル値の領域を消去します。
-- ワンドツール (<kbd>M</kbd>)
+- ワンドツール <Icon icon="rs-icon-wand" />(<kbd>M</kbd>)
   - 背景画像の画素値に対し、クリックした位置の画素値から一定範囲の画素値を持つ画素を塗ります。
     ![Setting of wand tool](wand-tool-setting.png)
-- ワンド消去ツール (<kbd>Shift</kbd>+<kbd>M</kbd>)
+- ワンド消去ツール <Icon icon="rs-icon-wand-eraser" />(<kbd>Shift</kbd>+<kbd>M</kbd>)
   - ワンドツールの逆の操作を行います。
 
 :::note

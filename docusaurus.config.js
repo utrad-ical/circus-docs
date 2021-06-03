@@ -85,9 +85,13 @@ module.exports = {
           editUrl: 'https://github.com/utrad-ical/circus-docs/edit/master',
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: [
+            require.resolve('./src/css/custom.scss'),
+            require.resolve('./src/css/icons.scss'),
+          ],
         },
       },
     ],
   ],
+  plugins: ['docusaurus-plugin-sass'],
 };
