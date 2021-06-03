@@ -48,3 +48,18 @@ dt {
 dd {
   margin-left: 10px;
 }
+
+.routes {
+  .route {
+    margin: 0.5em;
+    border: 1px solid silver;
+    padding: 1em;
+    border-radius: 5px;
+    .route-name {
+      font-weight: bold;
+    }
+    .desc {
+      margin-left: 15px;
+    }
+  }
+}
