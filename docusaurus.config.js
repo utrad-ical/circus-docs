@@ -1,3 +1,5 @@
+const deflist = require('remark-deflist');
+
 module.exports = {
   title: 'CIRCUS',
   tagline: 'Platform for Computer-aided Diagnosis Research',
@@ -76,6 +78,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/utrad-ical/circus-docs/edit/master',
+          remarkPlugins: [deflist],
         },
         blog: {
           showReadingTime: true,

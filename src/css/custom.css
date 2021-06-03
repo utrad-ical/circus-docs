@@ -31,3 +31,20 @@
   background: purple;
   padding: 0 3px;
 }
+
+dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 5px 3px;
+  margin: 25px 0;
+}
+
+dt {
+  font-weight: bold;
+  padding-right: 10px;
+  border-right: 2px solid gray;
+}
+
+dd {
+  margin-left: 10px;
+}

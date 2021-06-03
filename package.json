@@ -19,7 +19,8 @@
     "clsx": "^1.1.1",
     "prettier": "^2.3.0",
     "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react-dom": "^16.8.4",
+    "remark-deflist": "^0.3.0"
   },
   "browserslist": {
     "production": [
