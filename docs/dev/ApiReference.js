@@ -28,7 +28,7 @@ const Category = ({ category }) => {
 };
 
 export const ApiReference = props => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(undefined);
 
   useEffect(() => {
     let aborted = false;
@@ -46,6 +46,8 @@ export const ApiReference = props => {
       There is no API source data. Build the data using make-api-reference.js.
     </div>;
   }
+
+  if (!data) return <div style={{ fontSize: '200%' }}>Loading...</div>;
 
   return (
     <>
