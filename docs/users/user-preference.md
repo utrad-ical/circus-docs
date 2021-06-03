@@ -1,5 +1,5 @@
 ---
-title: User preference
+title: User Preference
 ---
 
 ## ユーザ固有の設定
@@ -10,14 +10,15 @@ title: User preference
 
 設定できる項目は以下の通りです。変更した設定を反映させるためには画面下部の [Save] ボタンをクリックしてください。
 
-### Color Theme
+Color Theme
+: 各ページの背景色を設定します（白 or 黒）
 
-各ページの背景色を設定します（白 or 黒）
+Show Personal Info
+: 患者個人情報（患者 ID・氏名・生年月日）を表示できるかどうかを設定します。
 
-### Show Personal Info
+Search Presets の削除
+: 各検索画面で作成した検索条件の preset を削除することができます。
 
-患者個人情報（患者 ID・氏名・生年月日）を表示できるかどうかを設定します。
-
-### Search Presets の削除
-
-各検索画面で作成した検索条件の preset を削除することができます。
+:::note
+Show Personal Info を ON にしても個人情報を表示できる権限が付与されていない場合は情報の表示は行えません。
+:::

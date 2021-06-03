@@ -16,7 +16,7 @@ title: Series Search
 
 ## 検索条件の設定
 
-Series Search 画面の上部の "Search Condition" にて検索条件を設定します。検索条件の設定方法として、Basic および Advanced の 2 種類があります。 それぞれはタブによって切り替えることが出来ます。
+Series Search 画面の上部の "Search Condition" にて検索条件を設定します。検索条件の設定方法として、Basic および Advanced の 2 種類があります。それぞれはタブによって切り替えることが出来ます。
 
 :::note
 
@@ -36,19 +36,19 @@ Advanced では検索条件をより詳細に設定することができます�
 
 ![Search condition (Advanced)](series-search-advanced-condition.png)
 
-### 検索条件(preset)の保存
+### 検索条件の保存
 
-よく使用する検索条件を preset として保存することができます。検索条件設定画面下部の [Save] ボタンをクリックすると、preset name を設定するダイアログが表示されますので、名前を設定して [OK] ボタンをクリックします。
+よく使用する検索条件をプリセットとして保存することができます。検索条件設定画面下部の [Save] ボタンをクリックすると、プリセット名を設定するダイアログが表示されますので、名前を設定して [OK] ボタンをクリックします。
 
 ![Set preset name](search-preset-dialog.png)
 
-保存した preset はメニューの [Seres] より呼び出すことができます。
+保存したプリセットはメニューの [Series] より呼び出すことができます。
 
 ![Menu - Series preset](menu-series-search-preset.png)
 
 :::note
 
-preset の削除方法は[ユーザ固有の設定](user-preference.md)を参照ください。
+プリセットの削除方法は[ユーザ固有の設定](user-preference.md)を参照ください。
 
 :::
 
@@ -58,9 +58,9 @@ preset の削除方法は[ユーザ固有の設定](user-preference.md)を参照
 
 ![Set preset name](series-search-list.png)
 
-- リスト各行の "Uid" 列にある虫眼鏡アイコンをクリックすると、その series の Study Instance UID ならびに Series Instance UID が表示されます。それぞれの UID をクリップボードにコピーすることもできます。
+- リスト各行の "UID" 列にある虫眼鏡アイコンをクリックすると、そのシリーズの Study Instance UID ならびに Series Instance UID が表示されます。それぞれの UID をクリップボードにコピーすることもできます。
 
-- リスト各行の[View]ボタンをクリックすると、Series Detail 画面が表示されます。Series Detail 画面では画像と Series の詳細情報が表示されます。
+- リスト各行の [View] ボタンをクリックすると、Series Detail 画面が表示されます。Series Detail 画面では画像とシリーズの詳細情報が表示されます。
 
   ![Set detail](series-detail.png)
 

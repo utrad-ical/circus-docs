@@ -1,5 +1,5 @@
 ---
-title: Data structure
+title: Data Structure
 ---
 
 ここでは CIRCUS の利用に最低限必要なデータ構造について説明します。

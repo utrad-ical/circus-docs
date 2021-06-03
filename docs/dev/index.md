@@ -12,7 +12,7 @@ This section explains how to acquire a permanent access token and use our API. Y
 
 This section briefly explains how to use CIRCUS RS, our DICOM image viewer component. This section requires deep understanding of JavaScript.
 
-:::warning
+:::caution
 Currently this section is not available.
 :::
 

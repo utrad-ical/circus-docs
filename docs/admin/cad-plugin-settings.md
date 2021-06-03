@@ -6,7 +6,7 @@ title: CAD Plug-ins
 
 :::caution
 
-この画面ではプラグイン (Docker image) の新規登録が行えません。[CIRCUS CS プラグインの登録手順](./registration-cs-plugin)に従って登録してください。
+この画面ではプラグイン（Docker イメージ）の新規登録は行えません。[CIRCUS CS プラグインの登録手順](./registration-cs-plugin)に従って登録してください。
 
 :::
 

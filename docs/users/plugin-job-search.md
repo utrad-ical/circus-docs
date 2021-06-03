@@ -32,23 +32,23 @@ Basic では基本的な検索条件により検索ができます。
 
 ### Advanced
 
-Advanced では検索条件をより詳細に設定することができます。Basic にはない検索項目(job register date, job finish date)を用いた検索も行うことができます。
+Advanced では検索条件をより詳細に設定することができます。Basic にはない検索項目 (job register date, job finish date) を用いた検索も行うことができます。
 
 ![Search condition (Advanced)](plugin-job-search-advanced-condition.png)
 
-### 検索条件(preset)の保存
+### 検索条件の保存
 
-よく使用する検索条件を preset として保存することができます。検索条件設定画面下部の [Save] ボタンをクリックすると、preset name を設定するダイアログが表示されますので、名前を設定して [OK] ボタンをクリックします。
+よく使用する検索条件をプリセットとして保存することができます。検索条件設定画面下部の [Save] ボタンをクリックすると、プリセット名を設定するダイアログが表示されますので、名前を設定して [OK] ボタンをクリックします。
 
 ![Set preset name](search-preset-dialog.png)
 
-保存した preset はメニューの[Seres]より呼び出すことができます。
+保存した preset はメニューのより呼び出すことができます。
 
 ![Menu - Series preset](menu-cad-search-preset.png)
 
 :::note
 
-preset の削除方法は [ユーザ固有の設定](user-preference.md) ご参照ください。
+プリセットの削除方法は[ユーザ固有の設定](user-preference.md)を参照ください。
 
 :::
 

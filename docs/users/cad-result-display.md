@@ -1,5 +1,5 @@
 ---
-title: CAD result display
+title: CAD Result Display
 ---
 
 ## プラグイン結果画面の閲覧
