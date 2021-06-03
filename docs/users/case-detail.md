@@ -10,25 +10,20 @@ Case Detail 画面は以下の要素で構成されています。
 
 ![Case Detail](case-detail-all.png)
 
-### Case Info
+Case Info
+: Case ID、患者情報（患者情報表示権限を有する場合）、プロジェクト名、タグが表示されます。
 
-Case ID、患者情報（患者情報表示権限を有する場合）、プロジェクト名、タグが表示されます。
+Revision
+: 現在表示しているリビジョンの情報が表示されています。プルダウンメニューになっているので表示するリビジョンを切り替えることも可能です。
 
-### Revision
+DICOM ビューア
+: DICOM シリーズより生成したボリュームデータが表示されます。初期状態では axial 断面のほかに MPR(coronal, sagittal, oblique)の 4 断面が表示されます。
 
-現在表示しているリビジョンの情報が表示されています。プルダウンメニューになっているので表示するリビジョンを切り替えることも可能です。
+Series / Labels
+: ケースに属しているシリーズ、ならびに各シリーズに属しているラベルの情報が表示されるとともに、ラベルの属性情報の入力インターフェイスがあります。
 
-### DICOM Viewer Component
-
-DICOM シリーズより生成したボリュームデータが表示されます。初期状態では axial 断面のほかに MPR(coronal, sagittal, oblique)の 4 断面が表示されます。
-
-### Series / Labels
-
-ケースに属しているシリーズ、ならびに各シリーズに属しているラベルの情報が表示されるとともに、ラベルの属性情報の入力インターフェイスがあります。
-
-### Case Attributes
-
-ケースの属性情報の入力インターフェイスがあります。
+Case Attributes
+: ケースの属性情報の入力インターフェイスがあります。
 
 ## DICOM Viewer Component の操作
 
@@ -89,43 +84,28 @@ Triliear filtering を選択すると表示画像に対して線形補間が行�
 
 CIRCUS DB で実装しているラベルは以下の通りです。
 
-### voxel
+voxel
+: ボクセル単位で塗りつぶすラベルです。
 
-ボクセル単位で塗りつぶすラベルです。
+cuboid (3D)
+: 直方体 ROI です。初期状態では立方体です。
 
-### ROI (2D/3D)
+ellipsoid (3D)
+: 楕円体 ROI です。初期状態では正球です。
 
-CIRCUS DB では 2D および 3D の関心領域 (ROI) をラベルとすることもできます。初期状態ではラベル追加時の画像の中心に設置されます。
+rectangle (2D)
+: 長方形 ROI です。初期状態では正方形です。
 
-#### cuboid (3D)
+ellipse (2D)
+: 楕円 ROI です。初期状態では正円です。
 
-直方体 ROI です。初期状態では立方体です。
+point
+: 点状のラベルです。初期状態ではラベル追加時の画像の中心に設置されます。
 
-#### ellipsoid (3D)
-
-楕円体 ROI です。初期状態では正球です。
-
-#### rectangle (2D)
-
-長方形 ROI です。初期状態では正方形です。
-
-#### ellipse (2D)
-
-楕円 ROI です。初期状態では正円です。
-
-:::tip
+ruler
+: サイズ計測用ラベルです。初期状態ではラベル追加時の画像の中心に設置されます。
 
 2D ROI は設定したスライスの上下 3 スライスでは半透明で表示されます。
-
-:::
-
-### point
-
-点状のラベルです。初期状態ではラベル追加時の画像の中心に設置されます。
-
-### ruler
-
-サイズ計測用ラベルです。初期状態ではラベル追加時の画像の中心に設置されます。
 
 ## ボクセルラベルに対する操作
 
@@ -155,36 +135,40 @@ DICOM Viewer Component 上部のツールバーで、ボクセルラベルに対
 
 :::
 
-### Connected component analysis
+### Connected Component Analysis
 
-"Series/Labels" の […] より、アクティブな voxel ラベルに対して Connected component labeling(CCL)、Hole filling を行うことができます。
+"Series/Labels" の […] より、アクティブな voxel ラベルに対して Connected component labeling (CCL)、Hole filling を行うことができます。
 
 ![Connected component analysis menu](case-detail-connected-component-analysis-menu.png)
 
-#### Connected component labeling (CCL)
+#### Connected Component Labeling (CCL)
 
 アクティブな voxel ラベルを 3 次元で連結する voxel ごとに別のラベルに分割します。
 
-| 設定オプション           | 範囲    | 詳細                                                                                                      |
-| ------------------------ | ------- | --------------------------------------------------------------------------------------------------------- |
-| 表示する最大連結要素数 N | 1 ～ 10 | 体積が大きい順に N 個の voxel ラベルを新たに作成し、それ以外の領域は一つの voxel ラベルにまとめて表示する |
-| 近傍数                   | 6、26   | 連結判定に使用                                                                                            |
+最大連結要素数 N
+: 体積が大きい順に N 個の voxel ラベルを新たに作成し、それ以外の領域はひとつの voxel ラベルにまとめて表示する
+
+近傍数
+: 連結判定モード（6 近傍または 26 近傍）
 
 ![CCL result](case-detail-CCL-result.png)
 
-#### Hole filling
+#### Hole Filling
 
 アクティブな voxel ラベルの穴埋めをします。
 
-| 設定オプション | 範囲                    | 詳細               |
-| -------------- | ----------------------- | ------------------ |
-| 次元数         | 2、3                    |                    |
-| Orientation    | Axial、Sagital、Colonal | 2 次元の時のみ選択 |
-| 近傍数         | 6、26                   | 連結判定に使用     |
+次元数
+: 2 または 3
+
+Orientation
+: Axial、Sagital、Colonal | 2 次元の時のみ選択 |
+
+近傍数
+: 連結判定モード（2 次元の場合は 4 または 8 近傍、3 次元の場合は 6 または 26 近傍）
 
 ![Hole filling result](case-detail-hole-filling-result.png)
 
-:::caution
+:::note
 CCL および Hole filling は計算途中で voxel ラベルの分割数が 255 を超える複雑な形状には対応していません。
 :::
 
@@ -212,30 +196,29 @@ CCL および Hole filling は計算途中で voxel ラベルの分割数が 255
 
 ケースのデータ（元画像、voxel ラベルのボリュームデータ、属性情報）をダウンロードするためには、画面右上のメニューボタンから [Export as MHD] を選択します。以下のダイアログが表示されますので、条件を選択した上で、[Start download] ボタンをクリックします。
 
-- Voxel labels
-  - 現在はラベル毎に別々のボリュームで出力する (Isolated) か、全てのラベルを 1 つのボリュームで出力するかを選択します。
-- MHD file line endings
-  - mhd ファイルの改行コードを LF (Linux)、CR + LF (Windows) を選択します。
-- Comression format
-  - エクスポートデータの圧縮形式を選択します(tar.gz or ZIP)。
+Voxel labels
+: 現在はラベル毎に別々のボリュームで出力する (Isolated) か、全てのラベルを 1 つのボリュームで出力するかを選択します。
+
+MHD file line endings
+: mhd ファイルの改行コードを LF (Linux)、CR + LF (Windows) を選択します。
+
+Comression format
+: エクスポートデータの圧縮形式を選択します(tar.gz or ZIP)。
 
 ![Export one case](export-one-case-dialog.png)
 
 ### 生成されるデータ
 
-#### vol[シリーズ番号].mhd (+.raw)
+vol[シリーズ番号].mhd (+.raw)
+: シリーズの元画像のボリュームデータです。
 
-シリーズの元画像のボリュームデータです。
+vol[シリーズ番号]\_label[ラベル番号].mhd (+.raw)
+: voxel ラベルデータです。
 
-#### vol[シリーズ番号]\_label[ラベル番号].mhd (+.raw)
+data.json
+: 症例の属性情報 (JSON 形式) です。
 
-voxel ラベルデータです。
-
-#### data.json
-
-症例の属性情報 (JSON 形式) です。
-
-:::tip
+:::note
 
 ROI、point、ruler の情報は data.json に含まれます。位置はボリュームの左上ボクセルを原点とした mm 単位で書かれています。
 
