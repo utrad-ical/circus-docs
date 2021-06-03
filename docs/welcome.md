@@ -18,7 +18,7 @@ CIRCUS は MIT ライセンスで公開されるオープンソースプロジ�
 
 ## CIRCUS の構成
 
-CIRCUS は 2 種類のトップレベル・アプリケーションで構成されています
+CIRCUS は 2 種類のトップレベル・アプリケーションで構成されています。
 
 ### CIRCUS DB (database)
 
@@ -42,27 +42,21 @@ CAD ソフトウェアの開発では、対象となる疾患の元画像およ�
 
 ## ライセンス
 
-CIRCUS は、MIT License の元に配布されるフリーソフトウェアです。
-
-CIRCUS CS 上で動作するオリジナルのプラグインを作成した場合、プラグインの作者は別のライセンス（商用ライセンスを含む）を適用することができます。
+CIRCUS は、MIT License の元に配布されるフリーソフトウェアです。CIRCUS CS 上で動作するオリジナルのプラグインを作成した場合、プラグインの作者は別のライセンス（商用ライセンスを含む）を適用することができます。
 
 CIRCUS は他のオープンソフトウェアを使用して構築されています。CIRCUS と別のライセンスが適用されます。主なものを以下に掲載します。
 
-### Node.js
+Node.js
+: Node.js は OpenJS Foundation により MIT license で配布されている JavaScript 実行環境です。
 
-Node.js は OpenJS Foundation により MIT license で配布されている JavaScript 実行環境です。
+nginx
+: nginx は Nginx, Inc. により 2-clause BSD-like license で配布されている HTTP サーバソフトウェアです。
 
-### nginx
+MongoDB
+: MongoDB は MongoDB, Inc. により Server Side Public License (SSPL) で配布されているドキュメント指向データベースです。
 
-nginx は Nginx, Inc. により 2-clause BSD-like license で配布されている HTTP サーバソフトウェアです。
-
-### MongoDB
-
-MongoDB は MongoDB, Inc. により Server Side Public License (SSPL) で配布されているドキュメント指向データベースです。
-
-### Docker
-
-Docker は Docker, Inc. により Apache License 2.0 で配布されているコンテナ型の仮想化プラットフォームです。
+Docker
+: Docker は Docker, Inc. により Apache License 2.0 で配布されているコンテナ型の仮想化プラットフォームです。
 
 ## 文献
 
@@ -74,10 +68,15 @@ International Journal of Computer Assisted Radiology and Surgery, vol.15, no.4, 
 
 - [**Journal's site** (open access)](https://rdcu.be/b2OLL)
 
-## About The Documents
+## このドキュメントについて
 
-This docs site is divided into three sections.
+このドキュメントは以下の大きな 3 セクションで構成されています。
 
-- **[User Guide](users/login)**: Explains how to use CIRCUS CS/DB as an end user.
-- **[Admininistrator Guide](admin/installation)**: Explains how to install CIRCUS in your institute, etc.
-- **[Developer Guide](dev/index)**: Explains how to programmatically access data on CIRCUS. Also explains how to build a new application using CIRCUS RS, our DICOM viewer component (requires JavaScript knowledge).
+[User Guide](users/login)
+: 一般ユーザとしての CIRCUS の使用方法について説明します。
+
+[Admininistrator Guide](admin/installation)
+: CIRCUS システムのインストール・更新・メンテナンスの方法、ユーザの追加方法などについて説明します。
+
+[Developer Guide](dev/index)
+: CIRCUS システムのデータにプログラムを使ってアクセスする方法や、CIRCUS CS のプラグイン作成方法など、開発者向けの解説です。プログラミングに関する知識が必要です。
