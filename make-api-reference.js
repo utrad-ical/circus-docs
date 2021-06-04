@@ -14,6 +14,8 @@ const url =
 
 const token = process.env.CIRCUS_DOCS_GH_TOKEN;
 
+const categoryName = path => path.match(/src\/api\/(.+)\/index/)[1];
+
 const load = async () => {
   const res = await axios.request({
     method: 'get',
@@ -21,9 +23,11 @@ const load = async () => {
     auth: { username: 'anyone', password: token },
   });
   const tree = res.data.tree;
-  const yamlFiles = tree.filter(t =>
-    /^packages\/circus-api\/src\/api\/.*\.yaml$/.test(t.path)
-  );
+  const deny = ['debug', 'login-info', 'logout', 'plugin-displays'];
+  const yamlFiles = tree
+    .filter(t => /^packages\/circus-api\/src\/api\/.*\.yaml$/.test(t.path))
+    .filter(t => !deny.includes(categoryName(t.path)));
+
   const routes = await Promise.all(
     yamlFiles.map(async yamlFile => {
       const blobRes = await axios.request({
@@ -34,7 +38,7 @@ const load = async () => {
       const yamlData = Buffer.from(blobRes.data.content, 'base64');
       const data = yaml.load(yamlData);
       return {
-        category: yamlFile.path.match(/src\/api\/(.+)\/index/)[1],
+        category: categoryName(yamlFile.path),
         description: data.description,
         routes: data.routes,
       };
@@ -59,8 +63,10 @@ const main = async () => {
     JSON.stringify(routes),
     'utf8'
   );
+  console.log(`Wrote api.json with ${routes.length} categories`);
 };
 
 main().catch(err => {
   console.error(err);
+  process.exit(-1);
 });

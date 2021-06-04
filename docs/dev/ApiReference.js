@@ -1,11 +1,28 @@
 import React, { useState, useEffect } from 'react';
-// import apiData from '../../static/api.json';
+
+const highlightPathParam = path => {
+  const children = [];
+  const matches = Array.from(path.matchAll(/:[a-zA-z]+\+?/g));
+  let len = 0;
+  const pushStr = pos => {
+    children.push(path.slice(len, pos));
+    len = pos;
+  };
+  for (const match of matches) {
+    pushStr(match.index);
+    children.push(<var>{match[0]}</var>);
+    len = match.index + match[0].length;
+  }
+  pushStr(path.length);
+  return React.createElement(React.Fragment, {}, ...children);
+};
 
 const Route = ({ route }) => {
   return (
     <div className="route">
       <div className="route-name">
-        {route.verb.toUpperCase()} {route.path}
+        <span className="verb">{(route.verb ?? 'GET').toUpperCase()}</span>{' '}
+        <span className="path">{highlightPathParam(route.path)}</span>
       </div>
       <div className="desc">{route.description}</div>
     </div>
@@ -19,8 +36,8 @@ const Category = ({ category }) => {
       <h2>{category.category}</h2>
       {category.description && <p>{category.description}</p>}
       <div className="routes">
-        {category.routes.map(route => (
-          <Route route={route} />
+        {category.routes.map((route, i) => (
+          <Route key={i} route={route} />
         ))}
       </div>
     </>
@@ -33,7 +50,6 @@ export const ApiReference = props => {
   useEffect(() => {
     let aborted = false;
     import('../../static/api.json').then(data => {
-      console.log(data);
       if (!aborted) setData(Array.from(data));
     });
     return () => {
@@ -52,7 +68,7 @@ export const ApiReference = props => {
   return (
     <>
       {data.map((c, i) => (
-        <Category category={c} key={i} />
+        <Category key={i} category={c} />
       ))}
     </>
   );
