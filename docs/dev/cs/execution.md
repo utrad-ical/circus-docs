@@ -49,17 +49,64 @@ Currently, only grayscale images are supported.
 
 ### JSON tag dump data (`${volId}.json`)
 
-This file contains anonymized, JSON-serialized version of DICOM tags. To reduce the file size, the file is divided into the `common` section and the `unique` section. The `common` section contains tag data that are shared across all the images (or slices) of the series (e.g., study time). The `unique` section contains other tag data that are not common across images (e.g., slice location).
-This file contains anonymized, JSON-serialized version of DICOM tags. To reduce file size, the file is divided into the `common` section and the `unique` section. The `common` section contains tag data that are shared across all the images (or slices) of the series (e.g., study time or modality). The `unique` section contains other tag data that are not common across images (e.g., slice location).
-
-The data related to patient information is not included.
+This file contains an anonymized, JSON-serialized version of DICOM tags. The file looks similar to the following (note that this is heavily abbreviated):
 
 ```json
 {
-  "common": {},
-  "unique": []
+  "common": {
+    "0002,0010": "1.2.840.10008.1.2",
+    "0008,0005": "ISO_IR 6",
+    "0008,0060": "MR",
+    "0008,103e": "MRA Oblique",
+    "0028,0004": "MONOCHROME2"
+  },
+  "unique": [
+    {
+      "0008,0018": "1.2.840.113619.2.176.3596.10292220.6726.1162856930.137",
+      "0020,0013": "1",
+      "0020,0032": "-119.671\\-150.354\\41.252"
+    },
+    {
+      "0008,0018": "1.2.840.113619.2.176.3596.10292220.6726.1162856930.138",
+      "0020,0013": "2",
+      "0020,0032": "-119.671\\-150.417\\40.6553"
+    }
+  ]
 }
 ```
+
+To reduce file size, the file is divided into the `common` section and the `unique` section. The `common` section contains tag data that are shared across all the images of the series (e.g., study time or modality). The `unique` section is an array, whose items contain other tag data that are not common across images (e.g., slice location). The number of items in the array is the same as the Z-size of the input raw data.
+
+:::important
+
+The data related to patient information are not included. Currently, the following data are unavailable in this file.
+
+<details>
+<summary>List of tags unavailable in the tag dump JSON files</summary>
+
+- (0008,0080): Institution name
+- (0008,0081): Institution address
+- (0008,0082): Institution Code Sequence
+- (0008,1040): Institutional Department Name
+- (0008,1048): Physician(s) of Record
+- (0008,1049): Physician(s) of Record Identification Sequence
+- (0008,1050): Performing Physician's Name
+- (0008,1052): Performing Physician Identification Sequence
+- (0008,1060): Name of Physician(s) ReadingStudy
+- (0008,1062): Physician(s) Reading Study Identification Sequence
+- (0008,1070): Operators' Name
+- (0008,1072): Operator Identification Sequence
+- (0010,0010): Patient's name
+- (0010,0020): Patient's ID
+- (0010,0030): Patient's birth date
+- (0032,1031): Requesting Physician Identification Sequence
+- (0032,1032): Requesting Physician
+- (0032,1033): Requesting Service
+- (0032,0030): Patient's birth date
+
+</details>
+
+:::
 
 ## Output of Your Plug-in
 
