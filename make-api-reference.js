@@ -39,6 +39,7 @@ const load = async () => {
       const data = yaml.load(yamlData);
       return {
         category: categoryName(yamlFile.path),
+        name: data.name,
         description: data.description,
         routes: data.routes,
       };

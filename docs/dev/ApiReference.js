@@ -33,7 +33,7 @@ const Category = ({ category }) => {
   return (
     <>
       <hr />
-      <h2>{category.category}</h2>
+      <h2>{category.name}</h2>
       {category.description && <p>{category.description}</p>}
       <div className="routes">
         {category.routes.map((route, i) => (
