@@ -75,7 +75,7 @@ International Journal of Computer Assisted Radiology and Surgery, vol.15, no.4, 
 [User Guide](users/login)
 : 一般ユーザとしての CIRCUS の使用方法について説明します。
 
-[Admininistrator Guide](admin/installation)
+[Administrator Guide](admin/installation)
 : CIRCUS システムのインストール・更新・メンテナンスの方法、ユーザの追加方法などについて説明します。
 
 [Developer Guide](dev/index)
