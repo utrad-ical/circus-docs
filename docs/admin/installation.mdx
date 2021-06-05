@@ -14,7 +14,7 @@ Docker Hub にて CIRCUS システムの Docker イメージを提供してい�
 
 Docker Hub 上にある CIRCUS の最新版は以下のサイトでご確認ください。
 
-- https://hub.docker.com/u/circuscad
+https://hub.docker.com/u/circuscad
 
 :::
 
@@ -36,6 +36,12 @@ CIRCUS をインストールするマシンに Docker をインストールし�
 
 - Linux: docker-ce 19.03 以降
 - Windows: Docker Desktop for Windows
+
+:::note
+
+インストールの際に BIOS の設定変更を求められることがあります。
+
+:::
 
 ### CIRCUS の Docker イメージの取得
 
@@ -111,6 +117,8 @@ $ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.s
 ```shell-session title="コンテナ内"
 # /root/services.sh &
 ```
+
+起動後にウェブブラウザにて http://localhost/ にアクセスします。
 
 ### デーモンとして起動させる場合
 
