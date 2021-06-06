@@ -70,7 +70,7 @@ const Home = () => {
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
   return (
-    <Layout title={siteConfig.title} description="The home of CIRCUS Project">
+    <Layout title="Home" description="The home of CIRCUS Project">
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
           <img
