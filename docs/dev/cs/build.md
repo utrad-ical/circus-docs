@@ -4,6 +4,14 @@ title: Building a Plug-in
 
 This page explains how to build your CIRCUS CS Plug-in. We assume the basic understanding of Docker.
 
+:::note
+
+You can find example plug-in examples in the following repository:
+
+https://github.com/utrad-ical/circus-cs-plugin-samples
+
+:::
+
 ## 1. Build Your Main Executable
 
 As described in the previous page, a program written in any language can work as a CIRCUS plug-in. Ensure the following:
