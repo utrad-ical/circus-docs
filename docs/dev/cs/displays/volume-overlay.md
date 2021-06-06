@@ -4,6 +4,10 @@ title: VolumeOverlay
 
 `VolumeOverlay` is a display that shows an input series with volume data overlaied on it. This is typically used by plug-ins that perform volumetry and segmentation.
 
+## Example
+
+![VolumeOverlay example](./volume-overlay.png)
+
 ## Synopsis
 
 ```json title=displayStrategy
