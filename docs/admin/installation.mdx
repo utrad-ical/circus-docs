@@ -10,14 +10,6 @@ Docker Hub にて CIRCUS システムの Docker イメージを提供してい�
 2021.6 現在、Mac OS では未検証です。
 :::
 
-:::tip
-
-Docker Hub 上にある CIRCUS の最新版は以下のサイトでご確認ください。
-
-https://hub.docker.com/u/circuscad
-
-:::
-
 ## CIRCUS の Docker イメージ取得・初期設定
 
 以下の手順は CIRCUS のデータフォルダを `/var/circus/data` と設定（ホスト、Docker コンテナ内共通）することを前提としています。
@@ -37,20 +29,23 @@ CIRCUS をインストールするマシンに Docker をインストールし�
 - Linux: docker-ce 19.03 以降
 - Windows: Docker Desktop for Windows
 
-:::note
-
-インストールの際に BIOS の設定変更を求められることがあります。
-
-:::
-
 ### CIRCUS の Docker イメージの取得
 
 Docker Hub より以下の Docker イメージを取得します。
 
 ```shell-session
-$ sudo docker pull circuscad/circus:1.0.0-beta10
-$ sudo docker pull circuscad/dicom_utility:2.0.0-beta3
+$ sudo docker pull circuscad/circus:latest
+$ sudo docker pull circuscad/dicom_utility:latest
 ```
+
+:::tip
+
+- latest は取得時点での推奨版です。対応するバージョンは予告なく変更されます。
+- 長期運用時には `latest` の代わりにバージョンを指定して取得されることをお勧めします。
+- Docker Hub 上にある CIRCUS の最新版は以下のサイトでご確認ください。
+  - https://hub.docker.com/u/circuscad
+
+:::
 
 :::note
 
@@ -67,7 +62,7 @@ CIRCUS システムの起動に必要なデータを作成するために以下�
 1. コンテナ内部でコマンドを実行するため、CIRCUS の Docker コンテナを作成し、内部で `/bin/bash` を実行します。
 
    ```shell-session
-   $ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -it circuscad/circus:1.0.0-beta10
+   $ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -it circuscad/circus:latest
    ```
 
    :::note
@@ -83,7 +78,7 @@ CIRCUS システムの起動に必要なデータを作成するために以下�
    # /root/data_initialization.sh
    ```
 
-1．`exit` コマンドで Docker コンテナを一旦終了させます。
+1. `exit` コマンドで Docker コンテナを一旦終了させます。
 
 ## コンテナ内でのコマンドの実行 {#shell}
 
@@ -96,7 +91,7 @@ CIRCUS システムの起動に必要なデータを作成するために以下�
 Docker コンテナ内の Bash (`/bin/bash`) にアクセスする場合は、以下のようにします。
 
 ```shell-session
-$ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] -it circuscad/circus:1.0.0-beta10
+$ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] -it circuscad/circus:latest
 ```
 
 - 上記は Linux の場合です。Windows でデータフォルダを /c/circus/data としている場合は、`-v /var/circus/data:/var/circus/data` を `-v /c/circus/data:/c/circus/data` に置き換えてください（以下同様）。
@@ -118,17 +113,29 @@ $ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.s
 # /root/services.sh &
 ```
 
-起動後にウェブブラウザにて http://localhost/ にアクセスします。
-
 ### デーモンとして起動させる場合
 
 以下のコマンドで Docker コンテナをバックグラウンド起動させ、サーバ群を自動起動させることができます（上記 `/bin/bash` 経由による方法の `-it` の代わりに `-d -e DAEMON_MODE=1` とします）。
 
 ```shell-session
-$ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] -d -e DAEMON_MODE=1 circuscad/circus:1.0.0-beta10
+$ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] -d -e DAEMON_MODE=1 circuscad/circus:latest
 ```
 
 起動させたコンテナを終了させるためには、`docker ps` コマンドで起動しているコンテナの ID を調べた上で、`docker kill --force [コンテナの ID]`を実行してください。
+
+## 動作確認方法
+
+1. 上記方法で CIRCUS を起動後、ホストマシンの web ブラウザで http://localhost/ （もしくはhttp://127.0.0.1/）へアクセスします。
+
+1. ログイン画⾯が表⽰されたら、ユーザ名／パスワードともに "circus" と入力してログインしてください。
+
+1. CIRCUS のホーム画⾯が表⽰されれば成功です。
+
+:::warning
+
+"circus" は管理者権限を持つ初期設定ユーザです。ログイン後、[ユーザの設定](user-settings.md) でパスワードを必ず変更してください。必要に応じて、別の管理者権限を持つユーザを作成し、そのユーザでログインし直して "circus" のログインを無効にしてください。
+
+:::
 
 ## 新バージョンの Docker イメージを使用する場合
 
