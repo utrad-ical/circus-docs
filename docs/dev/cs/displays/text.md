@@ -6,6 +6,8 @@ The `Text` shows an input box to collect a string-type feedback.
 
 ## Example
 
+![Text example](./text.png)
+
 ## Synopsis
 
 ```json title=displayStrategy

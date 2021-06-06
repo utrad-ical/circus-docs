@@ -6,6 +6,8 @@ The `Numeric` shows an input box to collect a numer feedback.
 
 ## Example
 
+![Numeric example](./numeric.png)
+
 ## Synopsis
 
 ```json title=displayStrategy
