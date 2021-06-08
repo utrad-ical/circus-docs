@@ -49,6 +49,18 @@ dd {
   margin-left: 10px;
 }
 
+details {
+  background: #88888833;
+  padding: 3px 3px 3px 10px;
+  border-radius: 10px;
+  summary {
+    cursor: pointer;
+  }
+  &[open] summary {
+    margin-bottom: 10px;
+  }
+}
+
 .routes {
   .route {
     margin: 0.5em;
