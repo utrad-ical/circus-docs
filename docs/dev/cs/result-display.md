@@ -53,4 +53,4 @@ To support multiple-reader scenarios, CIRCUS CS has a "consensual feedback" mech
 
 ### Building Your Own Display
 
-Interanally, displays are implemented as React components. A developer with the knowledge about React can provide a custom display (i.e., React component) to show plug-in results in an arbitrary way or collect complex feedback data from users. For details, see [Custom Result Display](./custom-display.md).
+Internally, displays are implemented as React components. A developer with the knowledge about React can provide a custom display (i.e., React component) to show plug-in results in an arbitrary way or collect complex feedback data from users. For details, see [Custom Result Display](./custom-display.md).
