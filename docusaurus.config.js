@@ -19,8 +19,13 @@ module.exports = {
       },
       items: [
         {
+          to: 'docs/news/recent-release-notes',
+          label: 'News',
+          position: 'left',
+        },
+        {
           to: 'docs/',
-          activeBasePath: 'docs',
+          activeBaseRegex: `(?!docs/news)(docs)`,
           label: 'Docs',
           position: 'left',
         },
