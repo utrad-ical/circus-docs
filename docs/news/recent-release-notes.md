@@ -9,14 +9,14 @@ title: CIRCUS  release notes
 ### CIRCUS-DB 関連
 
 - CCL(Connected component labeling)・Hole filling において計算時の仮ラベル数を可変にすることで、複雑な形状でも計算が可能になりました。(https://github.com/utrad-ical/circus/pull/214)
-- ボクセルラベルに対する操作に Erosion・Dilation・Interslice interpolation を追加しました。(https://github.com/utrad-ical/circus/pull/209) -> Document へのリンク(未作成)
+- ボクセルラベルに対する操作に Erosion・Dilation・Interslice interpolation を追加しました。(https://github.com/utrad-ical/circus/pull/209) -> [Document へ移動](../users/case-detail#mathematical-morphology)
 - 2D 画像の表示とアノテーションに対応しました。(https://github.com/utrad-ical/circus/pull/207)
 - Click & Drag で一度に複数ラベルの表示・非表示の変更が可能になりました。(https://github.com/utrad-ical/circus/pull/198)
 - Revision を保存する時のメッセージを、定型文・履歴から選択できるようになりました。Revision の定型文は Tool > Preferences で保存可能です。(https://github.com/utrad-ical/circus/pull/196)
 - 編集中にページを移動・更新する際にアラートにて警告を追加しました。(https://github.com/utrad-ical/circus/pull/195)
 - CCL・Hole filling のバグを修正しました。(https://github.com/utrad-ical/circus/pull/189)
 - WL(Window level) と WW(Windwon width) を manual で編集する際、現在の WL・WW が表示されるようになりました。(https://github.com/utrad-ical/circus/pull/187)
-- 入力した 3 点から oblique を表示する(Three points to section)を実装しました。(https://github.com/utrad-ical/circus/pull/174) -> Document へのリンク??(未作成)
+- 入力した 3 点から oblique を表示する(Three points to section)を実装しました。(https://github.com/utrad-ical/circus/pull/174) -> [Document へ移動](../users/case-detail#oblique-断面の自動生成)
 - CCL・Hole filling を Web Worker で再実装しました。(https://github.com/utrad-ical/circus/pull/172)
 
 ### Web UI 関連
