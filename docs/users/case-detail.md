@@ -132,11 +132,13 @@ DICOM Viewer Component 上部のツールバーで、ボクセルラベルに対
 
 :::
 
+## 作成したラベルに対する処理
+
+"Series/Labels" の […] より、アクティブな ラベルに対して Connected Component Analysis (Connected component labeling (CCL)、Hole filling)、Mathematical Morphology (erosion、dilation、interslice interpolation) 、oblique 断面の自動生成を行うことができます。
+
+![Label processor menu](case-detail-label-processor-menu.png)
+
 ### Connected Component Analysis
-
-"Series/Labels" の […] より、アクティブな voxel ラベルに対して Connected component labeling (CCL)、Hole filling を行うことができます。
-
-![Connected component analysis menu](case-detail-connected-component-analysis-menu.png)
 
 #### Connected Component Labeling (CCL)
 
@@ -147,6 +149,9 @@ DICOM Viewer Component 上部のツールバーで、ボクセルラベルに対
 
 近傍数
 : 連結判定モード（6 近傍または 26 近傍）
+
+最大一時ラベル数
+: 計算時の一時ラベル数
 
 ![CCL result](case-detail-CCL-result.png)
 
@@ -163,11 +168,69 @@ Orientation
 近傍数
 : 連結判定モード（2 次元の場合は 4 または 8 近傍、3 次元の場合は 6 または 26 近傍）
 
+最大一時ラベル数
+: 計算時の一時ラベル数
+
 ![Hole filling result](case-detail-hole-filling-result.png)
 
 :::note
-CCL および Hole filling は計算途中で voxel ラベルの分割数が 255 を超える複雑な形状には対応していません。
+複雑な形状の voxel ラベルで CCL および Hole filling を行う場合、最大一時ラベル数を増やすと計算可能となる場合があります。設定可能な最大一時ラベル数の上限は使用 PC のメモリに依存します。
 :::
+
+### Mathematical Morphology
+
+#### erosion
+
+アクティブな voxel ラベルの erosion をします。
+
+Width
+: 構造要素の横幅
+
+Height
+: 構造要素の縦幅
+
+nSlices
+: 構造要素の奥行
+
+Structuring element
+: 構造要素の形状
+
+![Erosion result](case-detail-erosion-result.png)
+
+#### dilation
+
+アクティブな voxel ラベルの dilasion をします。
+
+Width
+: 構造要素の横幅
+
+Height
+: 構造要素の縦幅
+
+nSlices
+: 構造要素の奥行
+
+Structuring element
+: 構造要素の形状
+
+![Dilation result](case-detail-dilation-result.png)
+
+#### interslice interpolation
+
+アクティブな voxel ラベルの スライス間補間 をします。
+
+Orientation
+: 補間するスライスの指定
+
+![Dilation result](case-detail-interslice-interpolation-result.png)
+
+### oblique 断面の自動生成
+
+#### three points to section
+
+アクティブな point ラベル 3 点より oblique 断面を自動生成します。point ラベルの名前は"任意の接頭辞[1]"、"任意の接頭辞[2]"、"任意の接頭辞[3]"としてください。3 点が同一直線にならない様に配置後、`three points to section`をクリックすると、3 点を通る oblique 断面が表示されます。
+
+![Three points to section result](case-detail-three-points-to-section-result.png)
 
 ## ROI の移動・サイズ変更
 

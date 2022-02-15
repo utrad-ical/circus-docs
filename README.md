@@ -8,6 +8,13 @@ This website is built using [Docusaurus 2](https://v2.docusaurus.io/), a modern 
 npm ci
 ```
 
+## Prebuild
+
+```console
+echo 'CIRCUS_DOCS_GH_TOKEN=$(Personal access token of Github)' > .env
+npm run prebuild
+```
+
 ## Local Development
 
 ```console
