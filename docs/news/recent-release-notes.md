@@ -4,7 +4,7 @@ title: CIRCUS  release notes
 
 ## [v1.1.0-experimental.1](https://hub.docker.com/layers/circuscad/circus/1.1.0-experimental.1/images/sha256-f34b1a30eb6c951851d8e356b6f16583a13f8201fe8a1fd91f75eaf341a7ddea?context=explore)
 
-7 Feb 2022 (第 4 回人工知能応用医用画像研究会以降のみ)
+7 Feb 2022 (6 Jun 2021以降の更新のみ)
 
 ### CIRCUS-DB 関連
 
