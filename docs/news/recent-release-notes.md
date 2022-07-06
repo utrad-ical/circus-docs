@@ -2,9 +2,48 @@
 title: CIRCUS  release notes
 ---
 
+## v1.1.0
+
+6 July 2022
+
+### CIRCUS-DB 関連
+
+- label colors を修正し、label colors を default/customize から選択できるようにしました。(https://github.com/utrad-ical/circus/pull/286)
+- ラベルの複製・voxel ラベルの論理演算が追加されました。(https://github.com/utrad-ical/circus/pull/281)
+- preferences でラベルの初期 α 値の設定が可能になりました。(https://github.com/utrad-ical/circus/pull/284)
+- Improve annotation draw (https://github.com/utrad-ical/circus/pull/282)
+- 新しいタブで 2 つ以上 CIRCUS を開いたとき login 情報が共有されるようになりました。(https://github.com/utrad-ical/circus/pull/226)
+
+### CIRCUS-CS 関連
+
+- CIRCUS CS プラグインの結果表示に自作の viewer を利用できるようになりました。(https://github.com/utrad-ical/circus/pull/161)
+
+### Web UI 関連
+
+- セッション復元時のフラグを追加しました。(https://github.com/utrad-ical/circus/pull/269)
+
+### その他
+
+- web worker を明示的に終了させました。(https://github.com/utrad-ical/circus/pull/285)
+- Fix setting name mismatch for checkQueueInterval (https://github.com/utrad-ical/circus/pull/275)
+- Create api for determining series orientation (https://github.com/utrad-ical/circus/pull/272)
+
+#### MongoDB transaction 導入関連
+
+- Dockerfile 修正 (https://github.com/utrad-ical/circus/pull/263, https://github.com/utrad-ical/circus/pull/274)
+- Introduce transactionManager to DicomImporter (https://github.com/utrad-ical/circus/pull/271)
+- Change dependency name (https://github.com/utrad-ical/circus/pull/250, https://github.com/utrad-ical/circus/pull/251)
+- Enable MongoDB transaction (https://github.com/utrad-ical/circus/pull/204)
+
+#### onetime URL 導入関連
+
+- Implement login with onetime URL (https://github.com/utrad-ical/circus/pull/273)
+- Add default auth provider to service loader (https://github.com/utrad-ical/circus/pull/262)
+- Create endpoint to issue onetime URL (https://github.com/utrad-ical/circus/pull/246)
+
 ## [v1.1.0-experimental.1](https://hub.docker.com/layers/circuscad/circus/1.1.0-experimental.1/images/sha256-f34b1a30eb6c951851d8e356b6f16583a13f8201fe8a1fd91f75eaf341a7ddea?context=explore)
 
-7 Feb 2022 (6 Jun 2021以降の更新のみ)
+7 Feb 2022 (6 Jun 2021 以降の更新のみ)
 
 ### CIRCUS-DB 関連
 
