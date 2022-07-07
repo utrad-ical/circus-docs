@@ -7,16 +7,16 @@ sidebar_label: Installation
 Docker Hub にて CIRCUS システムの Docker イメージを提供しています。こちらを使ってインストールするのが最も簡単です。
 
 :::important
-2021.6 現在、Mac OS では未検証です。
+2022.7 現在、Mac OS では未検証です。
 :::
 
 ## CIRCUS の Docker イメージ取得・初期設定
 
-以下の手順は CIRCUS のデータフォルダを `/var/circus/data` と設定（ホスト、Docker コンテナ内共通）することを前提としています。
+以下の手順は CIRCUS のデータフォルダを `/var/circus/data` と設定（ホストマシン、Docker コンテナ内共通）することを前提としています。
 
 :::tip
 
-- データフォルダを任意のフォルダに変更できます。この場合、ホストマシン と Docker コンテナの動作に影響が生じないフォルダを設定してください。
+- ホストマシンのデータフォルダを任意のフォルダに変更できます。この場合、ホストマシン と Docker コンテナの動作に影響が生じないフォルダを設定してください。
   - CIRCUS の Docker イメージでは `/var/circus` に CIRCUS のコード、設定ファイル等をインストールしています。
 - ホストマシンの OS が Windows でデータフォルダを `C:\circus\data` と設定する場合、以下の `/var/circus/data` は `/c/circus/data` に置き換えてください。
 
@@ -62,12 +62,13 @@ CIRCUS システムの起動に必要なデータを作成するために以下�
 1. コンテナ内部でコマンドを実行するため、CIRCUS の Docker コンテナを作成し、内部で `/bin/bash` を実行します。
 
    ```shell-session
-   $ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -it circuscad/circus:latest
+   $ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -h circus -it circuscad/circus:latest
    ```
 
    :::note
 
    - 上記コマンドの最後に `/bin/bash` は不要です（コンテナ内部の初期設定スクリプトより `/bin/bash` を実行しています）。
+   - `-h` オプションにより Docker コンテナのホスト名を設定してください（ここでは `circus` としていますが、別の名前でも可能です。ただし、コンテナを起動する毎にホスト名を変えた場合には正しく動作しない可能性があります）。 
    - 初期設定ではポートの公開（`-p` オプション）や IP アドレスのマッピング（`--add-host` オプション）の設定は不要です。
 
    :::
@@ -75,7 +76,7 @@ CIRCUS システムの起動に必要なデータを作成するために以下�
 1. CIRCUS の Docker コンテナ 内で以下のコマンドを実行し、データベースの初期設定を行います。
 
    ```shell-session title="コンテナ内"
-   # /root/data_initialization.sh
+   # /circus/data_initialization.sh
    ```
 
 1. `exit` コマンドで Docker コンテナを一旦終了させます。
@@ -91,10 +92,11 @@ CIRCUS システムの起動に必要なデータを作成するために以下�
 Docker コンテナ内の Bash (`/bin/bash`) にアクセスする場合は、以下のようにします。
 
 ```shell-session
-$ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] -it circuscad/circus:latest
+$ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:8000 -p 27017:27017 -h circus --add-host=hostmachine:[IP address for host] -it circuscad/circus:latest
 ```
 
-- 上記は Linux の場合です。Windows でデータフォルダを /c/circus/data としている場合は、`-v /var/circus/data:/var/circus/data` を `-v /c/circus/data:/c/circus/data` に置き換えてください（以下同様）。
+- 上記は Linux の場合です。Windows でデータフォルダを /c/circus/data としている場合は、`-v /var/circus/data:/var/circus/data` を `-v /c/circus/data:/var/circus/data` に置き換えてください（以下同様）。
+- Webサーバ (nginx) のホストマシンのポートは 8000 に設定しています。
 - データベース (MongoDB) を外部から操作しない場合は `-p 27017:27017` は不要です。
 - `-v /var/run/docker.sock:/var/run/docker.sock` のオプションはプラグインに Docker outside of Docker (DooD) 形式でアクセスするために必要です。
 - [IP address for host] はホスト側の IP アドレスを入力します。ホスト側の IP アドレスは各 OS のコマンドなどで調べてください。以下は一例です。
@@ -110,7 +112,7 @@ $ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.s
 上記の方法でコンテナ内の Bash にアタッチし、以下を実行します。
 
 ```shell-session title="コンテナ内"
-# /root/services.sh &
+# /circus/services.sh &
 ```
 
 ### デーモンとして起動させる場合
@@ -118,7 +120,7 @@ $ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.s
 以下のコマンドで Docker コンテナをバックグラウンド起動させ、サーバ群を自動起動させることができます（上記 `/bin/bash` 経由による方法の `-it` の代わりに `-d -e DAEMON_MODE=1` とします）。
 
 ```shell-session
-$ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:80 -p 27017:27017 --add-host=hostmachine:[IP address for host] -d -e DAEMON_MODE=1 circuscad/circus:latest
+$ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:8000 -p 27017:27017 -h circus --add-host=hostmachine:[IP address for host] -d -e DAEMON_MODE=1 circuscad/circus:latest
 ```
 
 起動させたコンテナを終了させるためには、`docker ps` コマンドで起動しているコンテナの ID を調べた上で、`docker kill --force [コンテナの ID]`を実行してください。
@@ -169,7 +171,7 @@ $ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.s
 CIRCUS の Docker コンテナ内部で CIRCUS を起動した後、以下のコマンドを実行することで内部データベースのダンプ（バイナリバックアップ）を行えます。
 
 ```shell-session
-# /root/mongodb_dump.sh
+# /circus/mongodb_dump.sh
 ```
 
 上記の場合、ダンプされたデータは `/var/circus/data/mongodb_dump/circus_mongo_archive_[タイムスタンプ].gz` となります。
