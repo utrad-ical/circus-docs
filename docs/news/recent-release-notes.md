@@ -12,18 +12,15 @@ title: CIRCUS  release notes
 - ラベルの複製・voxel ラベルの論理演算が追加されました。(https://github.com/utrad-ical/circus/pull/281)
 - preferences でラベルの初期 α 値の設定が可能になりました。(https://github.com/utrad-ical/circus/pull/284)
 - Improve annotation draw (https://github.com/utrad-ical/circus/pull/282)
-- 新しいタブで 2 つ以上 CIRCUS を開いたとき login 情報が共有されるようになりました。(https://github.com/utrad-ical/circus/pull/226)
 
 ### CIRCUS-CS 関連
 
 - CIRCUS CS プラグインの結果表示に自作の viewer を利用できるようになりました。(https://github.com/utrad-ical/circus/pull/161)
 
-### Web UI 関連
-
-- セッション復元時のフラグを追加しました。(https://github.com/utrad-ical/circus/pull/269)
-
 ### その他
 
+- セッション復元時のフラグを追加しました。(https://github.com/utrad-ical/circus/pull/269)
+- 新しいタブで 2 つ以上 CIRCUS を開いたとき login 情報が共有されるようになりました。(https://github.com/utrad-ical/circus/pull/226)
 - web worker を明示的に終了させました。(https://github.com/utrad-ical/circus/pull/285)
 - Fix setting name mismatch for checkQueueInterval (https://github.com/utrad-ical/circus/pull/275)
 - Create api for determining series orientation (https://github.com/utrad-ical/circus/pull/272)
