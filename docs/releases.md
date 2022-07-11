@@ -1,5 +1,6 @@
 ---
-title: CIRCUS  Release Notes
+title: CIRCUS Release Notes
+sidebar_label: Release Notes
 ---
 
 ## v1.1.0

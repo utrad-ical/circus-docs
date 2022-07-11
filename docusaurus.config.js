@@ -20,19 +20,23 @@ module.exports = {
       },
       items: [
         {
-          to: 'docs/news/recent-release-notes',
-          label: 'News',
-          position: 'left',
-        },
-        {
           to: 'docs/',
-          activeBaseRegex: `(?!docs/news)(docs)`,
+          activeBaseRegex: `(?!docs/(news|admin/installation))(docs)`,
           label: 'Docs',
           position: 'left',
         },
         /* { to: 'blog', label: 'Blog', position: 'left' } , */
-        { to: 'docs/admin/installation', label: 'Download', position: 'left' },
+        {
+          to: 'docs/admin/installation',
+          label: 'Install',
+          position: 'left',
+        },
         /* { to: 'api-explorer', label: 'API Explorer', position: 'left' }, */
+        {
+          to: 'docs/releases',
+          label: 'Releases',
+          position: 'left',
+        },
         {
           href: 'https://github.com/utrad-ical/circus',
           label: 'GitHub',
