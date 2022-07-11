@@ -105,6 +105,18 @@ const Home = () => {
           </section>
         )}
       </main>
+      <footer>
+        <p className={styles.footPoweredBy}>
+          <a href="https://www.netlify.com">
+            <img
+              src="https://www.netlify.com/v3/img/components/netlify-color-accent.svg"
+              alt="Deploys by Netlify"
+              width="114"
+              height="51"
+            />
+          </a>
+        </p>
+      </footer>
     </Layout>
   );
 };

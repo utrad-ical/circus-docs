@@ -4,13 +4,13 @@ const ghLinks = require('remark-github');
 module.exports = {
   title: 'CIRCUS',
   tagline: 'Platform for Computer-aided Diagnosis Research',
-  url: 'https://circus-docs.netlify.app',
+  url: 'https://circus-project.net/',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'utrad-ical', // Usually your GitHub org/user name.
-  projectName: 'circus-docs', // Usually your repo name.
+  projectName: 'circus', // Usually your repo name.
   themeConfig: {
     navbar: {
       title: 'CIRCUS',
@@ -74,6 +74,19 @@ module.exports = {
             {
               label: 'The University of Tokyo Hospital',
               to: 'https://www.h.u-tokyo.ac.jp/',
+            },
+          ],
+        },
+        {
+          title: 'The University of Tokyo',
+          items: [
+            {
+              label: 'The University of Tokyo',
+              to: 'https://www.u-tokyo.ac.jp/',
+            },
+            {
+              label: 'Code of Conduct',
+              to: 'https://www.u-tokyo.ac.jp/ja/research/ethics/index.html',
             },
           ],
         },
