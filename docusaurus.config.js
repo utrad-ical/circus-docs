@@ -1,4 +1,5 @@
 const deflist = require('remark-deflist');
+const ghLinks = require('remark-github');
 
 module.exports = {
   title: 'CIRCUS',
@@ -83,7 +84,10 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/utrad-ical/circus-docs/edit/master',
-          remarkPlugins: [deflist],
+          remarkPlugins: [
+            deflist,
+            [ghLinks, { repository: 'utrad-ical/circus' }],
+          ],
         },
         blog: {
           showReadingTime: true,
