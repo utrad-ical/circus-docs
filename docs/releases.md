@@ -18,13 +18,13 @@ sidebar_label: Release Notes
 - You can now specify initial alpha values (opacity) for newly created labels. Note that existing labels will not be affected. (#284)
 - Fixed memory leaks around history management and web workers. (#285)
 
-### CIRCUS RS
-
-- Annotation drawing algorithm have been improved. The viewer now strictly distinguishes on-screen view state and on-render view state. (#282)
-
 ### CIRCUS CS
 
 - You can now use custom Display to show plug-in results. (#161)
+
+### CIRCUS RS
+
+- Annotation drawing algorithm have been improved. The viewer now strictly distinguishes on-screen view state and on-render view state. (#282)
 
 ### Misc
 
@@ -63,7 +63,7 @@ sidebar_label: Release Notes
 - Added "three points to section" functionality which allows the user to display oblique section (#174) -> [Go Document](./users/case-detail#oblique-断面の自動生成)
 - Some settings which had been only configurable via the preference page are now configurable without leaving the main DB screen. (#202)
 
-### CIRCUS RS 関連
+### CIRCUS RS
 
 - Multiplanar reconstruction (MPR) was reimplemented using WebGL and is now much faster. (#193)
 - Improved MPR speec when pixel interpolation are enabled. (#179)
