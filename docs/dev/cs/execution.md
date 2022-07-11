@@ -4,9 +4,9 @@ title: Plug-in Execution Flow
 
 ## Job Management
 
-When a user registeres a plug-in job (hereafter "job" for short), it will be inserted in a queue. Since plug-in execution is usually costly, CIRCUS CS does not execute plug-ins in parallel.
+When a user registeres a plug-in job (hereafter "job" for short), it will be inserted in an internal queue. Since plug-in execution is usually costly, CIRCUS CS does not execute plug-ins in parallel.
 
-When a job is started, the CIRCUS CS system will create a Docker container and runs the main process (specified in your Dockerfile). The main application in your container will read and process the input image, and write the processed results into a file. The container will be deleted after the execution regardless of whether it succeeded or failed.
+When a job is started, the CIRCUS CS system will create a Docker container and runs the main process (specified in your Dockerfile). The main application in your container will read and process the input image, and write the processed results into a file. The container will be automatically deleted after the execution regardless of whether it succeeded or failed.
 
 :::note
 It is possible to execute plug-ins on multiple separate machines, but this is not documented yet. Please contact the authors if you need support for this.
@@ -14,15 +14,24 @@ It is possible to execute plug-ins on multiple separate machines, but this is no
 
 Each job has one of the following status:
 
-- `in_queue`: Waiting for other jobs to finish.
-- `processing`: The job is running.
-- `finished`: The job has finished successfully and users can view its results.
-- `failed`: The job did not finish successfully.
-- `invalidated`: A user manually marked this job as "invalid". One possible reason is that the input file was corrupted.
+`in_queue`
+: Waiting for other jobs to finish.
+
+`processing`
+: The job is running.
+
+`finished`
+: The job has finished successfully and users can view its results.
+
+`failed`
+: The job did not finish successfully.
+
+`invalidated`
+: A user manually marked this job as "invalid". One possible reason is that the input file was corrupted.
 
 ## Input of Your Plug-in
 
-Your plug-in (container) will be invoked with an external directory mounted to `/circus`. This directory contains the following directories and files.
+Your plug-in (Docker container) will be invoked with an external directory mounted to `/circus`. This directory contains the following directories and files.
 
 ```
 📂/circus/ (mounted to container's root)
@@ -37,7 +46,7 @@ Your plug-in (container) will be invoked with an external directory mounted to `
     📂out/ (initially empty)
 ```
 
-The numbers are volume IDs starting from 0.
+The numbers are volume IDs starting from 0. Volume IDs are specified when you register a job.
 
 ### RAW volume data (`${volId}.raw`) and MHD file (`${volId}.mhd`)
 
@@ -113,15 +122,15 @@ The data related to patient information are not included. Currently, the followi
 Here are the list of information your plug-in can output.
 
 - **Main results JSON** (`/circus/out/results.json`): The main results file containing the JSON-serialized results of your plug-in. Text-based data should go here. The details will be explained later.
-- **Optional files** (`/circus/out/*`): All the files your plug-in wrote into `/circus/out` will be stored in the results directory. For example, you can generate images, PDFs or any arbitrary binary file. Displays can access these files and show or let users download them. Each file should have an appropreate extension (e.g., `*.png`, `*.pdf`) because it will be served via HTTP.
-- **Standard output**: All the data your plug-in printed to stdout will be saved to a log file in the results directory. Note that anything written to stderr will be ignored.
+- **Optional files** (`/circus/out/*`): All the files your plug-in wrote into `/circus/out` will be stored in the results directory. For example, you can generate images, PDFs or any arbitrary binary file. Those data can be accessed or shown to users via "Displays" (described later). Each file should have an appropreate extension (e.g., `*.png`, `*.pdf`) because it will be served via HTTP.
+- **Standard output**: All the data your plug-in printed to stdout will be saved to a log file in the results directory. Note that anything written to stderr will be ignored, so you may want to redirect stderr to stdout.
 - **Status code**: Your plug-in must exit with a non-zero status code if it has not finished processing successfully. Then CIRCUS CS detects it and mark the job as "failed".
 
 ## `results.json`
 
-The `results.json` file is the main output file containing the processing results from your plug-in except binary data. The file must be a UTF8-encoded valid JSON file. (No comments are allowed.) The content of this file will be stored in the database after your plug-in has finished execution. The data stored in the database will then be consumed by Displays when a user opens a results page in a browser. You can store arbitrary data in any format as long as the display understands how to render them into a webpage.
+The `results.json` file is the main output file containing the processing results from your plug-in except binary data. The file must be a UTF8-encoded valid JSON file. (No comments are allowed.) The content of this file will be stored in the database after your plug-in has finished execution. The data stored in the database will then be consumed by Displays when a user opens a results page using a browser. You can store arbitrary data in any format as long as the display understands how to render them into a webpage.
 
-If you are planning to use CIRCUS CS built-in displays (such as `LesionCandidates`), you must store yoru processed data in the format those displays understand. For example, `LesionCandidates` expects your `results.json` will contain the data that look like this:
+If you are planning to use CIRCUS CS built-in displays (such as `LesionCandidates`), you must store your processed data in the predefined format understood by those displays. For example, `LesionCandidates` expects your `results.json` will contain the data that look like this:
 
 ```json
 {
@@ -131,9 +140,11 @@ If you are planning to use CIRCUS CS built-in displays (such as `LesionCandidate
 }
 ```
 
-THe [built-in display reference page](./displays/index.md) explains how to prepare your `results.json` for each display.
+The [built-in display reference pages](./displays/index.md) explain how to prepare your `results.json` for each display.
+
+If you are planning to build a custom Display using React, you can store any data in `results.json`. See: [Custom Result Display](./custom-display.md)
 
 ## Other Restrictions
 
-- For security reasons, your plug-in will not have network access. All the data required to process the input image must be contained in the Docker image.
-- The container will be deleted after the plug-in ends.
+- For security reasons, your plug-in will not have network access. All the data (e.g., trained parameter files) required to process the input image must be contained in the Docker image.
+- The container will be deleted after the plug-in ends regardless of whether it succeeded or failed.

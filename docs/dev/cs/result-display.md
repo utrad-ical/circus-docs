@@ -47,7 +47,7 @@ Some displays support collecting user feedback. When one or more such displays a
 
 ### Personal Feedback and Consensual Feedback
 
-To support multiple-reader scenarios, CIRCUS CS has a "consensual feedback" mechanism. A user can enter the consensual mode after inputting their "personal" feedback. All the personal feedback entries will be integrated as much as possible (this is a responsibility of each display). In the example above, the "Excellent" button will be pre-selected when all the users who entered their personal feedback had clicked it. Otherwise, the users who entered personal feedback must discuss and determine the consensual feedback by clicking "Excellent" or "Poor".
+To support multiple-reader scenarios, CIRCUS CS has an feedback integration mechanism. A user can enter the consensual mode after inputting their "personal" feedback. All the personal feedback entries will be integrated as much as possible (this is a responsibility of each display). In the example above, the "Excellent" button will be pre-selected when all the users who entered their personal feedback had clicked it. Otherwise, the users who entered personal feedback must discuss and determine the consensual feedback by clicking "Excellent" or "Poor".
 
 ## Built-in Displays and Custom Displays
 

@@ -71,13 +71,29 @@ Create a JSON file called `plugin.json`. This is a manifest file that contains t
 
 Note that you **cannot write comments** in the real JSON file.
 
-- `type`: This must be the string literal "CAD".
-- `pluginName`: The name of this plug-in. It is not used internally to distinguish plugins, but please choose one that is as unique as possible.
-- `version`: The version of this plug-in. Must be [semvar](https://semver.org/)-compatible.
-- `icon`: The icon of this plug-in.
-- `icon.glyph`: The icon of this plug-in. See `packages/circus-icons` for available glyphs.
-- `icon.color` and `icon.backgroundColor`: Must be in the 6-digit hex format.
-- `displayStrategy`: An array of objects that describes how to display the plug-in results by default. For details of how this works, read [Presenting CAD Results](./result-display.md). If you want examples, refer to [Built-in Displays](./displays/index.md) reference pages.
+`type`
+: This must be the string literal "CAD".
+
+`pluginName`
+: The name of this plug-in. It is not used internally to distinguish plugins, but please choose one that is as unique as possible.
+
+`version`
+: The version of this plug-in. Must be [semvar](https://semver.org/)-compatible.
+
+`icon`
+: The icon of this plug-in.
+
+`icon.glyph`
+: The icon of this plug-in. See `packages/circus-icons` for available glyphs.
+
+`icon.color`
+: Color of the icon. Must be in the 6-digit hex format (e.g., `#ffff00`).
+
+`icon.backgroundColor`
+: Background color of the icon. Must be in the 6-digit hex format.
+
+`displayStrategy`
+: An array of objects that describes how to display the plug-in results by default. For details of how this works, read [Presenting CAD Results](./result-display.md). If you want examples, refer to [Built-in Displays](./displays/index.md) reference pages.
 
 :::note
 `icon` and `displayStrategy` values can be overwritten after the installation via the administration screen of CIRCUS. Think of them as the default values.
@@ -85,10 +101,10 @@ Note that you **cannot write comments** in the real JSON file.
 
 ## 3. Write the Dockerfile
 
-There is little that's special here, but make sure:
+There is little that's special here, but make sure the following:
 
 - `plugin.json` is located at the root directory (`/plugin.json`).
-- There is a `CMD` line that locates to your main executable along with the desired arguments.
+- There is a `CMD` line that locates to your main executable along with the desired arguments. A minimum Dockerfile will look like this:
 
 ```dockerfile
 FROM ubuntu:20.04
