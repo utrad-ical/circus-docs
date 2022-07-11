@@ -37,7 +37,7 @@ dl {
   grid-template-columns: fit-content(40%) 1fr;
   gap: 7px 3px;
   margin: 25px 0;
-  border: 1px solid silver;
+  border: 1px solid #88888855;
   padding: 10px;
 }
 
@@ -49,6 +49,17 @@ dt {
 
 dd {
   margin-left: 10px;
+}
+
+h2 {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  &:after {
+    content: '';
+    flex: 1 1;
+    border-bottom: 5px dotted #88888855;
+  }
 }
 
 .routes {
