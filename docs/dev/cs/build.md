@@ -77,7 +77,7 @@ Note that you **cannot write comments** in the real JSON file.
 - `icon`: The icon of this plug-in.
 - `icon.glyph`: The icon of this plug-in. See `packages/circus-icons` for available glyphs.
 - `icon.color` and `icon.backgroundColor`: Must be in the 6-digit hex format.
-- `displayStrategy`: An array of objects that describes how to display the plug-in results by default. For details of how this works, read [Presenting CAD Results](./result-display.md). If you want examples, refer to [Built-in Displays](./displays/index) reference pages.
+- `displayStrategy`: An array of objects that describes how to display the plug-in results by default. For details of how this works, read [Presenting CAD Results](./result-display.md). If you want examples, refer to [Built-in Displays](./displays/index.md) reference pages.
 
 :::note
 `icon` and `displayStrategy` values can be overwritten after the installation via the administration screen of CIRCUS. Think of them as the default values.
@@ -145,7 +145,7 @@ Alternatively, your image can be hosted in Docker Hub or any other container reg
 
 ## 7. Install the plug-in
 
-Refer to the admin page: [Registration of CS Plug-ins](../../admin/registration-cs-plugin)
+Refer to the admin page: [Registration of CS Plug-ins](../../admin/registration-cs-plugin.mdx)
 
 :::caution
 Plug-ins are identified using the SHA-256 image hash. Thus you cannot change the content of the plug-in after installing it. When you have modified the content, rebuild the image and re-install it with a different version.

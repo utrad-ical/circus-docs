@@ -41,14 +41,14 @@ sidebar_label: Release Notes
 ### CIRCUS DB
 
 - CCL(Connected component labeling)・Hole filling において計算時の仮ラベル数を可変にすることで、複雑な形状でも計算が可能になりました。(#214)
-- ボクセルラベルに対する操作に Erosion・Dilation・Interslice interpolation を追加しました。(#209) -> [Document へ移動](../users/case-detail#mathematical-morphology)
+- ボクセルラベルに対する操作に Erosion・Dilation・Interslice interpolation を追加しました。(#209) -> [Document へ移動](./users/case-detail#mathematical-morphology)
 - 2D 画像の表示とアノテーションに対応しました。(#207)
 - Click & Drag で一度に複数ラベルの表示・非表示の変更が可能になりました。(#198)
 - Revision を保存する時のメッセージを、定型文・履歴から選択できるようになりました。Revision の定型文は Tool > Preferences で保存可能です。(#196)
 - 編集中にページを移動・更新する際にアラートにて警告を追加しました。(#195)
 - CCL・Hole filling のバグを修正しました。(#189)
 - WL(Window level) と WW(Windwon width) を manual で編集する際、現在の WL・WW が表示されるようになりました。(#187)
-- 入力した 3 点から oblique を表示する(Three points to section)を実装しました。(#174) -> [Document へ移動](../users/case-detail#oblique-断面の自動生成)
+- 入力した 3 点から oblique を表示する(Three points to section)を実装しました。(#174) -> [Document へ移動](./users/case-detail#oblique-断面の自動生成)
 - CCL・Hole filling を Web Worker で再実装しました。(#172)
 
 ### Web UI

@@ -34,7 +34,7 @@ import { Required } from './displays/label';
 
 - `feedbackKey: string`: The key name used if this display returns some feedback data.
 - `caption: string`: The title displayed as a header on the results screen.
-- `type: string`: <Required /> The display type. One of the names of [built-in displays](./displays/index).
+- `type: string`: <Required /> The display type. One of the names of [built-in displays](./displays/index.md).
 - `options: object`: A set of options to configure this display. See the reference pages to check which options are accepted.
 
 In the example above, when a user opens a job result page corresponding to this plug-in, they will see toggle buttons. When the users select one of them and clicks the register button, the feedback data will look like `{ evaluation: 5 }`.

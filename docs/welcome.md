@@ -72,11 +72,11 @@ International Journal of Computer Assisted Radiology and Surgery, vol.15, no.4, 
 
 このドキュメントは以下の大きな 3 セクションで構成されています。
 
-[User Guide](users/login)
+[User Guide](users/login.md)
 : 一般ユーザとしての CIRCUS の使用方法について説明します。
 
-[Administrator Guide](admin/installation)
+[Administrator Guide](admin/installation.mdx)
 : CIRCUS システムのインストール・更新・メンテナンスの方法、ユーザの追加方法などについて説明します。
 
-[Developer Guide](dev/index)
+[Developer Guide](dev/index.md)
 : CIRCUS システムのデータにプログラムを使ってアクセスする方法や、CIRCUS CS のプラグイン作成方法など、開発者向けの解説です。プログラミングに関する知識が必要です。
