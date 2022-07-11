@@ -36,41 +36,44 @@ sidebar_label: Release Notes
 
 ## [v1.1.0-experimental.1](https://hub.docker.com/layers/circuscad/circus/1.1.0-experimental.1/images/sha256-f34b1a30eb6c951851d8e356b6f16583a13f8201fe8a1fd91f75eaf341a7ddea?context=explore)
 
-7 Feb 2022 (6 Jun 2021 以降の更新のみ)
-
-### CIRCUS DB
-
-- CCL(Connected component labeling)・Hole filling において計算時の仮ラベル数を可変にすることで、複雑な形状でも計算が可能になりました。(#214)
-- ボクセルラベルに対する操作に Erosion・Dilation・Interslice interpolation を追加しました。(#209) -> [Document へ移動](./users/case-detail#mathematical-morphology)
-- 2D 画像の表示とアノテーションに対応しました。(#207)
-- Click & Drag で一度に複数ラベルの表示・非表示の変更が可能になりました。(#198)
-- Revision を保存する時のメッセージを、定型文・履歴から選択できるようになりました。Revision の定型文は Tool > Preferences で保存可能です。(#196)
-- 編集中にページを移動・更新する際にアラートにて警告を追加しました。(#195)
-- CCL・Hole filling のバグを修正しました。(#189)
-- WL(Window level) と WW(Windwon width) を manual で編集する際、現在の WL・WW が表示されるようになりました。(#187)
-- 入力した 3 点から oblique を表示する(Three points to section)を実装しました。(#174) -> [Document へ移動](./users/case-detail#oblique-断面の自動生成)
-- CCL・Hole filling を Web Worker で再実装しました。(#172)
+7 Feb 2022
 
 ### Web UI
 
-- 検索画面(Series Search / Case Search / Plugin Job Search)におけるページネーションのバグを修正しました。(#218)
-- Tool > Preferences における Color theme が Black の時の表示を修正しました。(#210)
-- Tool > Preferences で変更可能だった CIRCUS-DB の設定の一部が CIRCUS-DB の歯車からも可能になりました。(#202)
-- CIRCUS-DB/CIRCUS-CS で検索画面から各 case/job を表示した時、前後の case/job に直接移動できるようになりました。(#195)
-- Tool > Preferences に CIRCUS-DB の設定を追加しました。(#182)
+- Fixed pagenation bugs in saerch pages (series search, case search, plugin job search). (#218)
+- You can now navigate to the previous/next case or job without going back to the search results screen. (#195)
+- Introduced external authentication provider (AuthProvider). Instead of using the internal password for authentication, CIRCUS now can load a AuthProvider which takes care of the authentication. (#159)
+- Fixed some cosmetic bugs. (#210)
 
-### CIRCUS-RS 関連
+### CIRCUS DB
 
-- WebGL を用いた MPR の描画、VR を改良しました。(#193)
-- RS devserver 起動時にアイコンが表示されないバグを修正しました。(#183)
-- pixel 間の interpolation が有効になっている時の MPR 表示速度が改善しました。(#179)
+- Connected component labeling (CCL) and hole filling (HL) improvements:
 
-### その他
+  - They can now process more complexed voxel labels by making the number of intermediate labels variable. (#214)
+  - They now use web workers, meaning they will no longer hurt browser responsiveness. (#172)
+  - Fixed some bugs. (#189)
+
+- Added erosion, dilatation, and interslice interpotation for voxel labels (#209) -> [Go Document](./users/case-detail#mathematical-morphology)
+- Added support for displaying 2D images such as chest X-ray and mammograms. (#207)
+- You can now change the visibility of multiple labels by dragging over the label color boxes. (#198)
+- You can now use message history and saved message when saving a new revision. Saved messages can be configured in the preference page. (#196)
+- Warnings will be shown when you are trying to leave the page without saving a revision. (#195)
+- Fixed some bugs regarding CCL and hole filling. (#189)
+- The WL/WW (window lavel/width) dialog now shows the current window value when opened (#187)
+- Added "three points to section" functionality which allows the user to display oblique section (#174) -> [Go Document](./users/case-detail#oblique-断面の自動生成)
+- Some settings which had been only configurable via the preference page are now configurable without leaving the main DB screen. (#202)
+
+### CIRCUS RS 関連
+
+- Multiplanar reconstruction (MPR) was reimplemented using WebGL and is now much faster. (#193)
+- Improved MPR speec when pixel interpolation are enabled. (#179)
+- Fixed RS devserver icons. (#183)
+
+### Misc
 
 - Add "job status" as a job search condition. (#205)
-- Case の削除を実装しました。(#197)
-- Lerna から NPM workspace に切り替えました。(#176)
+- Implemented deletion of cases. (#197)
+- Internal repository now use NPM workspaces instead of Lerna. (#176)
 - Export case with revision index. (#170)
-- pm2(2.10.4 → 5.1.0) と pify(3.0.0 → 5.0.0) を update しました。(#166)
-- PAM (pluggable authentication mechanism) を導入しました。(#159)
-- Series import で tar.gz ファイルに対応しました。(#158)
+- Updated pm2 (2.10.4 → 5.1.0). (#166)
+- Series import now supports tar.gz archive files in addition to ZIP. (#158)
