@@ -37,6 +37,8 @@ dl {
   grid-template-columns: fit-content(40%) 1fr;
   gap: 7px 3px;
   margin: 25px 0;
+  border: 1px solid silver;
+  padding: 10px;
 }
 
 dt {
@@ -84,4 +86,11 @@ details {
     border-radius: 5px;
     background-color: #ffff0066;
   }
+}
+
+.panel {
+  border: 1px solid silver;
+  padding: 1em;
+  border-radius: 5px;
+  margin: 20px 0;
 }
