@@ -1,48 +1,43 @@
 ---
-title: CIRCUS  release notes
+title: CIRCUS  Release Notes
 ---
 
 ## v1.1.0
 
 6 July 2022
 
-### CIRCUS-DB 関連
+### Web UI
 
-- label colors を修正し、label colors を default/customize から選択できるようにしました。(https://github.com/utrad-ical/circus/pull/286)
-- ラベルの複製・voxel ラベルの論理演算が追加されました。(https://github.com/utrad-ical/circus/pull/281)
-- preferences でラベルの初期 α 値の設定が可能になりました。(https://github.com/utrad-ical/circus/pull/284)
-- Improve annotation draw (https://github.com/utrad-ical/circus/pull/282)
+- Added an one-time URL mechanism which allows users to log-in to the web UI without IDs and passwords. Only users with the `issueOneTime` priviledge can issue one-time URLs. Issued URLs are valid for one minute.
 
-### CIRCUS-CS 関連
+### CIRCUS DB
 
-- CIRCUS CS プラグインの結果表示に自作の viewer を利用できるようになりました。(https://github.com/utrad-ical/circus/pull/161)
+- You can now define a custom palette for label colors. (https://github.com/utrad-ical/circus/pull/286)
+- You can now duplicate labels and perform boolean operations against voxel labels. (https://github.com/utrad-ical/circus/pull/281)
+- You can now specify initial alpha values (opacity) for newly created labels. Note that existing labels will not be affected. (https://github.com/utrad-ical/circus/pull/284)
+- Fixed memory leaks around history management and web workers. (https://github.com/utrad-ical/circus/pull/285)
 
-### その他
+### CIRCUS RS
 
-- セッション復元時のフラグを追加しました。(https://github.com/utrad-ical/circus/pull/269)
-- 新しいタブで 2 つ以上 CIRCUS を開いたとき login 情報が共有されるようになりました。(https://github.com/utrad-ical/circus/pull/226)
-- web worker を明示的に終了させました。(https://github.com/utrad-ical/circus/pull/285)
-- Fix setting name mismatch for checkQueueInterval (https://github.com/utrad-ical/circus/pull/275)
-- Create api for determining series orientation (https://github.com/utrad-ical/circus/pull/272)
+- Annotation drawing algorithm have been improved. The viewer now strictly distinguishes on-screen view state and on-render view state. (https://github.com/utrad-ical/circus/pull/282)
 
-#### MongoDB transaction 導入関連
+### CIRCUS CS
 
-- Dockerfile 修正 (https://github.com/utrad-ical/circus/pull/263, https://github.com/utrad-ical/circus/pull/274)
-- Introduce transactionManager to DicomImporter (https://github.com/utrad-ical/circus/pull/271)
-- Change dependency name (https://github.com/utrad-ical/circus/pull/250, https://github.com/utrad-ical/circus/pull/251)
-- Enable MongoDB transaction (https://github.com/utrad-ical/circus/pull/204)
+- You can now use custom Display to show plug-in results. (https://github.com/utrad-ical/circus/pull/161)
 
-#### onetime URL 導入関連
+### Misc
 
-- Implement login with onetime URL (https://github.com/utrad-ical/circus/pull/273)
-- Add default auth provider to service loader (https://github.com/utrad-ical/circus/pull/262)
-- Create endpoint to issue onetime URL (https://github.com/utrad-ical/circus/pull/246)
+- Login information are shared across multiple browser tabs. (https://github.com/utrad-ical/circus/pull/226)
+- Fix: `checkQueueInterval` option was not used. (https://github.com/utrad-ical/circus/pull/275)
+- Createed API for determining series orientation. (https://github.com/utrad-ical/circus/pull/272)
+- Fixed several bugs regarding session management. (https://github.com/utrad-ical/circus/pull/269)
+- Internally, CIRCUS now uses MongoDB's transactions to keep stored data consistent.
 
 ## [v1.1.0-experimental.1](https://hub.docker.com/layers/circuscad/circus/1.1.0-experimental.1/images/sha256-f34b1a30eb6c951851d8e356b6f16583a13f8201fe8a1fd91f75eaf341a7ddea?context=explore)
 
 7 Feb 2022 (6 Jun 2021 以降の更新のみ)
 
-### CIRCUS-DB 関連
+### CIRCUS DB
 
 - CCL(Connected component labeling)・Hole filling において計算時の仮ラベル数を可変にすることで、複雑な形状でも計算が可能になりました。(https://github.com/utrad-ical/circus/pull/214)
 - ボクセルラベルに対する操作に Erosion・Dilation・Interslice interpolation を追加しました。(https://github.com/utrad-ical/circus/pull/209) -> [Document へ移動](../users/case-detail#mathematical-morphology)
@@ -55,7 +50,7 @@ title: CIRCUS  release notes
 - 入力した 3 点から oblique を表示する(Three points to section)を実装しました。(https://github.com/utrad-ical/circus/pull/174) -> [Document へ移動](../users/case-detail#oblique-断面の自動生成)
 - CCL・Hole filling を Web Worker で再実装しました。(https://github.com/utrad-ical/circus/pull/172)
 
-### Web UI 関連
+### Web UI
 
 - 検索画面(Series Search / Case Search / Plugin Job Search)におけるページネーションのバグを修正しました。(https://github.com/utrad-ical/circus/pull/218)
 - Tool > Preferences における Color theme が Black の時の表示を修正しました。(https://github.com/utrad-ical/circus/pull/210)
