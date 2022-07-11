@@ -20,7 +20,7 @@
     "@utrad-ical/circus-icons": "^0.2.0",
     "axios": "^0.21.1",
     "clsx": "^1.1.1",
-    "docusaurus-plugin-sass": "^0.2.0",
+    "docusaurus-plugin-sass": "^0.2.2",
     "dotenv": "^10.0.0",
     "js-yaml": "^4.1.0",
     "prettier": "^2.3.0",
