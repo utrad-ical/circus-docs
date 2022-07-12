@@ -4,7 +4,7 @@ title: Custom Result Display
 
 Authors of CIRCUS CS plug-ins can provide a fully custom display (view) to display plug-in results.
 
-A custom display is essentially a [React](https://reactjs.org/) component (JavaScript file) that follows certain rules and is bundled using [Webpack](https://webpack.js.org/). The bundle files are then included in the plug-in Docker image file.
+A custom display is essentially a [React](https://reactjs.org/) component (JavaScript file) that follows certain rules and is bundled using [Webpack](https://webpack.js.org/). The bundled files are then included in the plug-in Docker image file.
 
 We use [Webpack's Module Federation](https://module-federation.github.io/) mechanism to dynamically load your custom display from the main CIRCUS CS app.
 
@@ -12,29 +12,24 @@ We use [Webpack's Module Federation](https://module-federation.github.io/) mecha
 Your custom display will be used only from a results page of the plug-in that provides the display. You cannot share custom displays across multiple plug-ins.
 :::
 
-## Building Your Custom Display
+## Creating a Sample Plug-in Using Our Starter Template
 
-See the boilerplate in our GitHub repository.
-
-1. Make a new Node project similar to the starter template.
-2. Build your package: `npm run build`
-3. Several files will be generated under a directory named `display`. The directory contains `remoteEntry.js` and several other files.
-4. Copy this `display` directory into your plug-in image via `Dockerfile`.
-
-## Sample plug-in to create CIRCUS CAD with custom viewer
-
-Install prepared template.
+The easiest way to get started is to use our starter kit hosted on GitHub.
 
 ```bash
-mkdir circus-plugin
-cd circus-plugin
+mkdir my-circus-plugin
+cd my-circus-plugin
 npx @utrad-ical/create-circus-cad-plugin -i
 ```
 
-Inside the current directory, it will generate the CAD template and install the dependencies:
+::: note
+`npx` is a script runner that downloads and executes a package directly from the NPM registry.
+:::
+
+This will generate the following files along with dependencies:
 
 ```text
-circus-plugin
+📂my-circus-plugin
 ├── README.md
 ├── node_modules
 ├── package.json
@@ -43,18 +38,18 @@ circus-plugin
 ├── server.js
 ├── tsconfig.json
 ├── webpack.config.js
-├── data
+├── 📂data
 │   ├── results.json
 │   └── sample.png
-├── docker
+├── 📂docker
 │   ├── Dockerfile
 │   ├── plugin.json
 │   └── apps
 │       ├── cad.js
 │       └── sample.png
-├── public
+├── 📂public
 │   └── index.html
-└── src
+└── 📂src
     ├── App.tsx
     ├── bootstrap.tsx
     ├── index.ts
@@ -63,63 +58,62 @@ circus-plugin
         └── SampleViewer.tsx
 ```
 
-### Change/Add the following items
+- `docker` contains ...
+- `public` contains ...
+- `src` contains source code for building a custom display.
 
-#### Change/Add executable file at `./docker/apps`
+### Place Your Main Executable at `docker/apps`
 
-The sample file `./docker/apps/cad.js` is simple code that only outputs sample results.
-Please check [here](https://circus-project.net/docs/dev/cs/build) how to build your main executable.
+Under `docker/apps/`, you will see `cad.js`, which is a sample program that only outputs dummy results. Replace it with your main executable (written in any language you like). Read [this page](./build.md) for the details.
 
-#### Change Dockerfile at `./docker/Dockerfile`
+### Edit Dockerfile and Manifest File at `docker`
 
-- save infomation of your CAD plugin: ./docker/plugin.json
-- modify Dockerfile to run your executable file: ./docker/Dockerfile
-- modify viewer component: ./webpack.config.js, src/components/SampleViewer.tsx
-- add sample result files to check your viewer in local: ./data, src/sampleJob.json
+- Edit the plug-in manifest file: `./docker/plugin.json`
+- Modify Dockerfile to specify your executable file: `./docker/Dockerfile`
+- Modify veiwer component: `./webpack.config.js`, `src/components/SampleViewer.tsx`
+- Add sample result files to check your viewer in the local environment: `./data`, `src/sampleJob.json`
 
-#### Considerations to change `./webpack.config.js` and `./docker/plugin.json`
+### Edit `./webpack.config.js` and `./docker/plugin.json`
 
-Please do not change these ModuleFederationPlugin options: `name`, `library`, and `filename`
+Your custom display will be stored in a Docker image and has to be consumed by a running CIRCUS web app. To achieve this, you need to specify which module (React component) to expose to CIRCUS CS.
 
-```shell-session title="Unchangeable ModuleFederationPlugin options in ./webpack.config.js"
-  name: "CircusCsModule",
-  library: {
-    name: "CircusCsModule",
-    type: "window",
-  },
-  filename: "remoteEntry.js",
+For example, if your module name is named as "MyXyzVisualizer" and stored in `パス`, declare it `webpack.config.js`:
+
+```js title="webpack.config.js"
+exposes: {
+  "./MyXyzVisualizer": "[the path to the module]",
+},
 ```
 
-Please match module name: key of `exposes` that is ModuleFederationPlugin option in `./webpack.config.js` and `displayStrategy[*]["type"]` in `./docker/plugin.json`
+Note that the module name must be prefixed with `./`. You can specify as many modules as you want here. Your React component must be exported as an **default export** using the `export default` ES5 syntax.
 
-- prefix of exposes's key: `./`
-- prefix of displayStrategy[\*]["type"] to load external display: `@`
+To use the exposed module in your result screen, use the following syntax in the `plugin.json` manifest file:
 
-ex) Module name to be matched is "CustomDisplay"
-
-```shell-session title="ModuleFederationPlugin option exposes in ./webpack.config.js"
-  exposes: {
-    "./CustomDisplay": [the path to the module],
-  },
-```
-
-```shell-session title="displayStrategy in ./docker/plugin.json"
+```json title="docker/plugin.json"
 {
   ...,
   "displayStrategy": [
     {
-      ...,
-      "type": "@CustomDisplay",
+      "type": "@MyXyzVisualizer",
       ...,
     }
   ]
 }
 ```
 
-:::note
+Your custom display name must be prefixed with `@`. This prefix tells CIRCUS that you want to use a custom component stored in a plug-in image file instead of one of our built-in displays.
 
-You can add as many modules to exposes as you want. Don't forget to add module names to `./docker/plugin.json`.
+:::important
+Do not touch these ModuleFederationPlugin options: `name`, `library`, and `filename`.
 
+```js title="webpack.config.js"
+name: "CircusCsModule",
+library: {
+  name: "CircusCsModule",
+  type: "window",
+},
+filename: "remoteEntry.js",
+```
 :::
 
 ## Shared Modules
