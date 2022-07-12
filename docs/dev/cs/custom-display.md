@@ -22,7 +22,7 @@ cd my-circus-plugin
 npx @utrad-ical/create-circus-cad-plugin -i
 ```
 
-::: note
+:::note
 `npx` is a script runner that downloads and executes a package directly from the NPM registry.
 :::
 
