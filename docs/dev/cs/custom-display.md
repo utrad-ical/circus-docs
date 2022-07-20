@@ -44,7 +44,7 @@ This will generate the following files along with dependencies:
 ├── 📂docker
 │   ├── Dockerfile
 │   ├── plugin.json
-│   └── apps
+│   └── 📂apps
 │       ├── cad.js
 │       └── sample.png
 ├── 📂public
@@ -54,12 +54,13 @@ This will generate the following files along with dependencies:
     ├── bootstrap.tsx
     ├── index.ts
     ├── sampleJob.json
-    └── components
+    └── 📂components
         └── SampleViewer.tsx
 ```
 
-- `docker` contains ...
-- `public` contains ...
+- `data` contains your CIRCUS CS plug-in result files required for your custom display
+- `docker` contains files to build Docker image from your CIRCUS CS plug-in and your custom display
+- `public` contains `index.html` to check your custom display in the local environment
 - `src` contains source code for building a custom display.
 
 ### Place Your Main Executable at `docker/apps`
@@ -77,7 +78,7 @@ Under `docker/apps/`, you will see `cad.js`, which is a sample program that only
 
 Your custom display will be stored in a Docker image and has to be consumed by a running CIRCUS web app. To achieve this, you need to specify which module (React component) to expose to CIRCUS CS.
 
-For example, if your module name is named as "MyXyzVisualizer" and stored in `パス`, declare it `webpack.config.js`:
+For example, if your module name is named as "MyXyzVisualizer" and stored in `src/components/MyXyzVisualizer.tsx`, declare it `webpack.config.js`:
 
 ```js title="webpack.config.js"
 exposes: {
@@ -114,7 +115,28 @@ library: {
 },
 filename: "remoteEntry.js",
 ```
+
 :::
+
+### Check your custom display in the local environment
+
+Run mock REST API server.  
+This server can send files in `data`. Save your CIRCUS CS plug-in result files in `data`, if these files are required for your custom display.
+The default port number is 3000.
+
+```bash title="terminal 1"
+npm run json-server
+```
+
+Run webpack-dev-server to check your custom display.  
+Rename a module name and a file name of import statement to your module name in `src/App.tsx`.
+The default port number is 3002.
+
+```bash title="terminal 2"
+npm start
+```
+
+Check your custom display via [http://localhost:3002](http://localhost:3001/).
 
 ## Shared Modules
 
