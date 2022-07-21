@@ -58,7 +58,7 @@ This will generate the following files along with dependencies:
         └── SampleViewer.tsx
 ```
 
-- `data` contains **fake** CIRCUS CS plug-in result files (these files are only used to check your custom display in the local environment)
+- `data` contains **mock** CIRCUS CS plug-in result files (used to check your custom display in the local environment)
 - `docker` contains files to build Docker image from your CIRCUS CS plug-in and your custom display
 - `public` contains `index.html` to check your custom display in the local environment
 - `src` contains source code for building a custom display.
