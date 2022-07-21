@@ -31,7 +31,7 @@ This will generate the following files along with dependencies:
 ```text
 📂my-circus-plugin
 ├── README.md
-├── node_modules
+├── 📂node_modules
 ├── package.json
 ├── package-lock.json
 ├── postbuild.sh
@@ -58,7 +58,7 @@ This will generate the following files along with dependencies:
         └── SampleViewer.tsx
 ```
 
-- `data` contains your CIRCUS CS plug-in result files required for your custom display
+- `data` contains your CIRCUS CS plug-in result files required to check your custom display in the local environment
 - `docker` contains files to build Docker image from your CIRCUS CS plug-in and your custom display
 - `public` contains `index.html` to check your custom display in the local environment
 - `src` contains source code for building a custom display.
@@ -120,23 +120,24 @@ filename: "remoteEntry.js",
 
 ### Check your custom display in the local environment
 
-Run mock REST API server.  
-This server can send files in `data`. Save your CIRCUS CS plug-in result files in `data`, if these files are required for your custom display.
-The default port number is 3000.
+Save result files to send to your custom display. The following files need to be changed.  
+`data`: Simulated directory to save output files of your CIRCUS CS plug-in.  
+`src/sampleJob.json`: Simulation of the most of the important data provided via `useCsResults()` custom hook. Read [here](./custom-display.md#accessing-the-cad-data) for the details.
+
+Run mock REST API server. This server can send files in `data`. The default port number is 3000.
 
 ```bash title="terminal 1"
 npm run json-server
 ```
 
-Run webpack-dev-server to check your custom display.  
-Rename a module name and a file name of import statement to your module name in `src/App.tsx`.
+Run webpack-dev-server to check your custom display. Rename a module name and a file name of import statement to your module name in `src/App.tsx`.
 The default port number is 3002.
 
 ```bash title="terminal 2"
 npm start
 ```
 
-Check your custom display via [http://localhost:3002](http://localhost:3001/).
+Check your custom display via [http://localhost:3002](http://localhost:3002/).
 
 ## Shared Modules
 
