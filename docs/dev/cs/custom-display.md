@@ -2,13 +2,9 @@
 title: Custom Result Display
 ---
 
-:::warning
-What is written in this section is still in the early stage of development, and are subject to change. Contact the developer team before trying these.
-:::
-
 Authors of CIRCUS CS plug-ins can provide a fully custom display (view) to display plug-in results.
 
-A custom display is essentially a [React](https://reactjs.org/) component (JavaScript file) that follows certain rules and is bundled using [Webpack](https://webpack.js.org/). The bundle files are then included in the plug-in Docker image file.
+A custom display is essentially a [React](https://reactjs.org/) component (JavaScript file) that follows certain rules and is bundled using [Webpack](https://webpack.js.org/). The bundled files are then included in the plug-in Docker image file.
 
 We use [Webpack's Module Federation](https://module-federation.github.io/) mechanism to dynamically load your custom display from the main CIRCUS CS app.
 
@@ -16,14 +12,132 @@ We use [Webpack's Module Federation](https://module-federation.github.io/) mecha
 Your custom display will be used only from a results page of the plug-in that provides the display. You cannot share custom displays across multiple plug-ins.
 :::
 
-## Building Your Custom Display
+## Creating a Sample Plug-in Using Our Starter Template
 
-See the boilerplate in our GitHub repository.
+The easiest way to get started is to use our starter kit hosted on GitHub.
 
-1. Make a new Node project similar to the starter template.
-2. Build your package: `npm run build`
-3. Several files will be generated under a directory named `display`. The directory contains `remoteEntry.js` and several other files.
-4. Copy this `display` directory into your plug-in image via `Dockerfile`.
+```bash
+mkdir my-circus-plugin
+cd my-circus-plugin
+npx @utrad-ical/create-circus-cad-plugin -i
+```
+
+:::note
+`npx` is a script runner that downloads and executes a package directly from the NPM registry.
+:::
+
+This will generate the following files along with dependencies:
+
+```text
+📂my-circus-plugin
+├── README.md
+├── 📂node_modules
+├── package.json
+├── package-lock.json
+├── postbuild.sh
+├── server.js
+├── tsconfig.json
+├── webpack.config.js
+├── 📂data
+│   ├── results.json
+│   └── sample.png
+├── 📂docker
+│   ├── Dockerfile
+│   ├── plugin.json
+│   └── 📂apps
+│       ├── cad.js
+│       └── sample.png
+├── 📂public
+│   └── index.html
+└── 📂src
+    ├── App.tsx
+    ├── bootstrap.tsx
+    ├── index.ts
+    ├── sampleJob.json
+    └── 📂components
+        └── SampleViewer.tsx
+```
+
+- `data` contains **mock** CIRCUS CS plug-in result files (used to check your custom display in the local environment)
+- `docker` contains files to build Docker image from your CIRCUS CS plug-in and your custom display
+- `public` contains `index.html` to check your custom display in the local environment
+- `src` contains source code for building a custom display.
+
+### Place Your Main Executable at `docker/apps`
+
+Under `docker/apps/`, you will see `cad.js`, which is a sample program that only outputs dummy results. Replace it with your main executable (written in any language you like). Read [this page](./build.md) for the details.
+
+### Edit Dockerfile and Manifest File at `docker`
+
+- Edit the plug-in manifest file: `./docker/plugin.json`
+- Modify Dockerfile to specify your executable file: `./docker/Dockerfile`
+- Modify veiwer component: `./webpack.config.js`, `src/components/SampleViewer.tsx`
+- Add sample result files to check your viewer in the local environment: `./data`, `src/sampleJob.json`
+
+### Edit `./webpack.config.js` and `./docker/plugin.json`
+
+Your custom display will be stored in a Docker image and has to be consumed by a running CIRCUS web app. To achieve this, you need to specify which module (React component) to expose to CIRCUS CS.
+
+For example, if your module name is named as "MyXyzVisualizer" and stored in `src/components/MyXyzVisualizer.tsx`, declare it `webpack.config.js`:
+
+```js title="webpack.config.js"
+exposes: {
+  "./MyXyzVisualizer": "[the path to the module]",
+},
+```
+
+Note that the module name must be prefixed with `./`. You can specify as many modules as you want here. Your React component must be exported as an **default export** using the `export default` ES5 syntax.
+
+To use the exposed module in your result screen, use the following syntax in the `plugin.json` manifest file:
+
+```json title="docker/plugin.json"
+{
+  ...,
+  "displayStrategy": [
+    {
+      "type": "@MyXyzVisualizer",
+      ...,
+    }
+  ]
+}
+```
+
+Your custom display name must be prefixed with `@`. This prefix tells CIRCUS that you want to use a custom component stored in a plug-in image file instead of one of our built-in displays.
+
+:::important
+Do not touch these ModuleFederationPlugin options: `name`, `library`, and `filename`.
+
+```js title="webpack.config.js"
+name: "CircusCsModule",
+library: {
+  name: "CircusCsModule",
+  type: "window",
+},
+filename: "remoteEntry.js",
+```
+
+:::
+
+### Check your custom display in the local environment
+
+Save result files to send to your custom display. The following files need to be changed.  
+`data`: Simulated directory to save output files of your CIRCUS CS plug-in.  
+`src/sampleJob.json`: Simulation of the most of the important data provided via `useCsResults()` custom hook. Read [here](./custom-display.md#accessing-the-cad-data) for the details.
+
+Run mock REST API server. This server can send files in `data`. The default port number is 3000.
+
+```bash title="terminal 1"
+npm run json-server
+```
+
+Run webpack-dev-server to check your custom display. Rename a module name and a file name of import statement to your module name in `src/App.tsx`.
+The default port number is 3002.
+
+```bash title="terminal 2"
+npm start
+```
+
+Check your custom display via [http://localhost:3002](http://localhost:3002/).
 
 ## Shared Modules
 
