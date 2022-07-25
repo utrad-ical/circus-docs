@@ -4,34 +4,26 @@ title: Installation
 sidebar_label: Installation
 ---
 
-Docker Hub にて CIRCUS システムの Docker イメージを提供しています。こちらを使ってインストールするのが最も簡単です。
+The easiest way to install CIRCUS is to use the official Docker image hosted on Docker Hub.
 
 :::important
-2022.7 現在、Mac OS では未検証です。
+As of July 2022, CIRCUS has not been tested on Docker running on macOS.
 :::
 
-## CIRCUS の Docker イメージ取得・初期設定
+## Download and Configure CIRCUS Docker Image
 
-以下の手順は CIRCUS のデータフォルダを `/var/circus/data` と設定（ホストマシン、Docker コンテナ内共通）することを前提としています。
+The following steps assume that the **CIRCUS data folder** (the directory that will contain all persistent data on the host machine) is `/var/circus/data`. You can change this to any directory. For example, if your host machine is Windows and you want to set the data folder as `C:\circus\data`, replace the following `/var/circus/data` with `/c/circus/data`. Please choose a directory that does not affect the operation of the host machine and the Docker container.
 
-:::tip
+### Install Docker
 
-- ホストマシンのデータフォルダを任意のフォルダに変更できます。この場合、ホストマシン と Docker コンテナの動作に影響が生じないフォルダを設定してください。
-  - CIRCUS の Docker イメージでは `/var/circus` に CIRCUS のコード、設定ファイル等をインストールしています。
-- ホストマシンの OS が Windows でデータフォルダを `C:\circus\data` と設定する場合、以下の `/var/circus/data` は `/c/circus/data` に置き換えてください。
+Install Docker on the machine where CIRCUS will be installed. Refer to the [official Docker documentation](https://docs.docker.com/get-docker/) for details.
 
-:::
+- **Linux:** docker-ce 19.03 or later
+- **Windows:** Docker Desktop for Windows
 
-### Docker のインストール
+### Fetch CIRCUS Docker Image
 
-CIRCUS をインストールするマシンに Docker をインストールします。詳細は [Docker 公式ドキュメント](https://docs.docker.com/get-docker/)を参考してください。
-
-- Linux: docker-ce 19.03 以降
-- Windows: Docker Desktop for Windows
-
-### CIRCUS の Docker イメージの取得
-
-Docker Hub より以下の Docker イメージを取得します。
+Download the following Docker images from Docker Hub:
 
 ```shell-session
 $ sudo docker pull circuscad/circus:latest
@@ -40,138 +32,143 @@ $ sudo docker pull circuscad/dicom_utility:latest
 
 :::tip
 
-- latest は取得時点での推奨版です。対応するバージョンは予告なく変更されます。
-- 長期運用時には `latest` の代わりにバージョンを指定して取得されることをお勧めします。
-- Docker Hub 上にある CIRCUS の最新版は以下のサイトでご確認ください。
-  - https://hub.docker.com/u/circuscad
+- The `latest` tag refers to the latest recommended version, which may change without notice. For long-term operation, consider fixating the version instead of using `latest`.
+- The latest version of CIRCUS can be viewed on the following URL: https://hub.docker.com/u/circuscad
 
 :::
 
 :::note
 
-Windows のコマンドプロンプトで実行する場合は各行先頭の `sudo` は不要です（以下同様）。
+Remove `sudo` when you are using Windows.
 
 :::
 
-### 初期設定
+### Initial Configuration
 
-CIRCUS システムの起動に必要なデータを作成するために以下の操作が必要となります。
+To prepare the initial data needed to start CIRCUS, take the following steps:
 
-1. ホストマシンに `/var/circus/data` フォルダを作成します。
+1. Create the directory `/var/circus/data` on your host machine.
 
-1. コンテナ内部でコマンドを実行するため、CIRCUS の Docker コンテナを作成し、内部で `/bin/bash` を実行します。
+1. Create a CIRCUS container and run `/bin/bash` inside the container.
 
    ```shell-session
-   $ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -h circus -it circuscad/circus:latest
+   $ sudo docker run --rm -v /var/circus/data:/var/circus/data \
+     -v /var/run/docker.sock:/var/run/docker.sock \
+     -h circus -it circuscad/circus:latest
    ```
 
-   :::note
+   - You don't need to manually specify `/bin/bash`; it will run automatically when you attach to the container.
+   - Set the hostname of the container with the `-h` option. Here it is `circus`, but you can use another name. Note thet the container may not work correctly if you change the hostname each time you start a container.
+   - During this initial setup, you don't have to expose a port (with the `-p` option) or map IP addresses (with `--add-host`).
 
-   - 上記コマンドの最後に `/bin/bash` は不要です（コンテナ内部の初期設定スクリプトより `/bin/bash` を実行しています）。
-   - `-h` オプションにより Docker コンテナのホスト名を設定してください（ここでは `circus` としていますが、別の名前でも可能です。ただし、コンテナを起動する毎にホスト名を変えた場合には正しく動作しない可能性があります）。 
-   - 初期設定ではポートの公開（`-p` オプション）や IP アドレスのマッピング（`--add-host` オプション）の設定は不要です。
+1. Inside the created container, run the following command to initialize the database.
 
-   :::
-
-1. CIRCUS の Docker コンテナ 内で以下のコマンドを実行し、データベースの初期設定を行います。
-
-   ```shell-session title="コンテナ内"
+   ```shell-session title="Inside the container"
    # /circus/data_initialization.sh
    ```
 
-1. `exit` コマンドで Docker コンテナを一旦終了させます。
+1. Type `exit` inside the attached shell to finish the container.
 
-## コンテナ内でのコマンドの実行 {#shell}
+## Running Commands Within a Container {#shell}
 
-管理者はしばしばコンテナ内の `/bin/bash` にアクセスしてコマンドを発行する必要があります。
+Sometimes, a CIRCUS administrator needs to access `/bin/bash` within the container to issue some administrative CLI commands.
 
-- データベース初期設定・マイグレーション
-- プラグイン登録
-- その他 CLI として提供されている各種コマンドの利用
+- To initialize or migrate the database
+- To register a CAD plug-in
+- To run other administrative tasks or utilities offered only as CLI
 
-Docker コンテナ内の Bash (`/bin/bash`) にアクセスする場合は、以下のようにします。
+To access Bash within a CIRCUS container, type the following command (from the host machine):
 
 ```shell-session
-$ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:8000 -p 27017:27017 -h circus --add-host=hostmachine:[IP address for host] -it circuscad/circus:latest
+$ sudo docker run --rm -v /var/circus/data:/var/circus/data \
+  -v /var/run/docker.sock:/var/run/docker.sock -p 80:8000 -p 27017:27017 \
+  -h circus --add-host=hostmachine:[IP address for host] \
+  -it circuscad/circus:latest
 ```
 
-- 上記は Linux の場合です。Windows でデータフォルダを /c/circus/data としている場合は、`-v /var/circus/data:/var/circus/data` を `-v /c/circus/data:/var/circus/data` に置き換えてください（以下同様）。
-- Webサーバ (nginx) のホストマシンのポートは 8000 に設定しています。
-- データベース (MongoDB) を外部から操作しない場合は `-p 27017:27017` は不要です。
-- `-v /var/run/docker.sock:/var/run/docker.sock` のオプションはプラグインに Docker outside of Docker (DooD) 形式でアクセスするために必要です。
-- [IP address for host] はホスト側の IP アドレスを入力します。ホスト側の IP アドレスは各 OS のコマンドなどで調べてください。以下は一例です。
+:::note
+
+- The internal web server will be exposed to the host port 80.
+- You can remove `-p 27017:27017` if you don't plan to manage database via external Mongo Shell.
+- The `-v /var/run/docker.sock:/var/run/docker.sock` option is used to allow CIRCUS to access plug-ins using the Docker outside of Docker (DooD) technique.
+- Replace `[IP address for host]` with the host IP address, which can be discovered using commands of each OS. For example:
   - `ip a` (Ubuntu)
   - `ipconfig` (Windows)
 
-上記のスクリプトは Bash エイリアスなどで登録しておくと便利です。
+:::
 
-## CRICUS の起動(初期設定後)
+It is recommended to register the above script to a Bash alias, etc.
 
-### コンテナ内部でコマンドを実行する場合（`/bin/bash` 経由）
+## Starting CIRCUS Up
 
-上記の方法でコンテナ内の Bash にアタッチし、以下を実行します。
+### Manual Startup From Within the Container
 
-```shell-session title="コンテナ内"
+Attach to Bash in the container as described above, and run the following:
+
+```shell-session title="Inside the container"
 # /circus/services.sh &
 ```
 
-### デーモンとして起動させる場合
+### Starting CIRCUS as a Daemon
 
-以下のコマンドで Docker コンテナをバックグラウンド起動させ、サーバ群を自動起動させることができます（上記 `/bin/bash` 経由による方法の `-it` の代わりに `-d -e DAEMON_MODE=1` とします）。
+The following command will start the Docker container in the background and automatically start the servers (this is using `-d -e DAEMON_MODE=1` instead of `-it`).
 
 ```shell-session
-$ sudo docker run --rm -v /var/circus/data:/var/circus/data -v /var/run/docker.sock:/var/run/docker.sock -p 80:8000 -p 27017:27017 -h circus --add-host=hostmachine:[IP address for host] -d -e DAEMON_MODE=1 circuscad/circus:latest
+$ sudo docker run --rm -v /var/circus/data:/var/circus/data \
+  -v /var/run/docker.sock:/var/run/docker.sock -p 80:8000 -p 27017:27017 \
+  -h circus --add-host=hostmachine:[IP address for host] \
+  -d -e DAEMON_MODE=1 circuscad/circus:latest
 ```
 
-起動させたコンテナを終了させるためには、`docker ps` コマンドで起動しているコンテナの ID を調べた上で、`docker kill --force [コンテナの ID]`を実行してください。
+To stop this container, inspect its ID using `docker ps`, and run `docker kill --force <container-id>`.
 
-## 動作確認方法
+## Check if the Server is Running
 
-1. 上記方法で CIRCUS を起動後、ホストマシンの web ブラウザで http://localhost/ （もしくはhttp://127.0.0.1/）へアクセスします。
+1. After starting CIRCUS as described above, access http://localhost/ (or http://127.0.0.1/) using a web browser on the host machine.
 
-1. ログイン画⾯が表⽰されたら、ユーザ名／パスワードともに "circus" と入力してログインしてください。
+1. When the login screen appears, enter "circus" for both the user name and password.
 
-1. CIRCUS のホーム画⾯が表⽰されれば成功です。
+1. If the CIRCUS home screen appears, you have successfully logged in.
 
 :::warning
 
-"circus" は管理者権限を持つ初期設定ユーザです。ログイン後、[ユーザの設定](user-settings.md) でパスワードを必ず変更してください。必要に応じて、別の管理者権限を持つユーザを作成し、そのユーザでログインし直して "circus" のログインを無効にしてください。
+"circus" is the initial user with all administrative privileges. After logging-in, make sure to change its password following the steps described in [User Settings](user-settings.md). Additionally, you can disable the "circus" account after creating another user with full administrative privileges.
 
 :::
 
-## 新バージョンの Docker イメージを使用する場合
+## Upgrading the Docker Image
 
-新バージョンの Docker イメージを使用する場合、データベースのマイグレーション処理を行う必要がある場合があります。上記の手順に従い CIRCUS の Docker コンテナ内部で CIRCUS を起動した上で、以下のコマンドを実行して内部データベースの情報の更新を行います。
+When you use a newer version of our Docker image, you may need to perform a database migration. Attach to Bash as described above, and run the following command to upgrade the structure of the database.
 
-```shell-session title="コンテナ内"
+```shell-session title="Inside the container"
 # cd /var/circus/packages/circus-api
 # node circus migrate
 ```
 
 :::warning
 
-この操作でデータベースのリビジョンが更新された場合、旧バージョンの Docker イメージを使用することができなくなります。事前に内部データベース (MongoDB) のバックアップを取るなど、十分に注意してください。
+This operation is irreversible. Once the database revision has been increamented by this operation, you can no longer use the previous version of the Docker image. Please take extra precautions such as backing up the internal database (MongoDB) beforehand.
 
 :::
 
-## データのバックアップ
+## Backing Up Data
 
-永続的に保存されるすべてのデータはホスト側の `/var/circus/data` ディレクトリに保存されます（Linux デフォルトの場合）。このディレクトリはコンテナ作成時に `-v` オプションでコンテナにマウントされており、以下のようなデータが含まれます。
+All persistent data will be stored in the host `/var/circus/data` directory (or any other directory you specify when you create the container with the `-v` option). This directory will contain the following types of data:
 
-- MongoDB のデータベース（ユーザ情報、ケース情報などの非バイナリデータのほとんどを保存）
-- アップロードされるシリーズデータ
-- CIRCUS DB のラベルなどのバイナリデータ
-- CIRCUS CS のプラグイン処理結果
-- 各種実行ログデータ
+- MongoDB database (most non-binary data such as user information, case information)
+- Uploaded DICOM series data
+- Binary data such as CIRCUS DB voxel labels
+- Plug-in results from CIRCUS CS
+- Various logs
 
-バックアップは単純にこれらのファイルをコピーすることで行えます。
+Backups can be made by simply copying these files to elsewhere.
 
-### 内部データベース (MongoDB) のダンプを行う場合
+### Dumping the MongoDB data
 
-CIRCUS の Docker コンテナ内部で CIRCUS を起動した後、以下のコマンドを実行することで内部データベースのダンプ（バイナリバックアップ）を行えます。
+After starting CIRCUS inside the CIRCUS Docker container, you can perform a dump (binary backup) of the internal database by running the following command.
 
 ```shell-session
 # /circus/mongodb_dump.sh
 ```
 
-上記の場合、ダンプされたデータは `/var/circus/data/mongodb_dump/circus_mongo_archive_[タイムスタンプ].gz` となります。
+The dumped data will be created at `/var/circus/data/mongodb_dump/circus_mongo_archive_[timestamp].gz`.

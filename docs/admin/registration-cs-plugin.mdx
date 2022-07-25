@@ -4,88 +4,90 @@ title: Registration of CS Plug-in
 sidebar_label: Registration of CS Plug-in
 ---
 
-## CIRCUS CS プラグインの登録手順
+A CIRCUS CS plug-in is a Docker image, which can be exported as a tar archive (xxx_ver.1.0.0.tar). To register a plug-in, take the following steps.
 
-エクスポートされた Docker イメージ (xxx_ver.1.0.0.tar) を CIRCUS CS のプラグインとして登録するためには以下で行います。
+## Preparation
 
-### 準備
-
-docker load コマンドで Docker image を読み込みます。
+Use the `docker load` command _(on the host)_ to import the Docker image:
 
 ```
 $ docker load -i xxx_ver.1.0.0.tar
 ```
 
-### Docker コンテナ内でスクリプトを実行する場合（推奨）
+:::note
+You need to run this command on the host machine (where `circuscad/circus` itself is installed). CIRCUS will use the Docker-outside-of-Docker (DooD) technique to access this plug-in from the running container.
+:::
 
-CIRCUS の Docker コンテナ内部で CIRCUS を起動した後、以下のコマンドを実行してください。
+## Option 1: Run the Registration Script within the Container (Recommended)
+
+Start CIRCUS, attach to the container's Bash, and run the following command.
 
 ```
 # /root/cad_plugin_registration.sh [REPOSITORY]:[TAG]
 ```
 
-登録の途中で下図のように確認画面が求められたら、"Y" と入力し、[Enter]キーを押します。
+You will see a confirmation message like the following. Type "Y" and Enter.
 
 ![Confirmation of plug-in registration](register-cad-plugin-confirm.png)
 
 :::tip
-コマンド実行に必要な [REPOSITORY] および [TAG] は `docker images` コマンドで調べてください。
+You can inspect the `[REPOSITORY]` and `[TAG]` needed to import the container using the `docker images` command.
 :::
 
-### CIRCUS の Docker コンテナ内で API を直接実行する場合
+## Option 2: Running CIRCUS CLI in the Container
 
-1. 読み込んだプラグインの Docker image の full ID を取得します。
+1.  Run the following command on the host and inspect the full image ID of the plug-in.
 
-```
-$ docker images --no-trunc
-```
+    ```
+    $ docker images --no-trunc
+    ```
 
-    - 登録するDocker イメージ の Image ID 列の "sha256:" に続く文字列が登録に必要な full ID です（下図参照）。
+    The string following "sha256:" in the Image ID column of the Docker image to be registered is the full ID required for registration (see figure below).
 
-       ![docker image list](docker-images-no-trunc_result.png)
+    ![docker image list](docker-images-no-trunc_result.png)
 
-1. CIRCUS の Docker コンテナ内で以下のコマンドを実行し、CIRCUS CS プラグインの情報を登録します。
+1.  Run the following command (in the container) to register the information of the CIRCUS CS plug-in.
 
-```shell-session title="コンテナ内"
-# /root/servicies.sh &
-# cd /var/circus/packages/circus-api
-# node circus register-cad-plugin [取得したDocker イメージの full ID]
-```
+    ```shell-session title="Inside the container"
+    # /root/servicies.sh &
+    # cd /var/circus/packages/circus-api
+    # node circus register-cad-plugin [FULL-IMAGE-ID]
+    ```
 
-- 登録の途中で下図のように確認画面が求められたら、"Y" と入力し、[Enter]キーを押します。
+1.  You will see a confirmation message like the following. Type "Y" and Enter.
 
-  ![Confirmation of plug-in registration](register-cad-plugin-confirm.png)
+    ![Confirmation of plug-in registration](register-cad-plugin-confirm.png)
 
-## CIRCUS CS の プラグインで GPU を使用する場合(Linux のみ、オプション)
+## To Use GPU (for Linux Only, Optional)
 
-CUDA ドライバをインストール後、nvidia-container-runtime のインストール、ならびにホスト側の Docker の設定を行います。
+When the installed plug-in needs to access a GPU, you need to install CUDA Driver and nvidia-container-runtime, and configure Docker.
 
-1. nvidia-container-runtime の リポジトリを追加します。
+1. Add the repository of nvidia-container-runtime.
 
-```
-$ curl -s -L https://nvidia.github.io/nvidia-container-runtime/gpgkey | sudo apt-key add -
-$ distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
-$ curl -s -L https://nvidia.github.io/nvidia-container-runtime/$distribution/nvidia-container-runtime.list | sudo tee /etc/apt/sources.list.d/nvidia-container-runtime.list
-$ sudo apt update
-```
-
-1. nvidia-container-runtime をインストールし、再起動をします。
-
+   ```shell-session
+   $ curl -s -L https://nvidia.github.io/nvidia-container-runtime/gpgkey | sudo apt-key add -
+   $ distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+   $ curl -s -L https://nvidia.github.io/nvidia-container-runtime/$distribution/nvidia-container-runtime.list | sudo tee /etc/apt/sources.list.d/nvidia-container-runtime.list
+   $ sudo apt update
    ```
+
+1. Install nvidia-container-runtime and restart the host machine.
+
+   ```shell-session
    $ sudo apt install nvidia-container-runtime
    $ sudo reboot
    ```
 
-1. /etc/docker/daemon.json に以下の内容を記載します（要：sudo）。
+1. Edit `/etc/docker/daemon.json` and add the following (`sudo` required).
 
-   ```
+   ```json
    {
-       "default-runtime": "nvidia",
-       "runtimes": {
-           "nvidia": {
-               "path": "/usr/bin/nvidia-container-runtime",
-               "runtimeArgs": []
-           }
+     "default-runtime": "nvidia",
+     "runtimes": {
+       "nvidia": {
+         "path": "/usr/bin/nvidia-container-runtime",
+         "runtimeArgs": []
        }
+     }
    }
    ```

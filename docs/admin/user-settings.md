@@ -1,45 +1,45 @@
 ---
-title: Users
+title: Managing Users
 ---
 
-## ユーザの設定
+## Creating and Modifying Users
 
-画面上部のメニューより [Administration] - [Users] を選択するとユーザ設定画面が表示されます。
+Select [Administration] - [Users] from the menu at the top of the screen to display the user settings screen.
 
-新規ユーザを作成する場合はまず、[+ Create new] ボタンをクリックします。ページ下部に設定画面が表示されますので、各項目を入力した上で [Save] ボタンをクリックします。
+To create a new user, click the "Create new" button. After entering each item, click "Save".
 
 ![Create new user](create-new-user.png)
 
 :::caution
 
-登録後、メールアドレスの変更は行えません。
+You cannot modify the user's email address after creating a new user.
 
 :::
 
-既存のユーザに対して変更を行う場合は、上部リストより設定を変更したいユーザの行をクリックします。ページ下部に設定画面が表示されますので、適宜設定した上で [Save] ボタンをクリックします。
+To make changes to an existing user, click on the line of the user whose settings you wish to change from the top list.
 
-## 各ユーザの設定項目
+## Configurable Options
 
 Login Name
-: ログイン名のエイリアスです。
+: This is an ID a user can use instead of their email address.
 
 Description
-: 画面右上（Logout ボタンの横）など表示されるユーザの表示名（氏名など）を設定します。
+: The name of this user, e.g., shown next to the logout button at the top of the screen.
 
-パスワード
-: パスワードを設定します。変更の場合は空白で表示されています。
+Password
+: The user's password. The password of an existing user is not displayed here. If you do not want to change the password, leave this blank.
 
 Groups
-: ユーザが所属するグループを設定します。ユーザは複数のグループに所属することができ、そのレベルで CIRCUS 内の様々な操作への権限が付与されます（個々のユーザのレベルでは権限情報を持っていません）。
+: Specify the groups this user belongs to. One user can belong to more than one group. The user's privilege is determined by the groups it belongs to.
 
 Preferences
-: ユーザの個人設定です（ユーザ自身がログインした後に変更可能です）。
+: Some personal preferences of the user can be preconfigured here. Each user can change this settings later.
 
 Theme
-: 各ページの背景色を設定します（白 or 黒）。
+: The initial theme of the new user.
 
 Show Personal Info
-: そのユーザが患者個人情報（患者 ID・氏名・生年月日）を表示するかどうかを設定します。この設定が ON でも個人情報を表示する権限がない場合は個人情報は表示できません。
+: Determins whether this user prefers to show personal information (such as patient name and birthdate) when they have a priviledge to do so. A user also needs a sufficient priviledge to show personal information.
 
 Login Enabled
-: そのユーザによるログインを許可するかどうかを設定します。ユーザを一時的に無効にする場合などに使用します。
+: Used to temporarily or permanently disable this user.

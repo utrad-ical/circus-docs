@@ -1,66 +1,66 @@
 ---
-title: Groups
+title: Managing Groups
 ---
 
-## グループの設定
+## Creating and Modifying Groups
 
-画面上部のメニューより [Administration] - [Groups] を選択するとグループ設定画面が表示されます。
+Select [Administration] - [Gruops] from the menu at the top of the screen to display the group settings screen.
 
-新たなグループを作成する場合はまず、[+ Create new] ボタンをクリックします。ページ下部に設定画面が表示されますので、各項目を設定した上で [Save] ボタンをクリックします。
+To create a new group, click the "Create new" button. After entering each item, click "Save".
 
-既存のグループに対して変更を行う場合は、上部リストより設定を変更したいグループの行をクリックします。ページ下部に設定画面が表示されますので、適宜設定した上で [Save] ボタンをクリックします。
+To make changes to an existing group, click on the line of the group whose settings you wish to change from the top list.
 
 ![Groups](groups.png)
 
 :::caution
 
-2021.6 時点では、この画面よりグループの削除は行えません。
+As of July 2022, it is impossible to delete a group.
 
 :::
 
-## 各グループの設定項目
+## Configurable Options
 
 Group Name
-: グループ名を入力します（後から変更可能です）。
+: The name of the group (can be changed later). For example, "admin", "radiologists of XYZ hosp".
 
 Privileges
-: グループに属するグローバル権限を設定します。設定可能な権限の種類は以下を参照してください。
+: The global privileges associated with this group. All users belonging to this group will gain the privileges set here. See the following list to see the full list of global privileges.
 
 Accessible Domains
-: アクセスできる DICOM 画像のドメインを設定します。
+: The list of domains which users belonging to this group have access to.
 
-### グループに付与できるグローバル権限
-
-Create Project
-: プロジェクトの作成が行えます。
-
-Delete Project
-: プロジェクトの作成が行えます。
+### List of Global Privileges
 
 Manage Server
-: サーバの各種設定が行えます。いわゆる管理者権限です。
+: The "admin" role. Privilege to make almost any administrative operation from the web UI.
+
+Create Project
+: Privilege to create a new project.
+
+Delete Project
+: Privilege to delete an existing project.
 
 View Personal Info
-: 患者個人情報（患者 ID・氏名・生年月日）を表示できます。この権限がない場合、患者個人情報はマスクされます。なお、この権限を有するユーザであっても、[個人設定画面](../users/user-preference)より一時的に個人情報を非表示にすることができます。
+: Privilege to display personal information (e.g., patient ID, name, birthdate). If the user does not have this privilege, the personal information will be masked. Even if a user has this privilege, they can temporarily hide personal information from [Personal Preferences](./users/user-preference]).
 
 Download volume as raw file
-: ボリュームデータのダウンロードを可能にします。
+: Privilege to download raw DICOM volumes.
 
-### プロジェクトに関する設定項目
+### Settings Related to Projects
 
-CIRCUS DB のプロジェクトに関する設定項目です。各項目とも複数のプロジェクトに対して権限付与が可能です。
+These are setting items related to CIRCUS DB projects. Authorization can be granted to multiple projects for each item.
 
 Readable Projects
-: プロジェクトを閲覧できる権限です。
+: Users with this role will have read access to the specified projects.
 
 Writable Projects
-: プロジェクト内のケースに対して書込が行える権限です。
+: Users with this role will have write access to the specified projects.
 
 Add Series Projects
-: プロジェクトのケースに対して DICOM シリーズの追加が行える権限です。
+: Users with this role can modify the set of series that makes up a case.
 
 View Personal Info Projects
-: プロジェクトのケースの個人情報（患者 ID、患者氏名など）を表示できる権限です。
+: Users with this role can display personal information of the patient.
 
 Moderate Projects
-: プロジェクトに関するあらゆる処理が行える権限です。
+: Grants all access to the specified projects. This takes precedence of other roles.

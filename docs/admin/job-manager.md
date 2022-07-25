@@ -2,8 +2,8 @@
 title: Job Manager
 ---
 
-画面上部のメニューより [Administration] - [Job Manager] を選択すると Plug-in Job Manager の管理画面が表示されます。
+Select [Administration] - [Job Manager] from the menu at the top of the screen to display the user settings screen.
 
-この画面より Plug-in Job Manager の実行、停止、状態確認が行えます。プラグインを実行させるためには、Plug-in Job Manager を running の状態にしてください。
+This screen allows you to run, stop, and check the status of Plug-in Job Manager. To run plug-ins, set Plug-in Job Manager to the "running" state.
 
 ![Plug-in Job Manager](plugin-job-manager.png)

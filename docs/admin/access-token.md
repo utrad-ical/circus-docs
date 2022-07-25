@@ -1,33 +1,39 @@
 ---
-title: Access token
+title: Permanent Access Tokens
 ---
 
-## Parmanent access token の作成
+When you want to programmatically access CIRCUS REST API, or when you want to use DICOM Storage Server to upload DICOM series from imaging modalities, you need to generate a permanent access token for a user.
 
-CIRCUS の API を使用する場合や、DICOM Storage Server の Docker image を使用するためには、使用するユーザの parmanent access token を作成する必要があります。
+## Generating a Permanent Token
 
-### Web 画面にて作成
+### Via Web UI
 
-画面上部のメニューより[Tool] - [Access Tokens]を選択すると永続接続トークンの作成画面が表示されます。
+1. Select [Tool] - [Access Tokens] in the top menu.
 
-1. トークンを作成するためには、画面下部の"Add new token"のテキストボックスにを短い説明文を入力し、[Create]ボタンをクリックします。
+1. Generate a new token by clicking the "Add new token" button. Input a short text that describes the purpose of this token.
 
-![Add new token](add-new-token.png)
+   ![Add new token](add-new-token.png)
 
-2. すると token が生成されますので、token をコピーして、適切に保管してください（token 右側のアイコンをクリックするとクリップボードにコピーされます）。
+1. Store the generated token securely to somewhere. You cannot display this token again.
 
-![Token created](token-created.png)
+   ![Token created](token-created.png)
 
 :::caution
 
-上記画面で表示されている token は再度表示されません。access token はユーザログインの代わりとなるものですので、厳重に保管してください。
+The access token must be stored securely. Someone who knows this access token will be able to perform anything on behalf of the associated user.
 
 :::
 
-### コマンドラインにて作成 (Docker 版 CIRCUS の場合)
+### Via CLI
 
-CIRCUS の Docker image で /bin/bash を実行し、以下のコマンドを実行します。
+Attach to Bash in the CIRCUS container (see [Installation](./installation.mdx)), and run the following commands.
 
-    # /root/servicies.sh & (バックグラウンド実行)
-    # cd /var/circus/circus-api
-    # node circus add-permanent-token [ユーザ名(circus or 他ユーザ)]
+```shell-session title="Inside the container"
+# /root/servicies.sh &
+# cd /var/circus/circus-api
+# node circus add-permanent-token <LOGIN-NAME-OR-EMAIL>
+```
+
+## Using a Permanent Token
+
+The generated token can be used to access CIRCUS API. For details, refer to the [Developer Guide](../dev/api-intro).

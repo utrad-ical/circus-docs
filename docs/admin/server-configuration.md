@@ -2,10 +2,12 @@
 title: Server Configuration
 ---
 
-画面上部のメニューより [Administration] - [Server Configuration] を選択するとサーバ設定画面が表示されます。現状はドメインの設定のみが行えます。
+Select [Administration] - [Server Configuration] from the menu at the top of the screen to display the server settings screen.
 
-## ドメインの設定
+Currently, only domain settings can be configured.
 
-**Domains** でドメインの追加・変更・削除が行えます。また、**Default Domain** の設定の変更が可能です。変更した設定を反映させるためには [Save] ボタンをクリックしてください。
+## Domain Settings
+
+You can add, change, and delete domains in **Domains**. You can also change the settings for **Default Domain**. Click the [Save] button to reflect the changed settings.
 
 ![General Server Configuration](general-server-configuration.png)

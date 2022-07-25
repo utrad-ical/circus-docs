@@ -1,21 +1,22 @@
 ---
-title: CAD Plug-ins
+title: Managing CAD Plug-ins
 ---
 
-画面上部のメニューより [Administration] - [CAD Plug-ins] を選択すると CAD プラグイン設定画面が表示されます。
+Select [Administration] - [CAD Plug-ins] from the menu at the top of the screen to display the plug-in settings screen.
 
 :::caution
 
-この画面ではプラグイン（Docker イメージ）の新規登録は行えません。[CIRCUS CS プラグインの登録手順](./registration-cs-plugin)に従って登録してください。
+You cannot register a new plug-in from this screen. To register a new plug-in, follow the steps described in [this page](./registration-cs-plugin).
 
 :::
 
-登録済のプラグインに対して変更を行う場合は、上部リストより設定を変更したいプラグインの行をクリックします。ページ下部に設定画面が表示されますので、適宜設定した上で [Save] ボタンをクリックします。
+To make changes to an existing plug-in, click on the line of the plug-in whose settings you wish to change from the top list.
 
 ![CAD Plug-in Settings](cad-plugin-settings.png)
 
 :::note
 
-基本的には設定を変更する必要がありません。マシン環境によっては "Timeout (sec)"（処理の制限時間）の設定を変更する必要があります。
+- You typically do not need to modify settings here. Depending on your machine environment, you may want to adjust "Timeout (sec)".
+- The "Display Strategy" setting allows you to modify how to display the result of the plug-in or collect feedback from users. The default display strategy specified in each plug-in is displayed here. For now, the details of this settings is described in the Developer Guide.
 
 :::
