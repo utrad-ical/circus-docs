@@ -10,7 +10,7 @@ To create a new group, click the "Create new" button. After entering each item, 
 
 To make changes to an existing group, click on the line of the group whose settings you wish to change from the top list.
 
-![Groups](groups.png)
+![Groups](./groups.png)
 
 :::caution
 
@@ -41,7 +41,7 @@ Delete Project
 : Privilege to delete an existing project.
 
 View Personal Info
-: Privilege to display personal information (e.g., patient ID, name, birthdate). If the user does not have this privilege, the personal information will be masked. Even if a user has this privilege, they can temporarily hide personal information from [Personal Preferences](./users/user-preference]).
+: Privilege to display personal information (e.g., patient ID, name, birthdate). If the user does not have this privilege, the personal information will be masked. Even if a user has this privilege, they can temporarily hide personal information from [Personal Preferences](../users/user-preference).
 
 Download volume as raw file
 : Privilege to download raw DICOM volumes.
