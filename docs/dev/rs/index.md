@@ -21,12 +21,11 @@ RS Server has the following capabilities:
 
 RS Client is a framework-agnostic image viewer component. In addition to basic displaying functions (paging, zoom, pan, windowing), it has the following key features suitable for researches:
 
-- **Volume-based viewer**: Fully supports multiplanar reconstruction (MPR)
+- **Volume-based viewer**: Fully supports GPU-accelerated, clieent-side multiplanar reconstruction (MPR) and volume-rendering (VR)
 - **Hybrid rendering**: MPR can be performed both on server-side and client-side using the same algorithm.
 - **Extensible annotations**: Supports common ones (point, circle, ruler) and uncommon ones used for research (3D ROI, voxel painting)
 - **Extensible image source**: Out of the box, the viewer communicates with a CIRCUS RS server to fetch volume data. This can be customized, and it is possible to load local DICOM files or create a completely new volume programmatically.
-- **GPU-accerelated volume rendering (VR)**
-- MIT Licensed
+- Common **morphological operations** including erosion, dilatation, etc.
 
 All modern desktop browsers are supported. Currently, mobile browser support is limited. We do not support Internet Explorer.
 
@@ -34,7 +33,6 @@ All modern desktop browsers are supported. Currently, mobile browser support is 
 
 Currnetly, CIRCUS RS does **NOT** support the following:
 
-- Colored images
 - Movies (typically from ultrasound)
 
 ## See the Interactive Demo
