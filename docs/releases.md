@@ -3,9 +3,22 @@ title: CIRCUS Release Notes
 sidebar_label: Release Notes
 ---
 
-## v1.1.0
+## v1.2.0 (4 Aug 2022)
 
-6 July 2022
+### Web UI
+
+- Added a button to swap the start and end of a partial volume descriptor.
+- Changed to "toaster" style message boxes which do not shift page layout and are visible regardless of the current scroll position.
+
+### CIRCUS DB
+
+- The new alogorithm for interslice interpolation (see below) is avalble as an option.
+
+### CIRCUS RS
+
+- Added a new algorithm for interslice interpolation ("single" mode). This may work better e.g., when painting a tubular structure. (#289)
+
+## v1.1.0 (6 July 2022)
 
 ### Web UI
 
@@ -34,9 +47,7 @@ sidebar_label: Release Notes
 - Fixed several bugs regarding session management. (#269)
 - Internally, CIRCUS now uses MongoDB's transactions to keep stored data consistent.
 
-## [v1.1.0-experimental.1](https://hub.docker.com/layers/circuscad/circus/1.1.0-experimental.1/images/sha256-f34b1a30eb6c951851d8e356b6f16583a13f8201fe8a1fd91f75eaf341a7ddea?context=explore)
-
-7 Feb 2022
+## [v1.1.0-experimental.1](https://hub.docker.com/layers/circuscad/circus/1.1.0-experimental.1/images/sha256-f34b1a30eb6c951851d8e356b6f16583a13f8201fe8a1fd91f75eaf341a7ddea?context=explore) (7 Feb 2022)
 
 ### Web UI
 
