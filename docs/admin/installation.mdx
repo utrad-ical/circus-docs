@@ -76,6 +76,7 @@ Sometimes, a CIRCUS administrator needs to access `/bin/bash` within the contain
 - To initialize or migrate the database
 - To register a CAD plug-in
 - To run other administrative tasks or utilities offered only as CLI
+- To bulk-import a large amount of DICOM data set
 
 To access Bash within a CIRCUS container, type the following command (from the host machine):
 
@@ -98,6 +99,8 @@ $ sudo docker run --rm -v /var/circus/data:/var/circus/data \
 :::
 
 It is recommended to register the above script to a Bash alias, etc.
+
+For details of the CLI, see [this guide](admin-cli.md).
 
 ## Starting CIRCUS Up
 
