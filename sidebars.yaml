@@ -34,6 +34,7 @@ someSidebar:
       - admin/server-configuration
       - admin/access-token
       - admin/dicom-storage-server
+      - admin/admin-cli
   - type: category
     label: Developer Guide
     items:
