@@ -6,7 +6,15 @@ You can use Admin CLI to perform some administrative tasks.
 
 ## Accessing Admin CLI
 
-If you have installed CIRCUS using our Docker image, the CLI is already in the PATH. You can access it like this:
+Attach the container and run the following:
+
+```shell-session title="Inside the container"
+$ cd /var/circus/packages/circus-api
+$ node circus
+```
+
+<!--
+If you have installed CIRCUS using the official Docker image, the CLI is already in the PATH. You can access it like this:
 
 ```shell-session title="In the container"
 $ circus
@@ -19,6 +27,8 @@ If you have installed CIRCUS locally, the CLI is located at `/packages/circus-ap
 $ /path-to-circus/packages/circus-api/circus.js --version
 CIRCUS-API CLI version 0.4.0
 ```
+
+-->
 
 In the rest of this page, the CLI command is simply referred to as `circus`.
 
@@ -52,6 +62,10 @@ Available commands:
 
 ## Commands
 
+:::note
+At the moment, only important commands whose function cannot be accessed via the web UI are explained here. You can use the help command to get more information about each command.
+:::
+
 ### series-import
 
 With this command, you can import DICOM series into CIRCUS. The biggest difference from using the web UI is that you don't have to make an archive file (zip/tgz) and you can import as many files as you wish.
@@ -64,6 +78,18 @@ $ circus series-import --domain=DOMAIN -r /path/of/file-or-dir
 
 :::note
 
-If you are within a Docker container and want to import DICOM series outside the container, you need to temporarily mount the directory containing the series data to the container. To do so, use another `-v` option when you attach the container.
+If you are within a Docker container and want to import DICOM series outside the container, you need to temporarily mount the directory containing the series data to the container. To do so, use another `-v` option when you attach to the container.
 
 :::
+
+### migrate
+
+Sometimes, database migration is necessary when you update CIRCUS. CIRCUS API automatically detects it when the database in an old format, and prompts you to update the database.
+
+```shell-session
+$ circus migrate
+```
+
+### register-cad-plugin
+
+See [Registration of CS Plug-in](registration-cs-plugin.mdx).
