@@ -135,9 +135,12 @@ To stop this container, inspect its ID using `docker ps`, and run `docker kill -
 
 :::warning
 
-"circus" is the initial user with all administrative privileges. After logging-in, make sure to change its password following the steps described in [User Settings](user-settings.md). Additionally, you can disable the "circus" account after creating another user with full administrative privileges.
+- `circus` is the initial user with all administrative privileges. After the first logging-in, make sure to change its password to a safe one following the steps described in [User Settings](user-settings.md). Otherwise, everyone will be able to log in as an administrator with the default password!
+- A safer approach is to make a new user with a unique login ID and a safe password, make it belong to the `admin` group, and disable the default `circus` user.
 
 :::
+
+For the overview of the user management, refer to [Privilege System](privileges.md).
 
 ## Upgrading the Docker Image
 
