@@ -47,10 +47,42 @@ Array<{
 }>
 ```
 
+`metadata` in the plug-in results can contain additional options for each volume. That can contain display options in the following format:
+
+```ts
+interface displayOptions: Array<
+      {
+        volumeId?: number,
+        window?: {
+          level: number,
+          width: number
+        },
+        crop?: {
+          origin: [number, number, number],
+          size: [number, number, number]
+        }
+      }>
+```
+
 For exmaple:
 
 ```json
 {
+  "metadata": {
+    "displayOptions": [
+      {
+        "volumeId": 0,
+        "window": {
+          "level": 152,
+          "width": 356
+        },
+        "crop": {
+          "origin": [20, 6, 0],
+          "size": [636, 728, 128]
+        }
+      }
+    ]
+  },
   "results": {
     "lesionCandidates": [
       {
@@ -105,7 +137,7 @@ interface LesionCandidatesOptions {
 - `dataPath: string`: (default: "results.lesionCandidates") Changes where to read the location data from.
 - `feedbackListener: { type: string; options: any }`: Can be used to collect feedback data for each displayed candidates. See below.
 - `maxCandidates: number`: The maximum number of candidates that can be displayed.
-- `markStyle`: (defalut: magenta circle) The radius, color and line width of the mark.
+- `markStyle`: (defalut: magenta circle) The radius [mm], color and line width of the mark.
 - `confidenceThreshold: number`: If set, candidates with confidences below this value will be excluded.
 - `sortBy`: (default: ['rank', 'asc']) Sorts the displays according to the key.
 - `excludeFromActionLog: boolean`: (default: false) If set to true, nothing will be recorded to the action log regarding this display.
