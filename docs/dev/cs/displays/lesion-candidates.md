@@ -44,7 +44,7 @@ Array<{
   volumeSize: number;
   volumeId?: number;
   location: [number, number, number];
-}>
+}>;
 ```
 
 `metadata` in the plug-in results can contain additional options for each volume. That can contain display options in the following format:

@@ -37,7 +37,7 @@ Array<{
   origin: [number, number, number];
   size: [number, number, number];
   rawFile?: string;
-}>
+}>;
 ```
 
 - `volumeId`: (default: 0) The volume ID which this overlaid volume corresponds to.
