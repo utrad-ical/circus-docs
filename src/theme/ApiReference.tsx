@@ -1,34 +1,6 @@
-import React, { FC, ReactNode } from 'react';
-import data from '../../static/api.json';
-
-interface RouteDef {
-  verb?: string;
-  path: string;
-  description: string;
-}
-
-interface CategoryDef {
-  name: string;
-  description?: string;
-  routes: RouteDef[];
-}
-
-const highlightPathParam = (path: string) => {
-  const children: ReactNode[] = [];
-  const matches = Array.from(path.matchAll(/:[a-zA-z]+\+?/g));
-  let len = 0;
-  const pushStr = (pos: number) => {
-    children.push(path.slice(len, pos));
-    len = pos;
-  };
-  for (const match of matches) {
-    pushStr(match.index!);
-    children.push(<var>{match[0]}</var>);
-    len = match.index! + match[0].length;
-  }
-  pushStr(path.length);
-  return React.createElement(React.Fragment, {}, ...children);
-};
+import React, { FC } from 'react';
+import data, { CategoryDef, RouteDef } from './api-data';
+import { highlightPathParam } from './utils';
 
 const Route: FC<{ route: RouteDef }> = ({ route }) => {
   return (
@@ -38,6 +10,21 @@ const Route: FC<{ route: RouteDef }> = ({ route }) => {
         <span className="path">{highlightPathParam(route.path)}</span>
       </div>
       <div className="desc">{route.description}</div>
+      {/* route.requestSchema && (
+        <details>
+          <summary>Request Schema</summary>
+          {typeof route.requestSchema === 'object' ? (
+            <pre>{JSON.stringify(route.requestSchema, null, 2)}</pre>
+          ) : (
+            <pre>{route.requestSchema}</pre>
+          )}
+        </details>
+      ) */}
+      {route.hasExample && (
+        <div className="details-link">
+          <a href={`api-examples/${route.path.split('/')[1]}`}>Details</a>
+        </div>
+      )}
     </div>
   );
 };
