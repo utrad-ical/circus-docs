@@ -1,4 +1,17 @@
-import React, { useState, useEffect, ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
+import data from '../../static/api.json';
+
+interface RouteDef {
+  verb?: string;
+  path: string;
+  description: string;
+}
+
+interface CategoryDef {
+  name: string;
+  description?: string;
+  routes: RouteDef[];
+}
 
 const highlightPathParam = (path: string) => {
   const children: ReactNode[] = [];
@@ -17,7 +30,7 @@ const highlightPathParam = (path: string) => {
   return React.createElement(React.Fragment, {}, ...children);
 };
 
-const Route = ({ route }) => {
+const Route: FC<{ route: RouteDef }> = ({ route }) => {
   return (
     <div className="route">
       <div className="route-name">
@@ -29,7 +42,7 @@ const Route = ({ route }) => {
   );
 };
 
-const Category = ({ category }) => {
+const Category: FC<{ category: CategoryDef }> = ({ category }) => {
   return (
     <>
       <hr />
@@ -44,30 +57,10 @@ const Category = ({ category }) => {
   );
 };
 
-export const ApiReference = props => {
-  const [data, setData] = useState<any>(undefined);
-
-  useEffect(() => {
-    let aborted = false;
-    import('../../static/api.json').then(data => {
-      if (!aborted) setData(Array.from(data));
-    });
-    return () => {
-      aborted = true;
-    };
-  }, []);
-
-  if (data instanceof Error) {
-    <div>
-      There is no API source data. Build the data using make-api-reference.js.
-    </div>;
-  }
-
-  if (!data) return <div style={{ fontSize: '200%' }}>Loading...</div>;
-
+export const ApiReference: FC = () => {
   return (
     <>
-      {data.map((c, i) => (
+      {(data as CategoryDef[]).map((c, i) => (
         <Category key={i} category={c} />
       ))}
     </>
