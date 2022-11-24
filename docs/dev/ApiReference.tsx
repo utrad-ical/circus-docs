@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 
-const highlightPathParam = path => {
-  const children = [];
+const highlightPathParam = (path: string) => {
+  const children: ReactNode[] = [];
   const matches = Array.from(path.matchAll(/:[a-zA-z]+\+?/g));
   let len = 0;
-  const pushStr = pos => {
+  const pushStr = (pos: number) => {
     children.push(path.slice(len, pos));
     len = pos;
   };
   for (const match of matches) {
-    pushStr(match.index);
+    pushStr(match.index!);
     children.push(<var>{match[0]}</var>);
-    len = match.index + match[0].length;
+    len = match.index! + match[0].length;
   }
   pushStr(path.length);
   return React.createElement(React.Fragment, {}, ...children);
@@ -45,7 +45,7 @@ const Category = ({ category }) => {
 };
 
 export const ApiReference = props => {
-  const [data, setData] = useState(undefined);
+  const [data, setData] = useState<any>(undefined);
 
   useEffect(() => {
     let aborted = false;
