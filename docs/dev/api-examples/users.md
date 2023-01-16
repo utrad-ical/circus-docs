@@ -2,16 +2,12 @@
 
 <ApiPreamble verb="get" path="/users/:userEmail" />
 
-:::info
-
-If you want to get more user information, use `Get /api/admin/users/:userEmail`.
-
-:::
+An administrator can use `GET /api/admin/users/:userEmail` to get more information for an individual user.
 
 ### Request
 
-`userEmail (path parameter)`
-: The email address of the user to be searched.
+`userEmail` (path parameter)
+: The email address of the user.
 
 ```bash title="Example"
 GET /api/users/user1@example.com HTTP/1.1
@@ -31,10 +27,10 @@ If there is a user with the specified email address, information about the user 
 : An optinal text to identify the user. (string)
 
 `createdAt`
-: The date the user information was registered, in UTC format. (date)
+: The date the user information was registered, in ISO date format. (date)
 
 `updatedAt`
-: The date the user information was updated, in UTC format. (date)
+: The date the user information was updated, in ISO date format. (date)
 
 ```json title="Example"
 {
