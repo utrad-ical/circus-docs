@@ -3,7 +3,72 @@ title: CIRCUS Release Notes
 sidebar_label: Release Notes
 ---
 
-## v1.2.0 (4 Aug 2022)
+## v1.6.0 (2023-12-19)
+
+### CIRCUS DB
+
+- Added a new option to determine window propagetion scope (#331).
+- Added a warning message before switching revisions before saving (#335).
+- Fixed a crash when saving empty voxel data.
+- Fixed a crash when trying to add series to a case (#333).
+
+### CIRCUS CS
+
+- Added an ability to search plug-in jobs based on the properties of the primary series (series date, etc).
+
+## v1.5.0 (2022-11-21)
+
+Introduced a new WebSocket-based volume loader. Now each slice of a DICOM series will be loaded incrementally, enabling partial display of MPR images (#261).
+
+### CIRCUS CS
+
+- Added a new `crop` option in LesionCandidate's display option.
+- Changed the default radius for candidates shown in LesionCandidates.
+- Introduced a new URL query parameter to determine the initial feedback mode (personal or consensual) (#330).
+
+### CIRCUS DB
+
+- Added keyboard shortcuts to change window presets (<kbd>1</kbd>-(<kbd>9</kbd>)) (#320).
+
+### Misc
+
+- `create-circus-cad-plugin` is not integrated to the monorepo (#326).
+
+## v1.4.0 (2022-10-01)
+
+### CIRCUS DB
+
+- Added a data integrity check to ensure voxel label data have been saved before adding a revision (#306).
+- Added more configuration option for scroll bars (#309).
+- Changed the keyboard shortcuts for changing the viewer layout (<kbd>A</kbd> to <kbd>Ctrl + A</kbd>, etc)
+- Added new keyboard shortcuts to increase (<kbd>Q</kbd>) or decrease (<kbd>A</kbd>) the width of brush/eraser.
+- You can now use arrow keys (<kbd>Up</kbd>/<kbd>Down</kbd>) for paging a viewer.
+- Added `doodHostWorkingDirectory` option for the plug-in to work correctly in DooD (Docker-out-of-Docker) environments (#316).
+
+### CIRCUS CS
+
+- Fixed a bug that caused a plug-in result directory not to be properly created for some cases.
+
+### Misc
+
+- Added a stricter format check for series instance UIDs when uploading DICOM series (#307).
+- Added stricter security check for series search.
+- Fixed a bug that caused age-based searches to work incorrectly (#313).
+
+## v1.3.0 (2022-08-15)
+
+### Web UI
+
+- Added UI to delete an uploaded series.
+
+### Misc
+
+- Fixed excessive memory usage when exporting volume data in MHD format.
+- TaskManager will delete download files when the associated tasks were dismissed or when they become old (#299).
+- Added a new API endpoint to upload a single DICOM file without generating a task. Use this endpoint to upload DICOM files one by one (#300).
+- The series editor dialog now can add another series from a different study from the same patient.
+
+## v1.2.0 (2022-08-04)
 
 ### Web UI
 
@@ -18,7 +83,7 @@ sidebar_label: Release Notes
 
 - Added a new algorithm for interslice interpolation ("single" mode). This may work better e.g., when painting a tubular structure. (#289)
 
-## v1.1.0 (6 July 2022)
+## v1.1.0 (2022-07-06)
 
 ### Web UI
 
