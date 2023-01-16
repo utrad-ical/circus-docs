@@ -4,9 +4,7 @@
 
 :::info
 
-This API cannot obtain the ID of items in mylists.
-
-Use `Get /api/mylists/:myListId`
+The list of the resource IDs in each mylist can be learge, and thus is not included in the response. Use `Get /api/mylists/:myListId` instead.
 
 :::
 
@@ -21,22 +19,22 @@ GET /api/mylists HTTP/1.1
 Returns an array of objects with the following properties.
 
 `myListId`
-: The ID of a mylist. (string)
+: The ID of the mylist. (string)
 
 `resourceType`
-: The type of items in a mylist. (string)
+: The type of items in this mylist. (string)
 
 `name`
-: The name of a mylist. (string)
+: The name of the mylist. (string)
 
 `public`
-: Indicates whether it is a public mylist or not. (boolean)
+: Indicates whether this is a public mylist or not. (boolean)
 
 `editors`
-: A list of user or group that can edit a mylist. (array)
+: A list of user or group that can edit this mylist. (array)
 
 `createdAt`
-: The date a mylist was created, in UTC format. (date)
+: The date a mylist was created, in ISO format. (date)
 
 ```json title="Example"
 [
@@ -71,7 +69,7 @@ Returns an array of objects with the following properties.
 
 ### Request
 
-`myListId (path parameter)`
+`myListId` (path parameter)
 : ID of the mylist to be searched.
 
 ```bash title="Example"
@@ -81,7 +79,7 @@ GET /api/mylists/01gktktrqh63mdyfjpzzqey36n HTTP/1.1
 ### Response
 
 `myListId`
-: The ID of the desired mylist. (string)
+: The ID of the mylist. (string)
 
 `resourceType`
 : The type of items in the mylist. (string)
@@ -90,16 +88,16 @@ GET /api/mylists/01gktktrqh63mdyfjpzzqey36n HTTP/1.1
 : The name of the mylist. (string)
 
 `public`
-: Indicates whether it is a public mylist or not. (boolean)
+: Indicates whether this is a public mylist or not. (boolean)
 
 `editors`
-: A list of user or group that can edit the mylist. (array)
+: A list of user or group that can edit this mylist. (array)
 
 `createdAt`
-: The date the mylist was created, in UTC format. (date)
+: The date the mylist was created, in ISO date format. (date)
 
 `resourceIds`
-: IDs of items in the mylist. (array)
+: IDs of the items in the mylist. (array)
 
 ```json title="Example"
 {
@@ -125,10 +123,10 @@ GET /api/mylists/01gktktrqh63mdyfjpzzqey36n HTTP/1.1
 : Name of the mylist to be created. (string)
 
 `resourceType`
-: Type of resources to list. (string) **Available resource type: "series", "clinicalCases", "pluginJobs"**
+: The resource type for this list, one of `series`, `clinicalCases` and `pluginJobs`. (string)
 
 `public`
-: Indicates whether it is a public mylist or not. (boolean)
+: Indicates whether this is a public mylist or not. (boolean)
 
 ```bash title="Example"
 POST /api/mylists HTTP/1.1
@@ -157,22 +155,16 @@ Content-Type: application/json
 ### Request
 
 `myListId (path parameter)`
-: ID of the mylist to be operated.
+: ID of the mylist to operate.
 
 `name`
-: New name for the specified mylist. (string)
+: New name for the specified mylist. (string, optional)
 
 `public`
-: Indicates whether it is a public mylist or not. (boolean)
+: Indicates whether this is a public mylist or not. (boolean, optional)
 
 `editors`
-: Set up a user or group that can edit the specified mylist, other than the mylist creator. (array)　**Available editor type: "user" (need userEmail (string)), "group" (need groupId (number))**
-
-:::caution
-
-**_editors_** is replace in total. If you want to add a new editor, please also fill in the previous editors.
-
-:::
+: The list of users or groups that can edit this mylist in addition to the mylist creator. A user must be specified in the `{ type: 'user', userEmail: string }` format, and the group must be in the `{ type: 'group', groupId: number }` format. Note that the passed array will always replace the existing array; you cannot add or remove individual entries. (array, optional)
 
 ```bash title="Example"
 PATCH /api/mylists/01gktktrqh63mdyfjpzzqey36n HTTP/1.1
@@ -188,11 +180,7 @@ Content-Type: application/json
 
 <ApiPreamble verb="delete" path="/mylists/:myListId" />
 
-:::info
-
-This API cannot delete items in mylist.
-
-:::
+This API deletes the mylist itself, not the items in it.
 
 ### Request
 
@@ -208,13 +196,13 @@ DELETE /api/mylists/01gktktrqh63mdyfjpzzqey36n HTTP/1.1
 ### Request
 
 `myListId (path parameter)`
-: ID of the mylist to be operated.
+: ID of the mylist to operate.
 
 `operation`
-: Specifies the operation method for the items. (string) **Operation method: "add", "remove"**
+: Specifies the operation method for the items, either `'add'` or `'remove'` (string).
 
 `resourceIds`
-: IDs of items to be manipulated. (array) **Available item ID: seriesUid, caseId, jobId**
+: IDs of the items (series, cases or plug-in jobs) to add or remove. (string[])
 
 ```bash title="Example"
 PATCH /api/mylists/01gktktrqh63mdyfjpzzqey36n/items HTTP/1.1
@@ -231,7 +219,7 @@ Content-Type: application/json
 ### Response
 
 `changedCount`
-: Number of items added or removed. (number)
+: Number of the items that were added or removed. (number)
 
 ```json title="Example"
 {
