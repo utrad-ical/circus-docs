@@ -65,6 +65,8 @@ Returns an array of objects with the following properties.
 ]
 ```
 
+---
+
 <ApiPreamble verb="get" path="/mylists/:myListId" />
 
 ### Request
@@ -115,6 +117,8 @@ GET /api/mylists/01gktktrqh63mdyfjpzzqey36n HTTP/1.1
 }
 ```
 
+---
+
 <ApiPreamble verb="post" path="/mylists" />
 
 ### Request
@@ -150,6 +154,8 @@ Content-Type: application/json
 }
 ```
 
+---
+
 <ApiPreamble verb="patch" path="/mylists/:myListId" />
 
 ### Request
@@ -178,6 +184,8 @@ Content-Type: application/json
 }
 ```
 
+---
+
 <ApiPreamble verb="delete" path="/mylists/:myListId" />
 
 This API deletes the mylist itself, not the items in it.
@@ -190,6 +198,8 @@ This API deletes the mylist itself, not the items in it.
 ```bash title="Example"
 DELETE /api/mylists/01gktktrqh63mdyfjpzzqey36n HTTP/1.1
 ```
+
+---
 
 <ApiPreamble verb="patch" path="/mylists/:myListId/items" />
 
@@ -226,3 +236,5 @@ Content-Type: application/json
   "changedCount": 1
 }
 ```
+
+---
