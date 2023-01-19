@@ -7,7 +7,7 @@ sidebar_label: Release Notes
 
 ### CIRCUS CS
 
-- Reduced the number of WebGL contexts that slowed down PC (#347).
+- Fixed a problem where too many WebGL canvas contexts were generated, causing PCs to slow down or freeze temporarily (#347).
 
 ### Misc
 
