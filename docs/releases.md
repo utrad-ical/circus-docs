@@ -3,7 +3,20 @@ title: CIRCUS Release Notes
 sidebar_label: Release Notes
 ---
 
-## v1.6.0 (2023-12-19)
+## v1.6.1 (2023-01-19)
+
+### CIRCUS CS
+
+- Reduced the number of WebGL contexts that slowed down PC (#347).
+
+### Misc
+
+- Added an environment variable to automatically start the Plug-in Job Manager when creating a Docker container (#345).
+- The `/users/:userEmail` API now additionally returns the user's `loginId` (#342).
+- Fixed a bug where search conditions using "Today" returned no results (#340).
+- Deselect items' checkboxes after removing them from a mylist (#327, #336).
+
+## v1.6.0 (2022-12-19)
 
 ### CIRCUS DB
 
