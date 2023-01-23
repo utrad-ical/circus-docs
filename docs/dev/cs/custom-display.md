@@ -293,11 +293,13 @@ interface InvalidFeedbackReport {
 type FeedbackReport<T> = ValidFeedbackReport<T> | InvalidFeedbackReport;
 ```
 
-The mechanism is similar to the plain [controlled component pattern](https://reactjs.org/docs/forms.html) in that you have to report data changes using a passed callback, but `initialValue` will not be updated between re-renders. That is, you have to manage the current feedback data inside your display's state.
+The mechanism is different from the plain [controlled component pattern](https://reactjs.org/docs/forms.html) in that `initialValue` will not be updated between re-renders. That is, you have to manage the current feedback data the user is editing inside your display's state, as an [uncontrolled component](https://reactjs.org/docs/uncontrolled-components.html).
 
-Make sure to **call `onFeedbackChange` on initial render**. It tells the CIRCUS system that your display wants to collect user feedback. And report the validation status whenever your current feedback data inside your display changes, which can be done using `useEffect(..., [currentFeedback])`. On the other hand, if your display doesn't need to collect feedback, simply avoid calling `onFeedbackChange`.
+To tell the CIRCUS system that your display wants to collect users' feedback, **call `onFeedbackChange` on initial render**. Then, whenever the user makes an edit to your display, report its validation status using `onFeedbackChange`, usually in combination with `useEffect(..., [currentFeedback])`. For example, if you want your display to collect a score from 1 to 5 from a user, first call `onFeedbackChange({ value: false, error: 'Input your evaluation' })` on initial render. Manage the selection state typically using the `useState` hook, and when the user selects their score, call something like `onFeedbackChange({ valid: true, valie: 4 })`.
 
-You can return any data as feedback as long as they are JSON-serializable. Do not return non-serializable data such as `Date`, `Map` or `symbol`.
+If your display doesn't need to collect feedback at all, simply avoid calling `onFeedbackChange`. CIRCUS CS allows the user to register the feedback when no display is blocking it by the `valid: false` status.
+
+You can report any data as feedback as long as they are JSON-serializable. Do not return non-serializable data such as a `Date`, `Map` or symbol.
 
 This is a sample display which collects numerical feedback (greater than 3) from the user.
 
@@ -327,10 +329,7 @@ const NumberInputDisplay = props => {
     if (currentFeedback > 3) {
       onFeedbackChange({ valid: true, value: currentFeedback });
     } else {
-      onFeedbackChange({
-        valid: false,
-        error: 'The value must be greater than 3',
-      });
+      onFeedbackChange({ valid: false, error: 'Must be greater than 3' });
     }
   }, [currentFeedback]);
 
@@ -350,6 +349,6 @@ const NumberInputDisplay = props => {
 
 :::important
 
-When you integrate personal feedback entries, use `props.personalOpinions` rathern than `job.feedbacks` from `useCsResults()`. These seem similar, but the latter contains all the data from other displays, and you cannot determine which part of the data is relevant to your display.
+When you integrate personal feedback entries, use `props.personalOpinions` rathern than `job.feedbacks` from `useCsResults()`. These seem similar, but the latter contains all the feed data including data from other displays, and you cannot determine which part of the data is relevant to your display.
 
 :::
