@@ -4,8 +4,8 @@ someSidebar:
     label: User Guide
     items:
       - users/login
-      - users/series-search
       - users/series-import
+      - users/series-search
       - type: category
         label: CIRCUS DB
         items:
@@ -15,7 +15,7 @@ someSidebar:
       - type: category
         label: CIRCUS CS
         items:
-          - users/new-job
+          - users/managing-jobs
           - users/plugin-job-search
           - users/cad-result-display
       - users/user-preference

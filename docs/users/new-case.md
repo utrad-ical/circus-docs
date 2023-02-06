@@ -1,29 +1,46 @@
 ---
-title: New Case
+title: Creating Cases
 ---
 
-CIRCUS CS では CAD ソフトウェアなどのプラグインの実行指令は、「ジョブ」として登録され、登録時に「Job ID」が割り当てられます。ジョブは一度にひとつずつ逐次実行されます（1 台のマシンで複数のジョブを同時実行することはできません）。
+## Data Structure of CIRCUS DB
 
-## ケースの登録手順
+In CIRCUS DB, clinical data are managed in units called **Cases**. Cases are created by users and stored in a container called **Project**. Case data are versioned in **Revisions**, which will be created every time a user saves the editing data.
 
-1. Series Search 画面で処理を行いたい DICOM シリーズを検索し、そのシリーズのリスト右側の[+ New]より "New Case" を選択します。
+![Projects, Cases and Revisions](./db-data-structure.png)
 
-   :::tip
+A case must belong to only one project. A project can contain as many cases as you want. Each case and project has an unique ID (caseId and projectId).
 
-   Case に複数シリーズを登録する場合は、最初のシリーズに対して"New Case"（新規ケース登録）を行います。2 番目以降のシリーズは New Case 画面で設定します。
+Only administrators can [create and manage projects](../admin/project-settings).
 
-   :::
+## Creating a New Case
 
-1. New Case 画面が表示されます。"Series" で処理対象の DICOM シリーズを設定します(後述)。所属するプロジェクトは下部の"Project"より選択します。設定が完了したら [Create case for XXXX] (XXXX は選択したプロジェクト名) ボタンをクリックします。ケースが登録されるとケース情報入力画面が表示されます。
+:::info
+You need sufficient privileges to create a case in a project. If the following steps do not work, contact the administrator of your CIRCUS installation.
+:::
 
-   ![New Case](new-job.png)
+1. [Import the DICOM images](./series-import) you want to use.
 
-## 登録 DICOM シリーズの設定
+1. Go to [Series Search](./series-serch) screen and find the series you want to make a case from. From the [+ New] dropdown menu, select "New Case".
 
-- シリーズの一部のみを使用する、もしくは画像番号の順番を変える（上下反転させる）場合は、シリーズリストの Range 列にあるボタン（初期状態は[full])をクリックします。すると、設定ダイアログが表示されますので、start(開始画像番号)、end(終了画像番号)、delta(差分、上下反転させる場合は負値)を設定し、[OK]ボタンをクリックします。
+1. In the "New Case" screen, do the following:
 
-  ![Partial volume setting](partial-volume-dialog.png)
+   - Select the project this case will belong to. Only the administrator can create or edit projects.
+   - (Optional) If only the subset of the series is used in the case, specify the image range by clicking "Range" button. By default ("auto"), all the images in the first consecutive segment of the series will be used.
+   - (Optional) If you want a case with more than one series, click the "Add Series" button and add the series you need.
+   - (Optional) Add tags for the case.
 
-- 他のシリーズを追加したい場合はまず、[+ Add Series]ボタンをクリックします。すると、同一検査の他のシリーズが一覧で表示されますので、追加するシリーズ右側の [Add]ボタンをクリックしてください。
+   ![New Case](new-case.png)
 
-  ![Add DICOM series](add-dicom-series.png)
+1. Press the "Create Case for (project name)" button.
+
+### Using Only Part of the Series
+
+Sometimes not all images of interest in a DICOM series are contiguous. For example, the first image in a series may contain a "localizer" image with embedded reference lines. Or the images of interest may be interleaved (e.g. 1, 4, 7, 10, ..., 61) or stored in reverse order (e.g. 150, 149, 148, ..., 1). In such cases, you can manually specify image ranges of the series. To do so, click the "Range" button for each series. In the dialog that opens, specify the "Start", "End" and "Delta" values. If the images are stored in an interleaved manner, enter a delta value greater than 1. If the images are stored in reverse order, enter a negative delta value.
+
+![Partial volume setting](partial-volume-dialog.png)
+
+### Using More than One Series
+
+A case/job can contain more than one series. To add another series to a case, click the "Add Series" button and select the series you want to include.
+
+![Add DICOM series](add-dicom-series.png)

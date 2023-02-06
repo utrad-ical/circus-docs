@@ -2,51 +2,28 @@
 title: Log in
 ---
 
-## CIRCUS へのログイン
+## Loggin in to CIRCUS
 
-Web ブラウザで CIRCUS のログイン画面を表示し、ユーザ ID ならびにパスワードを入力して [Login] ボタンをクリックします。
+Go to the CIRCUS Login Screen using your browser. Enter your user ID and password, and click [Login].
 
-![Login page](login-disp.png 'ログイン画面')
+![Login Screen](./login-disp.png)
 
-## ホーム画面
+## Home Screen
 
-ログインに成功すると以下のようなホーム画面が表示されます。
+After successfully logging in, the following Home Screen will be displayed.
 
-![Home page](home-page.png 'ホーム画面')
+![Home Screen](./home-page.png)
 
-ホームページの上部メニューバーに表示されている項目は以下の通りです（ユーザにより表示項目が変化します）。
-
-CIRCUS
-: クリックするとホーム画面に戻ります。
-
-Series
-: DICOM シリーズに関する項目が表示されます。
-
-Case
-: CIRCUS DB の症例データに関する項目が表示されます。
-
-CAD
-: CIRCUS CS の処理結果などに関する項目が表示されます。
-
-Tool
-: 各種ツールに関する項目が表示されます。
-
-Administration
-: CIRCUS の設定に関する項目が表示されます（管理者権限を有するユーザのみ表示されます）。
-
-Logout
-: ログアウトします。
-
-画面中央にある 4 種類のアイコンをクリックすると、それぞれ以下のページに移動します。
+The four icons in the home screen are links to important pages:
 
 Series Import
-: DICOM 画像のアップロード画面が表示されます。
+: Go to [Series Import](./series-import) screen to upload DICOM images.
 
 Series Search
-: DICOM シリーズの検索画面が表示されます。
+: Go to [DICOM Series Search](./series-search) screen.
 
 Case Search
-: CIRCUS DB の症例データの検索画面が表示されます。
+: Go to [Case Search](./case-search) screen of CIRCUS DB.
 
 Plug-In Job Search
-: DICOM CS の plug-in 実行結果の検索画面が表示されます。
+: Go to [Plug-in Job Search](./plugin-job-search) screen of CIRCUS CS.
