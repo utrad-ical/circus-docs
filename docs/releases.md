@@ -3,6 +3,20 @@ title: CIRCUS Release Notes
 sidebar_label: Release Notes
 ---
 
+## v1.8.0 (2023-02-06)
+
+### CIRCUS CS
+
+- Add an ability to cancel or invalidate a plug-in job. You can cancel a job only when the job is in the `in_queue` status, and you can invalidate a job only when it is in the `finish` status (#353).
+
+## v1.7.0 (2023-01-29)
+
+### CIRCUS CS
+
+- Fixed a bug where user can edit their personal feedback after a consensual feedback has been registered (#348).
+- Add an ability to create a job/case with an automatic partial volume descriptor (#350).
+- Fixed a crash related to Locator display (#349)
+
 ## v1.6.1 (2023-01-19)
 
 ### CIRCUS CS
