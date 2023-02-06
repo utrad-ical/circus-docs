@@ -34,7 +34,7 @@ In CIRCUS, the status of a job transitions as follows.
 
 1. [Import the DICOM images](./series-import) you want to use.
 
-1. Go to [Series Search](./series-serch) screen and find the series you want to make a case from. From the [+ New] dropdown menu, select "New Case".
+1. Go to [Series Search](./series-search) screen and find the series you want to make a case from. From the [+ New] dropdown menu, select "New Case".
 
 1. In the "New Job" screen, do the following:
 
