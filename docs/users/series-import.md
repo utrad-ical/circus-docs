@@ -2,53 +2,50 @@
 title: Series Import
 ---
 
-DICOM ファイルを CIRCUS システムに転送する方法の 1 つとして、Series Import 画面による DICOM ファイルのアップロードがあります。
+You can upload DICOM files or ZIP archive files containing DICOM files to import DICOM files to the CIRCUS system.
 
-## Series Import 画面の表示方法
+You can go to the Series Import screen in two ways:
 
-画面上部のメニューより [Series] - [Series Import] を選択すると Series Import 画面が表示されます。
+- Select [Series] - [Series Import] in the top menu.
+- Select [Series Import] on the home screen.
 
-![Menu - Series Import](menu-series-import.png)
+![Menu - Series Import](./menu-series-import.png)
 
-:::tip
+## Upload Limitations
 
-ホーム画面中央の [Series Import] ボタンをクリックしても表示されます。
+The following limitations apply when uploading DICOM data via a browser.
 
-:::
+- Maximium number of files: 30
+- Total file size: 200 MB
 
-## 同時アップロードが可能なファイル数・サイズ
+:::info
 
-Series Import 画面で同時アップロードが可能なファイル数・サイズは以下の通りです。DICOM ファイルのほかに、複数の DICOM ファイルがまとめられた ZIP ファイルも対応しています。
-
-- 最大ファイル数：30
-- 最大ファイルサイズ（合計）：200 MB
-
-:::important
-
-Series Import 画面を使った DICOM ファイルのアップロードでは、DICOM ファイルの圧縮／非圧縮はそのまま維持されます（可逆圧縮や圧縮なしへの変換は行われません）。
+An administrator can increase these limitations via a configuration file.
 
 :::
 
-## アップロード手順
+When uploading a DICOM file on the Series Import screen, the compression status of the DICOM files remains the same (no lossless compression or conversion to uncompressed is performed).
 
-1. 画面中央の [Select File] ボタンをクリックしてアップロードファイルを選択するか、アップロードしたいファイルを灰色の領域へドラッグ＆ドロップします。
+## Uploading DICOM files
+
+1. Click the "Select File" button in the center of the screen to select the files to upload, or drag and drop the files into the box.
 
    ![Series Import: initial](series-import-initial.png)
 
-1. アップロードするファイルの所属ドメインを選択してから、[Upload] ボタンをクリックします。確認ダイアログが表示されますので、問題が無ければ [OK] ボタンをクリックしてアップロードを開始します。
+1. Select the **domain** the uploaded series will belong to, and the click the [Upload] button.
 
    ![Series Import: file added](series-import-file-added.png)
 
    :::important
 
-   一度アップロードしたシリーズのドメインを変更することはできません。
+   You cannot change the domain of the series after they have been upload.
 
    :::
 
-1. アップロード処理が完了すると、画面上部にインポートが開始されたというメッセージが表示されます。アップロードはタスクによるバックグラウンド処理にて行われます。
+1. When the upload process is complete, a message appears at the top of the screen indicating that the import has started. Uploading is performed in the background.
 
    ![Series Import: task started](series-import-task-started.png)
 
-1. 画面上部の鐘アイコンをクリックすると、ファイルのアップロード処理（バックグラウンド処理）の状況が確認できます。
+1. Click the bell icon at the top of the screen to check the importing status.
 
    ![Series Import: task status](series-import-task-status.png)

@@ -2,23 +2,60 @@
 title: User Preference
 ---
 
-## ユーザ固有の設定
-
-画面上部のメニューより [Tool] - [Preference] を選択するとユーザ固有の設定画面が表示されます。
+You can enter the Preference screen via the [Tool] - [Preference] link on the top menu.
 
 ![Preferences](user-preference.png)
 
-設定できる項目は以下の通りです。変更した設定を反映させるためには画面下部の [Save] ボタンをクリックしてください。
+:::caution
+Click the [Save] button after you have made any changes. Otherwise, your changes will be lost.
+:::
+
+## Appearances
 
 Color Theme
-: 各ページの背景色を設定します（白 or 黒）
+: Set the background color of each page (white or black).
 
 Show Personal Info
-: 患者個人情報（患者 ID・氏名・生年月日）を表示できるかどうかを設定します。
-
-Search Presets の削除
-: 各検索画面で作成した検索条件の preset を削除することができます。
+: Sets whether patients' personal information (patient ID, name, sex, etc.) can be displayed. Turn this off when you want to temporarily hide personal information, e.g., for demonstrating purposes.
 
 :::note
-Show Personal Info を ON にしても個人情報を表示できる権限が付与されていない場合は情報の表示は行えません。
+Even if 'Show Personal Info' is turned on, you cannot view personal information without sufficient user priviledge.
 :::
+
+## Search
+
+You can delete preset search conditions created in each search screen (series, case, job).
+
+## CIRCUS DB
+
+\*: can be changed also in the case screen.
+
+Reference lines\*
+: Sets the visibility of reference lines.
+
+Initial alpha for new labels
+: Sets the initial alpha (opacity) value for newly created labels.
+
+Label colors
+: Customizes the label color palette.
+
+Interpolation mode\*
+: Sets the interpolation mode (nearest neighbor or triliniear).
+
+Window propagation scope\*
+: Determines how window changes are applied to each viewer.
+
+Scroll bars\*
+: Sets the visibility of scroll bars.
+
+Maintain aspect ratio
+: By default, the aspect ratio of 2D/3D labels are not preserved unless the Shift key is pressed. When this is checked, aspect ratio is preserved by default.
+
+Lock center of gravity
+: By default, the resize of 2D/3D labels are performed with respect to the opposite edge or vertex unless the Ctrl key is pressed. When this is checked, resizing is performed with respect to the center of the label.
+
+2D shapes visibility\*
+: a
+
+Revision message templates
+: Customizes the messages that appear in the revision save dialog.

@@ -3,7 +3,6 @@ someSidebar:
   - type: category
     label: User Guide
     items:
-      - users/data-structure
       - users/login
       - users/series-search
       - users/series-import
@@ -20,6 +19,7 @@ someSidebar:
           - users/plugin-job-search
           - users/cad-result-display
       - users/user-preference
+      - users/data-structure
   - type: category
     label: Administrator Guide
     items:
