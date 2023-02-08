@@ -32,13 +32,19 @@ A search preset is a named set of search conditions that you use frequently.
 
 ### Deleting a Search Preset
 
-To delete a saved search preset, go to [User Preference](user-preference.md).
+You can delete a saved search preset in the [User Preference](user-preference.md) page.
 
 ## My List
 
 My List allows you to create a collection of items (series, cases or plug-in jobs).
 
 Each My List can contain only one type of item. For example, you cannot create a My List that contains both cases and plug-in jobs. The number of items a list can contain is limited to 1,000.
+
+:::tip Tags vs My Lists
+
+You can also assign tags to CIRCUS DB cases. Although conceptually similar, tags are shared by all users and are displayed prominently on the screen. Use tags to mark shared state of a case (e.g., "Reviewed", "High Priority") and use My Lists for personal collections.
+
+:::
 
 ### Creating a My List
 
