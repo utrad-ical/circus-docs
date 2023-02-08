@@ -6,6 +6,7 @@ someSidebar:
       - users/login
       - users/series-import
       - users/series-search
+      - users/search-preset
       - type: category
         label: CIRCUS DB
         items:

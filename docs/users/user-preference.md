@@ -40,22 +40,22 @@ Label colors
 : Customizes the label color palette.
 
 Interpolation mode\*
-: Sets the interpolation mode (nearest neighbor or triliniear).
+: Sets the interpolation mode (nearest neighbor or trilinear).
 
 Window propagation scope\*
-: Determines how window changes are applied to each viewer.
+: Specifies how window changes are applied to each viewer.
 
 Scroll bars\*
-: Sets the visibility of scroll bars.
+: Specifies the visibility of scroll bars.
 
 Maintain aspect ratio
-: By default, the aspect ratio of 2D/3D labels are not preserved unless the Shift key is pressed. When this is checked, aspect ratio is preserved by default.
+: By default, the aspect ratio of 2D/3D labels is not preserved unless the Shift key is pressed. If this is checked, the aspect ratio is preserved by default.
 
 Lock center of gravity
-: By default, the resize of 2D/3D labels are performed with respect to the opposite edge or vertex unless the Ctrl key is pressed. When this is checked, resizing is performed with respect to the center of the label.
+: By default, 2D/3D label resizing is performed with respect to the opposite edge or vertex unless the Ctrl key is pressed. If this is checked, resizing is performed with respect to the center of the label by default.
 
 2D shapes visibility\*
-: a
+: Specifies how far 2D labels remain visible.
 
 Revision message templates
-: Customizes the messages that appear in the revision save dialog.
+: Customizes the messages that appear in the revision save dialog box.

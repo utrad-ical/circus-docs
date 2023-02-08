@@ -31,22 +31,6 @@ Advanced search lets you use other search keys and complex conditions.
 
 ![Search condition (Advanced)](series-search-advanced-condition.png)
 
-### Saving Presets
-
-You can save the condition you frequently use as a named preset. Perform the search with the condition you want to save, and then click the "Save" button.
-
-![Set preset name](search-preset-dialog.png)
-
-You can access the saved preset in the top "Series" menu.
-
-![Menu - Series preset](menu-series-search-preset.png)
-
-:::note
-
-To delete presets, see [User Preference](user-preference.md).
-
-:::
-
 ## Viewing Series Search Results
 
 Search results will be displayed below the condition box.
