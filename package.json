@@ -14,8 +14,8 @@
     "prettier": "prettier --write docs/**/*.{md,mdx,js,ts,tsx}"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.2.0",
-    "@docusaurus/preset-classic": "^2.2.0",
+    "@docusaurus/core": "^2.3.1",
+    "@docusaurus/preset-classic": "^2.3.1",
     "@mdx-js/react": "^1.6.21",
     "@utrad-ical/circus-icons": "^0.2.0",
     "axios": "^0.21.1",
