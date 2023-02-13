@@ -13,6 +13,7 @@ someSidebar:
           - users/new-case
           - users/case-search
           - users/case-detail
+          - users/case-voxel-labels
       - type: category
         label: CIRCUS CS
         items:

@@ -44,3 +44,9 @@ Sometimes not all images of interest in a DICOM series are contiguous. For examp
 A case/job can contain more than one series. To add another series to a case, click the "Add Series" button and select the series you want to include.
 
 ![Add DICOM series](add-dicom-series.png)
+
+:::tip
+
+It is also possible to add a series after creating a case.
+
+:::

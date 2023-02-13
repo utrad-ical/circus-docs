@@ -1,35 +1,38 @@
 ---
-title: Case Detail
+title: Case Editor
 ---
 
-Case Search の検索結果のリスト各行にある [View] ボタンをクリックすると、Case Detail 画面が表示されます。Case Detail 画面ではラベルおよび属性情報の入力を行います。
+To start editing a case, click one of the \[View\] buttons to the right of the [Case Search](./case-search) result to enter a case editor.
 
-## Case Detail 画面の構成
+## Case Editor Overview
 
-Case Detail 画面は以下の要素で構成されています。
+After entering the case editor, you will see something like the below:
 
-![Case Detail](case-detail-all.png)
+![Case Editor](case-detail-all.png)
 
 Case Info
-: Case ID、患者情報（患者情報表示権限を有する場合）、プロジェクト名、タグが表示されます。
+: Displays the case ID, the patient information (if you have sufficient priviledges), the project this case belongs to, and the tags of the case.
 
-Revision
-: 現在表示しているリビジョンの情報が表示されています。プルダウンメニューになっているので表示するリビジョンを切り替えることも可能です。
+Revision Selector
+: Displays the current revision in which you are editing. You can switch the revision to see a previous revision. It is also possible to edit a case based on a previous revision, too.
 
-DICOM ビューア
-: DICOM シリーズより生成したボリュームデータが表示されます。初期状態では axial 断面のほかに MPR(coronal, sagittal, oblique)の 4 断面が表示されます。
+DICOM Viewer
+: Displays the image of the DICOM series. If the series contains a 3D volume, four viewers (axial, coronal, sagittal, and oblique) are displayed by default.
+
+Tool Bar
+: You can select the tool you are using.
 
 Series / Labels
-: ケースに属しているシリーズ、ならびに各シリーズに属しているラベルの情報が表示されるとともに、ラベルの属性情報の入力インターフェイスがあります。
+: Displays the list of series belonging to this case and the list of labels for each series. You can also edit the label attributes here.
 
 Case Attributes
-: ケースの属性情報の入力インターフェイスがあります。
+: Displays the case attributes editor.
 
-## DICOM Viewer Component の操作
+## Using the DICOM Viewer
 
-### 左ドラッグ時の操作
+### Tools
 
-DICOM Viewer Component 左上のツールバーで、マウスの左ドラッグ時の操作を選択できます。下図のアイコンは左側より以下の通りです。
+You can control the left-drag behavior by selecting one of the tools on the toolbar.
 
 ![Tool for left drag](case-detail-tool-for-left-drag.png)
 
@@ -37,255 +40,196 @@ import { Icon } from '../icon';
 
 <dl>
 <dt><Icon icon="rs-icon-pager" /> Paging (<kbd>P</kbd>)</dt>
-<dd>画像のスクロール（ページング）を行います。</dd>
+<dd>Scrolls the current image.</dd>
 <dt><Icon icon="rs-icon-zoom" /> Zoom (<kbd>Z</kbd>)</dt>
-<dd>画像のズームを行います。アイコン右側のプルダウンメニューにより、現在の表示画像を一定の倍率でズームすることもできます (×8, ×4, ×2, ×1/2, ×1/4, ×1/8)。</dd>
-<dt><Icon icon="rs-icon-hand" />Hand (<kbd>H</kbd>)</dt>
-<dd>画像の表示位置を移動させることができます。</dd>
+<dd>Zooms the image. The pull-down menu to the right of the icon allows you to zoom the current displayed image at a fixed magnification (×8, ×4, ×2, ×1/2, ×1/4, ×1/8).</dd>
+<dt><Icon icon="rs-icon-hand" /> Hand (<kbd>H</kbd>)</dt>
+<dd>Pans the current image.</dd>
 <dt><Icon icon="rs-icon-window" /> Window (<kbd>W</kbd>)</dt>
-<dd>画像の表示条件 (Window Level, Window Width) を変えることができます。アイコン右側のプルダウンメニューで登録済のプリセット値への変更や、マニュアルでの設定が行えます。</dd>
+<dd>Changes the display window (window level, window width) of the current image by dragging. You can also use the pull-down menu to the right to apply a preset window or enter the window values manually.</dd>
 </dl>
 
-カッコ内はキーボードショートカットです（以下同様）。
+Characters in boxes are keyboard shortcuts.
 
-### 画像のスクロール
+### Paging (Scrolling) Images
 
-DICOM Viewer Component の画像は以下の方法でスクロールすることができます。
+There are several ways to page (scroll) the current image.
 
-- マウス左ドラッグ操作を Pager <Icon icon="rs-icon-pager" /> に設定（Pager アイコンをクリック、もしくは <kbd>P</kbd> キーを押す）した上で、スクロールしたい断面で左ドラッグをします。
+- Select the Pager <Icon icon="rs-icon-pager" /> tool (by clicking the icon or pressing the <kbd>P</kbd> key) and left-drag on the image you want to page.
 
-- スクロールしたい断面でマウスカーソルを合わせて、マウスホイールでスクロールします。
+- Hover the mouse cursor over the image you wish to scroll and use the mouse wheel.
 
-- 設定ツールバーの [Scroll bars] で [Small] もしくは [Large] を選択し（左下図）、スクロールしたい断面の右端にマウスカーソルを合わせるとスクロールバーが表示されます（右下図）。
+- Use a scroll bar on each viewer. If the scroll bar is not visible, open the gear icon menu and change the scroll bar visibility option.
 
-  | ![Scrollbar setting](case-detail-scrollbar-setting.png) | ![Scrollbar setting](case-detail-scrollbar-display.png) |
-  | :-----------------------------------------------------: | :-----------------------------------------------------: |
-  |                  スクロールバーの設定                   |                  スクロールバーの表示                   |
+  ![Scroll Bar Setting](case-detail-scrollbar-setting.png)
 
-### 画面表示の切替
+  ![Scroll Bar](case-detail-scrollbar-display.png)
 
-初期状態は axial 断面、coronal 断面、sagittal 断面、oblique 断面が 2 行 ×2 列で表示されていますが、ツールバーにて axial、coronal、sagittal のみの表示に切り替えることができます。
+### Managing Viewer Layout
+
+By default, if your primary series is 3D, a 2&times;2 layout is applied, each showing an axial, coronal, sagittal or oblique slice. You can quickly change the layout by using the layout menu on the tool bar.
 
 ![Select view](case-detail-select-view.png)
 
-### リファレンス線、補間
+You can change the layout of the viewers in several ways:
 
-DICOM Viewer Component 上部の歯車アイコンより "Show reference line" を選択するとリファレンス線を表示されます。
+- Drag the horizontal bar at the top of each viewer.
+- Double click a series on the left panel to quickly reveal the series.
+- Drag a series from the left panel into the viewer area.
 
-Triliear filtering を選択すると表示画像に対して線形補間が行われます（選択しない場合は nearest neighbor 法による補間）。表示は滑らかになりますが、表示速度は遅くなります。
+You can increase the number of rows or columns by dragging an item into the "gap" between two viewers. A new row or column will be inserted when you drop the item. To remove a row or a column, remove or move all viewers in that row/column. An empty row/column will be automatically removed.
 
-![Viewer settings](case-detail-viewer-settings.png)
+Additionally, you can change the section type of the viewer using the dropdown menu at the top of each viewer.
 
-## ラベルの新規入力
+### Various Display Settings
 
-"Series/Labels" の [Add ●] の右側のプルダウンメニューよりラベルの種類を選択します。
+![Viewer Settings](case-detail-viewer-settings.png)
+
+To show reference lines, check the \[Show reference line\] option in the gear menu.
+
+To change interpolation methods, check or uncheck the \[Trilinear filtering\] menu. When checked, the display will be smoother, but the display speed may be slower.
+
+By default, 2D labels are visible semi-transparently within two slices before and after the slice on which they are defined. You can change the visibility so that they are displayed regardless of the currently displayed slice.
+
+## Editing Labels
+
+The main thing to do in the case editor is to edit labels. In CIRCUS DB, you can create various types of labels.
+
+### Creating a New Label
+
+Select the series to which you want to add a label, and then select the label type using the \[Add\] pull down menu.
 
 ![Add label](add-label.png)
 
-CIRCUS DB で実装しているラベルは以下の通りです。
-
 <dl>
-<dt><Icon icon="circus-icon-annotation-voxel"/> voxel</dt>
-<dd>ボクセル単位で塗りつぶすラベルです。</dd>
-<dt><Icon icon="circus-icon-annotation-cuboid"/> cuboid (3D)</dt>
-<dd>直方体 ROI です。作成直後は立方体です。</dd>
-<dt><Icon icon="circus-icon-annotation-ellipsoid"/> ellipsoid (3D)</dt>
-<dd>楕円体 ROI です。作成直後は正球です。</dd>
-<dt><Icon icon="circus-icon-annotation-rectangle"/> rectangle (2D)</dt>
-<dd>長方形 ROI です。作成直後は正方形です。</dd>
-<dt><Icon icon="circus-icon-annotation-ellipse"/> ellipse (2D)</dt>
-<dd>楕円 ROI です。作成直後は正円です。</dd>
-<dt><Icon icon="circus-icon-annotation-point"/> point</dt>
-<dd>点状のラベルです。作成直後はラベル追加時の画像の中心に設置されます。</dd>
-<dt><Icon icon="circus-icon-annotation-ruler"/> ruler</dt>
-<dd>サイズ計測用ラベルです。作成直後はラベル追加時の画像の中心に設置されます。</dd>
+<dt><Icon icon="circus-icon-annotation-voxel"/> Voxel</dt>
+<dd>Makes a free-form ROI (region of interest) by voxel painting.</dd>
+<dt><Icon icon="circus-icon-annotation-cuboid"/> Cuboid (3D)</dt>
+<dd>Defines a cuboid (or cubic) ROI (region of interest).</dd>
+<dt><Icon icon="circus-icon-annotation-ellipsoid"/> Ellipsoid (3D)</dt>
+<dd>Defines ellipsoid (or spherical) ROI.</dd>
+<dt><Icon icon="circus-icon-annotation-rectangle"/> Rectangle (2D)</dt>
+<dd>Defines recutangular (or square) ROI.</dd>
+<dt><Icon icon="circus-icon-annotation-ellipse"/> Ellipse (2D)</dt>
+<dd>Defines a ellipse (or circular) ROI.</dd>
+<dt><Icon icon="circus-icon-annotation-point"/> Point</dt>
+<dd>Defines a point label with no width or height.</dd>
+<dt><Icon icon="circus-icon-annotation-ruler"/> Ruler (3D)</dt>
+<dd>Defines a label to measure the length between two points.</dd>
 </dl>
 
-2D ROI は設定したスライスの上下 3 スライスでは半透明で表示されます。
-
-## ボクセルラベルに対する操作
-
-DICOM Viewer Component 上部のツールバーで、ボクセルラベルに対する操作を選択します。下図のアイコンは左側より以下の通りです。
-
-![Painting tools](case-detail-painting-tools.png)
-
-<dl>
-<dt><Icon icon="rs-icon-brush" /> ブラシ (<kbd>B</kbd>)</dt>
-<dd>クリックした位置を四角いペンで塗ります。</dd>
-<dt><Icon icon="rs-icon-eraser" /> 消しゴム (<kbd>E</kbd>)</dt>
-<dd>クリックした位置のラベルを消去します。</dd>
-<dt>ブラシ・消しゴムの太さ設定</dt>
-<dd>プルダウンメニューでブラシ・消しゴムの太さを設定します。</dd>
-<dt><Icon icon="rs-icon-bucket" /> バケツツール (<kbd>Shift</kbd>+<kbd>B</kbd>)</dt>
-<dd>クリックした位置から連結している同じラベル値の領域を塗りつぶします。</dd>
-<dt><Icon icon="rs-icon-bucket-erase" /> バケツ消去ツール (<kbd>Shift</kbd>+<kbd>E</kbd>)</dt>
-<dd>クリックした位置から連結している同じラベル値の領域を消去します。</dd>
-<dt><Icon icon="rs-icon-wand" /> ワンドツール (<kbd>M</kbd>)</dt>
-<dd>背景画像の画素値に対し、クリックした位置の画素値から一定範囲の画素値を持つ画素を塗ります。スレッショルドと最大距離をオプションで設定できます。</dd>
-<dt><Icon icon="rs-icon-wand-eraser" /> ワンド消去ツール (<kbd>Shift</kbd>+<kbd>M</kbd>)</dt>
-<dd>背景画像の画素値に対し、クリックした位置の画素値から一定範囲の画素値を持つ画素を消去します。</dd>
-</dl>
-
-:::note
-
-全ボリュームデータの読込が完了するまでの間（ローディングインジゲータが表示されている間）は、ワンドツールおよびワンド消去ツールは有効になりません。
-
+:::tip
+CIRCUS remembers the last selection you made. To create another label of the same type, you can just click the \[Add\] button.
 :::
 
-## 作成したラベルに対する処理
+Among these, Voxel labels are special and are explained in a [separate page](./case-voxel-labels).
 
-"Series/Labels" の […] より、アクティブな ラベルに対して Connected Component Analysis (Connected component labeling (CCL)、Hole filling)、Mathematical Morphology (erosion、dilation、interslice interpolation) 、oblique 断面の自動生成を行うことができます。
+Labels can be sorted manually by dragging, but you cannot move a label to under another series when multiple series are in a case.
 
-![Label processor menu](case-detail-label-processor-menu.png)
+### Moving and Resizing Labels
 
-### Connected Component Analysis
+_Note: the this description applies for labels other than Voxel_.
 
-#### Connected Component Labeling (CCL)
+You can move or resize a 2D/3D label by dragging its edges or corners, just as you do in word processing or presentation software.
 
-アクティブな voxel ラベルを 3 次元で連結する voxel ごとに別のラベルに分割します。
+You can change the resizing behavior using the following modifier keys.
 
-最大連結要素数 N
-: 体積が大きい順に N 個の voxel ラベルを新たに作成し、それ以外の領域はひとつの voxel ラベルにまとめて表示する
+- Press the <kbd>Shift</kbd> key while dragging to maintain the aspect ratio of the label. Use this when you have to define a label with the same width/height(/depth), e.g., precise cuboid.
+- Press the <kbd>Ctrl</kbd> key while dragging to fixate the location of the center of the label.
 
-近傍数
-: 連結判定モード（6 近傍または 26 近傍）
+You can also always turn on these behaviors without pressing a key. To do so, either use the gear icon menu or visit the [preference page](./user-preference).
 
-最大一時ラベル数
-: 計算時の一時ラベル数
+### Changing Label Appearance
 
-![CCL result](case-detail-CCL-result.png)
+You can change the color and the alpha (opacity) of a label by clicking the color box. You can change the color palette or the default alpha value in the [preference](./user-preference).
 
-#### Hole Filling
+To temporarily hide a label, click the color box of the label. To temporarily hide _all_ labels, click the eye icon at the top of the series list.
 
-アクティブな voxel ラベルの穴埋めをします。
+### Other Label-related Operations
 
-次元数
-: 2 次元ベース（断面ごとの処理）の処理か 3 次元ベースの処理かを選択
+- You can change the name for each label using the \[A\] icon at the top of the series list. Labels can be named arbitrarily, with the exception of some label names that have special meanings (see "Three-points-to-section").
+- Click the \[Reveal\] button to show the label at the center of each viewer.
 
-Orientation
-: 2 次元の時のみ選択可能。ここで指定した方向のスライスごとに処理を行う
+## Three-points-to-section
 
-近傍数
-: 連結判定モード（2 次元の場合は 4 または 8 近傍、3 次元の場合は 6 または 26 近傍）
+This function allows you to find an oblique section that contains three Point labels you define.
 
-最大一時ラベル数
-: 計算時の一時ラベル数
+1. Create three Point labels with the same name but with different suffixes: `[1]`, `[2]`, and `[3]`. For best results, place the three points as far apart as possible and not in a straight line.
 
-![Hole filling result](case-detail-hole-filling-result.png)
+1. Click one of the Point labels to make it active.
 
-:::note
-複雑な形状の voxel ラベルで CCL および Hole filling を行う場合、最大一時ラベル数を増やすと計算可能となる場合があります。設定可能な最大一時ラベル数の上限は使用 PC のメモリに依存します。
-:::
+1. Select the \[Three points to section\] menu. A new oblique viewer will be created showing the three Point labels.
 
-### Mathematical Morphology
-
-#### erosion
-
-アクティブな voxel ラベルの erosion をします。
-
-Width
-: 構造要素の横幅
-
-Height
-: 構造要素の縦幅
-
-nSlices
-: 構造要素の奥行
-
-Structuring element
-: 構造要素の形状
-
-![Erosion result](case-detail-erosion-result.png)
-
-#### dilation
-
-アクティブな voxel ラベルの dilasion をします。
-
-Width
-: 構造要素の横幅
-
-Height
-: 構造要素の縦幅
-
-nSlices
-: 構造要素の奥行
-
-Structuring element
-: 構造要素の形状
-
-![Dilation result](case-detail-dilation-result.png)
-
-#### interslice interpolation
-
-アクティブな voxel ラベルの スライス間補間 をします。
-
-Orientation
-: 補間するスライスの指定
-
-![Dilation result](case-detail-interslice-interpolation-result.png)
-
-### oblique 断面の自動生成
-
-#### three points to section
-
-アクティブな point ラベル 3 点より oblique 断面を自動生成します。point ラベルの名前は"任意の接頭辞[1]"、"任意の接頭辞[2]"、"任意の接頭辞[3]"としてください。3 点が同一直線にならない様に配置後、`three points to section`をクリックすると、3 点を通る oblique 断面が表示されます。
+1. If you adjusted the location of the Point labels, repeat the step above.
 
 ![Three points to section result](case-detail-three-points-to-section-result.png)
 
-## ROI の移動・サイズ変更
+## Case and Label Attributes
 
-### 移動
+"Attributes" refers to any additional data associated with a case or label. In CIRCUS DB, administrators can define the data type of an attribute. For example, there may be a checkbox to describe a visual feature of a lesion ("spiculated", "irregular") or a select box for the patient characteristics ("smoker", "never-smoker", "ex-smoker").
 
-マウスカーソルを ROI の端に合わせると、マウスカーソルが十字矢印に変わります。マウスの左ボタンを押しながらドラッグすると ROI が移動します。
+You cannot save a revision when required attributes are left empty.
 
-### サイズ変更
+If no attributes have been set by an administrator, the attribute editors are not displayed.
 
-マウスカーソルを ROI の端にある &#9633; に合わせると、マウスカーソルが両矢印に変わります。マウスの左ボタンを押しながらドラッグをすることで ROI のサイズを変えられます。
+## Save and Revert
 
-- <kbd>Shift</kbd> キーを押しながらサイズを変えると各軸のアスペクト比が維持されます。
-- <kbd>Ctrl</kbd> キーを押しながらサイズを変えると ROI の中心が固定された状態でサイズが変わります。
+You must save your work before leaving the Case Editor screen. Click the Save button and enter a **revision message** describing the contents of your edit. The revision message can be anything, but if you repeat the same work many times for different cases, you can define a saved revision message (see Preferences).
 
-## Undo / Redo / Revert
-
-- 画面右上 [Save] ボタンの左側にある &#x25C0;、&#x25B6; ボタンで操作の undo、redo が行えます(undo は Ctrl キー+Z キーでも行えます）。
-- 画面右上 [Save] ボタンの右側にあるメニューボタンより [Revert] を選択すると、Revision の最初の状態まで戻すことができます。ただし、Revert した場合はこれまでの操作の記録が消去されます。
+If something goes wrong, you can use the \[Revert\] menu to abandon the current edit and restore the last saved status.
 
 ![Undo, redo, and menu button](case-detail-menu-button.png)
 
-## エクスポート
+## Undo and Redo
 
-ケースのデータ（元画像、voxel ラベルのボリュームデータ、属性情報）をダウンロードするためには、画面右上のメニューボタンから [Export as MHD] を選択します。以下のダイアログが表示されますので、条件を選択した上で、[Start download] ボタンをクリックします。
+- Use the &#x25C0; and &#x25B6; buttons to undo or redo operations. (Keyboard shortcuts are <kbd>Ctrl + Z</kbd> and <kbd>Ctrl + Shift + Z</kbd>, respectively).
 
-:::note
+:::info
+The size of the undo buffere is limited. If you are doing something experimental and may have to undo dozens of steps, save a revision instead.
+:::
 
-ダウンロードには権限が必要です。Export as MHD メニューが選択できない場合は管理者に問い合わせてください。
+## Exporting Data
+
+You can download the case data (original images, label data, case attributes).
+
+:::caution
+
+- Archive files are created on the server side, so unsaved labels cannot be downloaded. **You must save a revision** before using this feature.
+- You need sufficient privileges to do this. When the export menu is unavailable, consult the administrator.
 
 :::
 
+Select "Export as MHD" from the menu button in the upper right corner of the screen. The following dialog box will appear. Select the settings and click the "Start download" button.
+
 Voxel labels
-: 現在はラベル毎に別々のボリュームで出力する (Isolated) か、全てのラベルを 1 つのボリュームで出力するかを選択します。
+: Select whether you want to output each label in a separate volume (Isolated) or all labels in one volume (Combined).
 
 MHD file line endings
-: mhd ファイルの改行コードを LF (Linux)、CR + LF (Windows) を選択します。
+: Select the newline code of the MHD file (LF (Linux) or CR + LF (Windows)).
 
 Comression format
-: エクスポートデータの圧縮形式を選択します(tar.gz or ZIP)。
+: Select the compression format of the exported data (tar.gz or ZIP).
 
 ![Export one case](export-one-case-dialog.png)
 
-### 生成されるデータ
+An archive file with the following files will be generated. `vol0`, `vol1` and so on correspond to the series of the case.
 
-vol[シリーズ番号].mhd (+.raw)
-: シリーズの元画像のボリュームデータです。
+`vol0.raw, vol1.raw, ...`
+: Contains the original volume data from the DICOM series.
 
-vol[シリーズ番号]\_label[ラベル番号].mhd (+.raw)
-: voxel ラベルデータです。
+`vol0.mhd, vol1.mhd, ...`
+: Volume metadata in the MHD format.
 
-data.json
-: 症例の属性情報 (JSON 形式) です。
+`vol0_label0.raw/mhd, ...`
+: Voxel label data (when the label type of Voxel).
+
+`data.json`
+: Contains other data in JSON format, including label names, label geometry data, case/label attributes.
 
 :::note
 
-ROI、point、ruler の情報は data.json に含まれます。位置はボリュームの左上ボクセルを原点とした mm 単位で書かれています。
+The position is written in mm, starting from the upper left voxel of the volume.
 
 :::
+
+The archive files are created on the server side and may take a few minutes. You can close the dialog or the browser tab if you wish. Once successful, the archive file can be downloaded from the Tasks page.
