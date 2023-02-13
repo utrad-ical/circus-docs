@@ -22,13 +22,13 @@ Show Personal Info
 Even if 'Show Personal Info' is turned on, you cannot view personal information without sufficient user priviledge.
 :::
 
-## Search
+## Search Presets
 
 You can delete preset search conditions created in each search screen (series, case, job).
 
 ## CIRCUS DB
 
-\*: can be changed also in the case screen.
+\*: can be changed also in the [case editor](./case-detail).
 
 Reference lines\*
 : Sets the visibility of reference lines.

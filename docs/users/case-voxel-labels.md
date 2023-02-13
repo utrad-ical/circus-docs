@@ -2,123 +2,107 @@
 title: Editing Voxel Labels
 ---
 
-## ボクセルラベルに対する操作
+Voxel Label is a powerful tool that allows you to define 3D ROI by "painting" voxels. To create a new voxel label, use the \[Add\] menu at the top of the series list.
 
-DICOM Viewer Component 上部のツールバーで、ボクセルラベルに対する操作を選択します。下図のアイコンは左側より以下の通りです。
+## Voxel Label Tools
 
-![Painting tools](case-detail-painting-tools.png)
+By creating and activating a voxel label, the following tools become available.
+
+![Voxel label-related tools](case-detail-painting-tools.png)
+
+import { Icon } from '../icon';
 
 <dl>
-<dt><Icon icon="rs-icon-brush" /> ブラシ (<kbd>B</kbd>)</dt>
-<dd>クリックした位置を四角いペンで塗ります。</dd>
-<dt><Icon icon="rs-icon-eraser" /> 消しゴム (<kbd>E</kbd>)</dt>
-<dd>クリックした位置のラベルを消去します。</dd>
-<dt>ブラシ・消しゴムの太さ設定</dt>
-<dd>プルダウンメニューでブラシ・消しゴムの太さを設定します。</dd>
-<dt><Icon icon="rs-icon-bucket" /> バケツツール (<kbd>Shift</kbd>+<kbd>B</kbd>)</dt>
-<dd>クリックした位置から連結している同じラベル値の領域を塗りつぶします。</dd>
-<dt><Icon icon="rs-icon-bucket-erase" /> バケツ消去ツール (<kbd>Shift</kbd>+<kbd>E</kbd>)</dt>
-<dd>クリックした位置から連結している同じラベル値の領域を消去します。</dd>
-<dt><Icon icon="rs-icon-wand" /> ワンドツール (<kbd>M</kbd>)</dt>
-<dd>背景画像の画素値に対し、クリックした位置の画素値から一定範囲の画素値を持つ画素を塗ります。スレッショルドと最大距離をオプションで設定できます。</dd>
-<dt><Icon icon="rs-icon-wand-eraser" /> ワンド消去ツール (<kbd>Shift</kbd>+<kbd>M</kbd>)</dt>
-<dd>背景画像の画素値に対し、クリックした位置の画素値から一定範囲の画素値を持つ画素を消去します。</dd>
+<dt><Icon icon="rs-icon-brush" /> Brush (<kbd>B</kbd>)</dt>
+<dd>Paints the clicked position with a square pen.</dd>
+<dt><Icon icon="rs-icon-eraser" /> Eraser (<kbd>E</kbd>)</dt>
+<dd>Unpaints the clicked position.</dd>
+<dt>(Width dropdown)</dt>
+<dd>Use this pulldown menu to change the width of the brush/eraser.</dd>
+<dt><Icon icon="rs-icon-bucket" /> Bucket (<kbd>Shift</kbd>+<kbd>B</kbd>)</dt>
+<dd>Fills the connected unpainted area from the clicked position.</dd>
+<dt><Icon icon="rs-icon-bucket-erase" /> Bucket Erase (<kbd>Shift</kbd>+<kbd>E</kbd>)</dt>
+<dd>Erases the connected painted area from the clicked position.</dd>
+<dt><Icon icon="rs-icon-wand" /> Wand (<kbd>M</kbd>)</dt>
+<dd>Paint voxels with a certain range of pixel values based on the pixel value of the clicked position. The threshold and maximum distance can optionally be set.</dd>
+<dt><Icon icon="rs-icon-wand-eraser" /> Wand Erase (<kbd>Shift</kbd>+<kbd>M</kbd>)</dt>
+<dd>Like Wand, but erases the painted voxels.</dd>
 </dl>
 
 :::note
 
-全ボリュームデータの読込が完了するまでの間（ローディングインジゲータが表示されている間）は、ワンドツールおよびワンド消去ツールは有効になりません。
+The Wand tool and Wand Erase tools will not be enabled until all volume data has been loaded (while the loading indicator is displayed).
 
 :::
 
-## 作成したラベルに対する処理
+## Processing Voxel Labels
 
-"Series/Labels" の […] より、アクティブな ラベルに対して Connected Component Analysis (Connected component labeling (CCL)、Hole filling)、Mathematical Morphology (erosion、dilation、interslice interpolation) 、oblique 断面の自動生成を行うことができます。
+Click the \[…\] button to perform several operations against the active voxel label.
 
 ![Label processor menu](case-detail-label-processor-menu.png)
 
-### Connected Component Analysis
+### Connected Component Analysis (CCL)
 
-#### Connected Component Labeling (CCL)
+Splits the active voxel label into separate voxel labels for each connected group of voxels in 3D.
 
-アクティブな voxel ラベルを 3 次元で連結する voxel ごとに別のラベルに分割します。
+Maximum number of connected components
+: Creates N voxel labels in the descending order of volume. Remaining voxels are grouped into a single voxel label.
 
-最大連結要素数 N
-: 体積が大きい順に N 個の voxel ラベルを新たに作成し、それ以外の領域はひとつの voxel ラベルにまとめて表示する
+Neighbors to decide same CC
+: Method to judge if two voxels are connected (6- or 26-neighbors)
 
-近傍数
-: 連結判定モード（6 近傍または 26 近傍）
-
-最大一時ラベル数
-: 計算時の一時ラベル数
+Maximum number of tentative labels
+: Increase this number when your voxel label is complicated.
 
 ![CCL result](case-detail-CCL-result.png)
 
-#### Hole Filling
+### Hole Filling
 
-アクティブな voxel ラベルの穴埋めをします。
+Performs a hole-filling on the active voxel labe.
 
-次元数
-: 2 次元ベース（断面ごとの処理）の処理か 3 次元ベースの処理かを選択
+Dimension
+: Select 2D-based hole-filling or 3D-based hole-filling.
 
 Orientation
-: 2 次元の時のみ選択可能。ここで指定した方向のスライスごとに処理を行う
+: Processes each slice in the direction specified here (only applicable in 2D mode)
 
-近傍数
-: 連結判定モード（2 次元の場合は 4 または 8 近傍、3 次元の場合は 6 または 26 近傍）
+Neighbors to decide same CC
+: Method to judge if two voxels are connected (4- or 8-neighbors in the 2D mode, 6- or 26-neighbors in 3D mode)
 
-最大一時ラベル数
-: 計算時の一時ラベル数
+Maximum number of tentative labels
+: Increase this number when your voxel label is complicated.
 
 ![Hole filling result](case-detail-hole-filling-result.png)
 
 :::note
-複雑な形状の voxel ラベルで CCL および Hole filling を行う場合、最大一時ラベル数を増やすと計算可能となる場合があります。設定可能な最大一時ラベル数の上限は使用 PC のメモリに依存します。
+When performing CCL and hole-filling on voxel labels with complex shapes, increasing the maximum number of tentative labels may make the calculation possible. The maximum number of tentative labels depends on the memory of the PC used.
 :::
 
-### Mathematical Morphology
+### Erosion and Dilatation
 
-#### erosion
-
-アクティブな voxel ラベルの erosion をします。
+Performs erosion or dilation on the active voxel label.
 
 Width
-: 構造要素の横幅
+: Width of the structuring element.
 
 Height
-: 構造要素の縦幅
+: Height of the structuring element.
 
 nSlices
-: 構造要素の奥行
+: Depth of the structuring element.
 
 Structuring element
-: 構造要素の形状
+: The shape of the structuring element.
 
 ![Erosion result](case-detail-erosion-result.png)
 
-#### dilation
-
-アクティブな voxel ラベルの dilasion をします。
-
-Width
-: 構造要素の横幅
-
-Height
-: 構造要素の縦幅
-
-nSlices
-: 構造要素の奥行
-
-Structuring element
-: 構造要素の形状
-
 ![Dilation result](case-detail-dilation-result.png)
 
-#### interslice interpolation
+### Interslice Interpolation
 
-アクティブな voxel ラベルの スライス間補間 をします。
+Performs an interslice interpolation for the active voxel label.
 
 Orientation
-: 補間するスライスの指定
+: The orientation of the guiding slices.
 
 ![Dilation result](case-detail-interslice-interpolation-result.png)

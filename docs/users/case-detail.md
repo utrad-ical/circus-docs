@@ -16,7 +16,7 @@ Case Info
 Revision Selector
 : Displays the current revision in which you are editing. You can switch the revision to see a previous revision. It is also possible to edit a case based on a previous revision, too.
 
-DICOM Viewer
+Viewer Pane
 : Displays the image of the DICOM series. If the series contains a 3D volume, four viewers (axial, coronal, sagittal, and oblique) are displayed by default.
 
 Tool Bar
@@ -55,7 +55,7 @@ Characters in boxes are keyboard shortcuts.
 
 There are several ways to page (scroll) the current image.
 
-- Select the Pager <Icon icon="rs-icon-pager" /> tool (by clicking the icon or pressing the <kbd>P</kbd> key) and left-drag on the image you want to page.
+- Select the Paging <Icon icon="rs-icon-pager" /> tool (by clicking the icon or pressing the <kbd>P</kbd> key) and left-drag on the image you want to page.
 
 - Hover the mouse cursor over the image you wish to scroll and use the mouse wheel.
 
@@ -73,7 +73,7 @@ By default, if your primary series is 3D, a 2&times;2 layout is applied, each sh
 
 You can change the layout of the viewers in several ways:
 
-- Drag the horizontal bar at the top of each viewer.
+- Drag the horizontal bar at the top of each viewer to move its position.
 - Double click a series on the left panel to quickly reveal the series.
 - Drag a series from the left panel into the viewer area.
 
@@ -141,7 +141,7 @@ You can also always turn on these behaviors without pressing a key. To do so, ei
 
 ### Changing Label Appearance
 
-You can change the color and the alpha (opacity) of a label by clicking the color box. You can change the color palette or the default alpha value in the [preference](./user-preference).
+You can change the color and the alpha (opacity) of a label by clicking the color box at the top of the series list. You can customize the color palette or the default alpha value in the [Preference](./user-preference) page.
 
 To temporarily hide a label, click the color box of the label. To temporarily hide _all_ labels, click the eye icon at the top of the series list.
 
@@ -149,6 +149,44 @@ To temporarily hide a label, click the color box of the label. To temporarily hi
 
 - You can change the name for each label using the \[A\] icon at the top of the series list. Labels can be named arbitrarily, with the exception of some label names that have special meanings (see "Three-points-to-section").
 - Click the \[Reveal\] button to show the label at the center of each viewer.
+
+## Case and Label Attributes
+
+"Attributes" refers to any additional data associated with a case or label. In CIRCUS DB, administrators can define the data type of an attribute. For example, there may be a checkbox to describe a visual feature of a lesion ("spiculated", "irregular") or a select box for the patient characteristics ("smoker", "never-smoker", "ex-smoker").
+
+![Attributes](./case-attributes.png)
+
+You cannot save a revision when required attributes are left empty.
+
+If no attributes have been set by an administrator, the attribute editors are not displayed.
+
+## Tags
+
+Tags are keywords that can be used to categorize cases. You can use tags to indicate the common state of a case (for example, "Reviewed", "High Priority"). Tags are displayed prominently on the screen, and can be changed both in the Case Search screen and the Case Editor screen, making them a useful tool for organizing your workflow.
+
+Note the following characteristics of tags:
+
+- Tags are defined by the administrator for each project.
+- Tags are **not versioned** using the revision mechanism. You can add or remove tags freely without incrementing a revision.
+- Tags are **shared by all users**. If you want to manage a personal collection of cases, use [My List](./search-preset.md) instead.
+
+To add/remove tags, use the Tags editor at the top of the Case Editor screen, or check cases in the Case Search screen and use the tag menu that appears above the checkboxes.
+
+## Save and Revert
+
+You must save your work before leaving the Case Editor screen. Click the Save button and enter a **revision message** describing the contents of your edit. The revision message can be anything, but if you repeat the same work many times for different cases, you can define a saved revision message (see the [Preference](./user-preference) page).
+
+If something goes wrong, you can use the \[Revert\] menu to abandon the current edit and restore the last saved status.
+
+![Undo, redo, and menu button](case-detail-menu-button.png)
+
+## Undo and Redo
+
+Use the &#x25C0; and &#x25B6; buttons to undo or redo operations. (Keyboard shortcuts are <kbd>Ctrl + Z</kbd> and <kbd>Ctrl + Shift + Z</kbd>, respectively).
+
+:::info
+The size of the undo buffere is limited. If you are doing something experimental and may have to undo dozens of steps, save a revision instead.
+:::
 
 ## Three-points-to-section
 
@@ -163,30 +201,6 @@ This function allows you to find an oblique section that contains three Point la
 1. If you adjusted the location of the Point labels, repeat the step above.
 
 ![Three points to section result](case-detail-three-points-to-section-result.png)
-
-## Case and Label Attributes
-
-"Attributes" refers to any additional data associated with a case or label. In CIRCUS DB, administrators can define the data type of an attribute. For example, there may be a checkbox to describe a visual feature of a lesion ("spiculated", "irregular") or a select box for the patient characteristics ("smoker", "never-smoker", "ex-smoker").
-
-You cannot save a revision when required attributes are left empty.
-
-If no attributes have been set by an administrator, the attribute editors are not displayed.
-
-## Save and Revert
-
-You must save your work before leaving the Case Editor screen. Click the Save button and enter a **revision message** describing the contents of your edit. The revision message can be anything, but if you repeat the same work many times for different cases, you can define a saved revision message (see Preferences).
-
-If something goes wrong, you can use the \[Revert\] menu to abandon the current edit and restore the last saved status.
-
-![Undo, redo, and menu button](case-detail-menu-button.png)
-
-## Undo and Redo
-
-- Use the &#x25C0; and &#x25B6; buttons to undo or redo operations. (Keyboard shortcuts are <kbd>Ctrl + Z</kbd> and <kbd>Ctrl + Shift + Z</kbd>, respectively).
-
-:::info
-The size of the undo buffere is limited. If you are doing something experimental and may have to undo dozens of steps, save a revision instead.
-:::
 
 ## Exporting Data
 
