@@ -2,7 +2,7 @@
 title: Case Editor
 ---
 
-To start editing a case, click one of the \[View\] buttons to the right of the [Case Search](./case-search) result to enter a case editor.
+To start editing a case, click one of the \[View\] buttons to the right of the [Case Search](./case-search.md) result to enter a case editor.
 
 ## Case Editor Overview
 
@@ -122,7 +122,7 @@ Select the series to which you want to add a label, and then select the label ty
 CIRCUS remembers the last selection you made. To create another label of the same type, you can just click the \[Add\] button.
 :::
 
-Among these, Voxel labels are special and are explained in a [separate page](./case-voxel-labels).
+Among these, Voxel labels are special and are explained in a [separate page](./case-voxel-labels.md).
 
 Labels can be sorted manually by dragging, but you cannot move a label to under another series when multiple series are in a case.
 
@@ -137,11 +137,11 @@ You can change the resizing behavior using the following modifier keys.
 - Press the <kbd>Shift</kbd> key while dragging to maintain the aspect ratio of the label. Use this when you have to define a label with the same width/height(/depth), e.g., precise cuboid.
 - Press the <kbd>Ctrl</kbd> key while dragging to fixate the location of the center of the label.
 
-You can also always turn on these behaviors without pressing a key. To do so, either use the gear icon menu or visit the [preference page](./user-preference).
+You can also always turn on these behaviors without pressing a key. To do so, either use the gear icon menu or visit the [preference page](./user-preference.md).
 
 ### Changing Label Appearance
 
-You can change the color and the alpha (opacity) of a label by clicking the color box at the top of the series list. You can customize the color palette or the default alpha value in the [Preference](./user-preference) page.
+You can change the color and the alpha (opacity) of a label by clicking the color box at the top of the series list. You can customize the color palette or the default alpha value in the [Preference](./user-preference.md) page.
 
 To temporarily hide a label, click the color box of the label. To temporarily hide _all_ labels, click the eye icon at the top of the series list.
 
@@ -174,7 +174,7 @@ To add or remove tags, use the Tags editor at the top of the Case Editor screen,
 
 ## Save and Revert
 
-You must save your work before leaving the Case Editor screen. Click the Save button and enter a **revision message** describing the contents of your edit. The revision message can be anything, but if you repeat the same work many times for different cases, you can define a saved revision message (see the [Preference](./user-preference) page).
+You must save your work before leaving the Case Editor screen. Click the Save button and enter a **revision message** describing the contents of your edit. The revision message can be anything, but if you repeat the same work many times for different cases, you can define a saved revision message (see the [Preference](./user-preference.md) page).
 
 If something goes wrong, you can use the \[Revert\] menu to abandon the current edit and restore the last saved status.
 

@@ -36,4 +36,4 @@ Attach to Bash in the CIRCUS container (see [Installation](./installation.mdx)),
 
 ## Using a Permanent Token
 
-The generated token can be used to access CIRCUS API. For details, refer to the [Developer Guide](../dev/api-intro).
+The generated token can be used to access CIRCUS API. For details, refer to the [Developer Guide](../dev/api-intro.mdx).

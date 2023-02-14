@@ -10,7 +10,7 @@ In CIRCUS DB, clinical data are managed in units called **Cases**. Cases are cre
 
 A case must belong to only one project. A project can contain as many cases as you want. Each case and project has an unique ID (caseId and projectId).
 
-Only administrators can [create and manage projects](../admin/project-settings).
+Only administrators can [create and manage projects](../admin/project-settings.md).
 
 ## Creating a New Case
 
@@ -18,9 +18,9 @@ Only administrators can [create and manage projects](../admin/project-settings).
 You need sufficient privileges to create a case in a project. If the following steps do not work, contact the administrator of your CIRCUS installation.
 :::
 
-1. [Import the DICOM images](./series-import) you want to use.
+1. [Import the DICOM images](./series-import.md) you want to use.
 
-1. Go to [Series Search](./series-search) screen and find the series you want to make a case from. From the [+ New] dropdown menu, select "New Case".
+1. Go to [Series Search](./series-search.md) screen and find the series you want to make a case from. From the [+ New] dropdown menu, select "New Case".
 
 1. In the "New Case" screen, do the following:
 

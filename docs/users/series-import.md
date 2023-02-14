@@ -10,7 +10,7 @@ To import DICOM files into the CIRCUS system, you can upload DICOM files or ZIP 
 
 :::tip Other methods to import series
 
-Alternatively, an administrator can [use Admin CLI to import series](../admin/admin-cli) or set up a [DICOM Storage Server](../admin/dicom-storage-server) to allow other devices (CT, MRI, etc.) to transfer DICOM images directly to CIRCUS. The Admin CLI is the most efficient because it does not use a network connection. If you are importing a large amount of DICOM data, consider contacting your administrator to use these non-browser-based transfer methods.
+Alternatively, an administrator can [use Admin CLI to import series](../admin/admin-cli.md) or set up a [DICOM Storage Server](../admin/dicom-storage-server.md) to allow other devices (CT, MRI, etc.) to transfer DICOM images directly to CIRCUS. The Admin CLI is the most efficient because it does not use a network connection. If you are importing a large amount of DICOM data, consider contacting your administrator to use these non-browser-based transfer methods.
 
 :::
 

@@ -156,14 +156,14 @@ Introduced a new WebSocket-based volume loader. Now each slice of a DICOM series
   - They now use web workers, meaning they will no longer hurt browser responsiveness. (#172)
   - Fixed some bugs. (#189)
 
-- Added erosion, dilatation, and interslice interpotation for voxel labels (#209) -> [Go Document](./users/case-detail#mathematical-morphology)
+- Added erosion, dilatation, and interslice interpotation for voxel labels (#209) -> [Go Document](./users/case-voxel-labels.md#erosion-and-dilatation)
 - Added support for displaying 2D images such as chest X-ray and mammograms. (#207)
 - You can now change the visibility of multiple labels by dragging over the label color boxes. (#198)
 - You can now use message history and saved message when saving a new revision. Saved messages can be configured in the preference page. (#196)
 - Warnings will be shown when you are trying to leave the page without saving a revision. (#195)
 - Fixed some bugs regarding CCL and hole filling. (#189)
 - The WL/WW (window lavel/width) dialog now shows the current window value when opened (#187)
-- Added "three points to section" functionality which allows the user to display oblique section (#174) -> [Go Document](./users/case-detail#oblique-断面の自動生成)
+- Added "three points to section" functionality which allows the user to display oblique section (#174) -> [Go Document](./users/case-detail.md#three-points-to-section)
 - Some settings which had been only configurable via the preference page are now configurable without leaving the main DB screen. (#202)
 
 ### CIRCUS RS

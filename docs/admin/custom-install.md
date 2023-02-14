@@ -2,7 +2,7 @@
 title: Custom Installation
 ---
 
-While the [official Docker image](./installation) is the easiest way to deploy CIRCUS with its default configuration, sometimes a custom installation directly from the GitHub respository may necessary to enable extended capabilities. For example, you may need a custom installation to achieve the following:
+While the [official Docker image](./installation.mdx) is the easiest way to deploy CIRCUS with its default configuration, sometimes a custom installation directly from the GitHub respository may necessary to enable extended capabilities. For example, you may need a custom installation to achieve the following:
 
 - Customize DICOM file repository (e.g., use Amazon S3 as DICOM storage)
 - Customize authentication mechanism (e.g., connect to an in-hospital medical recording system to authenticate users)

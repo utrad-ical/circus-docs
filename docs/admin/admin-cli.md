@@ -92,4 +92,4 @@ $ circus migrate
 
 ### register-cad-plugin
 
-See [Registration of CS Plug-in](registration-cs-plugin.mdx).
+See [Registration of CS Plug-in](./registration-cs-plugin.mdx).

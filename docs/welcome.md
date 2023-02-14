@@ -6,7 +6,7 @@ slug: /
 
 :::note
 
-This site is still in progress. We welcome your pull requests on our [documentation repository](https://github.com/utrad-ical/circus-docs).
+We welcome your pull requests on our [documentation repository](https://github.com/utrad-ical/circus-docs).
 
 :::
 
@@ -46,13 +46,13 @@ Evaluating a newly developed CAD algorithm in a routine clinical environment is 
 
 The docs consists of the following 3 main sections.
 
-[User Guide](users/login.md)
+[User Guide](./users/login.md)
 : Explains how to use the CIRCUS web app as an end user.
 
-[Administrator Guide](admin/installation.mdx)
+[Administrator Guide](./admin/installation.mdx)
 : Explains how to install, update or maintain CIRCUS as an administrator.
 
-[Developer Guide](dev/index.md)
+[Developer Guide](./dev/index.md)
 : Contains docs for developers who wish to access CIRCUS data using our web API, or create a new CIRCUS CS plug-in using a programming language you choose.
 
 ## License

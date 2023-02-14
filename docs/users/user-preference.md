@@ -28,7 +28,7 @@ You can delete preset search conditions created in each search screen (series, c
 
 ## CIRCUS DB
 
-\*: can be changed also in the [case editor](./case-detail).
+\*: can be changed also in the [Case Editor](./case-detail.md).
 
 Reference lines\*
 : Sets the visibility of reference lines.

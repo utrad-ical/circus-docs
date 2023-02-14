@@ -28,12 +28,12 @@ After the installation, you have one predefined user (`circus`), which belongs t
 
 :::danger
 
-You must protect this default account after the initial login. For details, see [Installation](installation.mdx).
+You must protect this default account after the initial login. For details, see [Installation](./installation.mdx).
 :::
 
 ## Global Privileges
 
-**Global privileges** are a set of roles that can be assigned to groups via [Group Settings](group-settings.md).
+**Global privileges** are a set of roles that can be assigned to groups via [Group Settings](./group-settings.md).
 
 `manageServer`
 : The "administrator" global privilege. A user with this privilege can perform administrative tasks such as adding users.
@@ -80,13 +80,13 @@ If you are sure that a certain set of DICOM series is used for only one research
 On the other hand, if you are uploading series that may be shared for multiple research projects in your institution, it may be handier to assign a shared domain (e.g., "xyz-univ.edu") or just use the default domain.
 :::
 
-To grant access to DICOM series to a user, go to [Group Settings](group-settings.md) first, change the list of accessible domains of a group, and make the user belong to the group.
+To grant access to DICOM series to a user, go to [Group Settings](./group-settings.md) first, change the list of accessible domains of a group, and make the user belong to the group.
 
 A domain does not necessarily have to follow the format of internet domains (e.g., "foo.bar.net"), but this is usually a reasonable convention to avoid any future collision.
 
 ### Cases (CIRCUS DB)
 
-CIRCUS DB's cases have an additional layer of access control based on the project it belongs to. For details, see [Group Settings](group-settings.md#project-settings).
+CIRCUS DB's cases have an additional layer of access control based on the project it belongs to. For details, see [Group Settings](./group-settings.md).
 
 ### Plug-in Jobs (CIRCUS CS)
 

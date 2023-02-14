@@ -6,9 +6,9 @@ As the number of items (series, cases, and plug-in jobs) managed in CIRCUS incre
 
 The description in this page applies to the following three types of search:
 
-- [Series Search](./series-search)
-- [Case Search](./case-search) (CIRCUS DB)
-- [Plug-in Job Search](./plugin-job-search) (CIRCUS CS)
+- [Series Search](./series-search.md)
+- [Case Search](./case-search.md) (CIRCUS DB)
+- [Plug-in Job Search](./plugin-job-search.md) (CIRCUS CS)
 
 ## Search Presets
 

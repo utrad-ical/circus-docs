@@ -43,4 +43,4 @@ Search results will be displayed below the condition box.
 
   ![Series Detail Screen](series-detail.png)
 
-- Click [+ New] to [create a new Case](./new-case) (CIRCUS DB) or [create a new plug-in job](./managing-jobs.md) (CIRCUS CS).
+- Click [+ New] to [create a new Case](./new-case.md) (CIRCUS DB) or [create a new plug-in job](./managing-jobs.md) (CIRCUS CS).

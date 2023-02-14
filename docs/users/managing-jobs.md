@@ -32,9 +32,9 @@ In CIRCUS, the status of a job transitions as follows.
 
 ## Creating a New Job
 
-1. [Import the DICOM images](./series-import) you want to use.
+1. [Import the DICOM images](./series-import.md) you want to use.
 
-1. Go to [Series Search](./series-search) screen and find the series you want to make a case from. From the [+ New] dropdown menu, select "New Case".
+1. Go to [Series Search](./series-search.md) screen and find the series you want to make a case from. From the [+ New] dropdown menu, select "New Case".
 
 1. In the "New Job" screen, do the following:
 
@@ -72,7 +72,7 @@ A case/job can contain more than one series. To add another series to a case, cl
 
 ## Cancel or Invalidate a Job
 
-You can cancel a job that has not yet started executing or invalidate a job that has already finished executing. To do this, use the menu on the [Job Search](./plugin-job-search) screen.
+You can cancel a job that has not yet started executing or invalidate a job that has already finished executing. To do this, use the menu on the [Job Search](./plugin-job-search.md) screen.
 
 :::info
 Currently, there is not way to abort a job that is in the process of execution.

@@ -41,7 +41,7 @@ Delete Project
 : Privilege to delete an existing project.
 
 View Personal Info
-: Privilege to display personal information (e.g., patient ID, name, birthdate). If the user does not have this privilege, the personal information will be masked. Even if a user has this privilege, they can temporarily hide personal information from [Personal Preferences](../users/user-preference).
+: Privilege to display personal information (e.g., patient ID, name, birthdate). If the user does not have this privilege, the personal information will be masked. Even if a user has this privilege, they can temporarily hide personal information from [Personal Preferences](../users/user-preference.md).
 
 Download volume as raw file
 : Privilege to download raw DICOM volumes.
