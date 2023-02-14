@@ -6,17 +6,22 @@ Required setting: [**Readable Projects**](../../../docs/admin/group-settings#pro
 
 ### Request
 
-`sort` (query parameter)
-: .
+See [**Query parameters**](../query-parameters.md) for more information.
 
-`limit` (query parameter)
-: .
+`filter` (query parameter, optional)
+: Specify search criteria.
 
-`page` (query parameter)
-: .
+`sort` (query parameter, optional)
+: Sort order of search results.
 
-`skip` (query parameter)
-: .
+`limit` (query parameter, optional)
+: Number of search results per page.
+
+`page` (query parameter, optional)
+: Page number starting from 1.
+
+`skip` (query parameter, optional)
+: Skip a specified number of search results.
 
 ```bash title="Example"
 GET /api/cases HTTP/1.1
@@ -33,7 +38,7 @@ Returns an array of objects with the following properties.
 : ID of the project to which the case belongs. (string)
 
 `latestRevision`
-: . (object)//////////////////////////////////////////////////////////////////
+: Last saved revision. (object)
 
 `tags`
 : Markers to accompany the case. (array)
@@ -176,13 +181,103 @@ Content-Type: application/json
 `myListId` (path parameter)
 : ID of the mylist to be searched.
 
+See [Query parameters](../query-parameters.md) for more information.
+
+`filter` (query parameter, optional)
+: Specify search criteria.
+
+`sort` (query parameter, optional)
+: Sort order of search results.
+
+`limit` (query parameter, optional)
+: Number of search results per page.
+
+`page` (query parameter, optional)
+: Page number starting from 1.
+
+`skip` (query parameter, optional)
+: Skip a specified number of search results.
+
 ```bash title="Example"
 GET /api/cases/list/01gktktrqh63mdyfjpzzqey36n HTTP/1.1
 ```
 
 ### Response
 
-//////////////////////////////////////////////////////////////書く
+Returns an array of objects with the following properties.
+
+`caseId`
+: ID of the case. (string)
+
+`projectId`
+: ID of the project to which the case belongs. (string)
+
+`latestRevision`
+: Last saved revision. (object)
+
+`tags`
+: Markers to accompany the case. (array)
+
+`domains`
+: Used to check access privileges of series belonging to the case. (array)
+
+`createdAt`
+: The date the case was created, in ISO format. (date)
+
+`updatedAt`
+: The date the case was updated, in ISO format. (date)
+
+```bash title="Example"
+HTTP/1.1 200
+Content-Type: application/json
+
+[
+  {
+    "caseId": "yjio7f9eiqc5jf3rzk782v91fx",
+    "projectId": "f0vv160g9b87k741qymsrq76qf",
+    "latestRevision": {
+      "creator": "creator@example.com",
+      "date": "2022-01-01T12:00:00.000Z",
+      "description": "Created",
+      "attributes": {},
+      "status": "draft",
+      "series": [
+        {
+          "seriesUid": "111.222.333.444.555",
+          "partialVolumeDescriptor": { "start": 1, "end": 100, "delta": 1 },
+          "labels": []
+        }
+      ]
+    },
+    "tags": ["XXX", "YYY"],
+    "domains": [],
+    "createdAt": "2022-01-02T00:00:00.000Z",
+    "updatedAt": "2022-01-02T12:00:00.000Z"
+  },
+  {
+    "caseId": "wx0f99g4786k7acn6zd6m7a144",
+    "projectId": "f0vv160g9b87k741qymsrq76qf",
+    "latestRevision": {
+      "creator": "creator@example.com",
+      "date": "2022-01-01T12:00:00.000Z",
+      "description": "Created",
+      "attributes": {},
+      "status": "draft",
+      "series": [
+        {
+          "seriesUid": "111.222.333.444.555",
+          "partialVolumeDescriptor": { "start": 1, "end": 100, "delta": 1 },
+          "labels": []
+        }
+      ]
+    },
+    "tags": ["AAA", "BBB", "CCC"],
+    "domains": [],
+    "createdAt": "2022-01-02T00:00:00.000Z",
+    "updatedAt": "2022-01-02T12:00:00.000Z"
+  }
+]
+```
 
 ---
 
@@ -307,14 +402,15 @@ HTTP/1.1 201
 <ApiPreamble verb="post" path="/cases/export-mhd" />
 
 Required global privilege: [**Download volume as raw file**](../../../docs/admin/group-settings#list-of-global-privileges)
+Required setting: [**Readable Projects**](../../../docs/admin/group-settings#project-settings)
 
 ### Request
 
 `caseIds`
-: The list of case IDs to export the MHD file. Available formats are `string[]` or `{"caseId": string, "revisionIndex": number}[]`. (array)///////////////////////////////////////////////////////////
+: The list of case IDs to export the MHD file. Available formats are array of caseIds: `string[]` or array of objects: `{"caseId": string, "revisionIndex": number}[]`. (array)
 
 `labelPackType` (optional)
-: `"combined"`, `"isolated"`. (string)////////////////////////////////////////////////////
+: Export data format, either `"combined"` or `"isolated"`. The default is `"isolated"` that generates one raw file per label. (string)
 
 `mhdLineEnding` (optional)
 : Specifies the line ending to export the MHD file, either `"crlf"` or `"lf"`. The default is `"lf"`. (string)
@@ -335,6 +431,17 @@ Content-Type: application/json
   "labelPackType": "combined",
   "mhdLineEnding": "crlf",
   "compressionFormat": "zip"
+}
+```
+
+## Response
+
+```bash title="Example"
+HTTP/1.1 201
+Content-Type: application/json
+
+{
+  "taskId": "dmr09gt0mqnq09cchhyk5w4v56"
 }
 ```
 
