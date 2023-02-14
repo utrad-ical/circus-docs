@@ -4,11 +4,11 @@ title: Managing Series
 
 ## Overview
 
-CIRCUS manages DICOM data based on series identified by Series Instance UID.
+CIRCUS manages DICOM data based on series identified by Series Instance UID (0020,000E).
 
 To import DICOM files into the CIRCUS system, you can upload DICOM files or ZIP archive files containing DICOM files via your web browser.
 
-:::info
+:::tip Other methods to import series
 
 Alternatively, an administrator can [use Admin CLI to import series](../admin/admin-cli) or set up a [DICOM Storage Server](../admin/dicom-storage-server) to allow other devices (CT, MRI, etc.) to transfer DICOM images directly to CIRCUS. The Admin CLI is the most efficient because it does not use a network connection. If you are importing a large amount of DICOM data, consider contacting your administrator to use these non-browser-based transfer methods.
 
@@ -17,6 +17,10 @@ Alternatively, an administrator can [use Admin CLI to import series](../admin/ad
 ### Domain
 
 Each DICOM series imported to CIRCUS must belong to one (and only one) **domain**. A domain is a string that identifies where the images came from (typically, an institute/hospital name). Only an administrator can configure the domains used in a CIRCUS installation, or which domain each user can upload images to.
+
+### Uploading Anonymized DICOM
+
+CIRCUS does not use DICOM tags related to patient information (0010,XXXX), such as Patient ID and Patient Name, to identify series. It is safe to anonymize these tags before importing series into CIRCUS. However, **Series Instance UID is the primary key for identifying series in CIRCUS**. Therefore, you will get an error if you try to import DICOM series with a malformed (or empty) Series Instance UID. If you really need to anonymize the Series Instance UID, you can use fake strings that look like valid UIDs (this is not a DICOM-compliant approach, so don't share such files with external parties).
 
 ## Importing DICOM Files via Browser
 

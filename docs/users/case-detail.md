@@ -167,10 +167,10 @@ Tags are keywords that can be used to categorize cases. You can use tags to indi
 Note the following characteristics of tags:
 
 - Tags are defined by the administrator for each project.
-- Tags are **not versioned** using the revision mechanism. You can add or remove tags freely without incrementing a revision.
+- Tags are **not versioned** using the revision mechanism. You can add or remove tags without incrementing a revision. If you need version control (for example, to track who entered the data), use case attributes instead.
 - Tags are **shared by all users**. If you want to manage a personal collection of cases, use [My List](./search-preset.md) instead.
 
-To add/remove tags, use the Tags editor at the top of the Case Editor screen, or check cases in the Case Search screen and use the tag menu that appears above the checkboxes.
+To add or remove tags, use the Tags editor at the top of the Case Editor screen, or check cases in the Case Search screen and use the tag menu that appears above the checkboxes.
 
 ## Save and Revert
 
