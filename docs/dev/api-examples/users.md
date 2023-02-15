@@ -32,7 +32,10 @@ If there is a user with the specified email address, information about the user 
 `updatedAt`
 : The date the user information was updated, in ISO date format. (date)
 
-```json title="Example"
+```bash title="Example"
+HTTP/1.1 200
+Content-type: application/json
+
 {
   "userEmail": "user1@example.com",
   "loginId": "user1",
