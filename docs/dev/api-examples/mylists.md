@@ -36,7 +36,10 @@ Returns an array of objects with the following properties.
 `createdAt`
 : The date a mylist was created, in ISO format. (date)
 
-```json title="Example"
+```bash title="Example"
+HTTP/1.1 200
+Content-type: application/json
+
 [
   {
     "myListId": "01gktktrqh63mdyfjpzzqey36n",
@@ -101,7 +104,10 @@ GET /api/mylists/01gktktrqh63mdyfjpzzqey36n HTTP/1.1
 `resourceIds`
 : IDs of the items in the mylist. (array)
 
-```json title="Example"
+```bash title="Example"
+HTTP/1.1 200
+Content-type: application/json
+
 {
   "myListId": "01gktktrqh63mdyfjpzzqey36n",
   "resourceType": "clinicalCases",
@@ -148,7 +154,10 @@ Content-Type: application/json
 `myListId`
 : ID of the created mylist. (string)
 
-```json title="Example"
+```bash title="Example"
+HTTP/1.1 201
+Content-type: application/json
+
 {
   "myListId": "0n01gktm9gb9hgyazarn102r01gk5hm3t2nef706qbq407qtq3pwtmf706x98240"
 }
@@ -160,17 +169,17 @@ Content-Type: application/json
 
 ### Request
 
-`myListId (path parameter)`
+`myListId` (path parameter)
 : ID of the mylist to operate.
 
-`name`
-: New name for the specified mylist. (string, optional)
+`name` (optional)
+: New name for the specified mylist. (string)
 
-`public`
-: Indicates whether this is a public mylist or not. (boolean, optional)
+`public` (optional)
+: Indicates whether this is a public mylist or not. (boolean)
 
-`editors`
-: The list of users or groups that can edit this mylist in addition to the mylist creator. A user must be specified in the `{ type: 'user', userEmail: string }` format, and the group must be in the `{ type: 'group', groupId: number }` format. Note that the passed array will always replace the existing array; you cannot add or remove individual entries. (array, optional)
+`editors` (optional)
+: The list of users or groups that can edit this mylist in addition to the mylist creator. A user must be specified in the `{ type: 'user', userEmail: string }` format, and the group must be in the `{ type: 'group', groupId: number }` format. Note that the passed array will always replace the existing array; you cannot add or remove individual entries. (array)
 
 ```bash title="Example"
 PATCH /api/mylists/01gktktrqh63mdyfjpzzqey36n HTTP/1.1
@@ -184,6 +193,12 @@ Content-Type: application/json
 }
 ```
 
+### Response
+
+```bash title="Example"
+HTTP/1.1 204
+```
+
 ---
 
 <ApiPreamble verb="delete" path="/mylists/:myListId" />
@@ -192,11 +207,17 @@ This API deletes the mylist itself, not the items in it.
 
 ### Request
 
-`myListId (path parameter)`
+`myListId` (path parameter)
 : ID of the mylist to be deleted.
 
 ```bash title="Example"
 DELETE /api/mylists/01gktktrqh63mdyfjpzzqey36n HTTP/1.1
+```
+
+### Response
+
+```bash title="Example"
+HTTP/1.1 204
 ```
 
 ---
@@ -205,7 +226,7 @@ DELETE /api/mylists/01gktktrqh63mdyfjpzzqey36n HTTP/1.1
 
 ### Request
 
-`myListId (path parameter)`
+`myListId` (path parameter)
 : ID of the mylist to operate.
 
 `operation`
@@ -231,7 +252,10 @@ Content-Type: application/json
 `changedCount`
 : Number of the items that were added or removed. (number)
 
-```json title="Example"
+```bash title="Example"
+HTTP/1.1 200
+Content-type: application/json
+
 {
   "changedCount": 1
 }
