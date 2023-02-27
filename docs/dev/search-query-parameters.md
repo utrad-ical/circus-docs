@@ -2,6 +2,8 @@
 title: Search Query Parameters
 ---
 
+Some GET methods can be filtered and paginated using query parameters.
+
 ## Available parameters
 
 `filter`
@@ -22,20 +24,26 @@ title: Search Query Parameters
 ### Example
 
 ```bash title="Example Request"
-GET /api/cases HTTP/1.1
+GET /api/cases?filter=<filter>&sort=<sort>&page=1&limit=20 HTTP/1.1
+```
 
+Assign URL-encoded JSON to `<filter>` and `<sort>` respectively.
+
+```bash title="Example JSON before encoding"
+<filter>
 {
-  "filter": {
-    "$and": [
-      { "patientInfo.age": 50 },
-      { "patientInfo.sex": "M" },
-      { "createdAt": { "$date": "2023-02-01" } },
-      { "updatedAt": { "$date": "2023-02-01" } }
-    ]
-  },
-  "sort": { "projectId": -1 },
-  "page": 1,
-  "limit": 20
+  "$and":[
+    { "patientInfo.age": { "$gt": 50 } },
+    { "patientInfo.age": { "$lte": 70 } },
+    { "patientInfo.sex":"M" },
+    { "createdAt": { "$gt": { "$date": "2023-01-10" } } },
+    { "createdAt": { "$lte": { "$date":"2023-02-20" } } }
+  ]
+}
+
+<sort>
+{
+  "projectId": -1
 }
 ```
 
@@ -78,27 +86,27 @@ Some of the MongoDB operators can be used. The operator descriptions are taken f
 
 <details><summary>Example</summary>
 
-This filter is used to search for cases of men aged 50 and over, created between 1 January 2023 and 10 January 2023.
+This filter is used to search for cases of men aged 50 and over, created between 10 January 2023 and 20 february 2023.
 
 ```bash
-GET /api/cases HTTP/1.1
-
 {
-  "filter": {
-    "$and": [
-      { "patientInfo.age": { "$gte": 50 } },
-      { "patientInfo.sex": "M" },
-      {
-        "$and": [
-          { "createdAt": { "$gte": { "$date": "2023-01-01T00:00:00.000Z" } } },
-          { "createdAt": { "$lt": { "$date": "2023-01-11T00:00:00.000Z" } } }
-        ]
-      }
-    ]
-  }
+  "$and": [
+    { "patientInfo.age": { "$gte": 50 } },
+    { "patientInfo.sex": "M" },
+    {
+      "$and": [
+        { "createdAt": { "$gte": { "$date": "2023-01-10T00:00:00.000Z" } } },
+        { "createdAt": { "$lt": { "$date": "2023-02-21T00:00:00.000Z" } } }
+      ]
+    }
+  ]
 }
+```
 
+URL-encode the above filter and assign it to `<filter>`.
 
+```bash
+GET /api/cases?filter=<filter> HTTP/1.1
 ```
 
 </details>
