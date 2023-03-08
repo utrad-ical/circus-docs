@@ -5,7 +5,7 @@
 ### Request
 
 `pluginId`
-: ID of the plug-in. This is Docker image ID. (string)
+: ID of the plug-in. This is a Docker image ID. (string)
 
 ```bash title="Example"
 GET /api/plugins/:pluginId HTTP/1.1
@@ -14,7 +14,7 @@ GET /api/plugins/:pluginId HTTP/1.1
 ### Response
 
 `pluginId`
-: ID of the plug-in. This is Docker image ID. (string)
+: ID of the plug-in. This is a Docker image ID. (string)
 
 `version`
 : Semver-compatible plug-in version. (string)
@@ -26,7 +26,7 @@ GET /api/plugins/:pluginId HTTP/1.1
 : Short text that describes what this plug-in does. (string)
 
 `icon`
-: Represents an icon for projects and apps. The setting items are `"glyph"`, `"color"` and `"backgroundColor"`. `"glyph"` is selected from **_[The values of glyph](./plugins#the-values-of-glyph)_** to represent the plug-in to be adapted. `"color"` and `"backgroundColor"` are the foreground and background colours of the icon. They are represented by a colour code in the form #rrggbb. (object)
+: Represents an icon for the plug-in. The setting items are `"glyph"`, `"color"` and `"backgroundColor"`. `"glyph"` is one of available icon glyphs (see below), and `"color"` and `"backgroundColor"` are in the hexadecimal CSS color format (e.g., `"#ffff00"`). (object)
 
 `type`
 : Plug-in type. Currently the only supported value is `"CAD"`. (string)
@@ -43,9 +43,8 @@ GET /api/plugins/:pluginId HTTP/1.1
 `updatedAt`
 : The date the plugin was updated, in ISO format. (date)
 
-#### The values of glyph
-
-<details><div>
+<details>
+<summary>Available Icon Glyphs</summary>
 
 `"stomach"`,
 `"brain"`,
@@ -69,7 +68,7 @@ GET /api/plugins/:pluginId HTTP/1.1
 `"atom"`,
 `"person"`
 
-</div></details>
+</details>
 
 ```bash title="Example"
 HTTP/1.1 200
@@ -114,37 +113,7 @@ GET /api/plugins HTTP/1.1
 
 ### Response
 
-Returns an array of objects with the following properties.
-
-`pluginId`
-: ID of the plug-in. This is Docker image ID. (string)
-
-`version`
-: Semver-compatible plug-in version. (string)
-
-`pluginName`
-: The name of the plug-in. (string)
-
-`description`
-: Short text that describes what this plug-in does. (string)
-
-`icon`
-: Represents an icon for projects and apps. The setting items are `"glyph"`, `"color"` and `"backgroundColor"`. `"glyph"` is selected from **_[The values of glyph](./plugins#the-values-of-glyph)_** to represent the plug-in to be adapted. `"color"` and `"backgroundColor"` are the foreground and background colours of the icon. They are represented by a colour code in the form #rrggbb. (object)
-
-`type`
-: Plug-in type. Currently the only supported value is `"CAD"`. (string)
-
-`runConfiguration`
-: Installation-specific configurations. (object)
-
-`displayStrategy`
-: Determines how plug-in results are displayed and how feedback is collected. (array)
-
-`createdAt`
-: The date the plugin was created, in ISO format. (date)
-
-`updatedAt`
-: The date the plugin was updated, in ISO format. (date)
+Returns an array of objects containing the same information as above.
 
 ```bash title="Example"
 HTTP/1.1 200
