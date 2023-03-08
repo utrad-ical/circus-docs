@@ -71,7 +71,10 @@ The format of filters accepted by CIRCUS API is basically a small subset of [Mon
 : Matches all values that are not equal to the specified value.
 
 `$in`
-: Matches any of the values specified in an array.
+: Matches any of the values specified in the array.
+
+`$all`
+: Matches arrays that contain all elements specified in the query.
 
 ### Logical Operators
 
@@ -80,11 +83,6 @@ The format of filters accepted by CIRCUS API is basically a small subset of [Mon
 
 `$or`
 : Joins query clauses with a logical OR.
-
-### Array Operators
-
-`$all`
-: Matches arrays that contain all elements specified in the query.
 
 ### Example
 
