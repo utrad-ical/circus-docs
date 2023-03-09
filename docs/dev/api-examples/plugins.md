@@ -8,7 +8,7 @@
 : ID of the plug-in. This is a Docker image ID. (string)
 
 ```bash title="Example"
-GET /api/plugins/:pluginId HTTP/1.1
+GET /api/plugins/85w1yc7xbzqjr7daf8mu6p2qj7f6a6vegzy4k9nf3vewv7sy32kvjrar49k70h3n HTTP/1.1
 ```
 
 ### Response
