@@ -44,7 +44,7 @@ GET /api/plugins/:pluginId HTTP/1.1
 : The date the plugin was updated, in ISO format. (date)
 
 <details>
-<summary>Available Icon Glyphs</summary>
+<summary><a id="#AvailableIconGlyphs">Available Icon Glyphs</a></summary>
 
 `"stomach"`,
 `"brain"`,
