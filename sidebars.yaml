@@ -47,7 +47,7 @@ someSidebar:
         items:
           - dev/api-intro
           - dev/api-reference
-          - dev/search-query-parameters
+          - dev/making-search-queries
       # - type: category
       #   label: CIRCUS RS
       #   items:
