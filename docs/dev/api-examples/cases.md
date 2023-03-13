@@ -6,10 +6,11 @@ Required setting: [**Readable Projects**](../../../docs/admin/group-settings#pro
 
 ### Request
 
-See [**Query parameters**](../search-query-parameters.md) for more information.
+This API allows filtering and sorting by query parameters.
+See [**Making Search Queries**](../making-search-queries.md) for more information.
 
 `filter` (query parameter, optional)
-: Specify search criteria.
+: Specifies the search criterion in JSON string. See [Forming Filters](../search-query-parameters#forming-filters) and [Available Filter Keys](#available-filter-keys).
 
 `sort` (query parameter, optional)
 : Sort order of search results.
@@ -20,12 +21,59 @@ See [**Query parameters**](../search-query-parameters.md) for more information.
 `page` (query parameter, optional)
 : Page number starting from 1.
 
-`skip` (query parameter, optional)
-: Skip a specified number of search results.
-
 ```bash title="Example"
 GET /api/cases HTTP/1.1
 ```
+
+#### Available Filter Keys
+
+<details>
+<summary>Filter keys & How to use</summary>
+
+**Filter keys**
+
+`projectId`
+: ID of the project that the case to be searched belongs to. (string)
+
+`caseId`
+: ID of the case to be searched. (string)
+
+`patientInfo.patientId`
+: ID of the patient in the case. (string)
+
+`patientInfo.patientName`
+: Name of the patient in the case. (string)
+
+`patientInfo.age`
+: Age of the patient in the case. (number)
+
+`patientInfo.sex`
+: Sex of the patient in the case, one of "M", "F" and "O". (string)
+
+`tags`
+: Markers to accompany the case. (array)
+
+`createdAt`
+: The date the case was created, in ISO format. (date)
+
+`updatedAt`
+: The date the case was updated, in ISO format. (date)
+
+**How to use**
+
+This filter is used to search for cases of men aged &ge; 50.
+
+```json
+{ "patientInfo.age": { "$gte": 50 } }
+```
+
+URL-encode the above filter and assign it to `<filter>`.
+
+```bash title="Example"
+GET /api/cases?filter=<filter> HTTP/1.1
+```
+
+</details>
 
 ### Response
 
@@ -302,7 +350,7 @@ Content-Type: application/json
   "projectId": "f0vv160g9b87k741qymsrq76qf",
   "series": [
           {
-            "seriesUid": '111.222.333.444.555',
+            "seriesUid": "111.222.333.444.555",
             "partialVolumeDescriptor": {
               "start": 1,
               "end": 100,
