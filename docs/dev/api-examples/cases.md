@@ -10,7 +10,7 @@ This API allows filtering and sorting by query parameters.
 See [**Making Search Queries**](../making-search-queries.md) for more information.
 
 `filter` (query parameter, optional)
-: Specifies the search criterion in JSON string. See [Forming Filters](../search-query-parameters#forming-filters) and [Available Filter Keys](#available-filter-keys).
+: Specifies the search criterion in JSON string. See [Forming Filters](../making-search-queries#forming-filters) and [Available Filter Keys](#available-filter-keys).
 
 `sort` (query parameter, optional)
 : Sort order of search results.
@@ -229,7 +229,7 @@ Content-Type: application/json
 `myListId` (path parameter)
 : ID of the mylist to be searched.
 
-See [Query parameters](../search-query-parameters.md) for more information.
+See [Query parameters](../making-search-queries.md) for more information.
 
 `filter` (query parameter, optional)
 : Specify search criteria.
