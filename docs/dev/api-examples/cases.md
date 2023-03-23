@@ -235,16 +235,13 @@ See [Query parameters](../making-search-queries.md) for more information.
 : Specify search criteria.
 
 `sort` (query parameter, optional)
-: Sort order of search results.
+: Sort order of search results. The default is `{ addedToListAt: -1 }`: this means sorted in descending order by date and time added to mylist.
 
 `limit` (query parameter, optional)
 : Number of search results per page.
 
 `page` (query parameter, optional)
 : Page number starting from 1.
-
-`skip` (query parameter, optional)
-: Skip a specified number of search results.
 
 ```bash title="Example"
 GET /api/cases/list/01gktktrqh63mdyfjpzzqey36n HTTP/1.1
