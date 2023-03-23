@@ -11,7 +11,7 @@ GET /api/preferences HTTP/1.1
 ### Response
 
 `theme`
-: The background colour of each page (white or black). (stirng)
+: The background color of each page (white or black). (stirng)
 
 `personalInfoView`
 : Whether patients' personal information (patient ID, name, sex, etc.) can be displayed. (boolean)
@@ -85,8 +85,10 @@ Content-type: application/json
 
 ### Request
 
+All keys are optional.
+
 `theme`
-: The background color of each page (white or black). Choose between `"mode_white"` or `"mode_black"`. (stirng)
+: The background color of each page (white or black). Choose between `"mode_white"` or `"mode_black"`. (string)
 
 `personalInfoView`
 : Whether patients' personal information (patient ID, name, sex, etc.) can be displayed. Set `false` when you want to temporarily hide personal information, e.g., for demonstrating purposes. (boolean)
