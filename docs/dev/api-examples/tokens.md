@@ -24,6 +24,12 @@ Returns an array of objects with the following properties.
 `updatedAt`
 : The date the token information was updated, in ISO date format. (date)
 
+:::info
+
+The actual tokens cannot be retreived.
+
+:::
+
 ```bash title="Example"
 HTTP/1.1 200
 Content-type: application/json
@@ -65,13 +71,7 @@ Content-Type: application/json
 : ID of the created token. (string)
 
 `accessToken`
-: The token itself. Used for authentication when using the API. (string)
-
-:::caution
-
-Access tokens cannot be displayed again. Make a note of the token.
-
-:::
+: The token itself. Used for authentication when using the API. Note that you cannot retrieve this string from the API again. (string)
 
 ```bash title="Example"
 HTTP/1.1 201
