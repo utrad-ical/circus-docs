@@ -50,7 +50,7 @@ GET /api/projects/4hn1qd8vr9rzq2yjjez4q4p20m HTTP/1.1
 
 ```bash title="Example"
 HTTP/1.1 200
-Content-type: application/json
+Content-Type: application/json
 
 {
   "projectId": "4hn1qd8vr9rzq2yjjez4q4p20m",

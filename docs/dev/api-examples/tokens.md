@@ -32,7 +32,7 @@ The actual tokens cannot be retreived.
 
 ```bash title="Example"
 HTTP/1.1 200
-Content-type: application/json
+Content-Type: application/json
 
 [
   {
@@ -75,7 +75,7 @@ Content-Type: application/json
 
 ```bash title="Example"
 HTTP/1.1 201
-Content-type: application/json
+Content-Type: application/json
 
 {
   "tokenId": "ps1trbvkn0zdn2ht5q4sh2h5hw",

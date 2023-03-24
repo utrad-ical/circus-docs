@@ -72,7 +72,7 @@ GET /api/plugins/85w1yc7xbzqjr7daf8mu6p2qj7f6a6vegzy4k9nf3vewv7sy32kvjrar49k70h3
 
 ```bash title="Example"
 HTTP/1.1 200
-Content-type: application/json
+Content-Type: application/json
 
 {
   "pluginId": "85w1yc7xbzqjr7daf8mu6p2qj7f6a6vegzy4k9nf3vewv7sy32kvjrar49k70h3n",
@@ -117,7 +117,7 @@ Returns an array of objects containing the same information as above.
 
 ```bash title="Example"
 HTTP/1.1 200
-Content-type: application/json
+Content-Type: application/json
 
 [
   {
