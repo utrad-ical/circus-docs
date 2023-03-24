@@ -46,6 +46,9 @@ View Personal Info
 Download volume as raw file
 : Privilege to download raw DICOM volumes.
 
+Issue Onetime
+: Privilege to issue temporary available login strings.
+
 ### Settings Related to Projects {#project-settings}
 
 These are setting items related to CIRCUS DB projects. Authorization can be granted to multiple projects for each item.
