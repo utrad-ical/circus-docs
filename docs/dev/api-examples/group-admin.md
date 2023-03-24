@@ -49,7 +49,7 @@ Returns an array of objects with the following properties.
 
 ```bash title="Example"
 HTTP/1.1 200
-Content-type: application/json
+Content-Type: application/json
 
 [
   {
@@ -133,7 +133,7 @@ GET /api/admin/groups/1 HTTP/1.1
 
 ```bash title="Example"
 HTTP/1.1 200
-Content-type: application/json
+Content-Type: application/json
 
 {
   "groupId": 1,
