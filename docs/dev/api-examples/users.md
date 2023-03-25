@@ -34,7 +34,7 @@ If there is a user with the specified email address, information about the user 
 
 ```bash title="Example"
 HTTP/1.1 200
-Content-type: application/json
+Content-Type: application/json
 
 {
   "userEmail": "user1@example.com",

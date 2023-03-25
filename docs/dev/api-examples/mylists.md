@@ -38,7 +38,7 @@ Returns an array of objects with the following properties.
 
 ```bash title="Example"
 HTTP/1.1 200
-Content-type: application/json
+Content-Type: application/json
 
 [
   {
@@ -106,7 +106,7 @@ GET /api/mylists/01gktktrqh63mdyfjpzzqey36n HTTP/1.1
 
 ```bash title="Example"
 HTTP/1.1 200
-Content-type: application/json
+Content-Type: application/json
 
 {
   "myListId": "01gktktrqh63mdyfjpzzqey36n",
@@ -156,7 +156,7 @@ Content-Type: application/json
 
 ```bash title="Example"
 HTTP/1.1 201
-Content-type: application/json
+Content-Type: application/json
 
 {
   "myListId": "0n01gktm9gb9hgyazarn102r01gk5hm3t2nef706qbq407qtq3pwtmf706x98240"
@@ -254,7 +254,7 @@ Content-Type: application/json
 
 ```bash title="Example"
 HTTP/1.1 200
-Content-type: application/json
+Content-Type: application/json
 
 {
   "changedCount": 1

@@ -15,7 +15,7 @@ GET /api/status HTTP/1.1
 
 ```bash title="Example"
 HTTP/1.1 200
-Content-type: application/json
+Content-Type: application/json
 
 {
   "status": "running"
