@@ -13,6 +13,7 @@ This section explains the built-in displays currently available on CIRCUS CS.
 | [Numeric](./numeric.md)                    |    🎤    | Lets user input a numeric value                                     |
 | [Text](./text.md)                          |    🎤    | Lets user input a string                                            |
 | [VolumeOverlay](./volume-overlay.md)       |    📺    | Shows series with colored volume overlay                            |
+| [Gallery](./gallery.md)                    |    📺    | Shows result images with label                                      |
 
 📺: Presentation, 🎤: Feedback collection
 

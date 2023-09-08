@@ -71,6 +71,7 @@ someSidebar:
               - dev/cs/displays/numeric
               - dev/cs/displays/text
               - dev/cs/displays/volume-overlay
+              - dev/cs/displays/gallery
           - dev/cs/custom-display
     # Default Docs:
     #   - doc1
