@@ -72,6 +72,7 @@ someSidebar:
               - dev/cs/displays/text
               - dev/cs/displays/volume-overlay
               - dev/cs/displays/gallery
+              - dev/cs/displays/tags
           - dev/cs/custom-display
     # Default Docs:
     #   - doc1

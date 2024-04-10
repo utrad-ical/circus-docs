@@ -14,6 +14,7 @@ This section explains the built-in displays currently available on CIRCUS CS.
 | [Text](./text.md)                          |    🎤    | Lets user input a string                                            |
 | [VolumeOverlay](./volume-overlay.md)       |    📺    | Shows series with colored volume overlay                            |
 | [Gallery](./gallery.md)                    |    📺    | Shows result images with label                                      |
+| [Tags](./tags.md)                          |    🎤    | Let users attach tags for feedback                                  |
 
 📺: Presentation, 🎤: Feedback collection
 
