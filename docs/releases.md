@@ -3,18 +3,102 @@ title: CIRCUS Release Notes
 sidebar_label: Release Notes
 ---
 
+## v1.13.0 (2024-09-02)
+
+### CIRCUS CS
+
+- Added jobId to job search condition (#382).
+- Fixed a bug where the plugin list in job search did not display correctly according to group permissions (#383).
+- Limited count and adjusted sorting in job search for improved MongoDB query performance (#385).
+
+### Misc
+
+- Added the ability to run Prettier as part of the CI configuration (#379).
+- Updated global IP filter to allow IPv6 loopback (#381).
+- Added the ability to run TSC as part of the CI configuration (#380).
+- Restructured MongoDB query for performance optimization (#384).
+
+## v1.12.1 (2024-07-22)
+
+### CIRCUS CS
+
+- Fixed a bug to display when "Tags" is null (#378).
+
+## v1.12.0 (2024-07-22)
+
+### CIRCUS DB
+
+- Fixed initial display slice (#377).
+
+### CIRCUS CS
+
+- Added "Tags" as one of the built-in displays, that provides a straightforward way to gather feedback, offering a drop-down list for predefined options and a free text input for custom responses (#367).
+
+### Misc
+
+- Fixed errors in GitHub Actions' test execution (#376).
+
+## v1.11.1 (2024-04-08)
+
+### CIRCUS CS
+
+- Added maxWidth/Height options to Gallery display.
+
+## v1.11.0 (2024-04-08)
+
+### CIRCUS CS
+
+- Added CS plugin-related permissions to the group settings (#375).
+
+## v1.10.0 (2023-10-04)
+
+### CIRCUS DB
+
+- Fixed a bug where cases with more than 1024 images could not be displayed, now allowing up to 8192 images to be shown (#370)(#371).
+- Fixed display issues for 2D images with non-isopixel and for 3D images with partial slice data by adjusting image dimensions and slice positions (#372).
+
+### CIRCUS CS
+
+- Added an ability to display the voter's name in a tooltip when hovering over feedback votes (#363).
+- Added an ability to move to the same patient's other cases or jobs (#366).
+- Added "Gallery" as one of the built-in displays, that shows result images with labels (#369).
+- Added a maximum width setting for each lesion candidate viewer to ensure consistent display (#373).
+
+### Misc
+
+- Fixed advanced search functionality to allow searches using local time instead of UTC (#362).
+- Fixed a bug where the tooltip would not disappear when interacting with a disabled button (#368).
+- Fixed error message pattern to fix broken test (#374).
+
+## v1.9.1 (2023-04-04)
+
+### CIRCUS DB
+
+- Fixed to the displayed slice were not prioritized for loading (#355).
+
+### Misc
+
+- Fixed a bug where web UI sent malformed PVD to API (#361).
+- Fixed some typos (#356)(#360).
+
+## v1.9.0 (2023-02-13)
+
+### CIRCUS CS
+
+- Added an ability to delete individual feedback from web UI (#354).
+
 ## v1.8.0 (2023-02-06)
 
 ### CIRCUS CS
 
-- Add an ability to cancel or invalidate a plug-in job. You can cancel a job only when the job is in the `in_queue` status, and you can invalidate a job only when it is in the `finish` status (#353).
+- Added an ability to cancel or invalidate a plug-in job. You can cancel a job only when the job is in the `in_queue` status, and you can invalidate a job only when it is in the `finish` status (#353).
 
 ## v1.7.0 (2023-01-29)
 
 ### CIRCUS CS
 
 - Fixed a bug where user can edit their personal feedback after a consensual feedback has been registered (#348).
-- Add an ability to create a job/case with an automatic partial volume descriptor (#350).
+- Added an ability to create a job/case with an automatic partial volume descriptor (#350).
 - Fixed a crash related to Locator display (#349)
 
 ## v1.6.1 (2023-01-19)
