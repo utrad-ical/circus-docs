@@ -4,7 +4,7 @@ title: Plug-in Execution Flow
 
 ## Job Management
 
-When a user registeres a plug-in job (hereafter "job" for short), it will be inserted in an internal queue. Since plug-in execution is usually costly, CIRCUS CS does not execute plug-ins in parallel.
+When a user registers a plug-in job (hereafter "job" for short), it will be inserted in an internal queue. Since plug-in execution is usually costly, CIRCUS CS does not execute plug-ins in parallel.
 
 When a job is started, the CIRCUS CS system will create a Docker container and runs the main process (specified in your Dockerfile). The main application in your container will read and process the input image, and write the processed results into a file. The container will be automatically deleted after the execution regardless of whether it succeeded or failed.
 
