@@ -34,13 +34,13 @@ In CIRCUS, the status of a job transitions as follows.
 
 1. [Import the DICOM images](./series-import.md) you want to use.
 
-1. Go to [Series Search](./series-search.md) screen and find the series you want to make a case from. From the [+ New] dropdown menu, select "New Case".
+1. Go to [Series Search](./series-search.md) screen and find the series you want to make a job from. From the [+ New] dropdown menu, select "New Job".
 
 1. In the "New Job" screen, do the following:
 
    - Select the plug-in to execute.
-   - (Optional) If only the subset of the series is used in the case, specify the image range by clicking "Range" button. By default ("auto"), all the images in the first consecutive segment of the series will be used.
-   - (Optional) If you want a case with more than one series, click the "Add Series" button and add the series you need.
+   - (Optional) If only the subset of the series is used in the job, specify the image range by clicking "Range" button. By default ("auto"), all the images in the first consecutive segment of the series will be used.
+   - (Optional) If you want a job with more than one series, click the "Add Series" button and add the series you need.
 
    ![New Job](new-job.png)
 
@@ -66,7 +66,7 @@ Sometimes not all images of interest in a DICOM series are contiguous. For examp
 
 ### Using More than One Series
 
-A case/job can contain more than one series. To add another series to a case, click the "Add Series" button and select the series you want to include.
+A case/job can contain more than one series. To add another series to a job, click the "Add Series" button and select the series you want to include.
 
 ![Add DICOM series](add-dicom-series.png)
 
