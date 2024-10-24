@@ -64,7 +64,7 @@ interface displayOptions: Array<
       }>
 ```
 
-For exmaple:
+For example:
 
 ```json
 {
