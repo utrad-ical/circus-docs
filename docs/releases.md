@@ -3,6 +3,20 @@ title: CIRCUS Release Notes
 sidebar_label: Release Notes
 ---
 
+## v1.14.0 (2024-10-24)
+
+### CIRCUS CS
+
+- Optimized pluginJobs search query for faster execution (#392).
+
+### Misc
+
+- Added the ability to run ESLint as part of the CI configuration (#386).
+  - Updated ESLint (6.8.0 → 8.57.0) and related packages.
+- Updated jest (26.0.1 → 29.7.0) and related packages (#387).
+- Updated webpack (5.49.0 → 5.95.0), related packages, and axios (0.19.2 → 1.7.7) (#389).
+- Discarded automatic retrieval of `DOCKER_HOST_WORKING_PATH` to support cgroups v2, a standard setting in Ubuntu since version 21.10. (#390).
+
 ## v1.13.0 (2024-09-02)
 
 ### CIRCUS CS
