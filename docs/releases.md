@@ -3,6 +3,19 @@ title: CIRCUS Release Notes
 sidebar_label: Release Notes
 ---
 
+## v1.14.2 (2024-11-11)
+
+### CIRCUS CS
+
+- Optimized pluginJobs search query by pre-filtering with seriesUid from series collection when exact matches on patientInfo.patientName or patientInfo.patientId are specified. (#395).
+
+## v1.14.1 (2024-10-28)
+
+### Misc
+
+- Updated `create-circus-cad-plugin` CLI for node 20/22 (#394).
+- Added migration in MongoDB to add indexes to pluginJobs (#393).
+
 ## v1.14.0 (2024-10-24)
 
 ### CIRCUS CS
