@@ -145,13 +145,13 @@ $ docker build
 
 ## 6. Pack and Distribute
 
-To pack your docker image into a gar.gz archive, do:
+To pack your docker image into a tar.gz archive, do:
 
 ```bash
 $ docker save my-detector | gzip > my-detector-1.0.0.tar.gz
 ```
 
-Then this archive can be loaded into another machine like so (\*.gz files are automatically unzpped):
+Then this archive can be loaded into another machine like so (\*.gz files are automatically unzipped):
 
 ```bash
 $ cat my-detector-1.0.0.tar.gz | docker load
