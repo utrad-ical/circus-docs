@@ -78,7 +78,7 @@ Note that you **cannot write comments** in the real JSON file.
 : The name of this plug-in. It is not used internally to distinguish plugins, but please choose one that is as unique as possible.
 
 `version`
-: The version of this plug-in. Must be [semvar](https://semver.org/)-compatible.
+: The version of this plug-in. Must be [semver](https://semver.org/)-compatible.
 
 `icon`
 : The icon of this plug-in.
