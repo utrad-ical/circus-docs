@@ -21,7 +21,7 @@ You need to run this command on the host machine (where `circuscad/circus` itsel
 Start CIRCUS, attach to the container's Bash, and run the following command.
 
 ```
-# /root/cad_plugin_registration.sh [REPOSITORY]:[TAG]
+# /circus/cad_plugin_registration.sh [REPOSITORY]:[TAG]
 ```
 
 You will see a confirmation message like the following. Type "Y" and Enter.
@@ -47,7 +47,7 @@ You can inspect the `[REPOSITORY]` and `[TAG]` needed to import the container us
 1.  Run the following command (in the container) to register the information of the CIRCUS CS plug-in.
 
     ```shell-session title="Inside the container"
-    # /root/servicies.sh &
+    # /circus/services.sh &
     # cd /var/circus/packages/circus-api
     # node circus register-cad-plugin [FULL-IMAGE-ID]
     ```

@@ -29,7 +29,7 @@ The access token must be stored securely. Someone who knows this access token wi
 Attach to Bash in the CIRCUS container (see [Installation](./installation.mdx)), and run the following commands.
 
 ```shell-session title="Inside the container"
-# /root/servicies.sh &
+# /circus/services.sh &
 # cd /var/circus/circus-api
 # node circus add-permanent-token <LOGIN-NAME-OR-EMAIL>
 ```
