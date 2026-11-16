@@ -5,7 +5,7 @@ import * as pagefind from 'pagefind';
 // Runs after `waku build`:
 // checks the links between the pages, and adds the sitemap and the search index.
 
-const siteUrl = 'https://circus-project.net';
+const siteUrl = 'https://v2.circus-project.net';
 const publicDir = path.join(import.meta.dirname, '../dist/public');
 
 type Page = { route: string; ids: Set<string>; links: string[] };
