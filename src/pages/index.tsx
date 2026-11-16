@@ -46,6 +46,11 @@ const HomePage = () => {
         <p className={styles.tagline}>
           Platform for Computer-aided Diagnosis Research
         </p>
+        <p className={styles.notice}>
+          This is the documentation for CIRCUS 2.0, currently in alpha. For
+          CIRCUS 1.x, see{' '}
+          <a href="https://circus-project.net">circus-project.net</a>.
+        </p>
         <Link to="/docs" className={styles.button}>
           Get Started
         </Link>

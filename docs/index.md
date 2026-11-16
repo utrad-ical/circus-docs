@@ -3,6 +3,12 @@ title: Welcome to CIRCUS Docs
 sidebar_label: Welcome
 ---
 
+<Warning title="CIRCUS 2.0 (alpha)">
+
+This is the documentation for CIRCUS 2.0, which is currently in alpha. Some pages still describe CIRCUS 1.x and are being updated. For CIRCUS 1.x, see [circus-project.net](https://circus-project.net).
+
+</Warning>
+
 <Note>
 
 We welcome your pull requests on our [documentation repository](https://github.com/utrad-ical/circus-docs).
