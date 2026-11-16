@@ -8,11 +8,11 @@ CIRCUS manages DICOM data based on series identified by Series Instance UID (002
 
 To import DICOM files into the CIRCUS system, you can upload DICOM files or ZIP archive files containing DICOM files via your web browser.
 
-:::tip Other methods to import series
+<Tip title="Other methods to import series">
 
-Alternatively, an administrator can [use Admin CLI to import series](../admin/admin-cli.md) or set up a [DICOM Storage Server](../admin/dicom-storage-server.md) to allow other devices (CT, MRI, etc.) to transfer DICOM images directly to CIRCUS. The Admin CLI is the most efficient because it does not use a network connection. If you are importing a large amount of DICOM data, consider contacting your administrator to use these non-browser-based transfer methods.
+Alternatively, an administrator can [use Admin CLI to import series](/docs/admin/admin-cli) or set up a [DICOM Storage Server](/docs/admin/dicom-storage-server) to allow other devices (CT, MRI, etc.) to transfer DICOM images directly to CIRCUS. The Admin CLI is the most efficient because it does not use a network connection. If you are importing a large amount of DICOM data, consider contacting your administrator to use these non-browser-based transfer methods.
 
-:::
+</Tip>
 
 ### Domain
 
@@ -38,11 +38,11 @@ CIRCUS does not use DICOM tags related to patient information (0010,XXXX), such 
 
    ![Series Import: file added](series-import-file-added.png)
 
-   :::important
+   <Important>
 
    You cannot change the domain of the series after they have been uploaded.
 
-   :::
+   </Important>
 
 1. When the upload process is complete, a message will appear at the top of the screen indicating that the import has begun. The import is done in the background, so you can leave the page or close the tab if you wish.
 
@@ -59,11 +59,11 @@ The following limitations apply when uploading DICOM data from a browser.
 - Maximum number of files: 30
 - Total file size: 200 MB
 
-:::info
+<Info>
 
 An administrator can increase these limits via a configuration file.
 
-:::
+</Info>
 
 When uploading a DICOM file from the Series Import screen, the compression status of the DICOM files remains the same (no lossless compression or decompressed is performed).
 

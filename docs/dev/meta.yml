@@ -1,0 +1,9 @@
+title: Developer Guide
+order:
+  - index
+  - title: CIRCUS API
+    items:
+      - api-intro
+      - api-reference
+      - making-search-queries
+  - cs

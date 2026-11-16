@@ -2,7 +2,7 @@
 title: Case Editor
 ---
 
-To start editing a case, click one of the \[View\] buttons to the right of the [Case Search](./case-search.md) result to enter a case editor.
+To start editing a case, click one of the \[View\] buttons to the right of the [Case Search](/docs/users/case-search) result to enter a case editor.
 
 ## Case Editor Overview
 
@@ -116,11 +116,13 @@ Select the series to which you want to add a label, and then select the label ty
 <dd>Defines a label to measure the length between two points.</dd>
 </dl>
 
-:::tip
-CIRCUS remembers the last selection you made. To create another label of the same type, you can just click the \[Add\] button.
-:::
+<Tip>
 
-Among these, Voxel labels are special and are explained in a [separate page](./case-voxel-labels.md).
+CIRCUS remembers the last selection you made. To create another label of the same type, you can just click the \[Add\] button.
+
+</Tip>
+
+Among these, Voxel labels are special and are explained in a [separate page](/docs/users/case-voxel-labels).
 
 Labels can be sorted manually by dragging, but you cannot move a label to under another series when multiple series are in a case.
 
@@ -135,11 +137,11 @@ You can change the resizing behavior using the following modifier keys.
 - Press the <kbd>Shift</kbd> key while dragging to maintain the aspect ratio of the label. Use this when you have to define a label with the same width/height(/depth), e.g., precise cuboid.
 - Press the <kbd>Ctrl</kbd> key while dragging to fixate the location of the center of the label.
 
-You can also always turn on these behaviors without pressing a key. To do so, either use the gear icon menu or visit the [preference page](./user-preference.md).
+You can also always turn on these behaviors without pressing a key. To do so, either use the gear icon menu or visit the [preference page](/docs/users/user-preference).
 
 ### Changing Label Appearance
 
-You can change the color and the alpha (opacity) of a label by clicking the color box at the top of the series list. You can customize the color palette or the default alpha value in the [Preference](./user-preference.md) page.
+You can change the color and the alpha (opacity) of a label by clicking the color box at the top of the series list. You can customize the color palette or the default alpha value in the [Preference](/docs/users/user-preference) page.
 
 To temporarily hide a label, click the color box of the label. To temporarily hide _all_ labels, click the eye icon at the top of the series list.
 
@@ -166,13 +168,13 @@ Note the following characteristics of tags:
 
 - Tags are defined by the administrator for each project.
 - Tags are **not versioned** using the revision mechanism. You can add or remove tags without incrementing a revision. If you need version control (for example, to track who entered the data), use case attributes instead.
-- Tags are **shared by all users**. If you want to manage a personal collection of cases, use [My List](./search-preset.md) instead.
+- Tags are **shared by all users**. If you want to manage a personal collection of cases, use [My List](/docs/users/search-preset) instead.
 
 To add or remove tags, use the Tags editor at the top of the Case Editor screen, or check cases in the Case Search screen and use the tag menu that appears above the checkboxes.
 
 ## Save and Revert
 
-You must save your work before leaving the Case Editor screen. Click the Save button and enter a **revision message** describing the contents of your edit. The revision message can be anything, but if you repeat the same work many times for different cases, you can define a saved revision message (see the [Preference](./user-preference.md) page).
+You must save your work before leaving the Case Editor screen. Click the Save button and enter a **revision message** describing the contents of your edit. The revision message can be anything, but if you repeat the same work many times for different cases, you can define a saved revision message (see the [Preference](/docs/users/user-preference) page).
 
 If something goes wrong, you can use the \[Revert\] menu to abandon the current edit and restore the last saved status.
 
@@ -182,9 +184,11 @@ If something goes wrong, you can use the \[Revert\] menu to abandon the current 
 
 Use the &#x25C0; and &#x25B6; buttons to undo or redo operations. (Keyboard shortcuts are <kbd>Ctrl + Z</kbd> and <kbd>Ctrl + Shift + Z</kbd>, respectively).
 
-:::info
+<Info>
+
 The size of the undo buffere is limited. If you are doing something experimental and may have to undo dozens of steps, save a revision instead.
-:::
+
+</Info>
 
 ## Three-points-to-section
 
@@ -204,12 +208,12 @@ This function allows you to find an oblique section that contains three Point la
 
 You can download the case data (original images, label data, case attributes).
 
-:::warning
+<Warning>
 
 - Archive files are created on the server side, so unsaved labels cannot be downloaded. **You must save a revision** before using this feature.
 - You need sufficient privileges to do this. When the export menu is unavailable, consult the administrator.
 
-:::
+</Warning>
 
 Select "Export as MHD" from the menu button in the upper right corner of the screen. The following dialog box will appear. Select the settings and click the "Start download" button.
 
@@ -238,10 +242,10 @@ An archive file with the following files will be generated. `vol0`, `vol1` and s
 `data.json`
 : Contains other data in JSON format, including label names, label geometry data, case/label attributes.
 
-:::note
+<Note>
 
 The position is written in mm, starting from the upper left voxel of the volume.
 
-:::
+</Note>
 
 The archive files are created on the server side and may take a few minutes. You can close the dialog or the browser tab if you wish. Once successful, the archive file can be downloaded from the Tasks page.

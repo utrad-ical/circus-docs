@@ -1,5 +1,4 @@
 ---
-id: api-intro
 title: CIRCUS API Introduction
 sidebar_label: API Introduction
 ---
@@ -21,9 +20,11 @@ First, you need a permanent access token to access the API. It can be obtained i
   $ node circus add-permanent-token <user-email>
   ```
 
-:::warning Keep the Token Secret!
+<Warning title="Keep the Token Secret!">
+
 Your permanent access tokens will remain valid even after you have logged out of the CIRCUS web UI, and it can do anything on behalf of your account.
-:::
+
+</Warning>
 
 Save the generated token somewhere securely. You cannot see it from the system again.
 
@@ -40,9 +41,6 @@ Any programming language or command that is capable of making HTTP requests can 
 The following examples access `/api/series` endpoint to search DICOM series uploaded to the system.
 
 Before trying the following samples, you need a permanent access token.
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 <Tabs
   defaultValue="js"

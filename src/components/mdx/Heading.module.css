@@ -1,0 +1,19 @@
+.hashLink {
+  margin-left: 0.4em;
+  font-weight: 400;
+  opacity: 0;
+  transition: opacity 0.15s;
+
+  :is(h2, h3, h4):hover > &,
+  &:focus-visible {
+    opacity: 1;
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  @media print {
+    display: none;
+  }
+}

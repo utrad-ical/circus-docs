@@ -1,0 +1,100 @@
+/*
+ * The bar follows the one of CIRCUS itself:
+ * dark theme color with white text, in both color schemes.
+ */
+.navBar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: stretch;
+  height: var(--navbar-height);
+  padding: 0 8px;
+  background: color-mix(in oklch, var(--theme), black 25%);
+  border-bottom: 1px solid color-mix(in oklch, var(--theme), black 50%);
+  color: #ffffff;
+
+  @media print {
+    display: none;
+  }
+}
+
+.brand,
+.link {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  color: inherit;
+
+  &:hover {
+    background: var(--theme);
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  &:focus-visible {
+    outline-color: #ffffff;
+    outline-offset: -3px;
+  }
+}
+
+.brand {
+  margin-right: 4px;
+  padding: 0 8px;
+}
+
+/* Everything has to fit in one row on a phone */
+@media (width < 480px) {
+  .navBar {
+    padding: 0 4px;
+  }
+
+  .link {
+    padding: 0 8px;
+  }
+}
+
+.links {
+  display: flex;
+  align-items: stretch;
+}
+
+.link.current {
+  background: var(--theme);
+  font-weight: 700;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: auto;
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: var(--radius);
+  background: none;
+  color: inherit;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--theme);
+    color: var(--accent);
+  }
+
+  &:focus-visible {
+    outline-color: #ffffff;
+  }
+}
+
+.github {
+  @media (width < 420px) {
+    display: none;
+  }
+}

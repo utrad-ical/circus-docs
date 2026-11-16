@@ -24,11 +24,11 @@ Returns an array of objects with the following properties.
 `updatedAt`
 : The date the token information was updated, in ISO date format. (date)
 
-:::info
+<Info>
 
 The actual tokens cannot be retreived.
 
-:::
+</Info>
 
 ```bash title="Example"
 HTTP/1.1 200

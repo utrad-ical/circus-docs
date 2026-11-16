@@ -37,4 +37,4 @@ All options are optional.
 
 ## Note
 
-This can be used at the "root" level of `displayStrategy`, but it is also suitable as the `feedbackListener` of the [LesionCandidates](./lesion-candidates.md) display.
+This can be used at the "root" level of `displayStrategy`, but it is also suitable as the `feedbackListener` of the [LesionCandidates](/docs/dev/cs/displays/lesion-candidates) display.

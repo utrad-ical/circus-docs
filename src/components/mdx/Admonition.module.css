@@ -1,0 +1,45 @@
+.admonition {
+  --color: var(--muted);
+  margin: 1.25em 0;
+  padding: 12px 16px;
+  border-left: 4px solid var(--color);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: color-mix(in oklch, var(--color) 9%, var(--bg));
+
+  & > :last-child {
+    margin-bottom: 0;
+  }
+
+  & > :nth-child(2) {
+    margin-top: 0;
+  }
+}
+
+.title {
+  margin-bottom: 4px;
+  color: color-mix(in oklch, var(--color), var(--text) 35%);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.tip {
+  --color: var(--success);
+}
+
+.info {
+  --color: oklch(0.6 0.13 240);
+}
+
+.important {
+  --color: oklch(0.55 0.17 300);
+}
+
+.warning {
+  --color: var(--warning);
+}
+
+.danger {
+  --color: var(--danger);
+}

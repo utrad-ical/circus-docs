@@ -6,13 +6,13 @@ You can transfer DICOM images to CIRCUS via DICOM Store SCP protocol. To do so, 
 
 ## Preparation
 
-1.  Fetch the Docker image of the latest DICOM Storage Server from Docker Hub. See the [Installation Guide](./installation.mdx) for details.
+1.  Fetch the Docker image of the latest DICOM Storage Server from Docker Hub. See the [Installation Guide](/docs/admin/installation) for details.
 
     ```shell-session
     $ sudo docker pull circuscad/dicom_storage_server:latest
     ```
 
-1.  Prepare a permanent API access token associated with a user with sufficient privilege. See [this guide](./access-token.md).
+1.  Prepare a permanent API access token associated with a user with sufficient privilege. See [this guide](/docs/admin/access-token).
 
 1.  Inspect the internal IP address of the CIRCUS Docker container.
 

@@ -8,9 +8,11 @@ When a user registeres a plug-in job (hereafter "job" for short), it will be ins
 
 When a job is started, the CIRCUS CS system will create a Docker container and runs the main process (specified in your Dockerfile). The main application in your container will read and process the input image, and write the processed results into a file. The container will be automatically deleted after the execution regardless of whether it succeeded or failed.
 
-:::note
+<Note>
+
 It is possible to execute plug-ins on multiple separate machines, but this is not documented yet. Please contact the authors if you need support for this.
-:::
+
+</Note>
 
 Each job has one of the following status:
 
@@ -52,9 +54,11 @@ The numbers are volume IDs starting from 0. Volume IDs are specified when you re
 
 The `*.raw` files contain the RAW data of the volume extracted by the DICOM series (i.e., only pixel values, no headers or metadata). The corresponding MHD files contain basic geometry information such as the size and the pixel format. You can preview the images using third-party MHD viewers.
 
-:::note
+<Note>
+
 Currently, only grayscale images are supported.
-:::
+
+</Note>
 
 ### JSON tag dump data (`${volId}.json`)
 
@@ -86,7 +90,7 @@ This file contains an anonymized, JSON-serialized version of DICOM tags. The fil
 
 To reduce file size, the file is divided into the `common` section and the `unique` section. The `common` section contains tag data that are shared across all the images of the series (e.g., study time or modality). The `unique` section is an array, whose items contain other tag data that are not common across images (e.g., slice location). The number of items in the array is the same as the Z-size of the input raw data.
 
-:::important
+<Important>
 
 The data related to patient information are not included. Currently, the following data are unavailable in this file.
 
@@ -115,7 +119,7 @@ The data related to patient information are not included. Currently, the followi
 
 </details>
 
-:::
+</Important>
 
 ## Output of Your Plug-in
 
@@ -140,9 +144,9 @@ If you are planning to use CIRCUS CS built-in displays (such as `LesionCandidate
 }
 ```
 
-The [built-in display reference pages](./displays/index.md) explain how to prepare your `results.json` for each display.
+The [built-in display reference pages](/docs/dev/cs/displays) explain how to prepare your `results.json` for each display.
 
-If you are planning to build a custom Display using React, you can store any data in `results.json`. See: [Custom Result Display](./custom-display.md)
+If you are planning to build a custom Display using React, you can store any data in `results.json`. See: [Custom Result Display](/docs/dev/cs/custom-display)
 
 ## Other Restrictions
 

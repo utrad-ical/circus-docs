@@ -12,9 +12,11 @@ Use the `docker load` command _(on the host)_ to import the Docker image:
 $ docker load -i xxx_ver.1.0.0.tar
 ```
 
-:::note
+<Note>
+
 You need to run this command on the host machine (where `circuscad/circus` itself is installed). CIRCUS will use the Docker-outside-of-Docker (DooD) technique to access this plug-in from the running container.
-:::
+
+</Note>
 
 ## Option 1: Run the Registration Script within the Container (Recommended)
 
@@ -28,9 +30,11 @@ You will see a confirmation message like the following. Type "Y" and Enter.
 
 ![Confirmation of plug-in registration](register-cad-plugin-confirm.png)
 
-:::tip
+<Tip>
+
 You can inspect the `[REPOSITORY]` and `[TAG]` needed to import the container using the `docker images` command.
-:::
+
+</Tip>
 
 ## Option 2: Running CIRCUS CLI in the Container
 

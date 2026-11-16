@@ -1,0 +1,167 @@
+/*
+ * Styles of the elements generated from Markdown.
+ */
+.article {
+  overflow-wrap: break-word;
+
+  & h1 {
+    margin: 0 0 0.6em;
+    font-size: 2.25rem;
+    line-height: 1.25;
+  }
+
+  & h2 {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 2em 0 0.7em;
+    font-size: 1.625rem;
+    line-height: 1.3;
+
+    /* A dotted line that fills the rest of the row */
+    &::after {
+      content: '';
+      flex: 1;
+      order: 1;
+      border-bottom: 5px dotted #88888855;
+    }
+
+    /* The link to the heading sits right after the text */
+    & > a {
+      margin-left: -8px;
+    }
+  }
+
+  & h3 {
+    margin: 1.8em 0 0.6em;
+    font-size: 1.25rem;
+    line-height: 1.35;
+  }
+
+  & h4 {
+    margin: 1.5em 0 0.5em;
+    font-size: 1rem;
+  }
+
+  & p {
+    margin: 0 0 1em;
+  }
+
+  & ul,
+  & ol {
+    margin: 0 0 1em;
+    padding-left: 1.75em;
+  }
+
+  & li > ul,
+  & li > ol {
+    margin-bottom: 0;
+  }
+
+  & li > p {
+    margin: 0.5em 0;
+  }
+
+  & img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  & hr {
+    margin: 2em 0;
+    border: none;
+    border-top: 1px solid var(--border);
+  }
+
+  & blockquote {
+    margin: 0 0 1em;
+    padding: 0 1em;
+    border-left: 3px solid var(--border);
+    color: var(--muted);
+  }
+
+  & :not(pre) > code {
+    padding: 0.1em 0.35em;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--surface);
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+  }
+
+  & kbd {
+    padding: 0.1em 0.4em;
+    border: 1px solid var(--border);
+    border-bottom-width: 2px;
+    border-radius: 4px;
+    background: var(--surface);
+    font-family: var(--font-mono);
+    font-size: 0.8125em;
+  }
+
+  & table {
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    overflow-x: auto;
+    margin: 0 0 1em;
+    border-collapse: collapse;
+  }
+
+  & th,
+  & td {
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+  }
+
+  & th {
+    background: var(--surface);
+    text-align: left;
+  }
+
+  & dl {
+    display: grid;
+    grid-template-columns: fit-content(40%) 1fr;
+    gap: 7px 3px;
+    margin: 25px 0;
+    padding: 10px;
+    border: 1px solid #88888855;
+  }
+
+  & dt {
+    padding-right: 10px;
+    border-right: 2px solid gray;
+    font-weight: bold;
+  }
+
+  & dd {
+    margin-left: 10px;
+
+    & > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  /* A parameter in the path of an endpoint */
+  & var {
+    border-radius: 5px;
+    background-color: #ffff0066;
+    font-style: normal;
+  }
+
+  & details {
+    margin: 0 0 1em;
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    & > summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    &[open] > summary {
+      margin-bottom: 8px;
+    }
+  }
+}

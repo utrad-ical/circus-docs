@@ -4,11 +4,11 @@ title: Core Concepts
 
 CIRCUS RS is a set of classes and functions that work together to achieve the image viewing/annotationg capabilities. Each piece can be extended or replaced to change the behavior of CIRCUS RS. This page briefly explains the core concepts of CIRCUS RS with a "top-down" approach.
 
-:::note
+<Note>
 
 TypeScript interfaces shown below are **heavily abbreviated** to describe the most essential role of each concept. Refer to the code for the complete interfaces.
 
-:::
+</Note>
 
 ## List of Client-Side Concepts
 
@@ -103,10 +103,11 @@ const newViewState: MprViewState = {
 
 This is because the `Viewer` uses reference-based equality to see whether a view state has been changed between re-renders.
 
-:::important
+<Important>
 
 A `ViewState` is used on a per-viewer basis, whereas a `Composition` can be shared among multiple viewers. It is possible to make three viewers have the same composition and make them have three different view states. This way, you can make three viewers that display the same volume from three different orientations (e.g, axial, sagittal, coronal) or different interpolation modes, window levels, etc.
-:::
+
+</Important>
 
 ### VolumeLoader
 
@@ -183,6 +184,8 @@ CIRCUS RS can be customized in the following ways.
 - Make your own `DicomFileRepository` if you have a lot of DICOM images stored somewhere (e.g., AWS S3) and want to serve them via CIRCUS RS Server.
 - Make your own `ImageSource` and design the corresponding `ViewState` if you want to display images using a new algorithm other than MPR or VR. Also, do this if your image is not based on 3D volumes.
 
-:::warning
+<Warning>
+
 Do **not** extend or modify the `Viewer` and `Compositioin` classes.
-:::
+
+</Warning>

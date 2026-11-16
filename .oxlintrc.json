@@ -1,0 +1,11 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "import", "typescript"],
+  "env": {
+    "builtin": true,
+    "es2022": true,
+    "browser": true,
+    "node": true
+  },
+  "ignorePatterns": ["dist", "src/pages.gen.ts"]
+}

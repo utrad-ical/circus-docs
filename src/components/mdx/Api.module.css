@@ -1,0 +1,25 @@
+.route {
+  margin: 0.5em;
+  padding: 1em;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.routeName {
+  font-weight: bold;
+}
+
+.desc,
+.detailsLink {
+  margin-left: 15px;
+}
+
+.detailsLink a {
+  font-weight: bold;
+}
+
+.verb {
+  margin-right: 5px;
+  padding: 1px 5px;
+  border: 1px solid var(--border);
+}

@@ -7,11 +7,11 @@ CIRCUS DB/CS is powered by **CIRCUS RS**, a lightweight medical image server and
 
 CIRCUS RS consists of the server part and the viewer (brower) part. RS Server is basically a small HTTP server that hosts DICOM images in the form of volumes, and RS Client is a framework-agnostic image viewer component that can display volume data obtained from an arbitrary resource, including RS Server.
 
-:::warning
+<Warning>
 
 CIRCUS RS is intended to be used for research purposes, and it comes with absolutely no warranty.
 
-:::
+</Warning>
 
 RS Server has the following capabilities:
 
@@ -43,11 +43,11 @@ CIRCUS RS has an interactive demo, which is available online here. You can run t
 $ npm install @utrad-ical/circus-rs-demo
 ```
 
-:::note
+<Note>
 
 The demo is using React, but CIRCUS RS itself does not depend on React (or jQuery, Angular, etc.). The demo uses a small wrapper component around CIRCUS RS's `Viewer` to use it seemlessly in a React component tree.
 
-:::
+</Note>
 
 ## Quickstart
 

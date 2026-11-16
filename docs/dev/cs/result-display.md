@@ -30,11 +30,9 @@ The `displayStrategy` is a JSON-serializable array of objects that defines how t
 ]
 ```
 
-import { Required } from './displays/label';
-
 - `feedbackKey: string`: The key name used if this display returns some feedback data.
 - `caption: string`: The title displayed as a header on the results screen.
-- `type: string`: <Required /> The display type. One of the names of [built-in displays](./displays/index.md).
+- `type: string`: <Required /> The display type. One of the names of [built-in displays](/docs/dev/cs/displays).
 - `options: object`: A set of options to configure this display. See the reference pages to check which options are accepted.
 
 In the example above, when a user opens a job result page corresponding to this plug-in, they will see toggle buttons. When the users select one of them and clicks the register button, the feedback data will look like `{ evaluation: 5 }`.
@@ -53,4 +51,4 @@ To support multiple-reader scenarios, CIRCUS CS has an feedback integration mech
 
 ### Building Your Own Display
 
-Internally, displays are implemented as React components. A developer with the knowledge about React can provide a custom display (i.e., React component) to show plug-in results in an arbitrary way or collect complex feedback data from users. For details, see [Custom Result Display](./custom-display.md).
+Internally, displays are implemented as React components. A developer with the knowledge about React can provide a custom display (i.e., React component) to show plug-in results in an arbitrary way or collect complex feedback data from users. For details, see [Custom Result Display](/docs/dev/cs/custom-display).

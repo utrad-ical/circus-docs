@@ -32,9 +32,9 @@ In CIRCUS, the status of a job transitions as follows.
 
 ## Creating a New Job
 
-1. [Import the DICOM images](./series-import.md) you want to use.
+1. [Import the DICOM images](/docs/users/series-import) you want to use.
 
-1. Go to [Series Search](./series-search.md) screen and find the series you want to make a case from. From the [+ New] dropdown menu, select "New Case".
+1. Go to [Series Search](/docs/users/series-search) screen and find the series you want to make a case from. From the [+ New] dropdown menu, select "New Case".
 
 1. In the "New Job" screen, do the following:
    - Select the plug-in to execute.
@@ -43,19 +43,19 @@ In CIRCUS, the status of a job transitions as follows.
 
    ![New Job](new-job.png)
 
-:::note
+<Note>
 
 If you try to register a job with the same combination of series and plugin as one that has already been registered, a confirmation screen will be displayed (jobs in the `failed`, `cancelled`, or `invalidated` status will be excluded from this check). Clicking the [OK] button will force the job to be registered.
 
 ![Duplicate Job Confirmation Dialog](confirm-duplicate-job.png)
 
-:::
+</Note>
 
-:::warning
+<Warning>
 
 At the moment, it is possible to specify any series as the input for a plug-in. A feature to declare the minimum conditions (such as modality) for series that the plugin can process will be implemented in the future.
 
-:::
+</Warning>
 
 ### Using Only Part of the Series
 
@@ -71,8 +71,10 @@ A case/job can contain more than one series. To add another series to a case, cl
 
 ## Cancel or Invalidate a Job
 
-You can cancel a job that has not yet started executing or invalidate a job that has already finished executing. To do this, use the menu on the [Job Search](./plugin-job-search.md) screen.
+You can cancel a job that has not yet started executing or invalidate a job that has already finished executing. To do this, use the menu on the [Job Search](/docs/users/plugin-job-search) screen.
 
-:::info
+<Info>
+
 Currently, there is not way to abort a job that is in the process of execution.
-:::
+
+</Info>

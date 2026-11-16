@@ -2,15 +2,15 @@
 
 <ApiPreamble verb="get" path="/cases" />
 
-Required setting: [**Readable Projects**](../../../docs/admin/group-settings#settings-related-to-projects)
+Required setting: [**Readable Projects**](/docs/admin/group-settings#settings-related-to-projects)
 
 ### Request
 
 This API allows filtering and sorting by query parameters.
-See [**Making Search Queries**](../making-search-queries.md) for more information.
+See [**Making Search Queries**](/docs/dev/making-search-queries) for more information.
 
 `filter` (query parameter, optional)
-: Specifies the search criterion in JSON string. See [Forming Filters](../making-search-queries#forming-filters) and [Available Filter Keys](#available-filter-keys).
+: Specifies the search criterion in JSON string. See [Forming Filters](/docs/dev/making-search-queries#forming-filters) and [Available Filter Keys](#available-filter-keys).
 
 `sort` (query parameter, optional)
 : Sort order of search results.
@@ -156,7 +156,7 @@ Content-Type: application/json
 
 <ApiPreamble verb="get" path="/cases/:caseId" />
 
-Required setting: [**Readable Projects**](../../../docs/admin/group-settings#settings-related-to-projects)
+Required setting: [**Readable Projects**](/docs/admin/group-settings#settings-related-to-projects)
 
 ### Request
 
@@ -229,7 +229,7 @@ Content-Type: application/json
 `myListId` (path parameter)
 : ID of the mylist to be searched.
 
-See [Query parameters](../making-search-queries.md) for more information.
+See [Query parameters](/docs/dev/making-search-queries) for more information.
 
 `filter` (query parameter, optional)
 : Specify search criteria.
@@ -377,7 +377,7 @@ Content-Type: application/json
 
 <ApiPreamble verb="post" path="/cases/:caseId/revision" />
 
-Required setting: [**Writable Projects**](../../../docs/admin/group-settings#settings-related-to-projects)
+Required setting: [**Writable Projects**](/docs/admin/group-settings#settings-related-to-projects)
 
 ### Request
 
@@ -385,7 +385,7 @@ Required setting: [**Writable Projects**](../../../docs/admin/group-settings#set
 : An arbitrary string that can be appended to the revision. (string)
 
 `attributes`
-: Actual data of [case attributes](../../admin/project-settings#configurable-options). (object)
+: Actual data of [case attributes](/docs/admin/project-settings#configurable-options). (object)
 
 `status`
 : Status of the revision. (string)
@@ -446,8 +446,8 @@ HTTP/1.1 201
 
 <ApiPreamble verb="post" path="/cases/export-mhd" />
 
-Required global privilege: [**Download volume as raw file**](../../../docs/admin/group-settings#list-of-global-privileges)
-Required setting: [**Readable Projects**](../../../docs/admin/group-settings#settings-related-to-projects)
+Required global privilege: [**Download volume as raw file**](/docs/admin/group-settings#list-of-global-privileges)
+Required setting: [**Readable Projects**](/docs/admin/group-settings#settings-related-to-projects)
 
 ### Request
 
@@ -494,13 +494,13 @@ Content-Type: application/json
 
 <ApiPreamble verb="put" path="/cases/:caseId/tags" />
 
-Required setting: [**Writable Projects**](../../../docs/admin/group-settings#settings-related-to-projects)
+Required setting: [**Writable Projects**](/docs/admin/group-settings#settings-related-to-projects)
 
-:::warning
+<Warning>
 
 This API replaces all tags. If you want to add a new tag, please also fill in the previous tags.
 
-:::
+</Warning>
 
 ### Request
 
@@ -521,7 +521,7 @@ HTTP/1.1 204
 
 <ApiPreamble verb="patch" path="/cases/tags" />
 
-Required setting: [**Writable Projects**](../../../docs/admin/group-settings#settings-related-to-projects)
+Required setting: [**Writable Projects**](/docs/admin/group-settings#settings-related-to-projects)
 
 ### Request
 
@@ -554,21 +554,21 @@ HTTP/1.1 204
 
 <ApiPreamble verb="delete" path="/cases/:caseId" />
 
-Required setting: [**Moderate Projects**](../../../docs/admin/group-settings#settings-related-to-projects)
+Required setting: [**Moderate Projects**](/docs/admin/group-settings#settings-related-to-projects)
 
-:::warning
+<Warning>
 
 This API deletes even the case created by other user.
 
-:::
+</Warning>
 
-:::info
+<Info>
 
 If the specified case exists in the mylist of users (including yourself), this API throws an error.
 
 Use **_force delete_** `DELETE /api/cases/:caseId?force=1`
 
-:::
+</Info>
 
 ### Request
 

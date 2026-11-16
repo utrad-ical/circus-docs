@@ -1,0 +1,15 @@
+title: Administrator Guide
+order:
+  - installation
+  - privileges
+  - registration-cs-plugin
+  - user-settings
+  - group-settings
+  - project-settings
+  - job-manager
+  - cad-plugin-settings
+  - server-configuration
+  - access-token
+  - dicom-storage-server
+  - admin-cli
+  - custom-install

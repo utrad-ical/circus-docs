@@ -36,10 +36,12 @@ All options are optional.
 - `exclusiveMaximum: number`: Ensures input &lt; maximum.
 - `multipleOf: number`: Ensures the input is a multiple of this. Internally, we just check "input % multipleOf === 0", so this does not work correctly with floating-point numbers due to rounding errors.
 
-:::tip
+<Tip>
+
 Use `multipleOf: 1` if you want to ensure the input value is an integer.
-:::
+
+</Tip>
 
 ## Note
 
-This can be used at the "root" level of `displayStrategy`, but it is also suitable as the `feedbackListener` of the [LesionCandidates](./lesion-candidates.md) display.
+This can be used at the "root" level of `displayStrategy`, but it is also suitable as the `feedbackListener` of the [LesionCandidates](/docs/dev/cs/displays/lesion-candidates) display.

@@ -1,0 +1,12 @@
+title: Built-in Displays
+order:
+  - index
+  - choice
+  - dump
+  - lesion-candidates
+  - locator
+  - numeric
+  - text
+  - volume-overlay
+  - gallery
+  - tags

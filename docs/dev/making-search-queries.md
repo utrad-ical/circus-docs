@@ -106,12 +106,12 @@ GET /api/cases?filter=<filter> HTTP/1.1
 
 Different filters are available for different search targets.
 
-:::info
+<Info>
 
-Filters prefixed with "patientInfo" require the [`personalInfoView` global privilege](../admin/privileges#global-privileges).
+Filters prefixed with "patientInfo" require the [`personalInfoView` global privilege](/docs/admin/privileges#global-privileges).
 
-:::
+</Info>
 
 ### searching Targets
 
-[Cases](../dev/api-examples/cases#available-filter-keys), Series, Plugin-jobs
+[Cases](/docs/dev/api-examples/cases#available-filter-keys), Series, Plugin-jobs

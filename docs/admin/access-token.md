@@ -18,15 +18,15 @@ When you want to programmatically access CIRCUS REST API, or when you want to us
 
    ![Token created](token-created.png)
 
-:::warning
+<Warning>
 
 The access token must be stored securely. Someone who knows this access token will be able to perform anything on behalf of the associated user.
 
-:::
+</Warning>
 
 ### Via CLI
 
-Attach to Bash in the CIRCUS container (see [Installation](./installation.mdx)), and run the following commands.
+Attach to Bash in the CIRCUS container (see [Installation](/docs/admin/installation)), and run the following commands.
 
 ```shell-session title="Inside the container"
 # /circus/services.sh &
@@ -36,4 +36,4 @@ Attach to Bash in the CIRCUS container (see [Installation](./installation.mdx)),
 
 ## Using a Permanent Token
 
-The generated token can be used to access CIRCUS API. For details, refer to the [Developer Guide](../dev/api-intro.mdx).
+The generated token can be used to access CIRCUS API. For details, refer to the [Developer Guide](/docs/dev/api-intro).

@@ -8,21 +8,21 @@ title: Case Search
 
 ![Menu - Case Search](menu-case-search.png)
 
-:::tip
+<Tip>
 
 ホーム画面中央の [Case Search] ボタンをクリックしても表示されます。
 
-:::
+</Tip>
 
 ## 検索条件の設定
 
 Case Search 画面の上部の "Search Condition" にて検索条件を設定します。検索条件の設定方法として、Basic および Advanced の 2 種類があります。それぞれはタブによって切り替えることが出来ます。
 
-:::note
+<Note>
 
 検索条件設定画面が表示されていない場合は "Search Condition" 上部の &#9660; をクリックします。
 
-:::
+</Note>
 
 ### Basic
 
@@ -46,11 +46,11 @@ Advanced では検索条件をより詳細に設定することができます�
 
 ![Menu - Series preset](menu-case-search-preset.png)
 
-:::note
+<Note>
 
-プリセットの削除方法は[ユーザ固有の設定](user-preference.md)を参照ください。
+プリセットの削除方法は[ユーザ固有の設定](/docs/users/user-preference)を参照ください。
 
-:::
+</Note>
 
 ## 検索結果のリスト表示
 

@@ -8,11 +8,11 @@ Administrators can control each user's access to various resources of CIRCUS via
 
 Each **user** belongs to one or more **groups**. The privileges of a user are granted indirectly by the groups they belong to. (Technically, there can be a user who belongs to no group, in which case that user can do virtually nothing other than logging-in and seeing their profile.)
 
-:::info Important
+<Info title="Important">
 
 No privilege can be _directly_ granted to an individual user. Instead, privileges are assigned to groups, and all user privileges are determined by which groups it belongs to.
 
-:::
+</Info>
 
 When you have finished installing CIRCUS, you have the following two predefined groups:
 
@@ -26,14 +26,15 @@ As an administrator, you can change the privileges of these groups arbitrarily (
 
 After the installation, you have one predefined user (`circus`), which belongs to the `admin` group.
 
-:::danger
+<Danger>
 
-You must protect this default account after the initial login. For details, see [Installation](./installation.mdx).
-:::
+You must protect this default account after the initial login. For details, see [Installation](/docs/admin/installation).
+
+</Danger>
 
 ## Global Privileges
 
-**Global privileges** are a set of roles that can be assigned to groups via [Group Settings](./group-settings.md).
+**Global privileges** are a set of roles that can be assigned to groups via [Group Settings](/docs/admin/group-settings).
 
 `manageServer`
 : The "administrator" global privilege. A user with this privilege can perform administrative tasks such as adding users.
@@ -47,17 +48,19 @@ You must protect this default account after the initial login. For details, see 
 `issueOnetime`
 : A user with this privilege can issue a onetime URL that allows a user to log in without a password.
 
-:::note
+<Note>
+
 Global privileges not mentioned here are deprecated or do not work. They may be removed in future releases of CIRCUS.
-:::
+
+</Note>
 
 Global privileges are granted _additively_ when a user belongs to multiple groups. For example, if a user belongs to both Group A with `personalInfoView` and Group B without it, this user _will_ have the `personalInfoView` global privilege.
 
-:::tip
+<Tip>
 
 There is no way to "revoke" a user's privilege granted via another group. Therefore, when you need fine-grained access control for many different types of users, it may be easier to make users belong to several "composable" groups with a small set of privileges rather than maintaining many groups with a complex set of privileges. For example, consider creating a "volume-downloader" group that just has one global privilege "downloadVolume".
 
-:::
+</Tip>
 
 ## Resource-specific Privileges
 
@@ -67,9 +70,10 @@ Each DICOM series imported (uploaded) to CIRCUS will have a string label called 
 
 Unlike users, **a series must belong to precisely one domain**. A series cannot be imported without a domain, and a series cannot belong to more than one domain.
 
-The list of available domains must first be declared via [Server Configuration](server-configuration.md). The `default` domain is the only predefined domain.
+The list of available domains must first be declared via [Server Configuration](/docs/admin/server-configuration). The `default` domain is the only predefined domain.
 
-:::warning
+<Warning>
+
 If you are planning to use one CIRCUS installation for multiple research projects, you need to carefully think of the domains to use _before_ importing DICOM series to CIRCUS. Keep the following points in mind:
 
 - Currently, even administrators cannot change the domain of an already imported series.
@@ -78,15 +82,16 @@ If you are planning to use one CIRCUS installation for multiple research project
 If you are sure that a certain set of DICOM series is used for only one research project, consider assigning a unique domain to these series (e.g., "abc-study.xyz-univ.edu") for better isolation.
 
 On the other hand, if you are uploading series that may be shared for multiple research projects in your institution, it may be handier to assign a shared domain (e.g., "xyz-univ.edu") or just use the default domain.
-:::
 
-To grant access to DICOM series to a user, go to [Group Settings](./group-settings.md) first, change the list of accessible domains of a group, and make the user belong to the group.
+</Warning>
+
+To grant access to DICOM series to a user, go to [Group Settings](/docs/admin/group-settings) first, change the list of accessible domains of a group, and make the user belong to the group.
 
 A domain does not necessarily have to follow the format of internet domains (e.g., "foo.bar.net"), but this is usually a reasonable convention to avoid any future collision.
 
 ### Cases (CIRCUS DB)
 
-CIRCUS DB's cases have an additional layer of access control based on the project it belongs to. For details, see [Group Settings](./group-settings.md).
+CIRCUS DB's cases have an additional layer of access control based on the project it belongs to. For details, see [Group Settings](/docs/admin/group-settings).
 
 ### Plug-in Jobs (CIRCUS CS)
 
@@ -112,6 +117,8 @@ In CIRCUS, the visibility of personal information is controlled in three layers:
 
 When a user cannot access personal information, they cannot perform a search with personal information, either. For example, they cannot search for a patient even when they know the exact patient ID of a series.
 
-:::warning
+<Warning>
+
 CIRCUS cannot anonymize personal information if it is embedded as an image in the pixel data itself. You may have to use a third-party tool to anonymize such DICOM data before importing them to CIRCUS.
-:::
+
+</Warning>

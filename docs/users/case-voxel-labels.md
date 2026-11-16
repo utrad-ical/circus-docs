@@ -27,11 +27,11 @@ By creating and activating a voxel label, the following tools become available.
 <dd>Like Wand, but erases the painted voxels.</dd>
 </dl>
 
-:::note
+<Note>
 
 The Wand tool and Wand Erase tools will not be enabled until all volume data has been loaded (while the loading indicator is displayed).
 
-:::
+</Note>
 
 ## Processing Voxel Labels
 
@@ -72,9 +72,11 @@ Maximum number of tentative labels
 
 ![Hole filling result](case-detail-hole-filling-result.png)
 
-:::note
+<Note>
+
 When performing CCL and hole-filling on voxel labels with complex shapes, increasing the maximum number of tentative labels may make the calculation possible. The maximum number of tentative labels depends on the memory of the PC used.
-:::
+
+</Note>
 
 ### Erosion and Dilatation
 

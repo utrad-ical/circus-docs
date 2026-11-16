@@ -1,0 +1,9 @@
+.docs {
+  display: flex;
+  align-items: flex-start;
+  flex: 1;
+
+  @media (width < 1000px) {
+    display: block;
+  }
+}

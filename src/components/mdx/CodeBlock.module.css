@@ -1,0 +1,68 @@
+.codeBlock {
+  margin: 1.25em 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.title {
+  padding: 6px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.body {
+  position: relative;
+
+  & pre {
+    margin: 0;
+    padding: 12px 14px;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.55;
+    tab-size: 2;
+  }
+
+  & code {
+    font: inherit;
+  }
+}
+
+.copyButton {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--muted);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s;
+
+  .body:hover &,
+  &:focus-visible {
+    opacity: 1;
+  }
+
+  &:hover {
+    color: var(--text);
+  }
+
+  @media (hover: none) {
+    opacity: 1;
+  }
+
+  @media print {
+    display: none;
+  }
+}

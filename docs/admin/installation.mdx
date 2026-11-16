@@ -1,14 +1,15 @@
 ---
-id: installation
 title: Installation
 sidebar_label: Installation
 ---
 
 The easiest way to install CIRCUS is to use the official Docker image hosted on Docker Hub.
 
-:::important
+<Important>
+
 As of July 2022, CIRCUS has not been tested on Docker running on macOS.
-:::
+
+</Important>
 
 ## Download and Configure CIRCUS Docker Image
 
@@ -30,18 +31,18 @@ $ sudo docker pull circuscad/circus:latest
 $ sudo docker pull circuscad/dicom_utility:latest
 ```
 
-:::tip
+<Tip>
 
 - The `latest` tag refers to the latest recommended version, which may change without notice. For long-term operation, consider fixating the version instead of using `latest`.
 - The latest version of CIRCUS can be viewed on the following URL: https://hub.docker.com/u/circuscad
 
-:::
+</Tip>
 
-:::note
+<Note>
 
 Remove `sudo` when you are using Windows.
 
-:::
+</Note>
 
 ### Initial Configuration
 
@@ -89,7 +90,7 @@ $ sudo docker run --rm -v /var/circus/data:/var/circus/data \
   -it circuscad/circus:latest
 ```
 
-:::note
+<Note>
 
 - The internal web server will be exposed to the host port 80.
 - You can remove `-p 27017:27017` if you don't plan to manage database via external Mongo Shell.
@@ -98,11 +99,11 @@ $ sudo docker run --rm -v /var/circus/data:/var/circus/data \
   - `ip a` (Ubuntu)
   - `ipconfig` (Windows)
 
-:::
+</Note>
 
 It is recommended to register the above script to a Bash alias, etc.
 
-For details of the CLI, see [this guide](./admin-cli.md).
+For details of the CLI, see [this guide](/docs/admin/admin-cli).
 
 ## Starting CIRCUS Up
 
@@ -135,14 +136,14 @@ To stop this container, inspect its ID using `docker ps`, and run `docker kill -
 
 1. If the CIRCUS home screen appears, you have successfully logged in.
 
-:::warning
+<Warning>
 
-- `circus` is the initial user with all administrative privileges. After the first logging-in, make sure to change its password to a safe one following the steps described in [User Settings](./user-settings.md). Otherwise, everyone will be able to log in as an administrator with the default password!
+- `circus` is the initial user with all administrative privileges. After the first logging-in, make sure to change its password to a safe one following the steps described in [User Settings](/docs/admin/user-settings). Otherwise, everyone will be able to log in as an administrator with the default password!
 - A safer approach is to make a new user with a unique login ID and a safe password, make it belong to the `admin` group, and disable the default `circus` user.
 
-:::
+</Warning>
 
-For the overview of the user management, refer to [Privilege System](./privileges.md).
+For the overview of the user management, refer to [Privilege System](/docs/admin/privileges).
 
 ## Upgrading the Docker Image
 
@@ -153,11 +154,11 @@ When you use a newer version of our Docker image, you may need to perform a data
 # node circus migrate
 ```
 
-:::warning
+<Warning>
 
 This operation is irreversible. Once the database revision has been increamented by this operation, you can no longer use the previous version of the Docker image. Please take extra precautions such as backing up the internal database (MongoDB) beforehand.
 
-:::
+</Warning>
 
 ## Backing Up Data
 

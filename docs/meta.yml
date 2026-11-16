@@ -1,0 +1,6 @@
+order:
+  - index
+  - users
+  - admin
+  - dev
+  - releases

@@ -1,0 +1,62 @@
+.container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 40px;
+  flex: 1;
+  min-width: 0;
+  padding: 20px 32px 64px;
+
+  @media (width < 600px) {
+    padding: 16px 16px 48px;
+  }
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  max-width: 52rem;
+}
+
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 0.875rem;
+
+  & a {
+    color: inherit;
+  }
+
+  @media print {
+    display: none;
+  }
+}
+
+.pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 56px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-weight: 600;
+
+  @media print {
+    display: none;
+  }
+}
+
+.next {
+  margin-left: auto;
+  text-align: right;
+}
+
+.pagerLabel {
+  display: block;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  font-weight: 400;
+}

@@ -1,0 +1,7 @@
+.required {
+  padding: 0 3px;
+  border-radius: 4px;
+  background: purple;
+  color: white;
+  font-size: 90%;
+}

@@ -2,11 +2,11 @@
 
 <ApiPreamble verb="get" path="/mylists" />
 
-:::info
+<Info>
 
 The list of the resource IDs in each mylist can be learge, and thus is not included in the response. Use `Get /api/mylists/:myListId` instead.
 
-:::
+</Info>
 
 ### Request
 

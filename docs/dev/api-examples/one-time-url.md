@@ -2,7 +2,7 @@
 
 <ApiPreamble verb="post" path="/admin/onetime-urls" />
 
-Required global privilege: [**Issue Onetime**](../../../docs/admin/group-settings#list-of-global-privileges)
+Required global privilege: [**Issue Onetime**](/docs/admin/group-settings#list-of-global-privileges)
 
 ### Request
 

@@ -35,8 +35,6 @@ title: Choice
 
 ## Options
 
-import { Required } from './label';
-
 - `personal: Array`: <Required /> Defines the choices in the personal mode.
 - `personal[].caption: string`: The human-friendly caption of the choice, which is displayed on the results screen.
 - `personal[].value: string | number`: The machine-friendly value that is saved to the database.
@@ -48,4 +46,4 @@ import { Required } from './label';
 
 ## Note
 
-This can be used at the "root" level of `displayStrategy`, but it is also suitable as the `feedbackListener` of the [LesionCandidates](./lesion-candidates.md) display.
+This can be used at the "root" level of `displayStrategy`, but it is also suitable as the `feedbackListener` of the [LesionCandidates](/docs/dev/cs/displays/lesion-candidates) display.

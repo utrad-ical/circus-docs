@@ -45,9 +45,11 @@ Available commands:
 
 ## Commands
 
-:::note
+<Note>
+
 At the moment, only important commands whose function cannot be accessed via the web UI are explained here. You can use the help command to get more information about each command.
-:::
+
+</Note>
 
 ### series-import
 
@@ -59,11 +61,11 @@ You must specify the domain the imported series will belong to.
 $ circus series-import --domain=DOMAIN -r /path/of/file-or-dir
 ```
 
-:::note
+<Note>
 
 If you are within a Docker container and want to import DICOM series outside the container, you need to temporarily mount the directory containing the series data to the container. To do so, use another `-v` option when you attach to the container.
 
-:::
+</Note>
 
 ### migrate
 
@@ -75,4 +77,4 @@ $ circus migrate
 
 ### register-cad-plugin
 
-See [Registration of CS Plug-in](./registration-cs-plugin.mdx).
+See [Registration of CS Plug-in](/docs/admin/registration-cs-plugin).

@@ -6,9 +6,11 @@ You can enter the Preference screen via the [Tool] - [Preference] link on the to
 
 ![Preferences](user-preference.png)
 
-:::warning
+<Warning>
+
 Click the [Save] button after you have made any changes. Otherwise, your changes will be lost.
-:::
+
+</Warning>
 
 ## Appearances
 
@@ -18,9 +20,11 @@ Color Theme
 Show Personal Info
 : Sets whether patients' personal information (patient ID, name, sex, etc.) can be displayed. Turn this off when you want to temporarily hide personal information, e.g., for demonstrating purposes.
 
-:::note
+<Note>
+
 Even if 'Show Personal Info' is turned on, you cannot view personal information without sufficient user priviledge.
-:::
+
+</Note>
 
 ## Search Presets
 
@@ -28,7 +32,7 @@ You can delete preset search conditions created in each search screen (series, c
 
 ## CIRCUS DB
 
-\*: can be changed also in the [Case Editor](./case-detail.md).
+\*: can be changed also in the [Case Editor](/docs/users/case-detail).
 
 Reference lines\*
 : Sets the visibility of reference lines.

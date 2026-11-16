@@ -2,6 +2,6 @@ name = "circus-docs"
 compatibility_date = "2026-05-25"
 
 [assets]
-directory = "./build"
+directory = "./dist/public"
 not_found_handling = "404-page"
-html_handling = "auto-trailing-slash"
+html_handling = "drop-trailing-slash"

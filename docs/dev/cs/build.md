@@ -4,13 +4,13 @@ title: Building a Plug-in
 
 This page explains how to build your CIRCUS CS Plug-in. We assume the basic understanding of Docker.
 
-:::note
+<Note>
 
 You can find example plug-in examples in the following repository:
 
 https://github.com/utrad-ical/circus-cs-plugin-samples
 
-:::
+</Note>
 
 ## 1. Build Your Main Executable
 
@@ -21,7 +21,8 @@ As described in the previous page, a program written in any language can work as
 - Your executable must end with a status code of `0` if it has finished processing successfully.
 - (Optional) Your executable can print log text into the standard output (stdout), which will help troubleshooting when something went wrong.
 
-:::tip
+<Tip>
+
 `/circus/in` and `/circus/out` do not have to be hardcoded. We recommend making these paths configurable via command-line arguments. You can then specify these paths via the `CMD` line in the Dockerfile.
 
 ```bash title="During the development..."
@@ -33,7 +34,7 @@ COPY ./my-detector /
 CMD /my-detector --in=/circus/in --out=/circus/out
 ```
 
-:::
+</Tip>
 
 ## 2. Write the `plugin.json` Manifest File
 
@@ -93,11 +94,13 @@ Note that you **cannot write comments** in the real JSON file.
 : Background color of the icon. Must be in the 6-digit hex format.
 
 `displayStrategy`
-: An array of objects that describes how to display the plug-in results by default. For details of how this works, read [Presenting CAD Results](./result-display.md). If you want examples, refer to [Built-in Displays](./displays/index.md) reference pages.
+: An array of objects that describes how to display the plug-in results by default. For details of how this works, read [Presenting CAD Results](/docs/dev/cs/result-display). If you want examples, refer to [Built-in Displays](/docs/dev/cs/displays) reference pages.
 
-:::note
+<Note>
+
 `icon` and `displayStrategy` values can be overwritten after the installation via the administration screen of CIRCUS. Think of them as the default values.
-:::
+
+</Note>
 
 ## 3. Write the Dockerfile
 
@@ -161,8 +164,10 @@ Alternatively, your image can be hosted in Docker Hub or any other container reg
 
 ## 7. Install the plug-in
 
-Refer to the admin page: [Registration of CS Plug-ins](../../admin/registration-cs-plugin.mdx)
+Refer to the admin page: [Registration of CS Plug-ins](/docs/admin/registration-cs-plugin)
 
-:::warning
+<Warning>
+
 Plug-ins are identified using the SHA-256 image hash. Thus you cannot change the content of the plug-in after installing it. When you have modified the content, rebuild the image and re-install it with a different version.
-:::
+
+</Warning>

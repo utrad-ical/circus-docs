@@ -26,8 +26,6 @@ title: VolumeOverlay
 
 ## Data Preparation
 
-import { Required } from './label';
-
 The plug-in results (`results.json`) must contain an array data containing the volume information in the following format:
 
 ```ts

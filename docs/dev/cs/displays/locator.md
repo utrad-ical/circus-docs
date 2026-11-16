@@ -23,7 +23,7 @@ title: Locator
 
 ## Data Preparation
 
-If `snapThresholdMm` is used, the `results.json` file must contain lesion candidate locations as described in [LesionCandidates](./lesion-candidates.md).
+If `snapThresholdMm` is used, the `results.json` file must contain lesion candidate locations as described in [LesionCandidates](/docs/dev/cs/displays/lesion-candidates).
 
 ## Options
 

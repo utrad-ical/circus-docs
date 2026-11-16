@@ -12,11 +12,11 @@ To make changes to an existing group, click on the line of the group whose setti
 
 ![Groups](./groups.png)
 
-:::warning
+<Warning>
 
 As of July 2022, it is impossible to delete a group.
 
-:::
+</Warning>
 
 ## Configurable Options
 
@@ -41,7 +41,7 @@ Delete Project
 : Privilege to delete an existing project.
 
 View Personal Info
-: Privilege to display personal information (e.g., patient ID, name, birthdate). If the user does not have this privilege, the personal information will be masked. Even if a user has this privilege, they can temporarily hide personal information from [Personal Preferences](../users/user-preference.md).
+: Privilege to display personal information (e.g., patient ID, name, birthdate). If the user does not have this privilege, the personal information will be masked. Even if a user has this privilege, they can temporarily hide personal information from [Personal Preferences](/docs/users/user-preference).
 
 Download volume as raw file
 : Privilege to download raw DICOM volumes.

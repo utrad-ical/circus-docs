@@ -2,7 +2,7 @@
 
 <ApiPreamble verb="get" path="/projects/:projectId" />
 
-Required setting: [**Readable Projects**](../../../docs/admin/group-settings#settings-related-to-projects)
+Required setting: [**Readable Projects**](/docs/admin/group-settings#settings-related-to-projects)
 
 ### Request
 
@@ -22,7 +22,7 @@ GET /api/projects/4hn1qd8vr9rzq2yjjez4q4p20m HTTP/1.1
 : The name of the project. (string)
 
 `icon`
-: Represents an icon for the plug-in. The setting items are `"glyph"`, `"color"` and `"backgroundColor"`. `"glyph"` is one of [available icon glyphs](./plugins#available-icon-glyphs), and `"color"` and `"backgroundColor"` are in the hexadecimal CSS color format (e.g., `"#ffff00"`). (object)
+: Represents an icon for the plug-in. The setting items are `"glyph"`, `"color"` and `"backgroundColor"`. `"glyph"` is one of [available icon glyphs](/docs/dev/api-examples/plugins#available-icon-glyphs), and `"color"` and `"backgroundColor"` are in the hexadecimal CSS color format (e.g., `"#ffff00"`). (object)
 
 `description`
 : Optional text to explain the project. (string)

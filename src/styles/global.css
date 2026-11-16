@@ -1,0 +1,130 @@
+@import '@utrad-ical/circus-icons/dist/circus-db-font-glyphs.css';
+@import '@utrad-ical/circus-icons/dist/circus-rs-font-glyphs.css';
+
+/*
+ * Design tokens.
+ * The names and the theme color follow those of CIRCUS itself
+ * (circus-web-ui/src/styles/tokens.css).
+ * Light and dark values are switched by `color-scheme` on the root element.
+ */
+:root {
+  color-scheme: light;
+
+  --theme: #037d70;
+  --theme-text: #ffffff;
+  --accent: #f6348a;
+
+  --success: oklch(0.6 0.15 145);
+  --warning: oklch(0.75 0.15 70);
+  --danger: oklch(0.58 0.19 25);
+
+  --bg: light-dark(#ffffff, #16181a);
+  --surface: light-dark(#f4f5f6, #22262a);
+  --text: light-dark(#1d2125, #e7e9ea);
+  --muted: light-dark(#667078, #9aa3aa);
+  --border: light-dark(#d9dde1, #3a4046);
+
+  /* The theme color is too dark for text on the dark background */
+  --link: light-dark(
+    var(--theme),
+    color-mix(in oklch, var(--theme), white 50%)
+  );
+  --theme-tint: color-mix(in oklch, var(--theme) 10%, var(--bg));
+
+  --font-sans:
+    system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans',
+    sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+
+  --navbar-height: 46px;
+  --sidebar-width: 290px;
+  --toc-width: 230px;
+  --radius: 6px;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Keeps the targets of links clear of the bars stuck to the top */
+[id] {
+  scroll-margin-top: calc(var(--navbar-height) + 16px);
+
+  @media (width < 1000px) {
+    scroll-margin-top: calc(var(--navbar-height) + 64px);
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+}
+
+@font-face {
+  font-family: 'circus-db-font';
+  src: url('@utrad-ical/circus-icons/dist/circus-db-font.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'circus-rs-font';
+  src: url('@utrad-ical/circus-icons/dist/circus-rs-font.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^='circus-icon-'],
+[class*=' circus-icon-'],
+[class^='rs-icon-'],
+[class*=' rs-icon-'] {
+  font-family: 'circus-db-font';
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: 150%;
+}
+
+[class^='rs-icon-'],
+[class*=' rs-icon-'] {
+  font-family: 'circus-rs-font';
+}

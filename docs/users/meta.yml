@@ -1,0 +1,19 @@
+title: User Guide
+order:
+  - login
+  - series-import
+  - series-search
+  - search-preset
+  - title: CIRCUS DB
+    items:
+      - new-case
+      - case-search
+      - case-detail
+      - case-voxel-labels
+  - title: CIRCUS CS
+    items:
+      - managing-jobs
+      - plugin-job-search
+      - cad-result-display
+  - user-preference
+  - data-structure

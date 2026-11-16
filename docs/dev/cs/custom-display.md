@@ -8,9 +8,11 @@ A custom display is essentially a [React](https://reactjs.org/) component (JavaS
 
 We use [Webpack's Module Federation](https://module-federation.github.io/) mechanism to dynamically load your custom display from the main CIRCUS CS app.
 
-:::note
+<Note>
+
 Your custom display will be used only from a results page of the plug-in that provides the display. You cannot share custom displays across multiple plug-ins.
-:::
+
+</Note>
 
 ## Creating a Sample Plug-in Using Our Starter Template
 
@@ -22,9 +24,11 @@ cd my-circus-plugin
 npx @utrad-ical/create-circus-cad-plugin -i
 ```
 
-:::note
+<Note>
+
 `npx` is a script runner that downloads and executes a package directly from the NPM registry.
-:::
+
+</Note>
 
 This will generate the following files along with dependencies:
 
@@ -65,7 +69,7 @@ This will generate the following files along with dependencies:
 
 ### Place Your Main Executable at `docker/apps`
 
-Under `docker/apps/`, you will see `cad.js`, which is a sample program that only outputs dummy results. Replace it with your main executable (written in any language you like). Read [this page](./build.md) for the details.
+Under `docker/apps/`, you will see `cad.js`, which is a sample program that only outputs dummy results. Replace it with your main executable (written in any language you like). Read [this page](/docs/dev/cs/build) for the details.
 
 ### Edit Dockerfile and Manifest File at `docker`
 
@@ -104,7 +108,8 @@ To use the exposed module in your result screen, use the following syntax in the
 
 Your custom display name must be prefixed with `@`. This prefix tells CIRCUS that you want to use a custom component stored in a plug-in image file instead of one of our built-in displays.
 
-:::important
+<Important>
+
 Do not touch these ModuleFederationPlugin options: `name`, `library`, and `filename`.
 
 ```js title="webpack.config.js"
@@ -116,13 +121,13 @@ library: {
 filename: "remoteEntry.js",
 ```
 
-:::
+</Important>
 
 ### Check your custom display in the local environment
 
 Save result files to send to your custom display. The following files need to be changed.  
 `data`: Simulated directory to save output files of your CIRCUS CS plug-in.  
-`src/sampleJob.json`: Simulation of the most of the important data provided via `useCsResults()` custom hook. Read [here](./custom-display.md#accessing-the-cad-data) for the details.
+`src/sampleJob.json`: Simulation of the most of the important data provided via `useCsResults()` custom hook. Read [here](/docs/dev/cs/custom-display#accessing-the-cad-data) for the details.
 
 Run mock REST API server. This server can send files in `data`. The default port number is 3000.
 
@@ -183,9 +188,11 @@ export interface Job {
 - The data the plug-in wrote to `results.json` is located at `job.results`. This is always available when this display is invoked.
 - Other arbitrary files output by the plug-in (e.g., PDF) can be asynchronously fetched via authorized HTTP requests. You can use either the `loadAttachment` function or the `useAttachment` custom hook (which is a wrapper around `loadAttachment`).
 
-:::important
+<Important>
+
 Use only function components. The `useCsResults()` hook does not work in React class components.
-:::
+
+</Important>
 
 ## Declaratively Load Data Using `usePluginAttachment`
 
@@ -347,8 +354,8 @@ const NumberInputDisplay = props => {
 };
 ```
 
-:::important
+<Important>
 
 When you integrate personal feedback entries, use `props.personalOpinions` rathern than `job.feedbacks` from `useCsResults()`. These seem similar, but the latter contains all the feed data including data from other displays, and you cannot determine which part of the data is relevant to your display.
 
-:::
+</Important>
