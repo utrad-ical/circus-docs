@@ -61,12 +61,12 @@ The configuration file must export an object, and its keys are "service" names u
 module.exports = {
   serviceName1: {
     type: 'serviceNameType',
-    options: { foo: 'bar' },
+    options: { foo: 'bar' }
   },
   serviceName2: {
     type: 'path/to/your/custom/script',
-    optoins: { dataDir: '/home/data.txt' },
-  },
+    optoins: { dataDir: '/home/data.txt' }
+  }
 };
 ```
 
@@ -80,8 +80,8 @@ Alternatively, you can also write a custom logger from scratch to suit your need
 module.exports = {
   apiLogger: {
     type: '/home/circus/my-logger.ts',
-    options: { anyData: 'passedToMyLogger' },
-  },
+    options: { anyData: 'passedToMyLogger' }
+  }
 };
 ```
 

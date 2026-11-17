@@ -80,13 +80,13 @@ const exampleViewState: MprViewState = {
   section: {
     origin: [0, 0, 0],
     xAxis: [250, 0, 0],
-    yAxis: [0, 250, 0],
+    yAxis: [0, 250, 0]
   },
   window: {
     level: 150,
-    width: 100,
+    width: 100
   },
-  interpolationMode: 'trilinear',
+  interpolationMode: 'trilinear'
 };
 ```
 
@@ -97,7 +97,7 @@ You must treat each view state as an **immutable** object, i.e., its members and
 ```tsx
 const newViewState: MprViewState = {
   ...oldViewState,
-  window: { ...oldViewState.window, level: 10 },
+  window: { ...oldViewState.window, level: 10 }
 };
 ```
 

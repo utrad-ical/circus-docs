@@ -4,8 +4,8 @@ title: Built-in Displays Overview
 
 This section explains the built-in displays currently available on CIRCUS CS.
 
-| Name                                       | Function | Purpose                                                             |
-| ------------------------------------------ | :------: | ------------------------------------------------------------------- |
+| Name                                                        | Function | Purpose                                                             |
+| ----------------------------------------------------------- | :------: | ------------------------------------------------------------------- |
 | [Choice](/docs/dev/cs/displays/choice)                      |    🎤    | Shows toggle buttons to obtain user feedback                        |
 | [Dump](/docs/dev/cs/displays/dump)                          |    📺    | Dumps raw results data for debugging                                |
 | [LesionCandidates](/docs/dev/cs/displays/lesion-candidates) |  📺&🎤   | Shows series with lesion candidate marks and collects user feedback |

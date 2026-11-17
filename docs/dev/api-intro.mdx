@@ -64,8 +64,8 @@ const server = 'localhost:8080';
 const main = async () => {
   const res = await fetch(`http://${server}/api/series`, {
     headers: {
-      Authorization: `Bearer ${token}`,
-    },
+      Authorization: `Bearer ${token}`
+    }
   });
   const data = await res.json();
   console.log(data);
