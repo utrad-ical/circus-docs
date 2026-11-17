@@ -1,6 +1,7 @@
 title: Administrator Guide
 order:
   - installation
+  - migration-v2
   - privileges
   - registration-cs-plugin
   - user-settings
