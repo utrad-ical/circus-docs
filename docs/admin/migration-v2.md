@@ -45,6 +45,7 @@ During the alpha, the images are published only to the GitHub Container Registry
 - The data directory (`/var/circus/data` by default, `CIRCUS_DATA_DIR`) keeps the same layout as 1.x: `dicom`, `labels`, `plugin-results`, `plugin-cache`, `cs-tmp`, `logs` and `mongodb`.
 - The `api` container needs `/var/run/docker.sock` to run CAD plug-ins (Docker-outside-of-Docker), and `DOOD_HOST_WORKING_PATH` set to the data directory as seen from the host.
 - To use your own configuration, mount it at `/var/circus/circus.config.js` in the `api` container. The default one is [`docker/api/circus.config.js`](https://github.com/utrad-ical/circus/blob/master/docker/api/circus.config.js).
+- **HTTPS is not set up by default.** `circus-web` serves CIRCUS over plain HTTP on port 80. We recommend hosting CIRCUS behind a reverse proxy that serves HTTPS, such as Caddy. The proxy should send `X-Forwarded-Proto: https`, which makes the session cookie `Secure`.
 - MongoDB is not published on the host in `compose.yaml`, and is reachable only from the other containers. The 1.x installation guide published it to all network interfaces (`-p 27017:27017`), and MongoDB has no authentication. If you need to connect to MongoDB from outside, publish the port yourself (preferably to `127.0.0.1` only, used through an SSH tunnel), and use `directConnection=true` in your client.
 - The CS job manager runs inside the `api` container. Set `AUTO_BOOT_JOB_MANAGER=1` to start it together with the API server. Its logs are under `/var/circus/data/logs` as before. The API server's logs are shown by `docker compose logs api`.
 
@@ -126,7 +127,6 @@ Use `run --rm` rather than `exec`, because the `api` container does not keep run
 - All users need to log in again after the upgrade. The session ends when the browser is closed.
 - The web UI requires Chrome / Edge 147, Firefox 147, Safari 26 or later. On older browsers, colors and menus may be broken.
 - Fonts and icons are bundled in the image, so the web UI works without access to the Internet.
-- If you put a reverse proxy that terminates HTTPS in front of `circus-web`, send `X-Forwarded-Proto: https`, which makes the session cookie `Secure`.
 
 ## Command-Line Tools
 
