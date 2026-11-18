@@ -13,17 +13,17 @@ CIRCUS 2.0 is currently in alpha. This guide will be updated as 2.0 develops.
 
 ## Overview
 
-| Item                                 | 1.x                                                                     | 2.0                                                                                                    |
-| ------------------------------------ | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| Containers                           | One `circuscad/circus` container with MongoDB, nginx and the API inside | Docker Compose with separate containers (mongo, api, web, etc.)                                        |
-| Images                               | `circuscad/circus`                                                      | `circus-api` and `circus-web`                                                                          |
-| MongoDB                              | 5.0 (inside the CIRCUS container)                                       | **9.0** (the official image, in its own container)                                                     |
-| Node.js (inside the `api` container) | 22                                                                      | 26                                                                                                     |
-| Configuration                        | Copied into the image                                                   | Your `circus.config.js` mounted into the `api` container                                               |
-| Administration commands              | `node circus.js <command>`                                              | `docker compose exec api circus <command>`                                                             |
+| Item                                 | 1.x                                                                     | 2.0                                                                                          |
+| ------------------------------------ | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Containers                           | One `circuscad/circus` container with MongoDB, nginx and the API inside | Docker Compose with separate containers (mongo, api, web, etc.)                              |
+| Images                               | `circuscad/circus`                                                      | `circus-api` and `circus-web`                                                                |
+| MongoDB                              | 5.0 (inside the CIRCUS container)                                       | **9.0** (the official image, in its own container)                                           |
+| Node.js (inside the `api` container) | 22                                                                      | 26                                                                                           |
+| Configuration                        | Copied into the image                                                   | Built-in defaults with an optional configuration file mounted into the `api` container       |
+| Administration commands              | `node circus.js <command>`                                              | `docker compose exec api circus <command>`                                                   |
 | Web server                           | nginx inside the container                                              | `circus-web` (Caddy), which serves the web UI and proxies `/api` and `/rs` to the API server |
-| Task list                            | Exports and imports ran as tasks                                        | **Removed**. Downloads and uploads stream directly                                                     |
-| Supported browsers                   | Most browsers                                                           | Chrome / Edge 147, Firefox 147, Safari 26 or later                                                     |
+| Task list                            | Exports and imports ran as tasks                                        | **Removed**. Downloads and uploads stream directly                                           |
+| Supported browsers                   | Most browsers                                                           | Chrome / Edge 147, Firefox 147, Safari 26 or later                                           |
 
 ## Docker Compose
 
@@ -44,14 +44,55 @@ During the alpha, the images are published only to the GitHub Container Registry
 - Set the version of the images with `CIRCUS_TAG` in `.env`. `compose.dev.yaml` in the repository is for development only; do not use it in production.
 - The data directory (`/var/circus/data` by default, `CIRCUS_DATA_DIR`) keeps the same layout as 1.x: `dicom`, `labels`, `plugin-results`, `plugin-cache`, `cs-tmp`, `logs` and `mongodb`.
 - The `api` container needs `/var/run/docker.sock` to run CAD plug-ins (Docker-outside-of-Docker), and `DOOD_HOST_WORKING_PATH` set to the data directory as seen from the host.
-- To use your own configuration, mount it at `/var/circus/circus.config.js` in the `api` container. The default one is [`docker/api/circus.config.js`](https://github.com/utrad-ical/circus/blob/master/docker/api/circus.config.js).
 - **HTTPS is not set up by default.** `circus-web` serves CIRCUS over plain HTTP on port 80. We recommend hosting CIRCUS behind a reverse proxy that serves HTTPS, such as Caddy. The proxy should send `X-Forwarded-Proto: https`, which makes the session cookie `Secure`.
 - MongoDB is not published on the host in `compose.yaml`, and is reachable only from the other containers. The 1.x installation guide published it to all network interfaces (`-p 27017:27017`), and MongoDB has no authentication. If you need to connect to MongoDB from outside, publish the port yourself (preferably to `127.0.0.1` only, used through an SSH tunnel), and use `directConnection=true` in your client.
 - The CS job manager runs inside the `api` container. Set `AUTO_BOOT_JOB_MANAGER=1` to start it together with the API server. PM2 captures its output in `/var/circus/data/logs/daemon-pm2-output.log` and `daemon-pm2-error.log`.
 
-### Server logs
+## Configuration files
 
-The API and its embedded CIRCUS RS now write JSON logs to standard output. Use Docker's standard logging mechanism to raed and store them. Docker's logging driver controls where logs are collected and how long they are kept.
+1.x used [cosmiconfig](https://www.npmjs.com/package/cosmiconfig) to read the config file. In the new Docker Compose setup, the config should be located at `/var/circus/circus.config.{js,mjs,cjs,mts}`, or specified via `CIRCUS_CONFIG`. YAML and JSON configs are no longer supported.
+
+In many cases, the standard Compose setup works without a configuration file. If you used a custom Dockerfile to copy your own `circus.config.js` into a 1.x image, first consider if it is still necessary at all. If you do have the settings you want to carry over, mount a minimum config file read-only at `/var/circus/circus.config.js` in the `api` service:
+
+```yaml
+services:
+  api:
+    volumes:
+      - ./circus.config.js:/var/circus/circus.config.js:ro
+```
+
+Read the following section carefully for the changed settings. Especially, make sure the timezone setting is set correctly.
+
+<Note>
+
+The API container detects a Docker environment automatically using `/.dockerenv` and changes its default behavior. For example, the MongoDB connection URL is set to `mongodb://mongo/circus-api` in Docker (localhost otherwise). If the automatic detection fails, you can set `CIRCUS_CONTAINER_MODE=0` to force the local defaults (such as when in a dev container), or `CIRCUS_CONTAINER_MODE=1` to force the container defaults (such as when in a non-Docker container environment).
+
+</Note>
+
+### Changed Config Settings
+
+In the 1.x official Docker release, the default `dicomTagReader.options.defaultTzOffset` was set to `540`, meaning DICOM timestamps without a recorded UTC offset were interpreted as UTC+09:00. From 2.0, CIRCUS uses the API process's time zone, which can be set in `compose.yaml`:
+
+```yaml
+services:
+  api:
+    environment:
+      TZ: Asia/Tokyo # The old default of 540
+```
+
+Alternatively, you can explicitly set `dicomTagReader.options.defaultTzOffset` in the config file.
+
+Other configuration-related changes include:
+
+- `apiServer.options.dicomImageServerUrl`: Should be `/rs`, a path on the same origin as the web UI, so that the browser sends the session cookie to CIRCUS RS.
+- `uploadFileSizeMaxBytes`: Now limits the size of each DICOM file, not of the uploaded archive. There is no limit on the size of an archive or the number of files.
+- `oauthServer.options.fallbackToDefault`: Moved to `auth.options.fallbackToDefault`. CIRCUS still reads the old setting when the `auth` block is absent.
+- **Custom service modules** (such as an authentication provider) are loaded with `import()`, and the default export is used. ESM is now the preferred module format.
+- The `CIRCUS_MONGO_URL` environment variable: No longer used. Instead, use the `mongoUrl` option in your configuration file.
+
+## Server logs
+
+The API and its embedded CIRCUS RS now write JSON logs to standard output. Use Docker's standard logging mechanism to read and store them. Docker's logging driver controls where logs are collected and how long they are kept.
 
 Remove legacy logger `type`, file options, and any `rsLogger` entry from `circus.config.js`. CIRCUS logs a warning for legacy `type` or `rsLogger` settings. Set `apiLogger.options.level` for both the API and embedded RS, and `csCoreDaemonLogger.options.level` for the job daemon. The default level is `info`.
 
@@ -89,11 +130,24 @@ If it reports invalid documents, fix the data _before upgrading_.
 
 MongoDB does not support in-place upgrade from 5.0 to 9.0. Instead, use `mongodump` and `mongorestore`.
 
-1. Before stopping CIRCUS 1.x, check that the 2.0 API server can read your data. The `db-check` command only reads the database:
+1. Before stopping CIRCUS 1.x, check that the 2.0 API server can read your data. Create a temporary file named `circus-migration.config.mjs` in the current directory.
+
+   ```js
+   export default {
+     database: {
+       options: {
+         mongoUrl: 'mongodb://localhost:27017/circus-api?directConnection=true'
+       }
+     }
+   };
+   ```
+
+   Run the read-only `db-check` command with that configuration.
 
    ```shell-session
    $ docker run --rm --network container:circus \
-     -e CIRCUS_MONGO_URL='mongodb://localhost:27017/circus-api?directConnection=true' \
+     -v "$PWD/circus-migration.config.mjs:/var/circus/circus-migration.config.mjs:ro" \
+     -e CIRCUS_CONFIG=/var/circus/circus-migration.config.mjs \
      <circus-api image>:<version> circus db-check
    ```
 
@@ -182,12 +236,6 @@ db.pluginDefinitions.deleteMany({ pluginId: { $in: ids } });
 
 The jobs of the deleted plug-ins remain in the database, but cannot be opened.
 
-## Changed Settings
-
-- **`apiServer.options.dicomImageServerUrl`** should be `/rs`, a path on the same origin as the web UI, so that the browser sends the session cookie to CIRCUS RS.
-- **`uploadFileSizeMaxBytes`** now limits the size of each DICOM file, not of the uploaded archive. There is no limit on the size of an archive or the number of files.
-- **Custom service modules** (such as an authentication provider specified in `circus.config.js`) are loaded with `import()`, and the default export is used.
-
 ## Users and Browsers
 
 - All users need to log in again after the upgrade. The session ends when the browser is closed.
@@ -209,7 +257,7 @@ CORS is disabled by default. If a browser-based tool on a different origin needs
 
 | Endpoint                                                                           | 1.x                                                                                 | 2.0                                                                                                                                  |
 | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `POST /login`                                                                      | Exchanges credentials or a refresh token for API tokens                             | Removed. Use an API key issued in the web UI. Previously issued API keys continue to work.                                            |
+| `POST /login`                                                                      | Exchanges credentials or a refresh token for API tokens                             | Removed. Use an API key issued in the web UI. Previously issued API keys continue to work.                                           |
 | `/api/tasks/*`                                                                     | Task list and downloads                                                             | Removed                                                                                                                              |
 | Case export                                                                        | `POST /api/cases/export-mhd` creates a task                                         | `GET /api/cases/export-mhd?caseIds=…` returns the archive                                                                            |
 | CS volume download                                                                 | `POST /api/series/export-cs-volume` creates a task                                  | `GET /api/series/export-cs-volume?series=<uid>[:<start>:<end>:<delta>],…` returns the archive. The domains of the series are checked |
