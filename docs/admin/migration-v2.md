@@ -47,7 +47,15 @@ During the alpha, the images are published only to the GitHub Container Registry
 - To use your own configuration, mount it at `/var/circus/circus.config.js` in the `api` container. The default one is [`docker/api/circus.config.js`](https://github.com/utrad-ical/circus/blob/master/docker/api/circus.config.js).
 - **HTTPS is not set up by default.** `circus-web` serves CIRCUS over plain HTTP on port 80. We recommend hosting CIRCUS behind a reverse proxy that serves HTTPS, such as Caddy. The proxy should send `X-Forwarded-Proto: https`, which makes the session cookie `Secure`.
 - MongoDB is not published on the host in `compose.yaml`, and is reachable only from the other containers. The 1.x installation guide published it to all network interfaces (`-p 27017:27017`), and MongoDB has no authentication. If you need to connect to MongoDB from outside, publish the port yourself (preferably to `127.0.0.1` only, used through an SSH tunnel), and use `directConnection=true` in your client.
-- The CS job manager runs inside the `api` container. Set `AUTO_BOOT_JOB_MANAGER=1` to start it together with the API server. Its logs are under `/var/circus/data/logs` as before. The API server's logs are shown by `docker compose logs api`.
+- The CS job manager runs inside the `api` container. Set `AUTO_BOOT_JOB_MANAGER=1` to start it together with the API server. PM2 captures its output in `/var/circus/data/logs/daemon-pm2-output.log` and `daemon-pm2-error.log`.
+
+### Server logs
+
+The API and its embedded CIRCUS RS now write JSON logs to standard output. Use Docker's standard logging mechanism to raed and store them. Docker's logging driver controls where logs are collected and how long they are kept.
+
+Remove legacy logger `type`, file options, and any `rsLogger` entry from `circus.config.js`. CIRCUS logs a warning for legacy `type` or `rsLogger` settings. Set `apiLogger.options.level` for both the API and embedded RS, and `csCoreDaemonLogger.options.level` for the job daemon. The default level is `info`.
+
+The planned v2 installation guide will cover logging driver configuration, retention and daily archives alongside backup and restore.
 
 ## Checking the Data
 
