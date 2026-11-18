@@ -197,6 +197,8 @@ For scripts that call the API directly:
 
 Paths under `/api` are now case-sensitive. Use the spelling shown in the API reference, for example `/api/mylists` in place of `/api/myLists`.
 
+CORS is disabled by default. If a browser-based tool on a different origin needs access, set `apiServer.options.corsOrigin` in `circus.config.js` to its origin, for example `https://tools.example.org`.
+
 | Endpoint                                                                           | 1.x                                                                                 | 2.0                                                                                                                                  |
 | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | `POST /login`                                                                      | Exchanges credentials or a refresh token for API tokens                             | Removed. Use an API key issued in the web UI. Previously issued API keys continue to work.                                            |
