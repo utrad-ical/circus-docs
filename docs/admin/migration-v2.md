@@ -49,6 +49,34 @@ During the alpha, the images are published only to the GitHub Container Registry
 - MongoDB is not published on the host in `compose.yaml`, and is reachable only from the other containers. The 1.x installation guide published it to all network interfaces (`-p 27017:27017`), and MongoDB has no authentication. If you need to connect to MongoDB from outside, publish the port yourself (preferably to `127.0.0.1` only, used through an SSH tunnel), and use `directConnection=true` in your client.
 - The CS job manager runs inside the `api` container. Set `AUTO_BOOT_JOB_MANAGER=1` to start it together with the API server. Its logs are under `/var/circus/data/logs` as before. The API server's logs are shown by `docker compose logs api`.
 
+## Checking the Data
+
+CIRCUS 2.0 checks the documents in the database more strictly than 1.x, both when it reads them and when it writes them. Data written by old versions of CIRCUS or by API clients (such as hand-edited revisions submitted from the command line) may not pass the new checks. For example, cases may have labels without a name or attributes, unknown properties in label data, voxel labels without the position, or series without the image range. A case that does not pass cannot be opened.
+
+Run `db-check` against your data **before** upgrading, using the image of the new version. It only reads the database, and reports every invalid document. When upgrading from 1.x, run it as shown in [Moving the Database to MongoDB 9.0](#moving-the-database-to-mongodb-90); on 2.0 and later:
+
+```shell-session
+$ docker compose run --rm api circus db-check
+```
+
+Options:
+
+- `-t <collection>`: checks only the collection, e.g., `-t clinicalCase` for the cases. Can be repeated.
+- `--documents-only`: checks only the documents, and not the attributes (see below).
+- `--attributes-only`: checks only the attributes of the cases.
+
+For each invalid document, it shows its ID (e.g., the case ID) and where the problems are. At the end, it shows a summary of the problems and how many documents have each of them, with the array indexes merged:
+
+```text
+Summary (the number of items with each issue):
+  3   clinicalCase revisions[*].series[*].labels[*].attributes: Invalid input: expected record, received undefined
+Found 3 invalid item(s).
+```
+
+If it reports invalid documents, fix the data _before upgrading_.
+
+`db-check` also checks the attributes of the latest revision of each case, and of its labels, with the current attribute schemas of the project, because CIRCUS 2.0 checks attributes with them when a revision is saved. These are reported as warnings, which do not stop the upgrade: the values may be ones saved before the schema was changed. Such a case can still be opened, but cannot be saved until its attributes are fixed in the case detail screen. When you change the attribute schemas of a project in the administrator screen, it suggests running `db-check` afterwards.
+
 ## Moving the Database to MongoDB 9.0
 
 MongoDB does not support in-place upgrade from 5.0 to 9.0. Instead, use `mongodump` and `mongorestore`.
@@ -61,7 +89,7 @@ MongoDB does not support in-place upgrade from 5.0 to 9.0. Instead, use `mongodu
      <circus-api image>:<version> circus db-check
    ```
 
-   `--network container:circus` lets the command use the network of the CIRCUS 1.x container (replace `circus` with the name of your container), so `localhost:27017` is the MongoDB of 1.x. Replace `circus-api` if you use another database name. If it reports invalid items (`Found N invalid item(s).`), do not proceed, and report the problem.
+   `--network container:circus` lets the command use the network of the CIRCUS 1.x container (replace `circus` with the name of your container), so `localhost:27017` is the MongoDB of 1.x. Replace `circus-api` if you use another database name. If it reports invalid items (`Found N invalid item(s).`), do not proceed; see [Checking the Data](#checking-the-data).
 
 1. Take a dump with the old MongoDB inside the CIRCUS 1.x container, stop MongoDB cleanly, and remove the container (replace `circus` with the name of your container):
 
@@ -110,11 +138,41 @@ Use `run --rm` rather than `exec`, because the `api` container does not keep run
 
 </Note>
 
+The migrations of 2.0 include:
+
+- **My lists** are moved from the `myLists` array of each user into the `myLists` collection, so that each my list is one document with its items. Items whose list is not found in any user are deleted.
+
 ## Removed Features and Settings
 
 - **The task list.** The task list screen, the task notifications in the navigation bar, and the `/api/tasks` endpoints have been removed. Case exports, series imports and CS volume downloads now stream directly. A database migration drops the `tasks` collection.
 - **The `downloads` directory.** `/var/circus/data/downloads` was where tasks saved files. It is no longer used, and you can delete it.
 - **The `taskManager` configuration.** Remove it from your `circus.config.js` if you have it. It is ignored if left.
+- **Remote plug-ins (`CAD+remote`).** The plug-in type that runs on an external server through an adapter has been removed from the API and the administrator screen. If your database has plug-in definitions of this type, delete them before upgrading, as shown below.
+
+If you have registered remote plug-ins, delete their definitions and remove their IDs from the privileges of the groups, using `mongosh` on the database of CIRCUS. Otherwise, the users in such groups cannot log in, and the plug-in administrator screen fails.
+
+```js
+const ids = db.pluginDefinitions
+  .find({ type: 'CAD+remote' })
+  .map(p => p.pluginId)
+  .toArray();
+const roles = [
+  'readPlugin',
+  'executePlugin',
+  'manageJobs',
+  'inputPersonalFeedback',
+  'inputConsensualFeedback',
+  'manageFeedback',
+  'viewPersonalInfo'
+];
+db.groups.updateMany(
+  {},
+  { $pull: Object.fromEntries(roles.map(r => [r, { $in: ids }])) }
+);
+db.pluginDefinitions.deleteMany({ pluginId: { $in: ids } });
+```
+
+The jobs of the deleted plug-ins remain in the database, but cannot be opened.
 
 ## Changed Settings
 
@@ -137,13 +195,18 @@ Use `run --rm` rather than `exec`, because the `api` container does not keep run
 
 For scripts that call the API directly:
 
-| Endpoint                                 | 1.x                                                | 2.0                                                                                                                                  |
-| ---------------------------------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `/api/tasks/*`                           | Task list and downloads                            | Removed                                                                                                                              |
-| Case export                              | `POST /api/cases/export-mhd` creates a task        | `GET /api/cases/export-mhd?caseIds=…` returns the archive                                                                            |
-| CS volume download                       | `POST /api/series/export-cs-volume` creates a task | `GET /api/series/export-cs-volume?series=<uid>[:<start>:<end>:<delta>],…` returns the archive. The domains of the series are checked |
-| Series upload                            | `POST /api/series/domain/:domain` creates a task   | Imports while receiving, and returns `{ imported, skipped, errors }` (201 if all files were imported, 422 if some failed)            |
-| `POST /api/series/domain/:domain/single` | Imports synchronously                              | Works as before. The body is empty on success (201)                                                                                  |
+| Endpoint                                                                           | 1.x                                                                                 | 2.0                                                                                                                                  |
+| ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `/api/tasks/*`                                                                     | Task list and downloads                                                             | Removed                                                                                                                              |
+| Case export                                                                        | `POST /api/cases/export-mhd` creates a task                                         | `GET /api/cases/export-mhd?caseIds=…` returns the archive                                                                            |
+| CS volume download                                                                 | `POST /api/series/export-cs-volume` creates a task                                  | `GET /api/series/export-cs-volume?series=<uid>[:<start>:<end>:<delta>],…` returns the archive. The domains of the series are checked |
+| Series upload                                                                      | `POST /api/series/domain/:domain` creates a task                                    | Imports while receiving, and returns `{ imported, skipped, errors }` (201 if all files were imported, 422 if some failed)            |
+| `POST /api/series/domain/:domain/single`                                           | Imports synchronously                                                               | Works as before. The body is empty on success (201)                                                                                  |
+| `POST /api/plugin-jobs`                                                            | Registers a job without checking the privilege                                      | Requires the `executePlugin` privilege of the plug-in (401 otherwise)                                                                |
+| `GET /api/admin/plugins`                                                           | Available to any user                                                               | Requires the `manageServer` privilege                                                                                                |
+| `PATCH /api/admin/plugins/:pluginId`                                               | Can change any property                                                             | Returns 400 if `pluginId` or `type` is included                                                                                      |
+| `GET /api/admin/users`, `GET /api/admin/users/:userEmail`                          | Includes `myLists`                                                                  | Does not include `myLists` (use `GET /api/mylists` as the user)                                                                      |
+| `GET /api/mylists/:myListId`, `GET /api/{series,cases,plugin-jobs}/list/:myListId` | The editors of a private list cannot read it, and only the owner can search with it | The owner, the editors and anyone for a public list can read it and search with it                                                   |
 
 Long-running requests take an optional `progressId` (issued by `POST /api/progress`) to report the progress through `GET /api/progress/:progressId` (server-sent events).
 
