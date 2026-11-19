@@ -20,7 +20,7 @@ CIRCUS 2.0 is currently in alpha. This guide will be updated as 2.0 develops.
 | MongoDB                              | 5.0 (inside the CIRCUS container)                                       | **9.0** (the official image, in its own container)                                           |
 | Node.js (inside the `api` container) | 22                                                                      | 26                                                                                           |
 | Configuration                        | Copied into the image                                                   | Built-in defaults with an optional configuration file mounted into the `api` container       |
-| Administration commands              | `node circus.js <command>`                                              | `docker compose exec api circus <command>`                                                   |
+| Administration commands              | `node circus <command>`                                                 | `docker compose exec api circus <command>`                                                   |
 | Web server                           | nginx inside the container                                              | `circus-web` (Caddy), which serves the web UI and proxies `/api` and `/rs` to the API server |
 | Task list                            | Exports and imports ran as tasks                                        | **Removed**. Downloads and uploads stream directly                                           |
 | Supported browsers                   | Most browsers                                                           | Chrome / Edge 147, Firefox 147, Safari 26 or later                                           |
@@ -102,17 +102,15 @@ The planned v2 installation guide will cover logging driver configuration, reten
 
 CIRCUS 2.0 checks the documents in the database more strictly than 1.x, both when it reads them and when it writes them. Data written by old versions of CIRCUS or by API clients (such as hand-edited revisions submitted from the command line) may not pass the new checks. For example, cases may have labels without a name or attributes, unknown properties in label data, voxel labels without the position, or series without the image range. A case that does not pass cannot be opened.
 
-Run `db-check` against your data **before** upgrading, using the image of the new version. It only reads the database, and reports every invalid document. When upgrading from 1.x, run it as shown in [Moving the Database to MongoDB 9.0](#moving-the-database-to-mongodb-90); on 2.0 and later:
+Run `db check` against your data **before** upgrading, using the image of the new version. It only reads the database, and reports every invalid document. When upgrading from 1.x, run it as shown in [Moving the Database to MongoDB 9.0](#moving-the-database-to-mongodb-90); on 2.0 and later:
 
 ```shell-session
-$ docker compose run --rm api circus db-check
+$ docker compose run --rm api circus db check
 ```
 
-Options:
+To check specific types of data, list their names after `db check`, for example `circus db check user group`. Use `clinicalCase` to check cases. An unknown type name stops the command before it starts checking data.
 
-- `-t <collection>`: checks only the collection, e.g., `-t clinicalCase` for the cases. Can be repeated.
-- `--documents-only`: checks only the documents, and not the attributes (see below).
-- `--attributes-only`: checks only the attributes of the cases.
+Use `--documents-only` to check document schemas or `--attributes-only` to check case attributes. The two options are mutually exclusive. With `--attributes-only`, omit type names or specify `clinicalCase`.
 
 For each invalid document, it shows its ID (e.g., the case ID) and where the problems are. At the end, it shows a summary of the problems and how many documents have each of them, with the array indexes merged:
 
@@ -124,7 +122,7 @@ Found 3 invalid item(s).
 
 If it reports invalid documents, fix the data _before upgrading_.
 
-`db-check` also checks the attributes of the latest revision of each case, and of its labels, with the current attribute schemas of the project, because CIRCUS 2.0 checks attributes with them when a revision is saved. These are reported as warnings, which do not stop the upgrade: the values may be ones saved before the schema was changed. Such a case can still be opened, but cannot be saved until its attributes are fixed in the case detail screen. When you change the attribute schemas of a project in the administrator screen, it suggests running `db-check` afterwards.
+`db check` also checks the attributes of the latest revision of each case, and of its labels, with the current attribute schemas of the project, because CIRCUS 2.0 checks attributes with them when a revision is saved. These are reported as warnings, which do not stop the upgrade: the values may be ones saved before the schema was changed. Such a case can still be opened, but cannot be saved until its attributes are fixed in the case detail screen. When you change the attribute schemas of a project in the administrator screen, it suggests running `db check` afterwards.
 
 ## Moving the Database to MongoDB 9.0
 
@@ -142,13 +140,13 @@ MongoDB does not support in-place upgrade from 5.0 to 9.0. Instead, use `mongodu
    };
    ```
 
-   Run the read-only `db-check` command with that configuration.
+   Run the read-only `db check` command with that configuration.
 
    ```shell-session
    $ docker run --rm --network container:circus \
      -v "$PWD/circus-migration.config.mjs:/var/circus/circus-migration.config.mjs:ro" \
      -e CIRCUS_CONFIG=/var/circus/circus-migration.config.mjs \
-     <circus-api image>:<version> circus db-check
+     <circus-api image>:<version> circus db check
    ```
 
    `--network container:circus` lets the command use the network of the CIRCUS 1.x container (replace `circus` with the name of your container), so `localhost:27017` is the MongoDB of 1.x. Replace `circus-api` if you use another database name. If it reports invalid items (`Found N invalid item(s).`), do not proceed; see [Checking the Data](#checking-the-data).
@@ -178,7 +176,7 @@ MongoDB does not support in-place upgrade from 5.0 to 9.0. Instead, use `mongodu
 1. Migrate the database, and start everything:
 
    ```shell-session
-   $ docker compose run --rm api circus migrate
+   $ docker compose run --rm api circus db migrate
    $ docker compose up -d
    ```
 
@@ -189,16 +187,12 @@ To roll back, stop the new containers, put the old data directory back to `/var/
 The API server checks the database revision at startup, and exits with "Please run DB migration script." if the database is not up to date. After every upgrade, run:
 
 ```shell-session
-$ docker compose run --rm api circus migrate
+$ docker compose run --rm api circus db migrate
 ```
 
 Use `run --rm` rather than `exec`, because the `api` container does not keep running until the database is migrated.
 
-<Note>
-
-`circus migrate` currently exits with code 0 even when a migration fails. Check its output for `Error:`.
-
-</Note>
+If a migration fails, `circus db migrate` reports the failed step and exits with status `1`.
 
 The migrations of 2.0 include:
 
@@ -244,8 +238,88 @@ The jobs of the deleted plug-ins remain in the database, but cannot be opened.
 
 ## Command-Line Tools
 
-- CIRCUS 2.0 comes with `circus-cli`, an official command-line tool that uses CIRCUS through the API from your computer (importing and exporting series and cases, and so on). It _requires_ Node.js 24 (24.19 or later), or 26.4 or later (earlier versions had a bug around streaming).
-- If you have used `circus-api-util`, note that `case-dl` is now `case-export`, and its `-p, --per-task` option is now `-b, --batch-size`.
+CIRCUS now provides two command-line tools, the **admin CLI** and the **client CLI**.
+
+- The admin CLI (sometimes called "CIRCUS CLI" in the 1.x documentation) is invoked inside the API container for administrative tasks such as database migrations.
+- The client CLI (`circus-cli`) is a new CLI tool. It is intended to be installed separately by CIRCUS users who want to use CIRCUS programmatically. It connects to the CIRCUS API using an API key and operates with the user's permissions.
+
+### Admin CLI
+
+To use the 2.0 admin CLI, move (`cd`) to the host directory containing your `compose.yaml` and run `docker compose exec api circus <group> <command>`. For commands that need to be invoked when the API container is stopped, use `docker compose run --rm api circus <group> <command>`, as shown under [Database Migrations](#database-migrations).
+
+<Note>
+
+If you run the admin CLI frequently, a shell alias can save you some typing. Put the following in your host OS's `.bashrc`:
+
+```bash
+alias circus-admin='docker compose exec api circus'
+```
+
+Then you can just run `circus-admin db check`.
+
+In scripts and cron jobs, add `-T` (`docker compose exec -T api circus ...`), because there is no terminal. `circus plugin register` and `circus util hash-password` ask for input, so run them by hand without `-T`.
+
+</Note>
+
+The `circus` command now organizes its subcommands into groups. Operations that users can perform through the API have moved to the client CLI.
+
+The table uses `circus` as shorthand for `node circus` in the 1.x column.
+
+| 1.x command                                         | 2.0 command                                          |
+| --------------------------------------------------- | ---------------------------------------------------- |
+| `circus db-check [-t <type> ...]`                   | `circus db check [<type> ...]`                       |
+| `circus migrate`                                    | `circus db migrate`                                  |
+| `circus refresh-series-parameters --maxDate <date>` | `circus series refresh-parameters --max-date <date>` |
+| `circus register-cad-plugin <image-id>`             | `circus plugin register <image-id>`                  |
+| `circus add-permanent-token <user>`                 | `circus token issue <user>`                          |
+| `circus clear-token`                                | `circus token clear`                                 |
+| `circus dump-dicom <file>`                          | `circus util dump-dicom <file>`                      |
+| `circus generate-password-hash`                     | `circus util hash-password`                          |
+| `circus ulid`                                       | `circus util ulid`                                   |
+| `circus import-series`                              | `circus-cli series import` (moved to client CLI)     |
+| `circus export-case`                                | `circus-cli case export` (moved to client CLI)       |
+| `circus register-case`                              | `circus-cli case create` (moved to client CLI)       |
+| `circus register-plugin-job`                        | `circus-cli job create` (moved to client CLI)        |
+
+Some commands also use different arguments or options:
+
+| 1.x                                                       | 2.0                                                        |
+| --------------------------------------------------------- | ---------------------------------------------------------- |
+| `circus db-check -t user -t group`                        | `circus db check user group`                               |
+| `circus register-case <project> <series> ...`             | `circus-cli case create --project <project> <series> ...`  |
+| `circus register-plugin-job <plugin> <series> ...`        | `circus-cli job create --plugin <plugin> <series> ...`     |
+| `--user <user>` of `register-case`, `register-plugin-job` | Removed (see below)                                        |
+| `circus export-case --out <dir>`                          | `circus-cli case export --outdir <dir>` (`-o` is the same) |
+| `circus export-case --type combined` (`-t combined`)      | `circus-cli case export --combined` (`-c`)                 |
+| `circus export-case --continue` (`-c`)                    | `circus-cli case export --skip-on-error`                   |
+
+See [Admin CLI](/docs/admin/admin-cli) for the commands (2.0 version is coming soon).
+
+### Client CLI
+
+CIRCUS 2.0 comes with `circus-cli`, an official command-line tool that uses CIRCUS through the API from your computer. It _requires_ Node.js 24 (24.19 or later), or 26.4 or later (earlier versions had a bug around streaming).
+
+Once you have a supported version of Node.js, install the client and run `auth login`. When prompted, enter your CIRCUS API endpoint (for example, `https://circus.example.org/api/`) and an API key issued in the web UI.
+
+```bash
+npm install -g @utrad-ical/circus-cli
+
+# Configure your connection
+circus-cli auth login
+```
+
+Run `circus-cli --help` to see the available commands.
+
+Unlike the 1.x commands, which ran inside the container and wrote to the database directly, the client CLI goes through the API:
+
+- The user of the API key needs the privileges for the operation: importing to the domain, creating cases in the project, or executing the plug-in.
+- DICOM files to import need to be on the computer running `circus-cli`, not in the container.
+- Users can issue API keys in the web UI, and administrators can issue them with `circus token issue <user>`. See [Permanent Access Tokens](/docs/admin/access-token).
+
+### Other Notable CLI Changes
+
+- **Case export**: The output files have changed. 1.x wrote one archive per case, named `<case ID>.tar.gz`, to `./case-exports` by default. `circus-cli case export` writes archives named `batch-001.tgz`, `batch-002.tgz`, and so on, to the current directory by default, and each archive has up to 10 cases (change this with `--batch-size`). With `--skip-on-error`, the command puts one case in each archive, continues after failures, and exits with status `1` if any case fails. Rewrite scripts that look for `<case ID>.tar.gz`.
+- **Case creation and job registration**: If a script used `--user` with `circus register-case` or `circus register-plugin-job`, configure the client CLI with an API key belonging to that user.
 
 ## API Changes
 
