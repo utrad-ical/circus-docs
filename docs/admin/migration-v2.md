@@ -198,6 +198,54 @@ The migrations of 2.0 include:
 
 - **My lists** are moved from the `myLists` array of each user into the `myLists` collection, so that each my list is one document with its items. Items whose list is not found in any user are deleted.
 
+## Fixes Affecting the Geometry of Existing Data
+
+<Warning>
+
+CIRCUS 2.0 fixes several bugs in how the voxel size of a series was determined. If your data meets the conditions below, the viewer shows the affected series with a different geometry after the upgrade, and some labels may no longer line up with the images. In that case, you need to update the series information and fix the label data itself.
+
+</Warning>
+
+The fixed bugs and the data they affect:
+
+- [The slice spacing of a partial volume differs between the viewer and the export (#567)](https://github.com/utrad-ical/circus/issues/567)
+  - Affects cases whose image range has a `delta` other than 1 or -1 (e.g., every other image), on a series without Spacing Between Slices (0018,0088), and series that have neither Spacing Between Slices nor Slice Location (0020,1041).
+  - The viewer now determines the slice spacing from the images in the range, as the export does, so the z size of the volume changes.
+- [Pixel Spacing is read with x and y swapped (#568)](https://github.com/utrad-ical/circus/issues/568)
+  - Affects series with non-square pixels, whose Pixel Spacing (0028,0030) has different row and column spacings. Almost all CT and most MR have square pixels.
+  - The x and y sizes of the voxels are swapped back in the viewer, the MHD export and the volumes passed to plug-ins. The `pixelSpacingX` and `pixelSpacingY` parameters of a series are also saved correctly on new imports.
+- [The image volume and the voxel labels of a partial volume do not line up in "Export as MHD" (#421)](https://github.com/utrad-ical/circus/issues/421)
+  - Affects MHD files exported by 1.x from cases whose image range has a `start` other than the first image, or a `delta` of -1. The image volume ignored the range, while the labels were placed at the beginning of the volume or flipped.
+  - The data in the database is not affected. Export such cases again with 2.0 if you use the files exported by 1.x.
+
+In the affected cases:
+
+- **Voxel labels** are saved per voxel, so they stay aligned with the images.
+- **Other labels** (points, rulers, ellipsoids, cuboids and plane figures) are saved in millimeters, so they may be shown at a different position: in the z direction for #567, and in the x and y directions for #568. Measurements saved in label or case attributes keep the values measured with the old voxel size.
+- **Plug-in jobs** of #568 were run with the x and y spacings swapped. Their results are not recalculated.
+
+If you have affected data:
+
+1. Update the series information, so that the stored parameters are read again with the fixed code:
+
+   ```shell-session
+   $ docker compose run --rm api circus series refresh-parameters
+   ```
+
+2. Fix the label data itself: open each affected case in the case detail screen, move or redraw the labels saved in millimeters, measure them again if needed, and save a new revision. Run the plug-in jobs again if their results depend on the voxel size.
+
+## Fix of DICOM Time Zone Offsets
+
+<Warning>
+
+CIRCUS 1.x read Timezone Offset From UTC (0008,0201) incorrectly ([#424](https://github.com/utrad-ical/circus/issues/424)). The dates of series imported from DICOM files with this tag, such as the series date, are saved with a wrong time. 2.0 reads the tag correctly, but does not fix the saved values.
+
+</Warning>
+
+- An offset with `00` minutes, such as `+0900`, was read as UTC, so the time is 9 hours off. An offset with other minutes, such as `+0530`, was read as a much larger offset.
+- DICOM files without this tag, which are the majority, were read with `defaultTzOffset` (see [Changed Config Settings](#changed-config-settings)) and are not affected.
+- Importing such a series again does not update the dates of an existing series. Fix the dates in the database if you have affected series.
+
 ## Removed Features and Settings
 
 - **The task list.** The task list screen, the task notifications in the navigation bar, and the `/api/tasks` endpoints have been removed. Case exports, series imports and CS volume downloads now stream directly. A database migration drops the `tasks` collection.
